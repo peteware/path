@@ -21,7 +21,7 @@ PathRules::~PathRules()
  * Converts Path into a 'canonical' form.  This allows a Path to be converted from
  * one PathRules to another PathRules.
  */
-Cannonical PathRules::canonical(const Path &path) const
+Cannonical PathRules::cannonical(const Path &path) const
 {
 	return Cannonical();
 }

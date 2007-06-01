@@ -6,8 +6,8 @@
  * Created on:      11-May-2007 5:09:32 PM
  * Original author: Pete Ware
  */
-#if !defined(EA_B8816B68_5736_4a45_816E_63C08B05D598__INCLUDED_)
-#define EA_B8816B68_5736_4a45_816E_63C08B05D598__INCLUDED_
+#if !defined(_Path_PathRules_h_)
+#define _Path_PathRules_h_
 
 #include <string>
 // Forward declarations
@@ -27,9 +27,9 @@ public:
 	PathRules();
 	virtual ~PathRules();
 
-	virtual Cannonical canonical(const Path &path) const;
+	virtual Cannonical cannonical(const Path &path) const;
 	virtual Path convert(const Cannonical &canonical) const;
 	virtual std::string quote(const std::string & path) const;
 
 };
-#endif // !defined(EA_B8816B68_5736_4a45_816E_63C08B05D598__INCLUDED_)
+#endif // !defined(_Path_PathRules_h_)

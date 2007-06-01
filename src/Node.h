@@ -6,9 +6,8 @@
  * Created on:      11-May-2007 5:09:30 PM
  * Original author: Pete Ware
  */
-#if !defined(EA_C4756561_E746_4a8c_820A_6323A12D0D03__INCLUDED_)
-#define EA_C4756561_E746_4a8c_820A_6323A12D0D03__INCLUDED_
-
+#if !defined(_PATH_NODE_H_)
+#define _PATH_NODE_H_
 #include "Path.h"
 #include <string>
 

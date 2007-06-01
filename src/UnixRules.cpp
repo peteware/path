@@ -6,7 +6,10 @@
  *  Original author: Pete Ware
  */
 #include "UnixRules.h"
+#include "Cannonical.h"
+#include "Path.h"
 
+UnixRules	UnixRules::rules;
 
 UnixRules::UnixRules()
 {
@@ -20,7 +23,7 @@ UnixRules::~UnixRules()
  * Converts Path into a 'canonical' form.  This allows a Path to be converted from
  * one PathRules to another PathRules.
  */
-Cannonical UnixRules::canonical(const Path &path) const
+Cannonical UnixRules::cannonical(const Path &path) const
 {
 	return Cannonical();
 }

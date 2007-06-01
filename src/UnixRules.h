@@ -6,12 +6,13 @@
  * Created on:      11-May-2007 5:09:33 PM
  * Original author: Pete Ware
  */
-#if !defined(EA_2002AF95_B2BA_45e1_B318_155B550DBE61__INCLUDED_)
-#define EA_2002AF95_B2BA_45e1_B318_155B550DBE61__INCLUDED_
+#if !defined(_Path_UnixRules_h_)
+#define _Path_UnixRules_h_
 
-#include "Cannonical.h"
-#include "Path.h"
 #include "PathRules.h"
+// Forward declarations
+class Path;
+class Cannonical;
 
 class UnixRules : public PathRules
 {
@@ -19,9 +20,11 @@ public:
 	UnixRules();
 	virtual ~UnixRules();
 
-	virtual Cannonical canonical(const Path &path) const;
+	virtual Cannonical cannonical(const Path &path) const;
 	virtual Path convert(const Cannonical &canonical) const;
 	virtual std::string quote(const std::string & path) const;
 
+	static UnixRules	rules;
+
 };
-#endif // !defined(EA_2002AF95_B2BA_45e1_B318_155B550DBE61__INCLUDED_)
+#endif // !defined(_Path_UnixRules_h_)

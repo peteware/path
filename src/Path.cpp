@@ -6,34 +6,121 @@
  *  Original author: Pete Ware
  */
 #include "Path.h"
+#include "PathExtra.h"
+#include "UnixRules.h"
 
-
-Path::~Path()
-{
-}
-
-Path::Path(const std::string path)
-{
-}
+PathRules * Path::s_defaultPathRules;
 
 /**
  * Initialize an empty Path
  */
-Path::Path()
+Path::Path(PathRules *rules)
+	: m_path(),
+	  m_rules(rules),
+	  m_extra(0)
 {
+}
+
+/**
+ * Set path to a raw string.
+ * This may contain environment variables, "~",
+ * multiple directory seperators, etc.  Use
+ * str() to get this raw version back.  Use
+ * path() to get it back as usable filename 
+ * and finally use normpath() to get it back
+ * in a cleaned up form.
+ */
+Path::Path(const std::string &path, PathRules *rules)
+	: m_path(path),
+	  m_rules(rules),
+	  m_extra(0)
+{
+}
+
+/**
+ * Copy the m_path, make m_rules the same (pointer copy)
+ * and duplicate the m_extra.
+ */
+Path::Path(const Path &copy)
+	: m_path(copy.m_path),
+	  m_rules(copy.m_rules),
+	  m_extra(0)
+{
+	if (copy.m_extra)
+	{
+		m_extra = new PathExtra (*copy.m_extra);
+	}
+}
+
+/**
+ * Delete m_extra
+ */
+Path::~Path()
+{
+	delete m_extra;
+}
+
+/**
+ * Do the assignment.
+ */
+Path & Path::operator=(const Path &op)
+{
+	if (this != &op) 
+	{
+		m_path = op.m_path;
+		m_rules = op.m_rules;
+		delete m_extra;
+		if (op.m_extra)
+		{
+			m_extra = new PathExtra(*op.m_extra);
+		}
+		else
+		{
+			m_extra = 0;
+		}
+	}
+	return  *this;
 }
 
 
 /**
- * Returns true if this String represents an absolute path.
- * 
- * This affects how join() works.
+ * The raw, uninterpreted string is returned.
+ * Use normpath() to get an expanded, clean path and
+ * path() to get an expanded but without duplicate
+ * directory seperators or ".." collapsed.
  */
-bool Path::abs() const 
+const std::string &Path::str() const
 {
-	return false;
+	return m_path;
 }
 
+/**
+ * Return the path as a string.
+ * 
+ * All ~ expansions and environment variables (e.g. $HOME) occur.
+ * 
+ * See also normpath() which does the same but cleans things up a little more and
+ * str() which returns the raw path being used.
+ */
+const std::string& Path::path() const
+{
+	return m_path;
+}
+
+/**
+ * Normalized the path and returns it as a std::string.
+ * 
+ * This removes any duplicate path seperators, collapses parent directory
+ * references, expands any ~ references and any environment variables (e.g. $HOME).
+ * 
+ * 
+ * See also str() which returns the path in it's raw form and path() which does ~
+ * and environment variable expansion but does not try to clean up the path.
+ */
+std::string Path::normpath() const
+{
+	return m_path;
+}
 
 /**
  * Returns the last component of the path.
@@ -45,7 +132,32 @@ bool Path::abs() const
  */
 Path Path::basename() const
 {
-	return Path();
+	std::string::size_type start, index;
+	std::string::size_type count;
+	std::string::size_type end = std::string::npos;
+	
+	start = std::string::npos;
+	for (index = 0, count = m_path.size(); index < count; ++index)
+	{
+		if (m_path[index] == '/')
+			continue;
+		start = index;
+		for (end = index + 1; end < count; ++end)
+		{
+			if (m_path[end] == '/')
+			{
+				break;
+			}
+		}
+		index = end;
+	}
+	if (start == std::string::npos) 
+	{	// It's all "///"
+		start = 0;
+		end = 1;
+	}
+	std::string base = m_path.substr(start, end - start);
+	return Path(base, m_rules);
 }
 
 
@@ -64,6 +176,19 @@ Path Path::basename() const
  */
 Path Path::dirname() const
 {
+	std::string::size_type	index;
+	bool					found = false;
+
+	for (index = m_path.size() - 1; index > 0; --index)
+	{
+		if (m_path[index] != '/')
+			continue;
+		if (!found)
+		{
+			found = true;
+
+		}
+	}
 	return Path();
 }
 
@@ -87,15 +212,29 @@ std::string Path::extension() const
 	return  std::string();
 }
 
-
 /**
- * Return the current working directory as an absolute path.
+ * Returns true if this String represents an absolute path.
+ * 
+ * This affects how join() works.
  */
-Path Path::getcwd()
+bool Path::abs() const 
 {
-	return Path();
+	return false;
 }
 
+/**
+ * Set if this is an absolute path or not.
+ * 
+ * An empty String is initially not an absolute path.  However, if you initialize
+ * it with a path, then the PathRules is used to determine if that string makes it
+ * an absolute path.
+ * 
+ * The return value is the previous value.
+ */
+bool Path::setAbs(bool absolute)
+{
+	return absolute;
+}
 
 /**
  * Return a Path by appending another path.  For example:
@@ -136,7 +275,6 @@ Path Path::join(const std::vector<std::string> &strings) const
 	return Path();
 }
 
-
 /**
  * Return the last component of the path.
  * 
@@ -148,131 +286,6 @@ Path Path::last() const
 	return Path();
 }
 
-
-/**
- * Normalized the path and returns it as a std::string.
- * 
- * This removes any duplicate path seperators, collapses parent directory
- * references, expands any ~ references and any environment variables (e.g. $HOME).
- * 
- * 
- * See also str() which returns the path in it's raw form and path() which does ~
- * and environment variable expansion but does not try to clean up the path.
- */
-std::string Path::normpath() const
-{
-	return std::string();
-}
-
-
-Path & Path::operator=(const Path &op)
-{
-	return *this;
-}
-
-
-bool Path::operator==(const std::string & op2) const
-{
-	return  NULL;
-}
-
-
-/**
- * Return the path as a string.
- * 
- * All ~ expansions and environment variables (e.g. $HOME) occur.
- * 
- * See alsl normpath() which does the same but cleans things up a little more and
- * str() which returns the raw path being used.
- */
-std::string Path::path() const
-{
-	return std::string();
-}
-
-
-/**
- * Return the PathRules used by the String.
- */
-PathRules *Path::pathRules() const
-{
-	return  NULL;
-}
-
-
-/**
- * Return path with components quoted to escape shell expansion.  Note that
- * characters such as "$" are quoted since they are special to the shell.  In
- * other words, you may want to use normpath() to expand environment variables
- * before using this:
- * 
- * @code
- * Path p1("$HOME/file 2");
- * Path p2(p1.normpath());
- * p2 = p2.quote();
- * assert(p2.str() == "/home/ware/file\\ 2");
- * @endcode
- */
-#ifdef notdef
-std::string Path::quote(QuoteStyle style)
-{
-	return  NULL;
-}
-
-
-/**
- * Use list of directors to find name.
- */
-Node Path::search(std::vector<Path> dirs, Path name)
-{
-	return  NULL;
-}
-#endif
-
-/**
- * Set if this is an absolute path or not.
- * 
- * An empty String is initially not an absolute path.  However, if you initialize
- * it with a path, then the PathRules is used to determine if that string makes it
- * an absolute path.
- * 
- * The return value is the previous value.
- */
-bool Path::setAbs(bool absolute)
-{
-
-	return absolute;
-}
-
-
-/**
- * Sets the default path rules to be used by any newly created Path objects.
- * 
- * This shold be done at compile time to match the operations on the system.
- */
-void Path::setDefaultPathRules(PathRules * rules)
-{
-
-}
-
-
-/**
- * Setting the path rules can change the path.  For example, '/a/b/c' might get
- * changed to '\a\b\c'
- */
-void Path::setPathRules(PathRules *rules)
-{
-}
-
-
-/**
- * Change the path.
- */
-void Path::setString(const std::string & path)
-{
-}
-
-
 /**
  * Returns each component of the path as an individual Path
  * 
@@ -283,9 +296,88 @@ std::vector<Path> Path::split()
 {
 	return std::vector<Path>();
 }
+/**
+ * Does a simple string comparison between two paths
+ * to see if they are the same.  So while two paths
+ * might be logically the same, "/a/b/.." is logically
+ * the same, they will not compare equally.  See
+ * normpath() as a way to make them compare the same
+ * 
+ * @param op2 The second argument to ==
+ * @return True if the same, false otherwise.
+ */
+bool Path::operator==(const Path & op2) const
+{
+	return m_path == op2.m_path;
+}
+
+/**
+ * Inverse of operator==()
+ */
+bool Path::operator!=(const Path &op2) const
+{
+	return m_path != op2.m_path;
+}
+
+/**
+ * Return the PathRules used by the Path.  May
+ * be NULL.  Do not delete the returned rules.
+ */
+const PathRules *Path::pathRules() const
+{
+	return m_rules;
+}
+
+/**
+ * Returns a default set of rules.  If the rules
+ * are not set, it uses the default rules.  If
+ * the default rules have not been initialized,
+ * it uses UnixRules::rules.
+ *
+ * Do not delete the returned rules!
+ */
+const PathRules *Path::rules() const
+{
+		if (m_rules)
+			return m_rules;
+		if (!s_defaultPathRules)
+			s_defaultPathRules = &UnixRules::rules;
+		return s_defaultPathRules;
+}
 
 
-std::vector<Path> Path::split(const std::string &dirs)
-{	
-	return std::vector<Path>();
+/**
+ * Sets the default path rules to be used by any newly created Path objects.
+ * 
+ * This should be done at compile time to match the operations on the system.
+ */
+PathRules * Path::setDefaultPathRules(PathRules * rules)
+{
+	std::swap(rules, s_defaultPathRules);
+	return rules;
+}
+
+/**
+ * Returns the default rules; maybe NULL.
+ */
+PathRules * Path::defaultPathRules()
+{
+	return s_defaultPathRules;
+}
+
+/**
+ * Return the current working directory as an absolute path.
+ */
+Path Path::getcwd()
+{
+	return Path();
+}
+
+/**
+ * Print's the raw form of the Path.  See normpath() 
+ * to get a cleaner version of the Path.  
+ */
+std::ostream &operator<<(std::ostream &out, const Path&path)
+{
+	return out << path.path();
 }

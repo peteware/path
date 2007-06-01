@@ -6,68 +6,99 @@
  * Created on:      11-May-2007 5:09:31 PM
  * Original author: Pete Ware
  */
-#if !defined(EA_83FDBD0B_6FF5_4f92_B5DD_FE67283EDD84__INCLUDED_)
-#define EA_83FDBD0B_6FF5_4f92_B5DD_FE67283EDD84__INCLUDED_
+#if !defined(_PATH_PATH_H_)
+#define _PATH_PATH_H_
 
 #include "PathRules.h"
 #include <vector>
 #include <string>
+#include <iosfwd>
+// Forward dclaration defined in Path.cpp
+class PathExtra;
 
 /**
- * A Path has no system component.  Essentially, it's an arbitrary string with the
- * only constraint is that it is valid whithn the constraints of it's pathRules().
- * 
+ * A Path is an arbitrary string used to represent a path to a file
+ * or directory.  The operations on a Path make no attempt to validate
+ * if the file or directory actually exists. 
  * 
  * You can operate on a Path with some common operations such as join(),
- * extension(), split().  All such operations happen without reference to actual
- * filenames.
- * 
- * The str() returns a std::string that is the current representation as
- * constrained by pathRules().
- * 
+ * extension(), split(), dirname(), basename(), last().  All such operations 
+ * happen without worrying about the result being a Path to a valid
+ * file or directory.  See the Node class to handle actual files and
+ * directories.
  * 
  */
 class Path
 {
-
 public:
+	/// Default constructory
+	Path(PathRules *rules = 0);
+	/// Constructor from std::string
+	Path(const std::string &path, PathRules *rules = 0);
+	/// Copy constructor
+	Path(const Path &copy);
+	/// Destructor
 	virtual ~Path();
+	/// Assignment operator
+	Path & operator=(const Path &op2);
 
-	Path(const std::string path);
-	Path();
-	bool abs() const;
+	/// Return original string
+	const std::string & str() const;
+	/// Return original string
+	const std::string & path() const;
+	/// Return original string but cleaned up
+	std::string normpath() const;
+
+
+	/// Return the last component of Path
 	Path basename() const;
+	/// Return the directory component of Path
 	Path dirname() const;
+	/// Return the filename extension
 	std::string extension() const;
-	static Path getcwd();
+
+	/// Return if this is an absolute path (not relative)
+	bool abs() const;
+	/// Indicate if this should be an absolute path
+	bool setAbs(bool absolute);
 	Path join(const Path &path) const;
 	Path join(const std::vector<std::string> &strings) const;
 	Path last() const;
-	std::string normpath() const;
-	Path & operator=(const Path &op2);
-	bool operator==(const std::string & op2) const;
-	std::string path() const;
-	PathRules *pathRules() const;
-	//std::string quote(QuoteStyle style);
-	//Node search(std::vector<Path> dirs, Path name);
-	bool setAbs(bool absolute);
-	void setDefaultPathRules(PathRules * rules);
-	void setPathRules(PathRules *rules);
-	void setString(const std::string & path);
 	std::vector<Path> split();
-	static std::vector<Path> split(const std::string &dirs);
+
+	/// Check if raw names are the same	
+	bool operator==(const Path &op2) const;
+	/// Check if raw names are different.
+	bool operator!=(const Path &op2) const;
+
+
+	/// Return the rules (may be NULL)
+	const PathRules *pathRules() const;
+	/// Return PathRules, never null
+	const PathRules *	rules() const;
+	/// Set the default rules to be used by most paths
+	static PathRules * setDefaultPathRules(PathRules * rules);
+	/// Return the rules
+	static PathRules * defaultPathRules();
+
+	/// Return the current working directory
+	static Path getcwd();
 
 private:
+	/// Use the rules if none are set.
+	static PathRules *	s_defaultPathRules;
 	/**
 	 * The path as set.
 	 * 
 	 * This is the uninterpreted string and is the value returned by str().
 	 */
-	std::string m_path;
-	/**
-	 * Rules used for path manipulation
-	 */
-	PathRules *m_pathRules;
+	std::string		m_path;
+	/// These are the rules we use for this path.
+	PathRules *		m_rules;
+	PathExtra *		m_extra;
 
 };
-#endif // !defined(EA_83FDBD0B_6FF5_4f92_B5DD_FE67283EDD84__INCLUDED_)
+
+/// Print out the path
+std::ostream &operator<<(std::ostream &out, const Path&path);
+#endif // !defined(_PATH_PATH_H_)
