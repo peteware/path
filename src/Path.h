@@ -56,14 +56,16 @@ public:
 	Path dirname() const;
 	/// Return the filename extension
 	std::string extension() const;
+	/// Return without extension
+	std::string stem() const;
 
 	/// Return if this is an absolute path (not relative)
 	bool abs() const;
-	/// Indicate if this should be an absolute path
+	/// Set if this should be an absolute path
 	bool setAbs(bool absolute);
 	Path join(const Path &path) const;
 	Path join(const std::vector<std::string> &strings) const;
-	Path last() const;
+
 	std::vector<Path> split();
 
 	/// Check if raw names are the same	

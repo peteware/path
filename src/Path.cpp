@@ -177,19 +177,27 @@ Path Path::basename() const
 Path Path::dirname() const
 {
 	std::string::size_type	index;
+	std::string::size_type	end = std::string::npos;
 	bool					found = false;
 
 	for (index = m_path.size() - 1; index > 0; --index)
 	{
-		if (m_path[index] != '/')
+		if (!found && m_path[index] != '/')
 			continue;
 		if (!found)
 		{
 			found = true;
-
+			end = index;
 		}
 	}
-	return Path();
+	if (found)
+	{
+		return Path(m_path.substr(index, index - end));
+	}
+	else
+	{
+		return Path(".");
+	}
 }
 
 
@@ -210,6 +218,18 @@ Path Path::dirname() const
 std::string Path::extension() const
 {
 	return  std::string();
+}
+
+/**
+ * Return basename() of path with the extension() removed
+ * @code
+ * Path	p("somepath.ext");
+ * p.basename() == Path(p.stem() + p.extension());
+ * @endcode
+ */
+std::string Path::stem() const
+{
+	return "";
 }
 
 /**
@@ -275,16 +295,6 @@ Path Path::join(const std::vector<std::string> &strings) const
 	return Path();
 }
 
-/**
- * Return the last component of the path.
- * 
- * For example, '/a/b/c' returns 'c'.  '/a' returns 'a'.  Finally, '/' returns '/'
- * (and it is absolute) and 'a' returns 'a'.
- */
-Path Path::last() const
-{
-	return Path();
-}
 
 /**
  * Returns each component of the path as an individual Path
