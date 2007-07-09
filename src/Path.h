@@ -63,9 +63,12 @@ public:
 	bool abs() const;
 	/// Set if this should be an absolute path
 	bool setAbs(bool absolute);
-	Path join(const Path &path) const;
-	Path join(const std::vector<std::string> &strings) const;
 
+	/// Concatenate this and Path
+	Path join(const Path &path) const;
+	/// Concatenate vector of strings with each as a component.
+	Path join(const std::vector<std::string> &strings) const;
+	/// Return each directory component as a Path.
 	std::vector<Path> split();
 
 	/// Check if raw names are the same	
