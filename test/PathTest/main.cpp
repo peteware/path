@@ -11,7 +11,6 @@ main( int argc, char* argv[] )
 {
 	printf ("hello\n");
 	std::cout << "Testing" << std::endl;
-#ifdef notdef
 	// Create the event manager anaad test controller
   CPPUNIT_NS::TestResult controller;
 
@@ -29,11 +28,9 @@ main( int argc, char* argv[] )
   runner.run( controller );
 
   // Print test in a compiler compatible format.
-  CPPUNIT_NS::CompilerOutputter outputter( &result, CPPUNIT_NS::stdCOut() );
+  CPPUNIT_NS::CompilerOutputter outputter( &result, std::cout );
   outputter.write(); 
 
   return result.wasSuccessful() ? 0 : 1;
-#endif
-  return 0;
 }
 

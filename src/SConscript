@@ -1,0 +1,21 @@
+# -*- python -*-
+
+Library('path',
+        [
+        'BadPath.cpp',
+        'Cannonical.cpp',
+        'FileStream.cpp',
+        'Node.cpp',
+        'NodeInfo.cpp',
+        'NodeIter.cpp',
+        'Path.cpp',
+        'PathException.cpp',
+        'PathExtra.cpp',
+        'PathRules.cpp',
+        'Permission.cpp',
+        'SysCalls.cpp',
+        'Unimplemented.cpp',
+        'UnixRules.cpp',
+        'UriRules.cpp',
+        'Win32Rules.cpp'
+        ])

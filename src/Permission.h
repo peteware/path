@@ -19,7 +19,7 @@ class Permission : public PathException
 
 public:
 	Permission();
-	virtual ~Permission();
+	virtual ~Permission() throw();
 
 };
 #endif // !defined(EA_90B2B1B4_DF1D_4caf_95A6_76B88139D79B__INCLUDED_)

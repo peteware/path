@@ -17,7 +17,7 @@ PathException::PathException()
 
 
 
-PathException::~PathException()
+PathException::~PathException() throw()
 {
 
 }

@@ -93,7 +93,8 @@ bool Node::isDir() const
 /**
  * Return a new Node with all symbolic linkes resolved.
  */
-const void Node::realpath(){
+const void Node::realpath()
+{
 
 }
 
@@ -101,7 +102,8 @@ const void Node::realpath(){
 /**
  * Return the size in bytes
  */
-size_t Node::size(){
+size_t Node::size()
+{
 
-	return  NULL;
+	return 0;
 }

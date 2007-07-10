@@ -8,12 +8,14 @@
 #include "BadPath.h"
 
 
-BadPath::BadPath(){
+BadPath::BadPath()
+{
 
 }
 
 
 
-BadPath::~BadPath(){
+BadPath::~BadPath() throw()
+{
 
 }

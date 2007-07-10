@@ -151,7 +151,7 @@ void PathUnit::testExtension()
 	CPPUNIT_ASSERT_EQUAL(std::string(""), Path("/a/b/cd").extension());
 	CPPUNIT_ASSERT_EQUAL(std::string(".c"), Path("/a.x/b.c").extension());
 	CPPUNIT_ASSERT_EQUAL(std::string("."), Path("a.").extension());
-	CPPUNIT_ASSERT_EQUAL(std::string(".c", Path("a....c").extension());
+	CPPUNIT_ASSERT_EQUAL(std::string(".c"), Path("a....c").extension());
 }
 
 void PathUnit::testRules()

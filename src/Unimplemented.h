@@ -6,8 +6,8 @@
  * Created on:      11-May-2007 5:09:33 PM
  * Original author: Pete Ware
  */
-#if !defined(EA_D9412DB2_4117_4f74_8101_82DEBE0899D4__INCLUDED_)
-#define EA_D9412DB2_4117_4f74_8101_82DEBE0899D4__INCLUDED_
+#if !defined(_PATH_UNIMPLEMENTED_H_)
+#define _PATH_UNIMPLEMENTED_H_
 
 #include "PathException.h"
 
@@ -20,7 +20,7 @@ class Unimplemented : public PathException
 
 public:
 	Unimplemented();
-	virtual ~Unimplemented();
+	virtual ~Unimplemented() throw();
 
 };
-#endif // !defined(EA_D9412DB2_4117_4f74_8101_82DEBE0899D4__INCLUDED_)
+#endif // !defined(_PATH_UNIMPLEMENTED_H_)

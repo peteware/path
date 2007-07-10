@@ -8,12 +8,14 @@
 #include "Permission.h"
 
 
-Permission::Permission(){
+Permission::Permission()
+{
 
 }
 
 
 
-Permission::~Permission(){
+Permission::~Permission() throw()
+{
 
 }

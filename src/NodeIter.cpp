@@ -20,7 +20,8 @@ NodeIter::NodeIter()
 /**
  * Makes iterator return all Nodes within a directory.
  */
-NodeIter::NodeIter(Node node){
+NodeIter::NodeIter(Node node)
+{
 
 }
 
@@ -28,7 +29,8 @@ NodeIter::NodeIter(Node node){
 /**
  * Makes iterator return all Nodes within a directory.
  */
-NodeIter::NodeIter(Node node, const std::string pattern, bool regexp){
+NodeIter::NodeIter(Node node, const std::string pattern, bool regexp)
+{
 
 }
 
@@ -43,9 +45,10 @@ Node & NodeIter::operator->()
 /**
  * Compares two iterators to see if they refer to different Nodes
  */
-bool NodeIter::operator!=(const NodeIter op2){
+bool NodeIter::operator!=(const NodeIter op2)
+{
 
-	return  NULL;
+	return true;
 }
 
 
@@ -54,7 +57,8 @@ bool NodeIter::operator!=(const NodeIter op2){
  * 
  * Returns an empty Node if there are no more nodes to examine.
  */
-Node NodeIter::operator*(){
+Node NodeIter::operator*()
+{
 
 	return  Node();
 }
@@ -63,7 +67,8 @@ Node NodeIter::operator*(){
 /**
  * Moves to the next Node in the
  */
-NodeIter NodeIter::operator++(){
+NodeIter NodeIter::operator++()
+{
 
 	return NodeIter();
 }
@@ -72,15 +77,17 @@ NodeIter NodeIter::operator++(){
 /**
  * Compares two iterators to see if they refer to the same Node
  */
-bool NodeIter::operator==(const NodeIter op2){
+bool NodeIter::operator==(const NodeIter op2)
+{
 
-	return  NULL;
+	return  true;
 }
 
 
 /**
  * Traverse into each subdirectory.
  */
-void NodeIter::setRecursive(){
+void NodeIter::setRecursive()
+{
 
 }

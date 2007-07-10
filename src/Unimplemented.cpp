@@ -8,12 +8,14 @@
 #include "Unimplemented.h"
 
 
-Unimplemented::Unimplemented(){
+Unimplemented::Unimplemented()
+{
 
 }
 
 
 
-Unimplemented::~Unimplemented(){
+Unimplemented::~Unimplemented() throw()
+{
 
 }
