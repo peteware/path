@@ -1,5 +1,5 @@
 # -*- python -*-
 SConscript(['src/SConscript',
-            'test/PathTest/SConscript',
+            'tests/pathtest/SConscript',
             ])
 

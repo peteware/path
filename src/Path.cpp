@@ -9,6 +9,8 @@
 #include "PathExtra.h"
 #include "UnixRules.h"
 
+#include <iostream>
+
 PathRules * Path::s_defaultPathRules;
 
 /**
@@ -176,23 +178,80 @@ Path Path::basename() const
  */
 Path Path::dirname() const
 {
-	std::string::size_type	index;
+	//std::string::size_type	index;
+	int						index;
 	std::string::size_type	end = std::string::npos;
-	bool					found = false;
+	int						state = 0;
 
-	for (index = m_path.size() - 1; index > 0; --index)
+	std::cout << "START: " << m_path << std::endl;
+	index = m_path.size() - 1;
+	while (index >= 0 && state != 3) 
 	{
-		if (!found && m_path[index] != '/')
-			continue;
-		if (!found)
+		std::cout << "\tstate = " << state
+			<< " index = " << index
+			<< " ch = " << m_path[index]
+			<< std::endl;
+		switch (state) 
 		{
-			found = true;
-			end = index;
+		case 0:
+			/*
+			 * Searching for the end with the '/' on end
+			 */
+			if (m_path[index] != '/') 
+			{
+				state = 1;
+			}
+			else 
+			{
+				--index;
+			}
+			break;
+		case 1:
+			/*
+			 * We are at the end, past any terminating '/'
+			 * and now we are searching the '/' that is for
+			 * the directory
+			 */
+			if (m_path[index] == '/') 
+			{
+				state = 2;
+			}
+			else 
+			{
+				--index;
+			}
+			break;
+		case 2:
+			/**
+			 * We've found the '/' for the directory and now
+			 * need to remove any repeating /'s
+			 */
+			if (m_path[index] != '/') 
+			{
+				state = 3;
+			}
+			else 
+			{
+				--index;
+			}
+			end = index + 1;
+			break;
 		}
 	}
-	if (found)
+
+	index = std::max (0, index);
+	std::cout << "DONE: end = " << end;
+	std::cout << "\tstate = " << state
+		<< " index = " << index
+		<< " ch = " << m_path[index]
+		<< std::endl;
+	if (state == 2)
 	{
-		return Path(m_path.substr(index, index - end));
+		return Path(m_path.substr(0, end));
+	}
+	else if (state == 3)
+	{
+		return Path (m_path.substr (0, end));
 	}
 	else
 	{
@@ -217,7 +276,11 @@ Path Path::dirname() const
  */
 std::string Path::extension() const
 {
-	return  std::string();
+	std::string::size_type	index = m_path.find_last_of (".");
+	if (index == std::string::npos)
+		return "";
+	else
+		return m_path.substr (index, m_path.size() - index);
 }
 
 /**

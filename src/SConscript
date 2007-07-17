@@ -1,6 +1,7 @@
 # -*- python -*-
 
-Library('path',
+env = Environment (CCFLAGS = '-g')
+env.Library('path',
         [
         'BadPath.cpp',
         'Cannonical.cpp',

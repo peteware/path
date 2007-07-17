@@ -1,0 +1,4 @@
+# -*- python -*-
+env = Environment(CPPPATH="../../src", CCFLAGS='-g')
+env.Program(target = 'pathtest', source = ['main.cpp', 'PathUnit.cpp'],
+            LIBS=['path', 'cppunit', 'dl'], LIBPATH='../../src')
