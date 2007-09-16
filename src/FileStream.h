@@ -6,8 +6,8 @@
  * Created on:      11-May-2007 5:09:30 PM
  * Original author: Pete Ware
  */
-#if !defined(EA_5CBCB30A_4013_4658_96A5_DBDA978238E9__INCLUDED_)
-#define EA_5CBCB30A_4013_4658_96A5_DBDA978238E9__INCLUDED_
+#if !defined(_PATH_FILESTREAM_H_)
+#define _PATH_FILESTREAM_H_
 
 #include "Node.h"
 #include <fstream>
@@ -20,4 +20,4 @@ public:
 	virtual ~FileStream();
 
 };
-#endif // !defined(EA_5CBCB30A_4013_4658_96A5_DBDA978238E9__INCLUDED_)
+#endif // !defined(_PATH_FILESTREAM_H_)

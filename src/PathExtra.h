@@ -1,5 +1,5 @@
-#ifndef _Path_PathExtra_h_
-#define _Path_PathExtra_h_
+#ifndef _PATH_PATHEXTRA_H_
+#define _PATH_PATHEXTRA_H_
 #include <string>
 
 // Forward declarations
@@ -32,4 +32,4 @@ private:
 	/// If other then the default rules are used.
 	PathRules *		m_rules;
 };
-#endif /* _Path_PathExtra_h_ */
+#endif /* _PATH_PATHEXTRA_H_ */

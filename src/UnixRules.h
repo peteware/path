@@ -6,8 +6,8 @@
  * Created on:      11-May-2007 5:09:33 PM
  * Original author: Pete Ware
  */
-#if !defined(_Path_UnixRules_h_)
-#define _Path_UnixRules_h_
+#if !defined(_PATH_UNIXRULES_H_)
+#define _PATH_UNIXRULES_H_
 
 #include "PathRules.h"
 // Forward declarations
@@ -27,4 +27,4 @@ public:
 	static UnixRules	rules;
 
 };
-#endif // !defined(_Path_UnixRules_h_)
+#endif // !defined(_PATH_UNIXRULES_H_)

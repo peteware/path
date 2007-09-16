@@ -6,8 +6,8 @@
  * Created on:      11-May-2007 5:09:32 PM
  * Original author: Pete Ware
  */
-#if !defined(_Path_PathRules_h_)
-#define _Path_PathRules_h_
+#if !defined(_PATH_PATHRULES_H_)
+#define _PATH_PATHRULES_H_
 
 #include <string>
 // Forward declarations
@@ -32,4 +32,4 @@ public:
 	virtual std::string quote(const std::string & path) const;
 
 };
-#endif // !defined(_Path_PathRules_h_)
+#endif // !defined(_PATH_PATHRULES_H_)

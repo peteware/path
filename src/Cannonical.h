@@ -6,8 +6,8 @@
  * Created on:      11-May-2007 5:09:30 PM
  * Original author: Pete Ware
  */
-#if !defined(EA_C5B97F3D_D2E2_40da_9D4A_6DF0CBF3AABE__INCLUDED_)
-#define EA_C5B97F3D_D2E2_40da_9D4A_6DF0CBF3AABE__INCLUDED_
+#if !defined(_PATH_CANNONICAL_H_)
+#define _PATH_CANNONICAL_H_
 
 #include <vector>
 #include <string>
@@ -43,4 +43,4 @@ public:
 	std::string m_protocol;
 
 };
-#endif // !defined(EA_C5B97F3D_D2E2_40da_9D4A_6DF0CBF3AABE__INCLUDED_)
+#endif // !defined(_PATH_CANNONICAL_H_)

@@ -6,8 +6,8 @@
  * Created on:      11-May-2007 5:09:32 PM
  * Original author: Pete Ware
  */
-#if !defined(EA_9DFD253C_57CC_4b8b_AC60_205874CCB105__INCLUDED_)
-#define EA_9DFD253C_57CC_4b8b_AC60_205874CCB105__INCLUDED_
+#if !defined(_PATH_SYSCALLS_H_)
+#define _PATH_SYSCALLS_H_
 
 #include <string>
 // Forward declarations
@@ -29,4 +29,4 @@ public:
 	virtual NodeInfo * stat(const std::string & path) const;
 
 };
-#endif // !defined(EA_9DFD253C_57CC_4b8b_AC60_205874CCB105__INCLUDED_)
+#endif // !defined(_PATH_SYSCALLS_H_)

@@ -6,8 +6,8 @@
  * Created on:      11-May-2007 5:09:33 PM
  * Original author: Pete Ware
  */
-#if !defined(EA_BB1196E9_08C1_4050_AD5B_B14215CA5142__INCLUDED_)
-#define EA_BB1196E9_08C1_4050_AD5B_B14215CA5142__INCLUDED_
+#if !defined(_PATH_URIRULES_H_)
+#define _PATH_URIRULES_H_
 
 #include "Cannonical.h"
 #include "Path.h"
@@ -25,4 +25,4 @@ public:
 	virtual std::string quote(const std::string & path) const;
 
 };
-#endif // !defined(EA_BB1196E9_08C1_4050_AD5B_B14215CA5142__INCLUDED_)
+#endif // !defined(_PATH_URIRULES_H_)

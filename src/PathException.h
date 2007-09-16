@@ -13,7 +13,7 @@
 #include <exception>
 
 /**
- * Anytime a Node interacts witht he filesystem, there's a chance for something to
+ * Anytime a Node interacts with the filesystem, there's a chance for something to
  * go wrong.  All such exceptions derive from this.
  * 
  * The actual name of the filesystem object is used in the error message.  The

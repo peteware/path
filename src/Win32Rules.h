@@ -6,8 +6,8 @@
  * Created on:      11-May-2007 5:09:33 PM
  * Original author: Pete Ware
  */
-#if !defined(EA_AB3F85DA_5097_4a8e_AA43_A723FE22CFEA__INCLUDED_)
-#define EA_AB3F85DA_5097_4a8e_AA43_A723FE22CFEA__INCLUDED_
+#if !defined(_PATH_WIN32RULES_H_)
+#define _PATH_WIN32RULES_H_
 
 #include "Cannonical.h"
 #include "Path.h"
@@ -24,4 +24,4 @@ public:
 	virtual Path convert(const Cannonical &canonical) const;
 	virtual std::string quote(const std::string & path) const;
 };
-#endif // !defined(EA_AB3F85DA_5097_4a8e_AA43_A723FE22CFEA__INCLUDED_)
+#endif // !defined(_PATH_WIN32RULES_H_)
