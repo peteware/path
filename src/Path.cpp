@@ -184,7 +184,7 @@ Path Path::dirname() const
 	int						state = 0;
 
 	std::cout << "START: " << m_path << std::endl;
-	index = m_path.size() - 1;
+	index = static_cast<int>(m_path.size()) - 1;
 	while (index >= 0 && state != 3) 
 	{
 		std::cout << "\tstate = " << state
