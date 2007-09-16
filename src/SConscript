@@ -1,6 +1,8 @@
 # -*- python -*-
 
-env = Environment (CCFLAGS = '-g')
+
+#env = Environment (CCFLAGS = '-g',CPPFLAGS = '/EHsc')
+env = Environment (CPPFLAGS = '/EHsc')
 env.Library('path',
         [
         'BadPath.cpp',
