@@ -29,6 +29,7 @@ class PathUnit : public CppUnit::TestCase
     CPPUNIT_TEST(testBasename);
    	CPPUNIT_TEST(testDirname);
 	CPPUNIT_TEST(testExtension);
+	CPPUNIT_TEST(testStem);
 	CPPUNIT_TEST(testRules);
 
 	CPPUNIT_TEST_SUITE_END();
@@ -46,6 +47,8 @@ protected:
 	void testDirname();
 	/// Test extension()
 	void testExtension();
+	/// Test stem()
+	void testStem();
 	/// Check that we can set the path rules
 	void testRules();
 
@@ -152,6 +155,15 @@ void PathUnit::testExtension()
 	CPPUNIT_ASSERT_EQUAL(std::string(".c"), Path("/a.x/b.c").extension());
 	CPPUNIT_ASSERT_EQUAL(std::string("."), Path("a.").extension());
 	CPPUNIT_ASSERT_EQUAL(std::string(".c"), Path("a....c").extension());
+}
+
+void PathUnit::testStem()
+{
+	CPPUNIT_ASSERT_EQUAL(std::string("abc"), Path("abc.c").stem());
+	CPPUNIT_ASSERT_EQUAL(std::string(".abc"), Path("/a/b/.abc").stem());
+	CPPUNIT_ASSERT_EQUAL(std::string(".abc"), Path("/a/.abc.xyz").stem());
+	CPPUNIT_ASSERT_EQUAL(std::string("a"), Path("a.c").stem());
+	CPPUNIT_ASSERT_EQUAL(std::string(""), Path("").stem());
 }
 
 void PathUnit::testRules()

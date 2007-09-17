@@ -183,14 +183,16 @@ Path Path::dirname() const
 	std::string::size_type	end = std::string::npos;
 	int						state = 0;
 
-	std::cout << "START: " << m_path << std::endl;
+	//std::cout << "START: " << m_path << std::endl;
 	index = static_cast<int>(m_path.size()) - 1;
 	while (index >= 0 && state != 3) 
 	{
+#ifdef notdef
 		std::cout << "\tstate = " << state
 			<< " index = " << index
 			<< " ch = " << m_path[index]
 			<< std::endl;
+#endif
 		switch (state) 
 		{
 		case 0:
@@ -226,7 +228,7 @@ Path Path::dirname() const
 			 * We've found the '/' for the directory and now
 			 * need to remove any repeating /'s
 			 */
-			if (m_path[index] != '/') 
+			if (m_path[index] != '/' || index == 0) 
 			{
 				state = 3;
 			}
@@ -240,11 +242,13 @@ Path Path::dirname() const
 	}
 
 	index = std::max (0, index);
+#ifdef notdef
 	std::cout << "DONE: end = " << end;
 	std::cout << "\tstate = " << state
 		<< " index = " << index
 		<< " ch = " << m_path[index]
 		<< std::endl;
+#endif
 	if (state == 2)
 	{
 		return Path(m_path.substr(0, end));
@@ -286,13 +290,23 @@ std::string Path::extension() const
 /**
  * Return basename() of path with the extension() removed
  * @code
- * Path	p("somepath.ext");
- * p.basename() == Path(p.stem() + p.extension());
+ * Path	p("/a/b/name.ext");
+ * p.extension() == "name"; 
+ * @endcode
+ * Path p2("/a/b/.name");
+ * p2.stem() == ".name";
  * @endcode
  */
 std::string Path::stem() const
 {
-	return "";
+	Path	base = basename();
+	std::string::size_type	index = base.m_path.find_last_of (".");
+	if (index == std::string::npos)
+		return base.m_path;
+	else if (index == 0)
+		return base.m_path;
+	else
+		return base.m_path.substr (0, index);
 }
 
 /**
