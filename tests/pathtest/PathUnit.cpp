@@ -30,6 +30,8 @@ class PathUnit : public CppUnit::TestCase
    	CPPUNIT_TEST(testDirname);
 	CPPUNIT_TEST(testExtension);
 	CPPUNIT_TEST(testStem);
+	CPPUNIT_TEST(testAbs);
+	CPPUNIT_TEST(testJoin);
 	CPPUNIT_TEST(testRules);
 
 	CPPUNIT_TEST_SUITE_END();
@@ -41,14 +43,18 @@ protected:
     void equal();
 	/// Test output operator
     void testOstream();
-	/// Test basename()
+	/// Test Path::basename()
 	void testBasename();
-	/// Test dirname()
+	/// Test Path::dirname()
 	void testDirname();
-	/// Test extension()
+	/// Test Path::extension()
 	void testExtension();
-	/// Test stem()
+	/// Test Path::stem()
 	void testStem();
+	/// Test Path::abs() and Path:;setAbs()
+	void testAbs();
+	/// Test Path::join()
+	void testJoin();
 	/// Check that we can set the path rules
 	void testRules();
 
@@ -164,6 +170,39 @@ void PathUnit::testStem()
 	CPPUNIT_ASSERT_EQUAL(std::string(".abc"), Path("/a/.abc.xyz").stem());
 	CPPUNIT_ASSERT_EQUAL(std::string("a"), Path("a.c").stem());
 	CPPUNIT_ASSERT_EQUAL(std::string(""), Path("").stem());
+}
+
+void PathUnit::testAbs()
+{
+	CPPUNIT_ASSERT_EQUAL(Path("abc").abs(), false);
+	CPPUNIT_ASSERT_EQUAL(Path("").abs(), false);
+	CPPUNIT_ASSERT_EQUAL(Path("a/b/c/fas").abs(), false);
+	CPPUNIT_ASSERT_EQUAL(Path("/a/bc").abs(), true);
+	CPPUNIT_ASSERT_EQUAL(Path("/a").abs(), true);
+	CPPUNIT_ASSERT_EQUAL(Path("/").abs(), true);
+
+	Path	p1("abc");
+	Path	p2(p1.makeAbs());
+	CPPUNIT_ASSERT_EQUAL(p2.abs(), true);
+	CPPUNIT_ASSERT_EQUAL(p1.abs(), false);
+}
+
+void PathUnit::testJoin()
+{
+	Path	p1("abc");
+	Path	p2("def");
+
+	CPPUNIT_ASSERT_EQUAL(Path("abc/def"), p1.join(p2));
+	CPPUNIT_ASSERT_EQUAL(p1.join(p2).abs(), false);
+
+	std::vector<std::string>	paths;
+	CPPUNIT_ASSERT_EQUAL(p1, p1.join(paths));
+	paths.push_back("a");
+	paths.push_back("b");
+	paths.push_back("c");
+	CPPUNIT_ASSERT_EQUAL(Path("abc/a/b/c"), p1.join(paths));
+	p1 = p1.makeAbs();
+	CPPUNIT_ASSERT_EQUAL(Path("/abc/a/b/c"), p1.join(paths));
 }
 
 void PathUnit::testRules()

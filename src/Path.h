@@ -61,8 +61,8 @@ public:
 
 	/// Return if this is an absolute path (not relative)
 	bool abs() const;
-	/// Set if this should be an absolute path
-	bool setAbs(bool absolute);
+	/// Return a new path by converting this one to an absolute path
+	Path makeAbs() const;
 
 	/// Concatenate this and Path
 	Path join(const Path &path) const;

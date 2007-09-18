@@ -316,21 +316,19 @@ std::string Path::stem() const
  */
 bool Path::abs() const 
 {
-	return false;
+	return (m_path.size() > 0 && m_path[0] == '/');
 }
 
 /**
- * Set if this is an absolute path or not.
- * 
- * An empty String is initially not an absolute path.  However, if you initialize
- * it with a path, then the PathRules is used to determine if that string makes it
- * an absolute path.
- * 
- * The return value is the previous value.
+ * Another alternative is to use Path::getcwd().join(path))
+ * which might return something closer to what you expect.
  */
-bool Path::setAbs(bool absolute)
+Path Path::makeAbs() const
 {
-	return absolute;
+	if (abs())
+		return *this;
+	else
+		return Path("/" + m_path);
 }
 
 /**
@@ -347,29 +345,41 @@ bool Path::setAbs(bool absolute)
  */
 Path Path::join(const Path &path) const
 {
-	return  Path();
+	if (path.abs())
+		return path;
+	return Path(m_path + "/" + path.m_path);
 }
 
-
 /**
- * Return a String by joining all the Strings in the vector.  All Strings must use
- * the same PathRules.
+ * Return a Path by joining all the std::strings in the vector.
  * 
  * This is comparable to repeated calling join() with each component of the vector.
  *  Creating an empty String and then calling join() should do what you'd expect.
  * For example:
  * 
  * @code
- * String  path; // initialize this...
- * String  newPath;
+ * std::string  str; // initialize this...
+ * Path  path;
  * 
- * newpath = String().join(path.split());
+ * path = path.join(str.split());
  * @endcode
  * 
  */
 Path Path::join(const std::vector<std::string> &strings) const
 {
-	return Path();
+	std::string		str = m_path;
+	bool			first = m_path.empty();
+
+	for (std::vector<std::string>::const_iterator iter = strings.begin();
+		iter != strings.end(); ++iter)
+	{
+		if (first)
+			first = false;
+		else
+			str += "/";
+		str += *iter;
+	}
+	return Path(str, m_rules);
 }
 
 
