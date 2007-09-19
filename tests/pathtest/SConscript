@@ -1,7 +1,7 @@
 # -*- python -*-
 
-#env = Environment(CPPPATH="../../src", CCFLAGS='-g')
-env = Environment(CPPPATH=["../../src", 'C:/cppunit/cppunit-1.12.0/include'],
-					CPPFLAGS='/EHsc')
+env = Environment(CPPPATH="../../src", CCFLAGS='-g')
+#env = Environment(CPPPATH=["../../src", 'C:/cppunit/cppunit-1.12.0/include'],
+#					CPPFLAGS='/EHsc')
 env.Program(target = 'pathtest', source = ['main.cpp', 'PathUnit.cpp'],
-            LIBS=['path', 'cppunit'], LIBPATH=['../../src', 'C:/cppunit/cppunit-1.12.0/lib'])
+            LIBS=['path', 'cppunit', 'dl'], LIBPATH=['../../src', 'C:/cppunit/cppunit-1.12.0/lib'])
