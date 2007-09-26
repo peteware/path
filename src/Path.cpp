@@ -178,21 +178,13 @@ Path Path::basename() const
  */
 Path Path::dirname() const
 {
-	//std::string::size_type	index;
 	int						index;
 	std::string::size_type	end = std::string::npos;
 	int						state = 0;
 
-	//std::cout << "START: " << m_path << std::endl;
 	index = static_cast<int>(m_path.size()) - 1;
 	while (index >= 0 && state != 3) 
 	{
-#ifdef notdef
-		std::cout << "\tstate = " << state
-			<< " index = " << index
-			<< " ch = " << m_path[index]
-			<< std::endl;
-#endif
 		switch (state) 
 		{
 		case 0:
@@ -242,24 +234,17 @@ Path Path::dirname() const
 	}
 
 	index = std::max (0, index);
-#ifdef notdef
-	std::cout << "DONE: end = " << end;
-	std::cout << "\tstate = " << state
-		<< " index = " << index
-		<< " ch = " << m_path[index]
-		<< std::endl;
-#endif
 	if (state == 2)
 	{
-		return Path(m_path.substr(0, end));
+		return Path(m_path.substr(0, end), m_rules);
 	}
 	else if (state == 3)
 	{
-		return Path (m_path.substr (0, end));
+		return Path (m_path.substr (0, end), m_rules);
 	}
 	else
 	{
-		return Path(".");
+		return Path(".", m_rules);
 	}
 }
 
@@ -328,7 +313,7 @@ Path Path::makeAbs() const
 	if (abs())
 		return *this;
 	else
-		return Path("/" + m_path);
+		return Path("/" + m_path, m_rules);
 }
 
 /**
@@ -347,7 +332,7 @@ Path Path::join(const Path &path) const
 {
 	if (path.abs())
 		return path;
-	return Path(m_path + "/" + path.m_path);
+	return Path(m_path + "/" + path.m_path, m_rules);
 }
 
 /**

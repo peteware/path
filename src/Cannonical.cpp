@@ -6,14 +6,156 @@
  *  Original author: Pete Ware
  */
 #include "Cannonical.h"
+#include <iostream>
+#include <algorithm>
+#include <iterator>
 
 
-Cannonical::Cannonical(){
+/**
+ * Sets everything to be empty
+ */
+Cannonical::Cannonical()
+	: m_protocol(),
+	  m_host(),	  
+	  m_extra(),
+	  m_abs(false),
+	  m_components()
 
+{
 }
 
+Cannonical::Cannonical(const std::string &protocol, const std::string &host, const std::string &extra)
+	: m_protocol(protocol),
+	  m_host(host),	  
+	  m_extra(extra),
+	  m_abs(false),
+	  m_components()
+{
+}
 
+/**
+ * Easy way to copy basic info but with a new path
+ *
+ * @param copy Provides the protocol, host and extra info
+ * @param components Replaces that path from copy
+ */
+Cannonical::Cannonical(const Cannonical &copy, const std::vector<std::string> &components)
+	: m_protocol(copy.m_protocol),
+	  m_host(copy.m_host),
+	  m_extra(copy.m_extra),
+	  m_abs(copy.m_abs),
+	  m_components(components)
+{
+}
 
-Cannonical::~Cannonical(){
+/**
+ * Empty destructor
+ */
+Cannonical::~Cannonical()
+{
+}
 
+const std::string & Cannonical::protocol() const
+{
+	return m_protocol;
+}
+
+const std::string & Cannonical::host() const
+{
+	return m_host;
+}
+
+const std::string & Cannonical::extra() const
+{
+	return m_extra;
+}
+
+/**
+ * This is a simplified way to append an item
+ * See components() to get full access.
+ */
+void Cannonical::add(const std::string &dir)
+{
+	m_components.push_back(dir);
+}
+
+/**
+ * Rather then anticipate every possible operation
+ * on the list of components, this just
+ * exposes the list as a reference.
+ *
+ * @return Componenets in a path
+ */
+std::vector<std::string> &Cannonical::components()
+{
+	return m_components;
+}
+
+/**
+ * @return Components in a path
+ */
+const std::vector<std::string> &Cannonical::components() const
+{
+	return m_components;
+}
+
+/**
+ * Some PathRules really only understand absolute
+ * paths.  For example, URLs are really always absolute
+ * with relative ones being expressed only relative
+ * to an existing path.
+ *
+ * Technically, even filesystem pathnames are 
+ * relative to the current working directory.
+ *
+ * @param abs	If this path starts at root
+ * @return Previous value of abs().
+ */
+bool Cannonical::setAbs(bool abs)
+{
+	std::swap(abs, m_abs);
+	return abs;
+}
+
+/**
+ * @return If this is an absolute path
+ */
+bool Cannonical::abs() const
+{
+	return m_abs;
+}
+
+/**
+ * Don't use this to print out as a regular path.
+ * Use an appropriate PathRules to do so.
+ *
+ * This prints out the path to look like
+ * a URI:
+ * @code
+ *	http://www.pete.ware/a/b/c
+ * @endcode
+ * or more generally:
+ * @code
+ * protocol://host:extra/components
+ * @endcode
+ *
+ * If protocol, host, and extra are empty it'll
+ * look like a regular path with "/" seperating
+ * components.
+ */
+
+std::ostream &
+operator<<(std::ostream &out, const Cannonical &cannon)
+{
+	if (!cannon.protocol().empty())
+		out << cannon.protocol() << ':';
+	if (!cannon.host().empty())
+		out << "//" << cannon.host();
+	if (!cannon.extra().empty())
+		out << ":" << cannon.extra();
+	out << '/';
+	std::copy(cannon.components().begin(),
+		cannon.components().end(),
+		std::ostream_iterator<std::string>(out, "/"));
+	return out;
 }
