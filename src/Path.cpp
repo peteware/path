@@ -6,7 +6,7 @@
  *  Original author: Pete Ware
  */
 #include "Path.h"
-#include "PathExtra.h"
+#include "Cannonical.h"
 #include "UnixRules.h"
 
 #include <iostream>
@@ -19,7 +19,7 @@ PathRules * Path::s_defaultPathRules;
 Path::Path(PathRules *rules)
 	: m_path(),
 	  m_rules(rules),
-	  m_extra(0)
+	  m_cannon(0)
 {
 }
 
@@ -35,31 +35,31 @@ Path::Path(PathRules *rules)
 Path::Path(const std::string &path, PathRules *rules)
 	: m_path(path),
 	  m_rules(rules),
-	  m_extra(0)
+	  m_cannon(0)
 {
 }
 
 /**
  * Copy the m_path, make m_rules the same (pointer copy)
- * and duplicate the m_extra.
+ * and duplicate the m_cannon.
  */
 Path::Path(const Path &copy)
 	: m_path(copy.m_path),
 	  m_rules(copy.m_rules),
-	  m_extra(0)
+	  m_cannon(0)
 {
-	if (copy.m_extra)
+	if (copy.m_cannon)
 	{
-		m_extra = new PathExtra (*copy.m_extra);
+		m_cannon = new Cannonical (*copy.m_cannon);
 	}
 }
 
 /**
- * Delete m_extra
+ * Delete m_cannon
  */
 Path::~Path()
 {
-	delete m_extra;
+	delete m_cannon;
 }
 
 /**
@@ -71,14 +71,14 @@ Path & Path::operator=(const Path &op)
 	{
 		m_path = op.m_path;
 		m_rules = op.m_rules;
-		delete m_extra;
-		if (op.m_extra)
+		delete m_cannon;
+		if (op.m_cannon)
 		{
-			m_extra = new PathExtra(*op.m_extra);
+			m_cannon = new Cannonical(*op.m_cannon);
 		}
 		else
 		{
-			m_extra = 0;
+			m_cannon = 0;
 		}
 	}
 	return  *this;
@@ -420,11 +420,10 @@ const PathRules *Path::pathRules() const
  */
 const PathRules *Path::rules() const
 {
-		if (m_rules)
-			return m_rules;
-		if (!s_defaultPathRules)
-			s_defaultPathRules = &UnixRules::rules;
-		return s_defaultPathRules;
+	if (m_rules)
+		return m_rules;
+	else
+		return defaultPathRules();
 }
 
 
@@ -440,10 +439,14 @@ PathRules * Path::setDefaultPathRules(PathRules * rules)
 }
 
 /**
- * Returns the default rules; maybe NULL.
+ * Returns the default rules; never NULL.
+ *
+ * Uses UnixRules::rules as the default value.
  */
 PathRules * Path::defaultPathRules()
 {
+	if (!s_defaultPathRules)
+		s_defaultPathRules = &UnixRules::rules;
 	return s_defaultPathRules;
 }
 
@@ -455,6 +458,20 @@ Path Path::getcwd()
 	return Path();
 }
 
+/**
+ * Returns the cannonical representation of this path.
+ *
+ * If the result has not already been determined, it
+ * is calculated.
+ */
+const Cannonical & Path::cannon() const
+{
+	if (!m_cannon)
+	{
+		m_cannon = new Cannonical(rules()->cannonical(m_path));
+	}
+	return *m_cannon;
+}
 /**
  * Print's the raw form of the Path.  See normpath() 
  * to get a cleaner version of the Path.  

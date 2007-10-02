@@ -20,7 +20,7 @@ public:
 	UnixRules();
 	virtual ~UnixRules();
 
-	virtual Cannonical cannonical(const Path &path) const;
+	virtual Cannonical cannonical(const std::string &path) const;
 	virtual Path convert(const Cannonical &canonical) const;
 	virtual std::string quote(const std::string & path) const;
 

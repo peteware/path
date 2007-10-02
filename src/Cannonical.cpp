@@ -24,6 +24,18 @@ Cannonical::Cannonical()
 {
 }
 
+/**
+ * @param copy Provides the protocol, host, and ocmponent info
+ */
+Cannonical::Cannonical(const Cannonical &copy)
+	: m_protocol(copy.m_protocol),
+	  m_host(copy.m_host),
+	  m_extra(copy.m_extra),
+	  m_abs(copy.m_abs),
+	  m_components(copy.m_components)
+{
+}
+
 Cannonical::Cannonical(const std::string &protocol, const std::string &host, const std::string &extra)
 	: m_protocol(protocol),
 	  m_host(host),	  

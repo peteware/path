@@ -20,9 +20,9 @@ public:
 	UriRules();
 	virtual ~UriRules();
 
-	virtual Cannonical canonical(const Path &path) const;
+	virtual Cannonical canonical(const std::string &path) const;
 	virtual Path convert(const Cannonical &canonical) const;
-	virtual std::string quote(const std::string & path) const;
+	virtual std::string quote(const std::string & subdirs) const;
 
 };
 #endif // !defined(_PATH_URIRULES_H_)

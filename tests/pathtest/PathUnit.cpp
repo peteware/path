@@ -212,7 +212,7 @@ void PathUnit::testRules()
 	/*
 	 * We don't know what pathrules is currently
 	 * set to, so save the old ones which gets
-	 * restored later.  Set the current ruels to NULL
+	 * restored later.  Set the current rules to NULL
 	 */
 	old = Path::setDefaultPathRules(0);
 
@@ -220,7 +220,7 @@ void PathUnit::testRules()
 	 * 
 	 */
 	Path		p1;
-	CPPUNIT_ASSERT(Path::defaultPathRules() == 0);
+	CPPUNIT_ASSERT(Path::defaultPathRules() != 0);
 	CPPUNIT_ASSERT(p1.rules() == Path::defaultPathRules());
 	p1 = Path(rules);
 	CPPUNIT_ASSERT(p1.rules() == rules);

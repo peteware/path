@@ -21,7 +21,7 @@ PathRules::~PathRules()
  * Converts Path into a 'canonical' form.  This allows a Path to be converted from
  * one PathRules to another PathRules.
  */
-Cannonical PathRules::cannonical(const Path &path) const
+Cannonical PathRules::cannonical(const std::string &path) const
 {
 	return Cannonical();
 }
@@ -43,7 +43,7 @@ Path PathRules::convert(const Cannonical &canonical) const
  * components should be passed.  For example, passing 'a/b' to UnixRules would
  * return 'a_b'.
  */
-std::string PathRules::quote(const std::string & path) const
+std::string PathRules::quote(const std::string & subdir) const
 {
 	return std::string();
 }

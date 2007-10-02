@@ -28,9 +28,9 @@ public:
 	virtual ~PathRules();
 
 	/// 
-	virtual Cannonical cannonical(const Path &path) const = 0;
+	virtual Cannonical cannonical(const std::string &path) const = 0;
 	virtual Path convert(const Cannonical &canonical) const = 0;
-	virtual std::string quote(const std::string & path) const = 0;
+	virtual std::string quote(const std::string & subdir) const = 0;
 
 };
 #endif // !defined(_PATH_PATHRULES_H_)

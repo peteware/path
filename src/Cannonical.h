@@ -28,6 +28,8 @@ class Cannonical
 public:
 	/// Default constructor
 	Cannonical();
+	/// Copy constructor
+	Cannonical(const Cannonical &copy);
 	/// Construct with basics but no path
 	Cannonical(const std::string &protocol, const std::string &host, const std::string &extra);
 	/// Copy but with new path

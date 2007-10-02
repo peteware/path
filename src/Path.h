@@ -90,17 +90,20 @@ public:
 	static Path getcwd();
 
 private:
-	/// Use the rules if none are set.
+	/// Use these rules if none are set.
 	static PathRules *	s_defaultPathRules;
+	/// Convert m_path into Cannonical or using existing one
+	const Cannonical &cannon() const;
 	/**
 	 * The path as set.
 	 * 
 	 * This is the uninterpreted string and is the value returned by str().
 	 */
 	std::string		m_path;
-	/// These are the rules we use for this path.
+	/// These are the rules we use for this path; may be NULL
 	PathRules *		m_rules;
-	PathExtra *		m_extra;
+	/// The path in cannonical form; may be NULL
+	mutable Cannonical *m_cannon;
 
 };
 
