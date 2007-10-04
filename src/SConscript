@@ -1,7 +1,7 @@
 # -*- python -*-
 
 
-env = Environment (CCFLAGS = '-g',CPPFLAGS = '-g')
+env = Environment (CCFLAGS = ['-g', '-Wall'],CPPFLAGS = '-g')
 #env = Environment (CPPFLAGS = '/EHsc')
 env.Library('path',
         [
