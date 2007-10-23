@@ -8,8 +8,14 @@
 #include "PathRules.h"
 #include "Cannonical.h"
 #include "Path.h"
+#include <string>
+#include <iostream>
 
-PathRules::PathRules()
+/**
+ * @param sep Sepearator charcter within path, for example '/'.
+ */
+PathRules::PathRules(char sep)
+	: m_sep(sep)
 {
 }
 
@@ -18,19 +24,22 @@ PathRules::~PathRules()
 }
 
 /**
- * Converts Path into a 'canonical' form.  This allows a Path to be converted from
- * one PathRules to another PathRules.
+ * This allows Path to implement it's manipulations without
+ * knowing system implementation details.
  */
 Cannonical PathRules::cannonical(const std::string &path) const
 {
-	return Cannonical();
+	Cannonical	cannon;
+	
+	split(path, m_sep, cannon.components());
+	return cannon;
 }
 
 /**
  * Converts the canonical representation of a path to a form used by the rules.
  * 
- * Any special characters are converted to a safe form.  For example, in UnixRules,
- * a '/' is converted to '|' (or whatever).
+ * Any special characters are converted to a safe form.  For example,
+ * in UnixRules, a '/' is converted to '|' (or whatever).
  */
 Path PathRules::convert(const Cannonical &canonical) const 
 {
@@ -46,4 +55,25 @@ Path PathRules::convert(const Cannonical &canonical) const
 std::string PathRules::quote(const std::string & subdir) const
 {
 	return std::string();
+}
+
+/**
+ * Calling this with "//abc/d/e//" would return a vector of
+ * "", "", "abc", "d", "e", "", ""
+ * @param path The string to split
+ * @param sep The character to use to split the path
+ * @param subdirs Vector of strings that each component is push_back()'d on
+ */
+void PathRules::split(const std::string &path, char sep, std::vector<std::string> &subdirs)
+{
+	std::cout << "splitting\n";
+	std::string::size_type	start = 0;
+	std::string::size_type end = 3;
+
+	while (start < path.size())
+	{
+		end = path.find_first_of(sep, start);
+		subdirs.push_back(path.substr(start, end));
+		start = ++end;
+	}
 }

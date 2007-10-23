@@ -3,5 +3,5 @@
 env = Environment(CPPPATH="../../src", CCFLAGS=['-g', '-Wall'])
 #env = Environment(CPPPATH=["../../src", 'C:/cppunit/cppunit-1.12.0/include'],
 #					CPPFLAGS='/EHsc')
-env.Program(target = 'pathtest', source = ['main.cpp', 'PathUnit.cpp', 'PathRulesUnit.cpp'],
+env.Program(target = 'pathtest', source = ['main.cpp', 'CannonicalUnit.cpp', 'PathUnit.cpp', 'PathRulesUnit.cpp'],
            LIBS=['path', 'cppunit', 'dl'], LIBPATH=['../../src'])

@@ -9,6 +9,7 @@
 
 
 UriRules::UriRules()
+	: PathRules('/')
 {
 }
 

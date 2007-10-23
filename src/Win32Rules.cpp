@@ -9,6 +9,7 @@
 
 
 Win32Rules::Win32Rules()
+	: PathRules('/')
 {
 }
 

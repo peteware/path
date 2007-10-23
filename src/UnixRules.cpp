@@ -12,6 +12,7 @@
 UnixRules	UnixRules::rules;
 
 UnixRules::UnixRules()
+	: PathRules('/')
 {
 }
 
@@ -25,7 +26,7 @@ UnixRules::~UnixRules()
  */
 Cannonical UnixRules::cannonical(const std::string &path) const
 {
-	return Cannonical();
+	return PathRules::cannonical(path);
 }
 
 /**
