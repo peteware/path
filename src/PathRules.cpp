@@ -30,8 +30,29 @@ PathRules::~PathRules()
 Cannonical PathRules::cannonical(const std::string &path) const
 {
 	Cannonical	cannon;
+	std::vector<std::string>	components;
+	bool		first = true;
 	
-	split(path, m_sep, cannon.components());
+	split(path, m_sep, components);
+	std::vector<std::string>::iterator iter = components.begin();
+	while (iter != components.end())
+	{
+		if (iter->empty())
+		{
+			if (first)
+				cannon.setAbs(true);
+			iter = components.erase(iter);
+		}
+		else {
+			// The previous erase goes to the next component
+			// and a second ++iter in for loop would go beyond
+			// the end
+			++iter;
+		}
+		first = false;
+				
+	}
+	cannon.components().swap(components);
 	return cannon;
 }
 
@@ -62,18 +83,17 @@ std::string PathRules::quote(const std::string & subdir) const
  * "", "", "abc", "d", "e", "", ""
  * @param path The string to split
  * @param sep The character to use to split the path
- * @param subdirs Vector of strings that each component is push_back()'d on
+ * @param subdirs vector of strings that each component is push_back()'d on
  */
 void PathRules::split(const std::string &path, char sep, std::vector<std::string> &subdirs)
 {
-	std::cout << "splitting\n";
 	std::string::size_type	start = 0;
-	std::string::size_type end = 3;
+	std::string::size_type	end;
 
-	while (start < path.size())
+	while (start < path.size() && end != std::string::npos)
 	{
 		end = path.find_first_of(sep, start);
-		subdirs.push_back(path.substr(start, end));
-		start = ++end;
+		subdirs.push_back(path.substr(start, end - start));
+		start = end + 1;
 	}
 }

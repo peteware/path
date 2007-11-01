@@ -48,7 +48,7 @@ public:
 
 	/// Return reference; you can change this.
 	std::vector<std::string> &components();
-	/// Return reference for const object
+	/// Return const reference for const object
 	const std::vector<std::string> &components() const;
 
 	/// Set if this is an absolute path
