@@ -16,7 +16,7 @@ PathRules * Path::s_defaultPathRules;
 /**
  * Initialize an empty Path
  */
-Path::Path(PathRules *rules)
+Path::Path(const PathRules *rules)
 	: m_path(),
 	  m_rules(rules),
 	  m_cannon(0)
@@ -32,7 +32,7 @@ Path::Path(PathRules *rules)
  * and finally use normpath() to get it back
  * in a cleaned up form.
  */
-Path::Path(const std::string &path, PathRules *rules)
+Path::Path(const std::string &path, const PathRules *rules)
 	: m_path(path),
 	  m_rules(rules),
 	  m_cannon(0)

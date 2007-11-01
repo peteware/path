@@ -32,9 +32,9 @@ class Path
 {
 public:
 	/// Default constructory
-	Path(PathRules *rules = 0);
+	Path(const PathRules *rules = 0);
 	/// Constructor from std::string
-	Path(const std::string &path, PathRules *rules = 0);
+	Path(const std::string &path, const PathRules *rules = 0);
 	/// Copy constructor
 	Path(const Path &copy);
 	/// Destructor
@@ -101,7 +101,7 @@ private:
 	 */
 	std::string		m_path;
 	/// These are the rules we use for this path; may be NULL
-	PathRules *		m_rules;
+	const PathRules *		m_rules;
 	/// The path in cannonical form; may be NULL
 	mutable Cannonical *m_cannon;
 
