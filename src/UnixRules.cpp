@@ -33,11 +33,27 @@ Cannonical UnixRules::cannonical(const std::string &path) const
  * Converts the canonical representation of a path to a form used by the rules.
  * 
  * Any special characters are converted to a safe form.  For example, in UnixRules,
- * a '/' is converted to '|' (or whatever).
+ * a '/' is converted to '_' (or whatever).
  */
 Path UnixRules::convert(const Cannonical &canonical) const 
 {
-	return Path();
+	std::string	path;
+	bool		first;
+
+	if (canonical.abs())
+		path += m_sep;
+	first = true;
+	for (std::vector<std::string>::const_iterator iter = canonical.components().begin();
+		 iter != canonical.components().end(); ++iter)
+	{
+		if (!first)
+			path += m_sep;
+		else
+			first = false;
+		path += quote(*iter);
+	}
+	
+	return Path(path, this);
 }
 
 /**
@@ -48,5 +64,5 @@ Path UnixRules::convert(const Cannonical &canonical) const
  */
 std::string UnixRules::quote(const std::string & subdir) const
 {
-	return std::string();
+	return subdir;
 }

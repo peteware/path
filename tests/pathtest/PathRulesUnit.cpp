@@ -1,6 +1,7 @@
 #include <PathRules.h>
 #include <UnixRules.h>
 #include <Cannonical.h>
+#include <Path.h>
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
@@ -11,13 +12,16 @@ class PathRulesUnit: public CppUnit::TestCase
 
 	CPPUNIT_TEST(init);
 	CPPUNIT_TEST(cannonical);
+	CPPUNIT_TEST(convert);
 
 	CPPUNIT_TEST_SUITE_END();
 protected:
 	/// Make sure constructors/destructor works
 	void init();
-	/// Test converstion to cannonical form
+	/// Test conversion to cannonical form
 	void cannonical();
+	/// Test conversion to Path form
+	void convert();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(PathRulesUnit);
@@ -59,4 +63,27 @@ void PathRulesUnit::cannonical()
 	CPPUNIT_ASSERT_EQUAL(std::string("cd"), cannon.components()[1]);
 	CPPUNIT_ASSERT_EQUAL(2UL, cannon.components().size());
 	CPPUNIT_ASSERT_EQUAL(false, cannon.abs());
+}
+
+void PathRulesUnit::convert()
+{
+	Cannonical	cannon;
+	UnixRules	rules;
+	Path		path = rules.convert(cannon);
+
+	CPPUNIT_ASSERT_EQUAL(std::string(""), path.str());
+	CPPUNIT_ASSERT(!path.abs());
+	
+	cannon.add("a");
+	cannon.add("b");
+
+	path = rules.convert(cannon);
+
+	CPPUNIT_ASSERT_EQUAL(std::string("a/b"), path.str());
+	CPPUNIT_ASSERT(!path.abs());
+
+	cannon.setAbs(true);
+	path = rules.convert(cannon);
+	CPPUNIT_ASSERT_EQUAL(std::string("/a/b"), path.str());
+	CPPUNIT_ASSERT(path.abs());
 }
