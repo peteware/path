@@ -21,23 +21,25 @@ class NodeInfo;
  */
 class Node : public Path
 {
-
 public:
 	Node();
 	virtual ~Node();
 
-	Node(const Path path);
 	NodeIter begin();
-	static Node * create(Path path);
 	NodeIter end();
-	bool exists();
-	NodeIter glob(const std::string pattern);
+	NodeIter glob(const std::string &pattern) const;
+
+	bool exists() const;
 	bool isDir() const;
-	const void realpath();
-	size_t size();
+	void realpath() const;
+	size_t size() const;
+
+	static Node * create(Path path);
+
+protected:
+	Node(const Path &path);
 
 private:
-	NodeInfo * m_cache;
-
+	mutable NodeInfo * m_cache;
 };
-#endif // !defined(EA_C4756561_E746_4a8c_820A_6323A12D0D03__INCLUDED_)
+#endif // !defined(_PATH_NODE_H)

@@ -6,36 +6,26 @@
  *  Original author: Pete Ware
  */
 #include "Node.h"
+#include "NodeInfo.h"
 #include "NodeIter.h"
-
-Node::Node(){
-
-}
-
-
-
-Node::~Node(){
-
-}
-
-
-
-
 
 /**
  * Create a Node from a Path.
  * 
  * If there is no corresponding filesystem object, then an exception is raised.
  */
-Node::Node(const Path path)
+Node::Node(const Path &path)
+	: m_cache(0)
 {
-
 }
 
+Node::~Node()
+{
+	delete m_cache;
+}
 
 NodeIter Node::begin()
 {
-
 	return  NodeIter();
 }
 
@@ -47,32 +37,31 @@ NodeIter Node::begin()
  * This is the same as calling the Node::Node() constructor but it catches any
  * exception.
  */
-Node * Node::create(Path path){
-
+Node * Node::create(Path path)
+{
 	return  NULL;
 }
-
 
 /**
  * Return an iterator to the end of Nodes
  */
-NodeIter Node::end(){
+NodeIter Node::end()
+{
 
-	return  NodeIter(Node());
+	//return  NodeIter(Node());
+	return  NodeIter();
 }
-
 
 /**
  * Returns if Node exists.
  */
-bool Node::exists(){
-
+bool Node::exists() const
+{
 	return  false;
 }
 
-
-NodeIter Node::glob(const std::string pattern){
-
+NodeIter Node::glob(const std::string & pattern) const
+{
 	return  NodeIter();
 }
 
@@ -85,15 +74,13 @@ NodeIter Node::glob(const std::string pattern){
  */
 bool Node::isDir() const 
 {
-
 	return false;
 }
-
 
 /**
  * Return a new Node with all symbolic linkes resolved.
  */
-const void Node::realpath()
+void Node::realpath() const
 {
 
 }
@@ -102,7 +89,7 @@ const void Node::realpath()
 /**
  * Return the size in bytes
  */
-size_t Node::size()
+size_t Node::size() const
 {
 
 	return 0;

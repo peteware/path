@@ -16,7 +16,7 @@ class FileStream : public Node, public std::fstream
 {
 
 public:
-	FileStream();
+	FileStream(const Path &p);
 	virtual ~FileStream();
 
 };

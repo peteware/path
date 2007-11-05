@@ -13,8 +13,6 @@ BadPath::BadPath()
 
 }
 
-
-
 BadPath::~BadPath() throw()
 {
 
