@@ -22,18 +22,41 @@ class NodeInfo;
 class Node : public Path
 {
 public:
+	/// Default constructor (avoid using)
 	Node();
+
+	/// Construct from a string
+	Node(const std::string &p);
+
+	///  Destructor
 	virtual ~Node();
 
+	typedef NodeIter	iterator;
+	typedef const NodeIter	const_iterator;
+	/// Return iterator for examining files in this directory
 	NodeIter begin();
-	NodeIter end();
+
+	const NodeIter begin() const;
+
+	/// Shorthand to only match a specific file
 	NodeIter glob(const std::string &pattern) const;
 
+	/// And return the end of the list
+	NodeIter end();
+
+	/// Check if this Node exists
 	bool exists() const;
+
+	/// Return if this is a directory
 	bool isDir() const;
-	void realpath() const;
+
+	/// Resolve symbolic links, etc
+	Node realpath() const;
+
+	/// Return the size of the node in bytes
 	size_t size() const;
 
+	/// Create a new node and handle exceptions if it doesn't exit
 	static Node * create(Path path);
 
 protected:

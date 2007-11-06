@@ -46,9 +46,9 @@ public:
 	NodeIter(const Node &node);
 	NodeIter(const Node &node, const std::string &pattern, bool regexp);
 	Node & operator->();
+	Node &operator*();
 	bool operator!=(const NodeIter & op2) const;
-	Node operator*();
-	NodeIter operator++();
+	NodeIter &operator++();
 	bool operator==(const NodeIter &op2) const;
 	void setRecursive();
 private:

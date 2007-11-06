@@ -10,6 +10,16 @@
 #include "NodeIter.h"
 
 /**
+ * Create an empty Node.
+ *
+ * I'm not happy about this but it became necessary to support NodeIter from Node::end().
+ */
+Node::Node()
+	: m_cache(0)
+{
+}
+
+/**
  * Create a Node from a Path.
  * 
  * If there is no corresponding filesystem object, then an exception is raised.
@@ -19,6 +29,13 @@ Node::Node(const Path &path)
 {
 }
 
+Node::Node(const std::string &str)
+	: Path(str),
+	  m_cache(0)
+{
+}
+
+
 Node::~Node()
 {
 	delete m_cache;
@@ -26,7 +43,7 @@ Node::~Node()
 
 NodeIter Node::begin()
 {
-	return  NodeIter();
+	return  NodeIter(*this);
 }
 
 
@@ -80,9 +97,9 @@ bool Node::isDir() const
 /**
  * Return a new Node with all symbolic linkes resolved.
  */
-void Node::realpath() const
+Node Node::realpath() const
 {
-
+	return Node();
 }
 
 
@@ -91,6 +108,5 @@ void Node::realpath() const
  */
 size_t Node::size() const
 {
-
 	return 0;
 }

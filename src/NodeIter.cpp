@@ -66,15 +66,16 @@ NodeIter::NodeIter(const Node &node)
 {
 	m_nodes = new Internal;
 	std::vector<std::string>	files = SysCalls().listdir(node.path());
-	std::copy(files.begin(), files.end(), std::back_insert_iterator(m_nodes);
+	std::copy(files.begin(), files.end(),
+			  std::back_insert_iterator<std::vector<Internal::Entry> > (m_nodes->m_entries));
 }
 
 /**
  * Makes iterator return all Nodes within a directory.
  */
 NodeIter::NodeIter(const Node &node, const std::string & pattern, bool regexp)
-	: m_parent(node),
-	  m_entries(SysCalls().listdir(node.path())),
+	: m_nodes(0),
+	  m_parent(node),
 	  m_current(0)
 {
 }
@@ -82,10 +83,7 @@ NodeIter::NodeIter(const Node &node, const std::string & pattern, bool regexp)
 Node & NodeIter::operator->()
 {
 	Node *	n = findNode();
-	if (!n)
-		return Node();
-	else
-		return *n;
+	return *n;
 
 }
 
@@ -94,14 +92,10 @@ Node & NodeIter::operator->()
  * 
  * Returns an empty Node if there are no more nodes to examine.
  */
-Node NodeIter::operator*()
+Node &NodeIter::operator*()
 {
 	Node *	n = findNode();
-
-	if (!n)
-		return Node();
-	else
-		return *n;
+	return *n;
 }
 
 /**
@@ -109,8 +103,8 @@ Node NodeIter::operator*()
  */
 NodeIter &NodeIter::operator++()
 {
-	if (m_current < m_entries.size())
-		++m_current
+	if (m_current < static_cast<int> (m_nodes->m_entries.size()))
+		++m_current;
 	return *this;
 }
 
@@ -119,7 +113,8 @@ NodeIter &NodeIter::operator++()
  */
 bool NodeIter::operator==(const NodeIter & op2) const
 {
-	return  true;
+	return (this == &op2 || (m_nodes == op2.m_nodes)
+			|| (m_parent == op2.m_parent && m_current == op2.m_current));
 }
 
 /**
@@ -127,7 +122,8 @@ bool NodeIter::operator==(const NodeIter & op2) const
  */
 bool NodeIter::operator!=(const NodeIter & op2) const
 {
-	return true;
+	return !(*this == op2);
+	
 }
 
 /**
@@ -139,16 +135,16 @@ void NodeIter::setRecursive()
 
 Node *NodeIter::findNode()
 {
-	if (!m_internal)
+	if (!m_nodes || m_current >= static_cast<int>(m_nodes->m_entries.size()))
 		return 0;
-	while (m_current < m_inter)
-	{
-	}
+	if (!m_nodes->m_entries[m_current].m_node)
+		m_nodes->m_entries[m_current].m_node = Node::create(m_nodes->m_entries[m_current].m_name);
+	return m_nodes->m_entries[m_current].m_node;
 }
 
 int NodeIter::size() const
 {
-	if (!m_internal)
+	if (!m_nodes)
 		return 0;
-	return m_internal->m_entries.size();
+	return m_nodes->m_entries.size();
 }
