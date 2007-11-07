@@ -58,7 +58,7 @@ public:
 	size_t size() const;
 
 	/// Create a new node and handle exceptions if it doesn't exit
-	static Node * create(Path path);
+	static Node * create(const Path &path);
 
 protected:
 	Node(const Path &path);

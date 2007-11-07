@@ -25,7 +25,8 @@ Node::Node()
  * If there is no corresponding filesystem object, then an exception is raised.
  */
 Node::Node(const Path &path)
-	: m_cache(0)
+	: Path(path),
+	  m_cache(0)
 {
 }
 
@@ -54,9 +55,9 @@ NodeIter Node::begin()
  * This is the same as calling the Node::Node() constructor but it catches any
  * exception.
  */
-Node * Node::create(Path path)
+Node * Node::create(const Path &path)
 {
-	return  NULL;
+	return new Node(path);
 }
 
 /**

@@ -34,7 +34,7 @@ void NodeUnit::iter()
 
 	for (Node::iterator iter = node.begin(); iter != node.end(); ++iter)
 	{
-		std::cout << (*iter).str() << " ";
+		std::cout << *iter << " ";
 		++count;
 	}
 	if (count > 0)

@@ -52,7 +52,7 @@ struct NodeIter::Internal
 NodeIter::NodeIter()
 	: m_nodes(0),
 	  m_parent(),
-	  m_current(0)
+	  m_current(-1)
 {
 }
 
@@ -103,8 +103,10 @@ Node &NodeIter::operator*()
  */
 NodeIter &NodeIter::operator++()
 {
-	if (m_current < static_cast<int> (m_nodes->m_entries.size()))
+	if (m_current >= 0 && m_current + 1< static_cast<int> (m_nodes->m_entries.size()))
 		++m_current;
+	else
+		m_current = -1;
 	return *this;
 }
 
@@ -113,8 +115,19 @@ NodeIter &NodeIter::operator++()
  */
 bool NodeIter::operator==(const NodeIter & op2) const
 {
-	return (this == &op2 || (m_nodes == op2.m_nodes)
-			|| (m_parent == op2.m_parent && m_current == op2.m_current));
+	// obvious case
+	if (this == &op2)
+		return true;
+	// same m_nodes and same index
+	if (m_nodes == op2.m_nodes && m_current == op2.m_current)
+		return true;
+	// be smart and asssume if parent the same and index same
+	if (m_parent == op2.m_parent && m_current == op2.m_current)
+		return true;
+	// now check for end()
+	if (m_current == -1 && op2.m_current == -1)
+		return true;
+	return false;
 }
 
 /**
@@ -135,11 +148,19 @@ void NodeIter::setRecursive()
 
 Node *NodeIter::findNode()
 {
+	Node *n = 0;
+
 	if (!m_nodes || m_current >= static_cast<int>(m_nodes->m_entries.size()))
 		return 0;
-	if (!m_nodes->m_entries[m_current].m_node)
-		m_nodes->m_entries[m_current].m_node = Node::create(m_nodes->m_entries[m_current].m_name);
-	return m_nodes->m_entries[m_current].m_node;
+	n = m_nodes->m_entries[m_current].m_node;
+	if (!n)
+	{
+		std::string		name = m_nodes->m_entries[m_current].m_name;
+		Path			path(name);
+		n = Node::create(path);
+		m_nodes->m_entries[m_current].m_node = n;
+	}
+	return n;
 }
 
 int NodeIter::size() const
