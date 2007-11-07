@@ -9,7 +9,7 @@
 #if !defined(_PATH_BADPATH_H_)
 #define _PATH_BADPATH_H_
 
-#include "PathException.h"
+#include <path/PathException.h>
 
 class BadPath : public PathException
 {

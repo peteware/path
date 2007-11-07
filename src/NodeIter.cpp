@@ -5,10 +5,10 @@
  *  Created on:      11-May-2007 5:09:31 PM
  *  Original author: Pete Ware
  */
-#include "NodeIter.h"
-#include "Node.h"
-#include "Syscalls.h"
-#include "BadPath.h"
+#include <path/NodeIter.h>
+#include <path/Node.h>
+#include <path/Syscalls.h>
+#include <path/BadPath.h>
 
 #include <iterator>
 

@@ -1,7 +1,7 @@
-#include <PathRules.h>
-#include <UnixRules.h>
-#include <Cannonical.h>
-#include <Path.h>
+#include <path/PathRules.h>
+#include <path/UnixRules.h>
+#include <path/Cannonical.h>
+#include <path/Path.h>
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>

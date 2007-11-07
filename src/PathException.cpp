@@ -5,8 +5,8 @@
  *  Created on:      11-May-2007 5:09:32 PM
  *  Original author: Pete Ware
  */
-#include "PathException.h"
 
+#include <path/PathException.h>
 
 PathException::PathException()
 {

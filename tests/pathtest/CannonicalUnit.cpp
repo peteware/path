@@ -1,4 +1,4 @@
-#include <Cannonical.h>
+#include <path/Cannonical.h>
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>

@@ -9,7 +9,7 @@
 #if !defined(_PATH_NODEITER_H_)
 #define _PATH_NODEITER_H_
 
-#include "Path.h"
+#include <path/Path.h>
 
 #include <iterator>
 #include <string>

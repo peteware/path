@@ -9,7 +9,7 @@
 #if !defined(_PATH_UNIXRULES_H_)
 #define _PATH_UNIXRULES_H_
 
-#include "PathRules.h"
+#include <path/PathRules.h>
 // Forward declarations
 class Path;
 class Cannonical;

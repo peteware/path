@@ -11,6 +11,7 @@
 
 #include <string>
 #include <vector>
+
 // Forward declarations
 class NodeInfo;
 

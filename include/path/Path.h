@@ -9,10 +9,12 @@
 #if !defined(_PATH_PATH_H_)
 #define _PATH_PATH_H_
 
-#include "PathRules.h"
+#include <path/PathRules.h>
+
 #include <vector>
 #include <string>
 #include <iosfwd>
+
 // Forward dclaration defined in Path.cpp
 class PathExtra;
 

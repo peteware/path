@@ -9,7 +9,7 @@
 #if !defined(_PATH_FILESTREAM_H_)
 #define _PATH_FILESTREAM_H_
 
-#include "Node.h"
+#include <path/Node.h>
 #include <fstream>
 
 class FileStream : public Node, public std::fstream

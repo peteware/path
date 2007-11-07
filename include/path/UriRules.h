@@ -9,9 +9,12 @@
 #if !defined(_PATH_URIRULES_H_)
 #define _PATH_URIRULES_H_
 
-#include "Cannonical.h"
-#include "Path.h"
-#include "PathRules.h"
+#include <path/PathRules.h>
+#include <string>
+
+// Forward declarations
+class Cannonical;
+class Path;
 
 class UriRules : public PathRules
 {

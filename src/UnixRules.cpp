@@ -5,9 +5,9 @@
  *  Created on:      11-May-2007 5:09:33 PM
  *  Original author: Pete Ware
  */
-#include "UnixRules.h"
-#include "Cannonical.h"
-#include "Path.h"
+#include <path/UnixRules.h>
+#include <path/Cannonical.h>
+#include <path/Path.h>
 
 UnixRules	UnixRules::rules;
 

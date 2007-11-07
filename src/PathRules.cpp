@@ -5,9 +5,10 @@
  *  Created on:      11-May-2007 5:09:32 PM
  *  Original author: Pete Ware
  */
-#include "PathRules.h"
-#include "Cannonical.h"
-#include "Path.h"
+#include <path/PathRules.h>
+#include <path/Cannonical.h>
+#include <path/Path.h>
+
 #include <string>
 #include <iostream>
 
@@ -88,7 +89,7 @@ std::string PathRules::quote(const std::string & subdir) const
 void PathRules::split(const std::string &path, char sep, std::vector<std::string> &subdirs)
 {
 	std::string::size_type	start = 0;
-	std::string::size_type	end;
+	std::string::size_type	end = 0;
 
 	while (start < path.size() && end != std::string::npos)
 	{

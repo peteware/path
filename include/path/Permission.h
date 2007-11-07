@@ -9,7 +9,7 @@
 #if !defined(_PATH_PERMISSION_H_)
 #define _PATH_PERMISSION_H_
 
-#include "PathException.h"
+#include <path/PathException.h>
 
 /**
  * An operation failed because of permissions.

@@ -1,5 +1,6 @@
 #ifndef _PATH_PATHEXTRA_H_
 #define _PATH_PATHEXTRA_H_
+
 #include <string>
 
 // Forward declarations

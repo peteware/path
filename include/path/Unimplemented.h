@@ -9,7 +9,7 @@
 #if !defined(_PATH_UNIMPLEMENTED_H_)
 #define _PATH_UNIMPLEMENTED_H_
 
-#include "PathException.h"
+#include <path/PathException.h>
 
 /**
  * The operation is not implemented.

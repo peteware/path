@@ -1,5 +1,5 @@
-#include <Node.h>
-#include <NodeIter.h>
+#include <path/Node.h>
+#include <path/NodeIter.h>
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>

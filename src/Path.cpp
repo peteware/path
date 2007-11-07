@@ -6,9 +6,9 @@
  *  Created on:      11-May-2007 5:09:31 PM
  *  Original author: Pete Ware
  */
-#include "Path.h"
-#include "Cannonical.h"
-#include "UnixRules.h"
+#include <path/Path.h>
+#include <path/Cannonical.h>
+#include <path/UnixRules.h>
 
 #include <iostream>
 

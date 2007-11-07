@@ -5,7 +5,7 @@
  *  Created on:      11-May-2007 5:09:33 PM
  *  Original author: Pete Ware
  */
-#include "SysCalls.h"
+#include <path/SysCalls.h>
 
 #include <sys/types.h>
 #include <dirent.h>

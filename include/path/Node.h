@@ -8,7 +8,8 @@
  */
 #if !defined(_PATH_NODE_H_)
 #define _PATH_NODE_H_
-#include "Path.h"
+
+#include <path/Path.h>
 #include <string>
 
 // Forward declarations

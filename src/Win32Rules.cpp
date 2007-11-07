@@ -5,8 +5,9 @@
  *  Created on:      11-May-2007 5:09:34 PM
  *  Original author: Pete Ware
  */
-#include "Win32Rules.h"
-
+#include <path/Win32Rules.h>
+#include <path/Cannonical.h>
+#include <path/Path.h>
 
 Win32Rules::Win32Rules()
 	: PathRules('/')

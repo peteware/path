@@ -5,8 +5,9 @@
  *  Created on:      11-May-2007 5:09:33 PM
  *  Original author: Pete Ware
  */
-#include "UriRules.h"
-
+#include <path/UriRules.h>
+#include <path/Cannonical.h>
+#include <path/Path.h>
 
 UriRules::UriRules()
 	: PathRules('/')

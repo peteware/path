@@ -9,9 +9,12 @@
 #if !defined(_PATH_WIN32RULES_H_)
 #define _PATH_WIN32RULES_H_
 
-#include "Cannonical.h"
-#include "Path.h"
-#include "PathRules.h"
+#include <path/PathRules.h>
+#include <string>
+
+// Forward declarations
+class Cannonical;
+class Path;
 
 class Win32Rules : public PathRules
 {

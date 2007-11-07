@@ -5,7 +5,7 @@
  *  Created on:      11-May-2007 5:09:31 PM
  *  Original author: Pete Ware
  */
-#include "NodeInfo.h"
+#include <path/NodeInfo.h>
 
 
 NodeInfo::NodeInfo()

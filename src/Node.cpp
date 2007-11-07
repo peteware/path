@@ -5,9 +5,9 @@
  *  Created on:      11-May-2007 5:09:30 PM
  *  Original author: Pete Ware
  */
-#include "Node.h"
-#include "NodeInfo.h"
-#include "NodeIter.h"
+#include <path/Node.h>
+#include <path/NodeInfo.h>
+#include <path/NodeIter.h>
 
 /**
  * Create an empty Node.
