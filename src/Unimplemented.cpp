@@ -8,7 +8,8 @@
 #include <path/Unimplemented.h>
 
 
-Unimplemented::Unimplemented()
+Unimplemented::Unimplemented(const std::string &operation)
+	
 {
 
 }

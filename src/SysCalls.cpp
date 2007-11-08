@@ -6,6 +6,7 @@
  *  Original author: Pete Ware
  */
 #include <path/SysCalls.h>
+#include <path/Unimplemented.h>
 
 #include <sys/types.h>
 #include <dirent.h>
@@ -20,10 +21,12 @@ SysCalls::~SysCalls()
 
 void SysCalls::mkdir(const std::string & dir, int mode) const
 {
+	throw Unimplemented("mkdir");
 }
 
 void SysCalls::rmdir(const std::string & dir) const
 {
+	throw Unimplemented("rmdir");
 }
 
 std::vector<std::string> SysCalls::listdir(const std::string &path) const

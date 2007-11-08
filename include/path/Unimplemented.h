@@ -19,7 +19,7 @@ class Unimplemented : public PathException
 {
 
 public:
-	Unimplemented();
+	Unimplemented(const std::string &operation);
 	virtual ~Unimplemented() throw();
 
 };
