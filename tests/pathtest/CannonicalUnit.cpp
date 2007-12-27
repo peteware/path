@@ -9,8 +9,8 @@
 
 /**
  * Implements unit tests for Cannonical class
+ *
  */
-
 class CannonicalUnit : public CppUnit::TestCase
 {
 	CPPUNIT_TEST_SUITE(CannonicalUnit);

@@ -1,11 +1,3 @@
-/**  
- * @file NodeIter.h
- *
- * Implementation of the Class NodeIter
- *
- * Created on:      11-May-2007 5:09:31 PM
- * Original author: Pete Ware
- */
 #if !defined(_PATH_NODEITER_H_)
 #define _PATH_NODEITER_H_
 
@@ -37,7 +29,7 @@ class Node;
  * or Directory should be examined.
  * 
  */
-class NodeIter //: public std::forward_iterator
+class NodeIter //:  public std::forward_iterator
 {
 
 public:

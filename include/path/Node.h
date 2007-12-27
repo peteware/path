@@ -17,8 +17,8 @@ class NodeIter;
 class NodeInfo;
 
 /**
- * A Node represents both files, directories and any other object that can be in a
- * filesystem.
+ * A Node represents both files, directories and any other object 
+ * that can be in a filesystem.
  */
 class Node : public Path
 {
