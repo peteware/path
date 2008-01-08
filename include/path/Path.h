@@ -36,7 +36,11 @@ public:
 	/// Default constructory
 	Path(const PathRules *rules = 0);
 	/// Constructor from std::string
-	Path(const std::string &path, const PathRules *rules = 0);
+    Path(const std::string &path);
+    /// Constructor from std::string with non-default PathRules
+	Path(const std::string &path, const PathRules *rules);
+    /// Construct from a NUL terminatd strin
+    Path(const char *path);
 	/// Copy constructor
 	Path(const Path &copy);
 	/// Destructor

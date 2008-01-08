@@ -12,46 +12,12 @@
 
 #include <iterator>
 
-struct NodeIter::Internal 
-{
-	struct Entry 
-	{
-		Entry() : m_name(), m_node(0)
-		{
-		}
-		
-		Entry(const std::string &name) : m_name(name), m_node(0)
-		{
-		}
-
-		Entry(const Entry&copy)
-		{
-			m_name = copy.m_name;
-			m_node = 0;
-		}
-
-		Entry &operator=(const Entry &op2)
-		{
-			if (this != &op2)
-			{
-				m_name = op2.m_name;
-				m_node = new Node(*op2.m_node);
-			}
-			return *this;
-		}
-		std::string		m_name;
-		Node *			m_node;
-	};
-	std::vector<Entry>	m_entries;
-};
-
 /**
  * Create a default iterator.  This corresponds to the
  * end() iterator.
  */
 NodeIter::NodeIter()
-	: m_nodes(0),
-	  m_parent(),
+	: m_parent(0),
 	  m_current(-1)
 {
 }
@@ -60,22 +26,16 @@ NodeIter::NodeIter()
  * Makes iterator return all Nodes within a directory.
  */
 NodeIter::NodeIter(const Node &node)
-	: m_nodes(0),
-	  m_parent(node),
+	: m_parent(&node),
 	  m_current(0)
 {
-	m_nodes = new Internal;
-	std::vector<std::string>	files = SysCalls().listdir(node.path());
-	std::copy(files.begin(), files.end(),
-			  std::back_insert_iterator<std::vector<Internal::Entry> > (m_nodes->m_entries));
 }
 
 /**
  * Makes iterator return all Nodes within a directory.
  */
 NodeIter::NodeIter(const Node &node, const std::string & pattern, bool regexp)
-	: m_nodes(0),
-	  m_parent(node),
+	: m_parent(&node),
 	  m_current(0)
 {
 }
@@ -103,7 +63,7 @@ Node &NodeIter::operator*()
  */
 NodeIter &NodeIter::operator++()
 {
-	if (m_current >= 0 && m_current + 1< static_cast<int> (m_nodes->m_entries.size()))
+	if (m_current >= 0 && m_current + 1 < size())
 		++m_current;
 	else
 		m_current = -1;
@@ -118,10 +78,6 @@ bool NodeIter::operator==(const NodeIter & op2) const
 	// obvious case
 	if (this == &op2)
 		return true;
-	// same m_nodes and same index
-	if (m_nodes == op2.m_nodes && m_current == op2.m_current)
-		return true;
-	// be smart and asssume if parent the same and index same
 	if (m_parent == op2.m_parent && m_current == op2.m_current)
 		return true;
 	// now check for end()
@@ -148,24 +104,14 @@ void NodeIter::setRecursive()
 
 Node *NodeIter::findNode()
 {
-	Node *n = 0;
-
-	if (!m_nodes || m_current >= static_cast<int>(m_nodes->m_entries.size()))
-		return 0;
-	n = m_nodes->m_entries[m_current].m_node;
-	if (!n)
-	{
-		std::string		name = m_nodes->m_entries[m_current].m_name;
-		Path			path(name);
-		n = Node::create(path);
-		m_nodes->m_entries[m_current].m_node = n;
-	}
-	return n;
+    if (!m_parent)
+        return 0;
+    return m_parent->subNode(m_current);
 }
 
 int NodeIter::size() const
 {
-	if (!m_nodes)
+	if (!m_parent)
 		return 0;
-	return m_nodes->m_entries.size();
+	return m_parent->subNodeCount();
 }

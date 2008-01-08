@@ -20,26 +20,21 @@ PathException::PathException(const std::string &filename, int errno)
 	  m_filename(filename),
 	  m_errno(errno)
 {
+    m_message = m_filename + ":" + strerror(m_errno);
 }
-
-
-
-
 
 PathException::~PathException() throw()
 {
 
 }
 
-
 /**
  * Return the operating system related error number.
  */
 int PathException::err() const
 {
-	return 0;
+	return m_errno;
 }
-
 
 /**
  * Returns filename associated with the error.
@@ -49,7 +44,7 @@ int PathException::err() const
  */
 std::string PathException::filename() const
 {
-	return std::string();
+	return m_filename;
 }
 
 
@@ -58,5 +53,5 @@ std::string PathException::filename() const
  */
 const char* PathException::what() const throw()
 {
-	return  NULL;
+	return m_message.c_str();
 }

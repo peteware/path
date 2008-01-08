@@ -26,9 +26,17 @@ public:
 	SysCalls();
 	virtual ~SysCalls();
 
-	void mkdir(const std::string & dir, int mode) const;
+    /// Create a Directory
+	virtual void mkdir(const std::string & dir, int mode = 0777) const;
+    /// Remove a directory
 	virtual void rmdir(const std::string & dir) const;
+    /// Create empty file or if it exists update modified time
+    virtual void touch(const std::string & file) const;
+    /// Remove a file
+    virtual void remove(const std::string &file) const;
+    /// Return a vector with directory contents
 	virtual std::vector<std::string> listdir(const std::string &dir) const;
+    /// Return info about a file or directory
 	virtual NodeInfo * stat(const std::string & path) const;
 
 };

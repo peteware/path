@@ -34,5 +34,6 @@ public:
 private:
 	std::string		m_filename;
 	int				m_errno;
+    std::string     m_message;
 };
 #endif // !defined(_PATH_PATHEXCEPTION_H_)

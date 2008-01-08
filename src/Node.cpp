@@ -8,6 +8,8 @@
 #include <path/Node.h>
 #include <path/NodeInfo.h>
 #include <path/NodeIter.h>
+#include <path/SubNode.h>
+#include <path/SysCalls.h>
 
 /**
  * Create an empty Node.
@@ -15,9 +17,31 @@
  * I'm not happy about this but it became necessary to support NodeIter from Node::end().
  */
 Node::Node()
-	: m_cache(0)
+	: m_cache(0),
+      m_nodes(0)
 {
 }
+
+/**
+ * Construct from a NUL terminated string.  May throw PathException.
+ */
+Node::Node(const char *path)
+    : Path(path),
+      m_cache(0),
+      m_nodes(0)
+{
+}
+
+/**
+ * Construct from a std::string.  May throw PathException
+ */
+Node::Node(const std::string &str)
+	: Path(str),
+	  m_cache(0),
+      m_nodes(0)
+{
+}
+
 
 /**
  * Create a Node from a Path.
@@ -25,14 +49,9 @@ Node::Node()
  * If there is no corresponding filesystem object, then an exception is raised.
  */
 Node::Node(const Path &path)
-	: Path(path),
-	  m_cache(0)
-{
-}
-
-Node::Node(const std::string &str)
-	: Path(str),
-	  m_cache(0)
+    : Path(path),
+     m_cache(0),
+     m_nodes(0)
 {
 }
 
@@ -40,11 +59,7 @@ Node::Node(const std::string &str)
 Node::~Node()
 {
 	delete m_cache;
-}
-
-NodeIter Node::begin()
-{
-	return  NodeIter(*this);
+    delete m_nodes;
 }
 
 
@@ -58,16 +73,6 @@ NodeIter Node::begin()
 Node * Node::create(const Path &path)
 {
 	return new Node(path);
-}
-
-/**
- * Return an iterator to the end of Nodes
- */
-NodeIter Node::end()
-{
-
-	//return  NodeIter(Node());
-	return  NodeIter();
 }
 
 /**
@@ -110,4 +115,62 @@ Node Node::realpath() const
 size_t Node::size() const
 {
 	return 0;
+}
+
+NodeIter Node::begin()
+{
+    subNodeCreate();
+    if (!m_nodes)
+        return end();
+    else
+        return  NodeIter(*this);
+}
+
+/**
+ * Return an iterator to the end of Nodes
+ */
+NodeIter Node::end()
+{
+
+	//return  NodeIter(Node());
+	return  NodeIter();
+}
+
+Node *Node::subNode(int index) const
+{
+	Node *n = 0;
+    
+    subNodeCreate();
+    if (!m_nodes)
+        return 0;
+	if (index < 0 || index >= static_cast<int>(m_nodes->m_entries.size()))
+		return 0;
+	n = m_nodes->m_entries[index].m_node;
+	if (!n)
+	{
+		std::string		name = m_nodes->m_entries[index].m_name;
+		Path			path(name);
+		n = Node::create(path);
+ 		m_nodes->m_entries[index].m_node = n;
+	}
+	return n;
+}
+
+int Node::subNodeCount() const
+{
+    if (!m_nodes)
+        return 0;
+    return m_nodes->m_entries.size();
+    
+}
+
+void Node::subNodeCreate() const
+{
+    if (m_nodes)
+        return;
+	m_nodes = new SubNode;
+	std::vector<std::string>	files = SysCalls().listdir(path());
+	std::copy(files.begin(), files.end(),
+			  std::back_insert_iterator<std::vector<SubNode::Entry> > (m_nodes->m_entries));
+    
 }

@@ -10,7 +10,7 @@ int
 main( int argc, char* argv[] )
 {
 
-	std::cout << "Testing" << std::endl;
+	std::cout << "Testing 2" << std::endl;
 	// Create the event manager anaad test controller
   CPPUNIT_NS::TestResult controller;
 

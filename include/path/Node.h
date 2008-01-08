@@ -15,6 +15,7 @@
 // Forward declarations
 class NodeIter;
 class NodeInfo;
+class SubNode;
 
 /**
  * A Node represents both files, directories and any other object 
@@ -27,7 +28,13 @@ public:
 	Node();
 
 	/// Construct from a string
+    Node(const char *path);
+
+	/// Construct from a string
 	Node(const std::string &p);
+
+	/// Construct from a string
+	Node(const Path &path);
 
 	///  Destructor
 	virtual ~Node();
@@ -57,13 +64,21 @@ public:
 	/// Return the size of the node in bytes
 	size_t size() const;
 
+    /// Return a Node
+    Node *subNode(int index) const;
+    
+    /// Return how many subnodes there are
+    int subNodeCount() const;
+    
+    
 	/// Create a new node and handle exceptions if it doesn't exit
 	static Node * create(const Path &path);
 
 protected:
-	Node(const Path &path);
+    void subNodeCreate() const;
 
 private:
 	mutable NodeInfo * m_cache;
+    mutable SubNode * m_nodes;
 };
 #endif // !defined(_PATH_NODE_H)

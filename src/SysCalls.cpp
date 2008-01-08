@@ -8,8 +8,12 @@
 #include <path/SysCalls.h>
 #include <path/Unimplemented.h>
 
-#include <sys/types.h>
 #include <dirent.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
 
 SysCalls::SysCalls()
 {
@@ -21,12 +25,31 @@ SysCalls::~SysCalls()
 
 void SysCalls::mkdir(const std::string & dir, int mode) const
 {
-	throw Unimplemented("mkdir");
+    int status = ::mkdir(dir.c_str(), mode);
+    if (status < 0)
+        throw PathException(dir, errno);
 }
 
 void SysCalls::rmdir(const std::string & dir) const
 {
-	throw Unimplemented("rmdir");
+    int status = ::rmdir(dir.c_str());
+    if (status < 0)
+        throw PathException(dir, errno);
+}
+
+void SysCalls::touch(const std::string &file) const
+{
+    int fd = ::open(file.c_str(), O_WRONLY|O_CREAT, 0777);
+    if (fd < 0)
+        throw PathException(file, errno);
+    (void) ::close(fd);
+}
+
+void SysCalls::remove(const std::string &file) const
+{
+    int status = ::unlink(file.c_str());
+    if (status < 0)
+        throw PathException(file, errno);
 }
 
 std::vector<std::string> SysCalls::listdir(const std::string &path) const

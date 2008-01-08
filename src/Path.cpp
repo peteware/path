@@ -24,6 +24,26 @@ Path::Path(const PathRules *rules)
 }
 
 /**
+ * Initialize path, set rules to NULL (i.e. default)
+ */
+Path::Path(const char *path)
+    : m_path(path),
+     m_rules(0),
+     m_cannon(0)
+{
+}
+
+/**
+ * Initialize path, set rules to NULL (i.e. default)
+ */
+Path::Path(const std::string &path)
+    : m_path(path),
+      m_rules(0),
+      m_cannon(0)
+{
+}
+
+/**
  * Set path to a raw string.
  * This may contain environment variables, "~",
  * multiple directory seperators, etc.  Use
