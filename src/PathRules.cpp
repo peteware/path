@@ -8,6 +8,7 @@
 #include <path/PathRules.h>
 #include <path/Cannonical.h>
 #include <path/Path.h>
+#include <path/Unimplemented.h>
 
 #include <string>
 #include <iostream>
@@ -65,7 +66,7 @@ Cannonical PathRules::cannonical(const std::string &path) const
  */
 Path PathRules::convert(const Cannonical &canonical) const 
 {
-	return Path();
+	throw Unimplemented("PathRules::convert()");
 }
 
 /**
@@ -76,7 +77,31 @@ Path PathRules::convert(const Cannonical &canonical) const
  */
 std::string PathRules::quote(const std::string & subdir) const
 {
-	return std::string();
+	throw Unimplemented("PathRules::quote()");
+}
+
+std::string PathRules::join(const Cannonical &cannon) const
+{
+    std::string     p;
+    if (!cannon.protocol().empty())
+    {
+        p += cannon.protocol() + ":";
+        if (!cannon.host().empty())
+            p += "//" + cannon.host() + "/";
+    }
+    if (cannon.abs())
+        p += m_sep;
+    bool first = true;
+    for (std::vector<std::string>::const_iterator iter = cannon.components().begin();
+         iter != cannon.components().end(); ++iter)
+    {
+        if (first)
+            first = false;
+        else
+            p += m_sep;
+        p += *iter;
+    }
+    return p;
 }
 
 /**

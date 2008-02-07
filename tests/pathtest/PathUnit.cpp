@@ -143,8 +143,8 @@ void PathUnit::testBasename()
  */
 void PathUnit::testDirname()
 {
-	CPPUNIT_ASSERT_EQUAL(Path("."), Path("a").dirname());
-	CPPUNIT_ASSERT_EQUAL(Path("."), Path("a////").dirname());
+	CPPUNIT_ASSERT_EQUAL(Path(""), Path("a").dirname());
+	CPPUNIT_ASSERT_EQUAL(Path(""), Path("a////").dirname());
 	CPPUNIT_ASSERT_EQUAL(Path("/a"), Path("/a/b").dirname());
 	CPPUNIT_ASSERT_EQUAL(Path("/"), Path("/a").dirname());
 	CPPUNIT_ASSERT_EQUAL(Path("a"), Path("a///b").dirname());

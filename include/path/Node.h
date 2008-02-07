@@ -23,10 +23,11 @@ class SubNode;
  */
 class Node : public Path
 {
-public:
-	/// Default constructor (avoid using)
+private:
+	/// Defau lt constructor (avoid using)
 	Node();
-
+public:
+    
 	/// Construct from a string
     Node(const char *path);
 

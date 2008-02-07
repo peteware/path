@@ -29,6 +29,8 @@ NodeIter::NodeIter(const Node &node)
 	: m_parent(&node),
 	  m_current(0)
 {
+    if (m_parent->subNodeCount() == 0)
+        m_current = -1;
 }
 
 /**
@@ -38,12 +40,14 @@ NodeIter::NodeIter(const Node &node, const std::string & pattern, bool regexp)
 	: m_parent(&node),
 	  m_current(0)
 {
+    if (m_parent->subNodeCount() == 0)
+        m_current = -1;
 }
 
-Node & NodeIter::operator->()
+Node * NodeIter::operator->()
 {
 	Node *	n = findNode();
-	return *n;
+	return n;
 
 }
 
@@ -71,10 +75,23 @@ NodeIter &NodeIter::operator++()
 }
 
 /**
+ * Postfix increment
+ */
+NodeIter NodeIter::operator++(int)
+{
+    NodeIter    iter(*this);
+    ++(*this);
+    return iter;
+}
+
+/**
  * Compares two iterators to see if they refer to the same Node
  */
 bool NodeIter::operator==(const NodeIter & op2) const
 {
+    // Most comparisons are non-end against end() so make sure that is fast.
+    if (m_current != op2.m_current)
+        return false;
 	// obvious case
 	if (this == &op2)
 		return true;

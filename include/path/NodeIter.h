@@ -26,24 +26,38 @@ class Node;
  * or Directory should be examined.
  * 
  */
-class NodeIter :  public std::forward_iterator
+class NodeIter :  public std::iterator<std::forward_iterator_tag, Node>
 {
 
 public:
 	/// The end() iterator
 	NodeIter();
+    /// Copy constructor
 	NodeIter(const Node &node);
+    /// Regular expression macher
 	NodeIter(const Node &node, const std::string &pattern, bool regexp);
-	Node & operator->();
+    /// Dereferencing
+	Node * operator->();
+    /// Dereferencing
 	Node & operator*();
+    /// Comparison
 	bool operator!=(const NodeIter & op2) const;
-	NodeIter &operator++();
+    /// Comparison
 	bool operator==(const NodeIter &op2) const;
+    /// Prefix increment
+	NodeIter &operator++();
+    /// Postfix increment
+    NodeIter NodeIter::operator++(int);
+    /// Make this a recursive iterator
 	void setRecursive();
 private:
+    /// Returns the node this iterator is referencing
 	Node *      findNode();
+    /// Return number of SubNode's in Node
 	int         size() const;
+    /// Actual Node being iterator over
 	const Node *m_parent;
+    /// Current index
 	int			m_current;
 };
 #endif // !defined(_PATH_NODEITER_H_)

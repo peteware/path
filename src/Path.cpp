@@ -19,7 +19,8 @@ PathRules * Path::s_defaultPathRules;
 Path::Path(const PathRules *rules)
 	: m_path(),
 	  m_rules(rules),
-	  m_cannon(0)
+	  m_cannon(0),
+      m_pathStr(0)
 {
 }
 
@@ -29,7 +30,8 @@ Path::Path(const PathRules *rules)
 Path::Path(const char *path)
     : m_path(path),
      m_rules(0),
-     m_cannon(0)
+     m_cannon(0),
+     m_pathStr(0)
 {
 }
 
@@ -39,7 +41,8 @@ Path::Path(const char *path)
 Path::Path(const std::string &path)
     : m_path(path),
       m_rules(0),
-      m_cannon(0)
+      m_cannon(0),
+      m_pathStr(0)
 {
 }
 
@@ -55,7 +58,8 @@ Path::Path(const std::string &path)
 Path::Path(const std::string &path, const PathRules *rules)
 	: m_path(path),
 	  m_rules(rules),
-	  m_cannon(0)
+	  m_cannon(0),
+      m_pathStr(0)
 {
 }
 
@@ -66,12 +70,13 @@ Path::Path(const std::string &path, const PathRules *rules)
 Path::Path(const Path &copy)
 	: m_path(copy.m_path),
 	  m_rules(copy.m_rules),
-	  m_cannon(0)
+	  m_cannon(0),
+      m_pathStr(0)
 {
 	if (copy.m_cannon)
-	{
 		m_cannon = new Cannonical (*copy.m_cannon);
-	}
+    if (copy.m_pathStr)
+        m_pathStr = new std::string(*copy.m_pathStr);
 }
 
 /**
@@ -80,6 +85,7 @@ Path::Path(const Path &copy)
 Path::~Path()
 {
 	delete m_cannon;
+    delete m_pathStr;
 }
 
 /**
@@ -87,20 +93,23 @@ Path::~Path()
  */
 Path & Path::operator=(const Path &op)
 {
-	if (this != &op) 
-	{
-		m_path = op.m_path;
-		m_rules = op.m_rules;
-		delete m_cannon;
-		if (op.m_cannon)
-		{
-			m_cannon = new Cannonical(*op.m_cannon);
-		}
-		else
-		{
-			m_cannon = 0;
-		}
-	}
+    if (this == &op)
+        return *this;
+    m_path = op.m_path;
+    m_rules = op.m_rules;
+
+    delete m_cannon;
+    if (op.m_cannon)
+        m_cannon = new Cannonical(*op.m_cannon);
+    else
+        m_cannon = 0;
+
+    delete m_pathStr;
+    if (op.m_pathStr)
+        m_pathStr = new std::string(*op.m_pathStr);
+    else
+        m_pathStr = 0;
+    
 	return  *this;
 }
 
@@ -126,7 +135,10 @@ const std::string &Path::str() const
  */
 const std::string& Path::path() const
 {
-	return m_path;
+    if (m_pathStr)
+        return *m_pathStr;
+    m_pathStr = new std::string(rules()->join(cannon()));
+	return *m_pathStr;
 }
 
 /**
@@ -147,13 +159,25 @@ std::string Path::normpath() const
 /**
  * Returns the last component of the path.
  * 
- * For example, basename('/a/b/c') returns 'c'.  basename('/a/b/') returns an
- * empty Path.
- * 
- * This ia analogous to the Unix shell utility "basename"..
+ * For example, basename('/a/b/c') returns 'c'.  basename('/a/b/') returns 'b' 
+ * This ia analogous to the Unix shell utility "basename".
  */
 Path Path::basename() const
 {
+    const std::vector<std::string> &components = cannon().components();
+    if (components.size() == 0)
+    {
+        if (cannon().abs())
+            return rules()->convert(cannon());
+        else
+            return *this;
+    }
+    else
+    {
+        return Path(components[components.size() - 1], m_rules);
+    }
+
+#ifdef notdef
 	std::string::size_type start, index;
 	std::string::size_type count;
 	std::string::size_type end = std::string::npos;
@@ -180,6 +204,7 @@ Path Path::basename() const
 	}
 	std::string base = m_path.substr(start, end - start);
 	return Path(base, m_rules);
+#endif
 }
 
 
@@ -198,6 +223,15 @@ Path Path::basename() const
  */
 Path Path::dirname() const
 {
+    std::vector<std::string>::const_iterator last;  // end elements
+    last = cannon().components().end();
+    if (cannon().components().size() > 0)
+        --last;
+    std::vector<std::string> com(cannon().components().begin(), last);
+    
+    Cannonical  c(cannon(), com);
+    return(rules()->convert(c));
+#ifdef notdef
 	int						index;
 	std::string::size_type	end = std::string::npos;
 	int						state = 0;
@@ -266,6 +300,7 @@ Path Path::dirname() const
 	{
 		return Path(".", m_rules);
 	}
+#endif
 }
 
 
@@ -321,7 +356,7 @@ std::string Path::stem() const
  */
 bool Path::abs() const 
 {
-	return (m_path.size() > 0 && m_path[0] == '/');
+    return cannon().abs();
 }
 
 /**
@@ -333,7 +368,11 @@ Path Path::makeAbs() const
 	if (abs())
 		return *this;
 	else
-		return Path("/" + m_path, m_rules);
+    {
+        Cannonical  c (cannon());
+        c.setAbs(true);
+        return rules()->convert(c);
+    }
 }
 
 /**

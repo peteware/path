@@ -120,7 +120,7 @@ size_t Node::size() const
 NodeIter Node::begin()
 {
     subNodeCreate();
-    if (!m_nodes)
+    if (!m_nodes || m_nodes->m_entries.size() == 0)
         return end();
     else
         return  NodeIter(*this);

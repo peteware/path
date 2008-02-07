@@ -110,6 +110,8 @@ private:
 	const PathRules *		m_rules;
 	/// The path in cannonical form; may be NULL
 	mutable Cannonical *m_cannon;
+    /// Cached value path converted by path();
+    mutable std::string *   m_pathStr;
 
 };
 
