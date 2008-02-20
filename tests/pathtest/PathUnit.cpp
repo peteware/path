@@ -34,7 +34,8 @@ class PathUnit : public CppUnit::TestCase
 	CPPUNIT_TEST(testAbs);
 	CPPUNIT_TEST(testJoin);
 	CPPUNIT_TEST(testRules);
-
+   	CPPUNIT_TEST(testGetcwd);
+    
 	CPPUNIT_TEST_SUITE_END();
 
 protected:
@@ -58,6 +59,8 @@ protected:
 	void testJoin();
 	/// Check that we can set the path rules
 	void testRules();
+    /// Check static member function getcwd() works
+    void testGetcwd();
 
 };
 
@@ -229,4 +232,10 @@ void PathUnit::testRules()
 	CPPUNIT_ASSERT(p1.rules() == Path::defaultPathRules());
 
 	old = Path::setDefaultPathRules(old);
+}
+
+void PathUnit::testGetcwd()
+{
+    Path    p = Path::getcwd();
+    CPPUNIT_ASSERT(p.abs());
 }

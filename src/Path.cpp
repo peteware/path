@@ -9,6 +9,8 @@
 #include <path/Cannonical.h>
 #include <path/UnixRules.h>
 
+#include <path/SysCalls.h>
+
 #include <iostream>
 
 PathRules * Path::s_defaultPathRules;
@@ -153,7 +155,7 @@ const std::string& Path::path() const
  */
 std::string Path::normpath() const
 {
-	return m_path;
+	return path();
 }
 
 /**
@@ -391,7 +393,11 @@ Path Path::join(const Path &path) const
 {
 	if (path.abs())
 		return path;
-	return Path(m_path + "/" + path.m_path, m_rules);
+    Cannonical c(cannon());
+    std::copy(path.cannon().components().begin(),
+              path.cannon().components().end(),
+              std::back_inserter(c.components()));
+    return rules()->convert(c);
 }
 
 /**
@@ -411,9 +417,15 @@ Path Path::join(const Path &path) const
  */
 Path Path::join(const std::vector<std::string> &strings) const
 {
+    
+    Cannonical c(cannon());
+    std::copy(strings.begin(), strings.end(),
+              std::back_inserter(c.components()));
+    return rules()->convert(c);
+
+#ifdef notdef
 	std::string		str = m_path;
 	bool			first = m_path.empty();
-
 	for (std::vector<std::string>::const_iterator iter = strings.begin();
 		iter != strings.end(); ++iter)
 	{
@@ -424,6 +436,7 @@ Path Path::join(const std::vector<std::string> &strings) const
 		str += *iter;
 	}
 	return Path(str, m_rules);
+#endif
 }
 
 
@@ -437,6 +450,7 @@ std::vector<Path> Path::split()
 {
 	return std::vector<Path>();
 }
+
 /**
  * Does a simple string comparison between two paths
  * to see if they are the same.  So while two paths
@@ -473,7 +487,8 @@ const PathRules *Path::pathRules() const
  * Returns a default set of rules.  If the rules
  * are not set, it uses the default rules.  If
  * the default rules have not been initialized,
- * it uses UnixRules::rules.
+ * it uses UnixRules::rules (as returned by
+ * defaultPathRules()).
  *
  * Do not delete the returned rules!
  */
@@ -514,7 +529,7 @@ PathRules * Path::defaultPathRules()
  */
 Path Path::getcwd()
 {
-	return Path();
+	return Path(SysCalls().getcwd(), defaultPathRules());
 }
 
 /**

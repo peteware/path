@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
+#include <sys/param.h>
 
 SysCalls::SysCalls()
 {
@@ -78,4 +79,12 @@ std::vector<std::string> SysCalls::listdir(const std::string &path) const
 NodeInfo * SysCalls::stat(const std::string & path) const 
 {
 	return NULL;
+}
+
+std::string SysCalls::getcwd() const
+{
+    char        buf[MAXPATHLEN];
+    
+    ::getcwd(buf, sizeof(buf));
+    return std::string(buf);
 }
