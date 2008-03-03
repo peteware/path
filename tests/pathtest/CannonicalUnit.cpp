@@ -17,12 +17,15 @@ class CannonicalUnit : public CppUnit::TestCase
 
 	CPPUNIT_TEST(init);
     CPPUNIT_TEST(testOstream);
-	CPPUNIT_TEST_SUITE_END();
+	CPPUNIT_TEST(testDrive);
+    CPPUNIT_TEST_SUITE_END();
 protected:
 	/// Test constructor
 	void init();
 	/// Test output operator <<
 	void testOstream();
+    /// Test the setDrive()/drive()
+    void testDrive();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(CannonicalUnit);
@@ -34,6 +37,7 @@ void CannonicalUnit::init()
 	CPPUNIT_ASSERT(c1.protocol().empty());
 	CPPUNIT_ASSERT(c1.host().empty());
 	CPPUNIT_ASSERT(c1.extra().empty());
+    CPPUNIT_ASSERT(c1.drive().empty());
 
 	Cannonical	c2 = c1;
 	CPPUNIT_ASSERT(c2.components().empty());
@@ -73,5 +77,34 @@ void CannonicalUnit::testOstream()
 
 	out << c1;
 	CPPUNIT_ASSERT_EQUAL(std::string("ftp://ftp.peteware.com:8080/a/b/"), out.str());
+    
+    std::ostringstream  out2;
+    Cannonical c2;
+    c2.add("a");
+    c2.setDrive("C");
+    out2 << c2;
+    CPPUNIT_ASSERT_EQUAL(std::string("C:a/"), out2.str());
+    std::ostringstream  out3;
+    c2.setAbs(true);
+    out3 << c2;
+    CPPUNIT_ASSERT_EQUAL(std::string("C:/a/"), out3.str());
+    
+}
 
+void CannonicalUnit::testDrive()
+{
+    Cannonical  c1;
+    c1.setDrive("abc");
+    CPPUNIT_ASSERT_EQUAL(std::string("abc"), c1.drive());
+    c1.setDrive("abc:");
+    CPPUNIT_ASSERT_EQUAL(std::string("abc:"), c1.drive());
+    /// Test copy operator
+    Cannonical c2(c1);
+    Cannonical c3;
+    CPPUNIT_ASSERT_EQUAL(c1.drive(), c2.drive());
+    
+    c3 = c1;
+    CPPUNIT_ASSERT_EQUAL(c1.drive(), c3.drive());
+
+    
 }

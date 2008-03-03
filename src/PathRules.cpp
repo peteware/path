@@ -89,6 +89,10 @@ std::string PathRules::join(const Cannonical &cannon) const
         if (!cannon.host().empty())
             p += "//" + cannon.host() + "/";
     }
+    if (!cannon.drive().empty())
+    {
+        p += cannon.drive() + ":";
+    }
     if (cannon.abs())
         p += m_sep;
     bool first = true;
@@ -99,7 +103,7 @@ std::string PathRules::join(const Cannonical &cannon) const
             first = false;
         else
             p += m_sep;
-        p += *iter;
+        p += quote(*iter);
     }
     return p;
 }

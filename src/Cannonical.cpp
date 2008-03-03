@@ -102,12 +102,12 @@ const std::string & Cannonical::extra() const
  * \\somehostname\C$\temp
  * @endcode
  */
-void setDrive(const std::string &drive)
+void Cannonical::setDrive(const std::string &drive)
 {
     m_drive = drive;
 }
 
-const std::string &drive() const
+const std::string &Cannonical::drive() const
 {
     return m_drive;
 }
@@ -189,13 +189,28 @@ bool Cannonical::abs() const
 std::ostream &
 operator<<(std::ostream &out, const Cannonical &cannon)
 {
+    bool    seperator = true;
 	if (!cannon.protocol().empty())
 		out << cannon.protocol() << ':';
 	if (!cannon.host().empty())
+    {
 		out << "//" << cannon.host();
+        seperator = false;
+    }
 	if (!cannon.extra().empty())
+    {
 		out << ":" << cannon.extra();
-	out << '/';
+        seperator = false;
+    }
+    if (!seperator)
+        out << '/';
+
+    if (!cannon.drive().empty())
+    {
+        out << cannon.drive() << ':';
+    }
+    if (cannon.abs())
+        out << '/';
 	std::copy(cannon.components().begin(),
 		cannon.components().end(),
 		std::ostream_iterator<std::string>(out, "/"));

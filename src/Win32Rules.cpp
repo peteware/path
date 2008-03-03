@@ -24,7 +24,17 @@ Win32Rules::~Win32Rules()
  */
 Cannonical Win32Rules::cannonical(const std::string &path) const
 {
-	return PathRules::cannonical(path);
+    Cannonical cannon;
+    if (path.size() >= 2 && path[1] == ':')
+    {
+        cannon = PathRules::cannonical(path.substr(2, path.size() - 2));
+        cannon.setDrive(path.substr(0,1));
+    }
+    else
+    {
+        cannon = PathRules::cannonical(path);
+    }
+	return cannon;
 }
 
 /**
@@ -47,5 +57,5 @@ Path Win32Rules::convert(const Cannonical &cannonical) const
  */
 std::string Win32Rules::quote(const std::string & path) const
 {
-	return std::string();
+	return path;
 }
