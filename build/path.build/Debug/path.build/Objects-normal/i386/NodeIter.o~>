@@ -1,0 +1,3 @@
+/Users/ware/src/path/src/NodeIter.cpp:47: error: prototype for 'Node* NodeIter::operator->()' does not match any in class 'NodeIter'
+/Users/ware/src/path/include/path/NodeIter.h:40: error: candidate is: Node& NodeIter::operator->()
+/Users/ware/src/path/src/NodeIter.cpp:47: error: 'Node* NodeIter::operator->()' and 'Node& NodeIter::operator->()' cannot be overloaded

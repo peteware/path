@@ -49,6 +49,21 @@ Path::Path(const std::string &path)
 }
 
 /**
+ * Create a path from a Cannonical and a PathRules.
+ *
+ * Initialized m_path by converting from Canonical to a string
+ * via the PathRules
+ */
+Path::Path(const Cannonical &cannon, const PathRules *rules)
+    : m_path(),
+      m_rules(rules),
+      m_cannon(new Cannonical(cannon)),
+      m_pathStr(0)
+{
+    m_path = rules->join(cannon);
+}
+
+/**
  * Set path to a raw string.
  * This may contain environment variables, "~",
  * multiple directory seperators, etc.  Use

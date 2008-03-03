@@ -16,13 +16,16 @@
 
 #include "PathRulesUnit.h"
 
-class UnixRulesUnit: public CppUnit::TestCase
+class UnixRulesUnit: public PathRulesUnit
 {
 	CPPUNIT_TEST_SUB_SUITE(UnixRulesUnit, PathRulesUnit);
     
 	CPPUNIT_TEST(init);
     
 	CPPUNIT_TEST_SUITE_END();
+public:
+    virtual void setUp();
+    virtual void tearDown();    
 protected:
 	/// Make sure constructors/destructor works
 	void init();
@@ -30,6 +33,16 @@ protected:
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(UnixRulesUnit);
+
+void UnixRulesUnit::setUp()
+{
+    setRules(new UnixRules());
+}
+
+void UnixRulesUnit::tearDown()
+{
+    PathRulesUnit::tearDown();
+}
 
 void UnixRulesUnit::init()
 {

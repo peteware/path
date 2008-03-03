@@ -18,6 +18,7 @@ Cannonical::Cannonical()
 	: m_protocol(),
 	  m_host(),	  
 	  m_extra(),
+      m_drive(),
 	  m_abs(false),
 	  m_components()
 
@@ -25,21 +26,26 @@ Cannonical::Cannonical()
 }
 
 /**
- * @param copy Provides the protocol, host, and ocmponent info
+ * @param copy Provides the protocol, host, and component info
  */
 Cannonical::Cannonical(const Cannonical &copy)
 	: m_protocol(copy.m_protocol),
 	  m_host(copy.m_host),
 	  m_extra(copy.m_extra),
+      m_drive(copy.m_drive),
 	  m_abs(copy.m_abs),
 	  m_components(copy.m_components)
 {
 }
 
+/**
+ * Better to get rid of this and just use some properties.
+ */
 Cannonical::Cannonical(const std::string &protocol, const std::string &host, const std::string &extra)
 	: m_protocol(protocol),
 	  m_host(host),	  
 	  m_extra(extra),
+      m_drive(),
 	  m_abs(false),
 	  m_components()
 {
@@ -55,6 +61,7 @@ Cannonical::Cannonical(const Cannonical &copy, const std::vector<std::string> &c
 	: m_protocol(copy.m_protocol),
 	  m_host(copy.m_host),
 	  m_extra(copy.m_extra),
+      m_drive(copy.m_drive),
 	  m_abs(copy.m_abs),
 	  m_components(components)
 {
@@ -80,6 +87,29 @@ const std::string & Cannonical::host() const
 const std::string & Cannonical::extra() const
 {
 	return m_extra;
+}
+
+/**
+ * This helps with win32/DOS compatibility by allowing
+ * a drive to be specified.  For example: 
+ * @code
+ * C:\temp
+ * @endcode
+ * The "C" is the drive.  Do not include the ":" as
+ * other protocols use something different.  For example,
+ * UNC uses a "$" to specify a drive:
+ * @code
+ * \\somehostname\C$\temp
+ * @endcode
+ */
+void setDrive(const std::string &drive)
+{
+    m_drive = drive;
+}
+
+const std::string &drive() const
+{
+    return m_drive;
 }
 
 /**

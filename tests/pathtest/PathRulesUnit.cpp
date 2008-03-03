@@ -6,7 +6,32 @@
 #include "PathRulesUnit.h"
 
 CPPUNIT_TEST_SUITE_REGISTRATION(PathRulesUnit);
+void PathRulesUnit::setUp()
+{
+    if (!m_rules)
+        m_rules = new UnixRules;
+}
+void PathRulesUnit::tearDown()
+{
+    delete m_rules;
+}
 
+/// Set the rules and returns the previous one
+PathRules * PathRulesUnit::setRules (PathRules *rules)
+{
+    std::swap(m_rules, rules);
+    return rules;
+}
+
+/// Return the rules
+PathRules *PathRulesUnit::rules() const
+{
+    return m_rules;
+}
+
+/**
+ * Check basic initialization.
+ */
 void PathRulesUnit::init()
 {
 	UnixRules	unix_rules;

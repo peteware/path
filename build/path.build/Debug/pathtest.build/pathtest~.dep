@@ -1,0 +1,7 @@
+00e91ac9a2648d9bf65a646637d98a13 c616fa737d96b209a7455ef56ab6313a ffffffffffffffffffffffffffffffff 415332 /Users/ware/src/path/build/Debug/x
+000000004783dc7500000000000002ed 60c0f5f9aa9a7008ec8f727f20021637 ffffffffffffffffffffffffffffffff 205440 /Users/ware/src/path/build/path.build/Debug/pathtest.build/Objects-normal/i386/SysCallsUnit.o
+00000000009a75230000000000001c6c d7f6b9aba0cc6d8dad24e467e29824b6 ffffffffffffffffffffffffffffffff 274332 /Users/ware/src/path/build/path.build/Debug/pathtest.build/Objects-normal/i386/PathUnit.o
+00000000472183300000000000000a30 d2ec8888f1f7a7c82ff43c7fc392fc77 ffffffffffffffffffffffffffffffff 227120 /Users/ware/src/path/build/path.build/Debug/pathtest.build/Objects-normal/i386/PathRulesUnit.o
+0000000047aa283a000000000000005f d3cecd6f3b88afd255668d364b25bf42 ffffffffffffffffffffffffffffffff 297996 /Users/ware/src/path/build/path.build/Debug/pathtest.build/Objects-normal/i386/NodeUnit.o
+00000000477c0fad0000000000000433 dd7fa4b0c3e45ccf0b250935333dbbf0 ffffffffffffffffffffffffffffffff 20288 /Users/ware/src/path/build/path.build/Debug/pathtest.build/Objects-normal/i386/main.o
+000000000079555a0000000000000f0e 6b82b7cce65544fac6464a024ee8e64b ffffffffffffffffffffffffffffffff 233800 /Users/ware/src/path/build/path.build/Debug/pathtest.build/Objects-normal/i386/CannonicalUnit.o

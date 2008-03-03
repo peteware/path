@@ -1,0 +1,515 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 44;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		500914440CE2B66F00ADA70C /* BadPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500913FF0CE2B3E300ADA70C /* BadPath.cpp */; };
+		500914450CE2B66F00ADA70C /* Cannonical.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914000CE2B3E300ADA70C /* Cannonical.cpp */; };
+		500914460CE2B66F00ADA70C /* FileStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914010CE2B3E300ADA70C /* FileStream.cpp */; };
+		500914470CE2B66F00ADA70C /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914020CE2B3E300ADA70C /* Node.cpp */; };
+		500914480CE2B66F00ADA70C /* NodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914030CE2B3E300ADA70C /* NodeInfo.cpp */; };
+		500914490CE2B66F00ADA70C /* NodeIter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914040CE2B3E300ADA70C /* NodeIter.cpp */; };
+		5009144A0CE2B66F00ADA70C /* Path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914050CE2B3E300ADA70C /* Path.cpp */; };
+		5009144B0CE2B66F00ADA70C /* PathException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914060CE2B3E300ADA70C /* PathException.cpp */; };
+		5009144C0CE2B66F00ADA70C /* PathExtra.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914070CE2B3E300ADA70C /* PathExtra.cpp */; };
+		5009144D0CE2B66F00ADA70C /* PathRules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914080CE2B3E300ADA70C /* PathRules.cpp */; };
+		5009144E0CE2B66F00ADA70C /* Permission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914090CE2B3E300ADA70C /* Permission.cpp */; };
+		500914500CE2B66F00ADA70C /* SysCalls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140B0CE2B3E300ADA70C /* SysCalls.cpp */; };
+		500914510CE2B66F00ADA70C /* Unimplemented.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140C0CE2B3E300ADA70C /* Unimplemented.cpp */; };
+		500914520CE2B66F00ADA70C /* UnixRules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140D0CE2B3E300ADA70C /* UnixRules.cpp */; };
+		500914530CE2B66F00ADA70C /* UriRules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140E0CE2B3E300ADA70C /* UriRules.cpp */; };
+		500914540CE2B66F00ADA70C /* Win32Rules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140F0CE2B3E300ADA70C /* Win32Rules.cpp */; };
+		5009145E0CE2B85600ADA70C /* BadPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914240CE2B3F600ADA70C /* BadPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5009145F0CE2B85600ADA70C /* Cannonical.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914250CE2B3F600ADA70C /* Cannonical.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500914600CE2B85600ADA70C /* FileStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914260CE2B3F600ADA70C /* FileStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500914610CE2B85600ADA70C /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914270CE2B3F600ADA70C /* Node.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500914620CE2B85600ADA70C /* NodeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914280CE2B3F600ADA70C /* NodeInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500914630CE2B85600ADA70C /* NodeIter.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914290CE2B3F600ADA70C /* NodeIter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500914640CE2B85600ADA70C /* Path.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142A0CE2B3F600ADA70C /* Path.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500914650CE2B85600ADA70C /* PathException.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142B0CE2B3F600ADA70C /* PathException.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500914660CE2B85600ADA70C /* PathExtra.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142C0CE2B3F600ADA70C /* PathExtra.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500914670CE2B85600ADA70C /* PathRules.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142D0CE2B3F600ADA70C /* PathRules.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500914680CE2B85600ADA70C /* Permission.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142E0CE2B3F600ADA70C /* Permission.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500914690CE2B85600ADA70C /* SysCalls.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142F0CE2B3F600ADA70C /* SysCalls.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5009146A0CE2B85600ADA70C /* Unimplemented.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914300CE2B3F600ADA70C /* Unimplemented.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5009146B0CE2B85600ADA70C /* UnixRules.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914310CE2B3F600ADA70C /* UnixRules.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5009146C0CE2B85600ADA70C /* UriRules.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914320CE2B3F600ADA70C /* UriRules.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5009146D0CE2B85600ADA70C /* Win32Rules.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914330CE2B3F600ADA70C /* Win32Rules.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		500948630D665356000B393F /* UnixRulesUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500948620D665356000B393F /* UnixRulesUnit.cpp */; };
+		500948B40D6EF039000B393F /* Win32RulesUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500948B30D6EF039000B393F /* Win32RulesUnit.cpp */; };
+		503F0A290D10952200563F2E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914860CE333AE00ADA70C /* main.cpp */; };
+		503F0A2A0D10952D00563F2E /* NodeUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914870CE333AE00ADA70C /* NodeUnit.cpp */; };
+		503F0A2B0D10953A00563F2E /* PathRulesUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914880CE333AE00ADA70C /* PathRulesUnit.cpp */; };
+		503F0A2C0D10953A00563F2E /* PathUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914890CE333AE00ADA70C /* PathUnit.cpp */; };
+		503F0A2D0D10953A00563F2E /* SysCallsUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009148B0CE333AE00ADA70C /* SysCallsUnit.cpp */; };
+		503F0A360D109E0500563F2E /* libpath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009143D0CE2B54E00ADA70C /* libpath.a */; };
+		503F0A3B0D109EBD00563F2E /* libcppunit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009152A0CE5238000ADA70C /* libcppunit.a */; };
+		507AECC10D2BCE4B0071EB10 /* SubNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 507AECBF0D2BCE4B0071EB10 /* SubNode.cpp */; };
+		507AED660D2C49E20071EB10 /* CannonicalUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914850CE333AE00ADA70C /* CannonicalUnit.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		503F0A140D0A447E00563F2E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5009143C0CE2B54E00ADA70C;
+			remoteInfo = path;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		500913FF0CE2B3E300ADA70C /* BadPath.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = BadPath.cpp; sourceTree = "<group>"; };
+		500914000CE2B3E300ADA70C /* Cannonical.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Cannonical.cpp; sourceTree = "<group>"; };
+		500914010CE2B3E300ADA70C /* FileStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = FileStream.cpp; sourceTree = "<group>"; };
+		500914020CE2B3E300ADA70C /* Node.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Node.cpp; sourceTree = "<group>"; };
+		500914030CE2B3E300ADA70C /* NodeInfo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = NodeInfo.cpp; sourceTree = "<group>"; };
+		500914040CE2B3E300ADA70C /* NodeIter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = NodeIter.cpp; sourceTree = "<group>"; };
+		500914050CE2B3E300ADA70C /* Path.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Path.cpp; sourceTree = "<group>"; };
+		500914060CE2B3E300ADA70C /* PathException.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = PathException.cpp; sourceTree = "<group>"; };
+		500914070CE2B3E300ADA70C /* PathExtra.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = PathExtra.cpp; sourceTree = "<group>"; };
+		500914080CE2B3E300ADA70C /* PathRules.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = PathRules.cpp; sourceTree = "<group>"; };
+		500914090CE2B3E300ADA70C /* Permission.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Permission.cpp; sourceTree = "<group>"; };
+		5009140B0CE2B3E300ADA70C /* SysCalls.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = SysCalls.cpp; sourceTree = "<group>"; };
+		5009140C0CE2B3E300ADA70C /* Unimplemented.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Unimplemented.cpp; sourceTree = "<group>"; };
+		5009140D0CE2B3E300ADA70C /* UnixRules.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = UnixRules.cpp; sourceTree = "<group>"; };
+		5009140E0CE2B3E300ADA70C /* UriRules.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = UriRules.cpp; sourceTree = "<group>"; };
+		5009140F0CE2B3E300ADA70C /* Win32Rules.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Win32Rules.cpp; sourceTree = "<group>"; };
+		500914240CE2B3F600ADA70C /* BadPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadPath.h; sourceTree = "<group>"; };
+		500914250CE2B3F600ADA70C /* Cannonical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cannonical.h; sourceTree = "<group>"; };
+		500914260CE2B3F600ADA70C /* FileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileStream.h; sourceTree = "<group>"; };
+		500914270CE2B3F600ADA70C /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		500914280CE2B3F600ADA70C /* NodeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeInfo.h; sourceTree = "<group>"; };
+		500914290CE2B3F600ADA70C /* NodeIter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeIter.h; sourceTree = "<group>"; };
+		5009142A0CE2B3F600ADA70C /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
+		5009142B0CE2B3F600ADA70C /* PathException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathException.h; sourceTree = "<group>"; };
+		5009142C0CE2B3F600ADA70C /* PathExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathExtra.h; sourceTree = "<group>"; };
+		5009142D0CE2B3F600ADA70C /* PathRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathRules.h; sourceTree = "<group>"; };
+		5009142E0CE2B3F600ADA70C /* Permission.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Permission.h; sourceTree = "<group>"; };
+		5009142F0CE2B3F600ADA70C /* SysCalls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SysCalls.h; sourceTree = "<group>"; };
+		500914300CE2B3F600ADA70C /* Unimplemented.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Unimplemented.h; sourceTree = "<group>"; };
+		500914310CE2B3F600ADA70C /* UnixRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnixRules.h; sourceTree = "<group>"; };
+		500914320CE2B3F600ADA70C /* UriRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UriRules.h; sourceTree = "<group>"; };
+		500914330CE2B3F600ADA70C /* Win32Rules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Win32Rules.h; sourceTree = "<group>"; };
+		5009143D0CE2B54E00ADA70C /* libpath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpath.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		500914850CE333AE00ADA70C /* CannonicalUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = CannonicalUnit.cpp; sourceTree = "<group>"; };
+		500914860CE333AE00ADA70C /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = main.cpp; sourceTree = "<group>"; };
+		500914870CE333AE00ADA70C /* NodeUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = NodeUnit.cpp; sourceTree = "<group>"; };
+		500914880CE333AE00ADA70C /* PathRulesUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = PathRulesUnit.cpp; sourceTree = "<group>"; };
+		500914890CE333AE00ADA70C /* PathUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = PathUnit.cpp; sourceTree = "<group>"; };
+		5009148B0CE333AE00ADA70C /* SysCallsUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = SysCallsUnit.cpp; sourceTree = "<group>"; };
+		500914CE0CE3F37900ADA70C /* pathtest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "pathtest-Info.plist"; sourceTree = "<group>"; };
+		5009152A0CE5238000ADA70C /* libcppunit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcppunit.a; path = /usr/local/lib/libcppunit.a; sourceTree = "<absolute>"; };
+		500948620D665356000B393F /* UnixRulesUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnixRulesUnit.cpp; sourceTree = "<group>"; };
+		5009487C0D6656AC000B393F /* PathRulesUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathRulesUnit.h; sourceTree = "<group>"; };
+		500948B30D6EF039000B393F /* Win32RulesUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Win32RulesUnit.cpp; sourceTree = "<group>"; };
+		503F0A080D0A14C600563F2E /* x */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = x; sourceTree = BUILT_PRODUCTS_DIR; };
+		507AECBF0D2BCE4B0071EB10 /* SubNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SubNode.cpp; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		5009143B0CE2B54E00ADA70C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		503F0A060D0A14C600563F2E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				503F0A3B0D109EBD00563F2E /* libcppunit.a in Frameworks */,
+				503F0A360D109E0500563F2E /* libpath.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* path */ = {
+			isa = PBXGroup;
+			children = (
+				5009152A0CE5238000ADA70C /* libcppunit.a */,
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+				500914CE0CE3F37900ADA70C /* pathtest-Info.plist */,
+			);
+			name = path;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				500913FE0CE2B3E300ADA70C /* src */,
+				500914220CE2B3F600ADA70C /* include */,
+				500914830CE333AE00ADA70C /* tests */,
+				500914840CE333AE00ADA70C /* pathtest */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5009143D0CE2B54E00ADA70C /* libpath.a */,
+				503F0A080D0A14C600563F2E /* x */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		500913FE0CE2B3E300ADA70C /* src */ = {
+			isa = PBXGroup;
+			children = (
+				500913FF0CE2B3E300ADA70C /* BadPath.cpp */,
+				500914000CE2B3E300ADA70C /* Cannonical.cpp */,
+				500914010CE2B3E300ADA70C /* FileStream.cpp */,
+				500914020CE2B3E300ADA70C /* Node.cpp */,
+				507AECBF0D2BCE4B0071EB10 /* SubNode.cpp */,
+				500914030CE2B3E300ADA70C /* NodeInfo.cpp */,
+				500914040CE2B3E300ADA70C /* NodeIter.cpp */,
+				500914050CE2B3E300ADA70C /* Path.cpp */,
+				500914060CE2B3E300ADA70C /* PathException.cpp */,
+				500914070CE2B3E300ADA70C /* PathExtra.cpp */,
+				500914080CE2B3E300ADA70C /* PathRules.cpp */,
+				500914090CE2B3E300ADA70C /* Permission.cpp */,
+				5009140B0CE2B3E300ADA70C /* SysCalls.cpp */,
+				5009140C0CE2B3E300ADA70C /* Unimplemented.cpp */,
+				5009140D0CE2B3E300ADA70C /* UnixRules.cpp */,
+				5009140E0CE2B3E300ADA70C /* UriRules.cpp */,
+				5009140F0CE2B3E300ADA70C /* Win32Rules.cpp */,
+			);
+			path = src;
+			sourceTree = "<group>";
+		};
+		500914220CE2B3F600ADA70C /* include */ = {
+			isa = PBXGroup;
+			children = (
+				500914230CE2B3F600ADA70C /* path */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		500914230CE2B3F600ADA70C /* path */ = {
+			isa = PBXGroup;
+			children = (
+				500914240CE2B3F600ADA70C /* BadPath.h */,
+				500914250CE2B3F600ADA70C /* Cannonical.h */,
+				500914260CE2B3F600ADA70C /* FileStream.h */,
+				500914270CE2B3F600ADA70C /* Node.h */,
+				500914280CE2B3F600ADA70C /* NodeInfo.h */,
+				500914290CE2B3F600ADA70C /* NodeIter.h */,
+				5009142A0CE2B3F600ADA70C /* Path.h */,
+				5009142B0CE2B3F600ADA70C /* PathException.h */,
+				5009142C0CE2B3F600ADA70C /* PathExtra.h */,
+				5009142D0CE2B3F600ADA70C /* PathRules.h */,
+				5009142E0CE2B3F600ADA70C /* Permission.h */,
+				5009142F0CE2B3F600ADA70C /* SysCalls.h */,
+				500914300CE2B3F600ADA70C /* Unimplemented.h */,
+				500914310CE2B3F600ADA70C /* UnixRules.h */,
+				500914320CE2B3F600ADA70C /* UriRules.h */,
+				500914330CE2B3F600ADA70C /* Win32Rules.h */,
+			);
+			path = path;
+			sourceTree = "<group>";
+		};
+		500914830CE333AE00ADA70C /* tests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = tests;
+			sourceTree = "<group>";
+		};
+		500914840CE333AE00ADA70C /* pathtest */ = {
+			isa = PBXGroup;
+			children = (
+				500914860CE333AE00ADA70C /* main.cpp */,
+				500914850CE333AE00ADA70C /* CannonicalUnit.cpp */,
+				500914870CE333AE00ADA70C /* NodeUnit.cpp */,
+				500914880CE333AE00ADA70C /* PathRulesUnit.cpp */,
+				500914890CE333AE00ADA70C /* PathUnit.cpp */,
+				5009148B0CE333AE00ADA70C /* SysCallsUnit.cpp */,
+				500948620D665356000B393F /* UnixRulesUnit.cpp */,
+				5009487C0D6656AC000B393F /* PathRulesUnit.h */,
+				500948B30D6EF039000B393F /* Win32RulesUnit.cpp */,
+			);
+			name = pathtest;
+			path = tests/pathtest;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		500914390CE2B54E00ADA70C /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5009145E0CE2B85600ADA70C /* BadPath.h in Headers */,
+				5009145F0CE2B85600ADA70C /* Cannonical.h in Headers */,
+				500914600CE2B85600ADA70C /* FileStream.h in Headers */,
+				500914610CE2B85600ADA70C /* Node.h in Headers */,
+				500914620CE2B85600ADA70C /* NodeInfo.h in Headers */,
+				500914630CE2B85600ADA70C /* NodeIter.h in Headers */,
+				500914640CE2B85600ADA70C /* Path.h in Headers */,
+				500914650CE2B85600ADA70C /* PathException.h in Headers */,
+				500914660CE2B85600ADA70C /* PathExtra.h in Headers */,
+				500914670CE2B85600ADA70C /* PathRules.h in Headers */,
+				500914680CE2B85600ADA70C /* Permission.h in Headers */,
+				500914690CE2B85600ADA70C /* SysCalls.h in Headers */,
+				5009146A0CE2B85600ADA70C /* Unimplemented.h in Headers */,
+				5009146B0CE2B85600ADA70C /* UnixRules.h in Headers */,
+				5009146C0CE2B85600ADA70C /* UriRules.h in Headers */,
+				5009146D0CE2B85600ADA70C /* Win32Rules.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		5009143C0CE2B54E00ADA70C /* path */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 500914430CE2B56900ADA70C /* Build configuration list for PBXNativeTarget "path" */;
+			buildPhases = (
+				500914390CE2B54E00ADA70C /* Headers */,
+				5009143A0CE2B54E00ADA70C /* Sources */,
+				5009143B0CE2B54E00ADA70C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = path;
+			productName = path;
+			productReference = 5009143D0CE2B54E00ADA70C /* libpath.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		503F0A070D0A14C600563F2E /* pathtest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 503F0A0C0D0A14E400563F2E /* Build configuration list for PBXNativeTarget "pathtest" */;
+			buildPhases = (
+				503F0A050D0A14C600563F2E /* Sources */,
+				503F0A060D0A14C600563F2E /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				503F0A150D0A447E00563F2E /* PBXTargetDependency */,
+			);
+			name = pathtest;
+			productName = x;
+			productReference = 503F0A080D0A14C600563F2E /* x */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "path" */;
+			compatibilityVersion = "Xcode 3.0";
+			hasScannedForEncodings = 1;
+			mainGroup = 08FB7794FE84155DC02AAC07 /* path */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				5009143C0CE2B54E00ADA70C /* path */,
+				503F0A070D0A14C600563F2E /* pathtest */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		5009143A0CE2B54E00ADA70C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				500914440CE2B66F00ADA70C /* BadPath.cpp in Sources */,
+				500914450CE2B66F00ADA70C /* Cannonical.cpp in Sources */,
+				500914460CE2B66F00ADA70C /* FileStream.cpp in Sources */,
+				500914470CE2B66F00ADA70C /* Node.cpp in Sources */,
+				500914480CE2B66F00ADA70C /* NodeInfo.cpp in Sources */,
+				500914490CE2B66F00ADA70C /* NodeIter.cpp in Sources */,
+				5009144A0CE2B66F00ADA70C /* Path.cpp in Sources */,
+				5009144B0CE2B66F00ADA70C /* PathException.cpp in Sources */,
+				5009144C0CE2B66F00ADA70C /* PathExtra.cpp in Sources */,
+				5009144D0CE2B66F00ADA70C /* PathRules.cpp in Sources */,
+				5009144E0CE2B66F00ADA70C /* Permission.cpp in Sources */,
+				500914500CE2B66F00ADA70C /* SysCalls.cpp in Sources */,
+				500914510CE2B66F00ADA70C /* Unimplemented.cpp in Sources */,
+				500914520CE2B66F00ADA70C /* UnixRules.cpp in Sources */,
+				500914530CE2B66F00ADA70C /* UriRules.cpp in Sources */,
+				500914540CE2B66F00ADA70C /* Win32Rules.cpp in Sources */,
+				507AECC10D2BCE4B0071EB10 /* SubNode.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		503F0A050D0A14C600563F2E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				507AED660D2C49E20071EB10 /* CannonicalUnit.cpp in Sources */,
+				503F0A290D10952200563F2E /* main.cpp in Sources */,
+				503F0A2A0D10952D00563F2E /* NodeUnit.cpp in Sources */,
+				503F0A2B0D10953A00563F2E /* PathRulesUnit.cpp in Sources */,
+				503F0A2C0D10953A00563F2E /* PathUnit.cpp in Sources */,
+				503F0A2D0D10953A00563F2E /* SysCallsUnit.cpp in Sources */,
+				500948630D665356000B393F /* UnixRulesUnit.cpp in Sources */,
+				500948B40D6EF039000B393F /* Win32RulesUnit.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		503F0A150D0A447E00563F2E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5009143C0CE2B54E00ADA70C /* path */;
+			targetProxy = 503F0A140D0A447E00563F2E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = (
+					ppc,
+					i386,
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+			};
+			name = Release;
+		};
+		5009143E0CE2B54E00ADA70C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_SYMBOL_SEPARATION = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				HEADER_SEARCH_PATHS = include;
+				INSTALL_PATH = /usr/local/lib;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PREBINDING = NO;
+				PRODUCT_NAME = path;
+				SEPARATE_STRIP = NO;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				STRIP_STYLE = "non-global";
+				USER_HEADER_SEARCH_PATHS = include;
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		5009143F0CE2B54E00ADA70C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/lib;
+				PREBINDING = NO;
+				PRODUCT_NAME = path;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		503F0A0A0D0A14C600563F2E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
+				MACH_O_TYPE = mh_execute;
+				MACOSX_DEPLOYMENT_TARGET = 10.4;
+				PREBINDING = NO;
+				PRODUCT_NAME = x;
+				STANDARD_C_PLUS_PLUS_LIBRARY_TYPE = dynamic;
+				STRIP_STYLE = "non-global";
+				ZERO_LINK = NO;
+			};
+			name = Debug;
+		};
+		503F0A0B0D0A14C600563F2E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PREBINDING = NO;
+				PRODUCT_NAME = x;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "path" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		500914430CE2B56900ADA70C /* Build configuration list for PBXNativeTarget "path" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5009143E0CE2B54E00ADA70C /* Debug */,
+				5009143F0CE2B54E00ADA70C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		503F0A0C0D0A14E400563F2E /* Build configuration list for PBXNativeTarget "pathtest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				503F0A0A0D0A14C600563F2E /* Debug */,
+				503F0A0B0D0A14C600563F2E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

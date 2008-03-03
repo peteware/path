@@ -1,31 +1,30 @@
 /**  
- * @file Win32Rules.h
+ * @file UnixRules.h
  *
- * Implementation of the Class Win32Rules
+ * Implementation of the Class UnixRules
  *
  * Created on:      11-May-2007 5:09:33 PM
  * Original author: Pete Ware
  */
-#if !defined(_PATH_WIN32RULES_H_)
-#define _PATH_WIN32RULES_H_
+#if !defined(_PATH_UNIXRULES_H_)
+#define _PATH_UNIXRULES_H_
 
 #include <path/PathRules.h>
-#include <string>
-
 // Forward declarations
-class Cannonical;
 class Path;
+class Cannonical;
 
-class Win32Rules : public PathRules
+class UnixRules : public PathRules
 {
-
 public:
-	Win32Rules();
-	virtual ~Win32Rules();
+	UnixRules();
+	virtual ~UnixRules();
 
 	virtual Cannonical cannonical(const std::string &path) const;
 	virtual Path convert(const Cannonical &canonical) const;
 	virtual std::string quote(const std::string & path) const;
-    //virtual std::string join(const Cannonical &canonical) const;
+
+	static UnixRules	rules;
+
 };
-#endif // !defined(_PATH_WIN32RULES_H_)
+#endif // !defined(_PATH_UNIXRULES_H_)

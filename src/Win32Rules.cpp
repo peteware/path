@@ -10,7 +10,7 @@
 #include <path/Path.h>
 
 Win32Rules::Win32Rules()
-	: PathRules('/')
+	: PathRules('\\')
 {
 }
 
@@ -22,9 +22,9 @@ Win32Rules::~Win32Rules()
  * Converts Path into a 'canonical' form.  This allows a Path to be converted from
  * one PathRules to another PathRules.
  */
-Cannonical Win32Rules::canonical(const Path &path) const
+Cannonical Win32Rules::cannonical(const std::string &path) const
 {
-	return Cannonical();
+	return PathRules::cannonical(path);
 }
 
 /**
@@ -33,9 +33,9 @@ Cannonical Win32Rules::canonical(const Path &path) const
  * Any special characters are converted to a safe form.  For example, in UnixRules,
  * a '/' is converted to '|' (or whatever).
  */
-Path Win32Rules::convert(const Cannonical &canonical) const 
+Path Win32Rules::convert(const Cannonical &cannonical) const 
 {
-	return Path();
+	return Path(cannonical, this);
 }
 
 
