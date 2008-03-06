@@ -216,3 +216,41 @@ operator<<(std::ostream &out, const Cannonical &cannon)
 		std::ostream_iterator<std::string>(out, "/"));
 	return out;
 }
+
+/**
+ * Return true if all the values in the Cannonical objects op1 and op2 
+ * are identical; false otherwise
+ *
+ * @param op1 The left hand side
+ * @param op2 The right hand side
+ * @return true if identical, false otherwise.
+ */
+bool operator==(const Cannonical &op1, const Cannonical &op2)
+{
+    if (op1.abs() != op2.abs())
+        return false;
+    if (op1.protocol() != op2.protocol())
+        return false;
+    if (op1.host() != op2.host())
+        return false;
+    if (op1.extra() != op2.extra())
+        return false;
+    if (op1.drive() != op2.drive())
+        return false;
+    if (op1.components() != op2.components())
+        return false;
+    return true;
+}
+
+/**
+ * Return true if any of the values in the Cannonical objects op1 and op2 
+ * are diffrent; false otherwise
+ *
+ * @param op1 The left hand side
+ * @param op2 The right hand side
+ * @return true if different, false otherwise.
+ */
+bool operator!=(const Cannonical &op1, const Cannonical &op2)
+{
+    return !(op1 == op2);
+}

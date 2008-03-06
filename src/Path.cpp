@@ -54,13 +54,13 @@ Path::Path(const std::string &path)
  * Initialized m_path by converting from Canonical to a string
  * via the PathRules
  */
-Path::Path(const Cannonical &cannon, const PathRules *rules)
+Path::Path(const Cannonical &cannon, const PathRules *param_rules)
     : m_path(),
-      m_rules(rules),
+      m_rules(param_rules),
       m_cannon(new Cannonical(cannon)),
       m_pathStr(0)
 {
-    m_path = rules->join(cannon);
+    m_path = rules()->join(cannon);
 }
 
 /**
@@ -348,8 +348,9 @@ std::string Path::extension() const
  * Return basename() of path with the extension() removed
  * @code
  * Path	p("/a/b/name.ext");
- * p.extension() == "name"; 
+ * p.basename() == "name"; 
  * @endcode
+ * @code
  * Path p2("/a/b/.name");
  * p2.stem() == ".name";
  * @endcode
@@ -463,13 +464,28 @@ Path Path::join(const std::vector<std::string> &strings) const
  */
 std::vector<Path> Path::split()
 {
-	return std::vector<Path>();
+    const Cannonical &      c = cannon();
+    std::vector<Path>       paths;
+    bool                    first = true;
+    
+    for (std::vector<std::string>::const_iterator iter = c.components().begin();
+         iter != c.components().end(); ++iter)
+    {
+        Path    p (*iter, rules());
+        if (first && abs())
+        {
+            p = p.makeAbs();
+        }
+        first = false;
+        paths.push_back(p);
+    }
+	return paths;
 }
 
 /**
  * Does a simple string comparison between two paths
  * to see if they are the same.  So while two paths
- * might be logically the same, "/a/b/.." is logically
+ * might be logically the same, "a" and "/a/b/.." are logically
  * the same, they will not compare equally.  See
  * normpath() as a way to make them compare the same
  * 
@@ -478,7 +494,8 @@ std::vector<Path> Path::split()
  */
 bool Path::operator==(const Path & op2) const
 {
-	return m_path == op2.m_path;
+    //return m_path == op2.m_path;
+    return rules() == op2.rules() && cannon() == op2.cannon();
 }
 
 /**
@@ -486,7 +503,7 @@ bool Path::operator==(const Path & op2) const
  */
 bool Path::operator!=(const Path &op2) const
 {
-	return m_path != op2.m_path;
+	return !(*this == op2);
 }
 
 /**

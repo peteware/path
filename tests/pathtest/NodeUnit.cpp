@@ -68,6 +68,7 @@ void NodeUnit::initFiles()
 
 void NodeUnit::buildFiles()
 {
+    // Create a directories first
     for (std::vector<DirHiearchy>::iterator iter = m_files.begin();
          iter != m_files.end(); ++iter)
     {
@@ -75,7 +76,11 @@ void NodeUnit::buildFiles()
         {
             SysCalls().mkdir(iter->m_path.path());
         }
-        else
+    }
+    for (std::vector<DirHiearchy>::iterator iter = m_files.begin();
+         iter != m_files.end(); ++iter)
+    {
+        if (!iter->m_isDir) 
         {
             SysCalls().touch(iter->m_path.path());
         }
@@ -111,7 +116,7 @@ void NodeUnit::cleanFiles()
             }
             catch (PathException e)
             {
-                std::cout << "rmdir: " << e.what() << std::endl;
+                //std::cout << "rmdir: " << e.what() << std::endl;
             }
         }
     }

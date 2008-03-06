@@ -18,6 +18,8 @@ class CannonicalUnit : public CppUnit::TestCase
 	CPPUNIT_TEST(init);
     CPPUNIT_TEST(testOstream);
 	CPPUNIT_TEST(testDrive);
+    CPPUNIT_TEST(testCompare);
+
     CPPUNIT_TEST_SUITE_END();
 protected:
 	/// Test constructor
@@ -26,6 +28,8 @@ protected:
 	void testOstream();
     /// Test the setDrive()/drive()
     void testDrive();
+    /// Test the == and != operator
+    void testCompare();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(CannonicalUnit);
@@ -104,7 +108,13 @@ void CannonicalUnit::testDrive()
     CPPUNIT_ASSERT_EQUAL(c1.drive(), c2.drive());
     
     c3 = c1;
-    CPPUNIT_ASSERT_EQUAL(c1.drive(), c3.drive());
+    CPPUNIT_ASSERT_EQUAL(c1.drive(), c3.drive());    
+}
 
-    
+void CannonicalUnit::testCompare()
+{
+    Cannonical  c1;
+    Cannonical  c2;
+    CPPUNIT_ASSERT(c1 == c2);
+    CPPUNIT_ASSERT(!(c1 != c2));
 }

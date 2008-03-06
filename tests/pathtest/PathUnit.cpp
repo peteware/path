@@ -1,7 +1,7 @@
 #include <path/Path.h>
 #include <path/PathRules.h>
 #include <path/UnixRules.h>
-
+#include <path/Cannonical.h>
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
@@ -35,6 +35,7 @@ class PathUnit : public CppUnit::TestCase
 	CPPUNIT_TEST(testJoin);
 	CPPUNIT_TEST(testRules);
    	CPPUNIT_TEST(testGetcwd);
+    CPPUNIT_TEST(testSplit);
     
 	CPPUNIT_TEST_SUITE_END();
 
@@ -57,11 +58,13 @@ protected:
 	void testAbs();
 	/// Test Path::join()
 	void testJoin();
+    /// Check that Path::split() works
+    void testSplit();
 	/// Check that we can set the path rules
 	void testRules();
     /// Check static member function getcwd() works
     void testGetcwd();
-
+    
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(PathUnit);
@@ -96,16 +99,20 @@ void PathUnit::init()
  */
 void PathUnit::equal()
 {
-	Path	p0("/a");
-	Path	p1("/a/b/c");
-	Path	p2("/a");
+	Path	p0(UnixRules::cannon("/a//"));
+	Path	p1(UnixRules::cannon("/a/b/c"));
+	Path	p2(UnixRules::cannon("/a"));
 	Path	p3, p4;
+    Path    p5("/a//"); // really want this as a string
+    Path    p6("/a");   // really want this as a string
 
 	CPPUNIT_ASSERT_EQUAL(p0, p2);
 	CPPUNIT_ASSERT_EQUAL(p3, p4);
 	CPPUNIT_ASSERT(!(p0 == p3));
 	CPPUNIT_ASSERT(!(p1 == p2));
 	CPPUNIT_ASSERT(p0 != p1);
+    CPPUNIT_ASSERT(p5 == p6);
+    CPPUNIT_ASSERT(p4 != p6);
 }
 
 /**
@@ -207,6 +214,23 @@ void PathUnit::testJoin()
 	CPPUNIT_ASSERT_EQUAL(Path("abc/a/b/c"), p1.join(paths));
 	p1 = p1.makeAbs();
 	CPPUNIT_ASSERT_EQUAL(Path("/abc/a/b/c"), p1.join(paths));
+}
+
+
+void PathUnit::testSplit()
+{
+    Path    p("/a/b/c");
+    std::vector<Path>  paths;
+    
+    paths = p.split();
+    CPPUNIT_ASSERT_EQUAL(3UL, paths.size());
+    
+    CPPUNIT_ASSERT(paths[0].abs());
+    p = Path("a/b");
+    CPPUNIT_ASSERT_EQUAL(false, p.abs());
+    paths = p.split();
+    CPPUNIT_ASSERT_EQUAL(2UL, paths.size());
+    CPPUNIT_ASSERT_EQUAL(false, paths[0].abs());
 }
 
 void PathUnit::testRules()

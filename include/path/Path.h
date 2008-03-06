@@ -15,9 +15,6 @@
 #include <string>
 #include <iosfwd>
 
-// Forward dclaration defined in Path.cpp
-class PathExtra;
-
 /**
  * A Path is an arbitrary string used to represent a path to a file
  * or directory.  The operations on a Path make no attempt to validate
@@ -38,7 +35,7 @@ public:
 	/// Constructor from std::string
     Path(const std::string &path);
     /// Use a Cannonical path and PathRules
-    Path(const Cannonical &cannon, const PathRules *rules);
+    Path(const Cannonical &cannon, const PathRules *rules = 0);
     /// Constructor from std::string with non-default PathRules
 	Path(const std::string &path, const PathRules *rules);
     /// Construct from a NUL terminatd strin
@@ -119,4 +116,12 @@ private:
 
 /// Print out the path
 std::ostream &operator<<(std::ostream &out, const Path&path);
+
+// Shortcuts for handling different paths as strings
+/// Convert a unix style path ("/a/b/c") to Cannonical
+Cannonical UnixPath(const std::string &path);
+/// Convert a Win32 style path ("C:\temp") to Cannonical
+Cannonical Win32Path(const std::string &path);
+/// Convert a URL style path ("http://www.peteware.com/a") to Cannonical
+Cannonical URLPath(const std::string &path);
 #endif // !defined(_PATH_PATH_H_)

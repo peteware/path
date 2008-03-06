@@ -58,7 +58,7 @@ public:
 	/// Set if this is an absolute path
 	bool	setAbs(bool abs);
 	/// Return if this is an absolute path
-	bool		abs() const;
+	bool	abs() const;
 
 protected:
 	/**
@@ -79,4 +79,9 @@ protected:
 };
 /// Print this out for debugging purposes!
 std::ostream& operator<<(std::ostream &out, const Cannonical &cannon);
+/// Return true if these two Cannoical objects are the same values
+bool operator==(const Cannonical &op1, const Cannonical &op2);
+/// Return true if these tow Cannonical objects are different values
+bool operator!=(const Cannonical &op1, const Cannonical &op2);
+
 #endif // !defined(_PATH_CANNONICAL_H_)
