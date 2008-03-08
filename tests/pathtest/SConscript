@@ -10,7 +10,9 @@ env.Program(target = 'pathtest',
              'NodeUnit.cpp',
              'PathRulesUnit.cpp',
              'PathUnit.cpp',
-             'SysCallsUnit.cpp'
+             'SysCallsUnit.cpp',
+             'UnixRulesUnit.cpp',
+             'Win32RulesUnit.cpp'
              ],
             LIBS = ['path', 'cppunit', 'dl'],
             LIBPATH = ['../../src'])
