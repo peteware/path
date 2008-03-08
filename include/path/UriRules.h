@@ -24,7 +24,6 @@ public:
 	virtual ~UriRules();
 
 	virtual Cannonical canonical(const std::string &path) const;
-	virtual Path convert(const Cannonical &canonical) const;
 	virtual std::string quote(const std::string & subdirs) const;
 
 };

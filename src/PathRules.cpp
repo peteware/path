@@ -66,7 +66,7 @@ Cannonical PathRules::cannonical(const std::string &path) const
  */
 Path PathRules::convert(const Cannonical &canonical) const 
 {
-	throw Unimplemented("PathRules::convert()");
+	return Path(canonical, this);
 }
 
 /**

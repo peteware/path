@@ -27,7 +27,7 @@ public:
 	/// Convert a raw path (aka a string) into Cannonical
 	virtual Cannonical cannonical(const std::string &path) const = 0;
 	/// Convert Cannonical into a Path
-	virtual Path convert(const Cannonical &canonical) const = 0;
+	virtual Path convert(const Cannonical &canonical) const;
 	/// Quote an element of path
 	virtual std::string quote(const std::string & subdir) const = 0;
     /// Convert Cannonical into a string

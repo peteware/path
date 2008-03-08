@@ -22,9 +22,10 @@ class Win32Rules : public PathRules
 public:
 	Win32Rules();
 	virtual ~Win32Rules();
+    
+    static Win32Rules    rules;
 
 	virtual Cannonical cannonical(const std::string &path) const;
-	virtual Path convert(const Cannonical &canonical) const;
 	virtual std::string quote(const std::string & path) const;
     //virtual std::string join(const Cannonical &canonical) const;
 };

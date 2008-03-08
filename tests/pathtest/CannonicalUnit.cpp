@@ -19,7 +19,8 @@ class CannonicalUnit : public CppUnit::TestCase
     CPPUNIT_TEST(testOstream);
 	CPPUNIT_TEST(testDrive);
     CPPUNIT_TEST(testCompare);
-
+    CPPUNIT_TEST(testAdd);
+    
     CPPUNIT_TEST_SUITE_END();
 protected:
 	/// Test constructor
@@ -30,6 +31,8 @@ protected:
     void testDrive();
     /// Test the == and != operator
     void testCompare();
+    /// Test the .add() and variations
+    void testAdd();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(CannonicalUnit);
@@ -46,7 +49,10 @@ void CannonicalUnit::init()
 	Cannonical	c2 = c1;
 	CPPUNIT_ASSERT(c2.components().empty());
 
-	Cannonical	c3 ("http", "peteware.com", "8080");
+	Cannonical	c3;
+    c3.setProtocol("http");
+    c3.setHost("peteware.com");
+    c3.setExtra("8080");
 	CPPUNIT_ASSERT_EQUAL(std::string("http"), c3.protocol());
 	CPPUNIT_ASSERT_EQUAL(std::string("peteware.com"), c3.host());
 	CPPUNIT_ASSERT_EQUAL(std::string("8080"), c3.extra());
@@ -74,7 +80,10 @@ void CannonicalUnit::init()
 
 void CannonicalUnit::testOstream()
 {
-	Cannonical	c1("ftp", "ftp.peteware.com", "8080");
+	Cannonical	c1;
+    c1.setProtocol("ftp");
+    c1.setHost("ftp.peteware.com");
+    c1.setExtra("8080");
 	c1.add("a");
 	c1.add("b");
 	std::ostringstream	out;
@@ -117,4 +126,14 @@ void CannonicalUnit::testCompare()
     Cannonical  c2;
     CPPUNIT_ASSERT(c1 == c2);
     CPPUNIT_ASSERT(!(c1 != c2));
+}
+
+void CannonicalUnit::testAdd()
+{
+    Cannonical  c1("a", "b", "c", "d");
+    Cannonical  c2;
+    c2.add("a").add("b").add("c").add("d");
+    
+    CPPUNIT_ASSERT_EQUAL(4UL, c1.components().size());
+    CPPUNIT_ASSERT_EQUAL(c1, c2);
 }

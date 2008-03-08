@@ -103,8 +103,8 @@ void PathUnit::equal()
 	Path	p1(UnixRules::cannon("/a/b/c"));
 	Path	p2(UnixRules::cannon("/a"));
 	Path	p3, p4;
-    Path    p5("/a//"); // really want this as a string
-    Path    p6("/a");   // really want this as a string
+    Path    p5(UnixPath("/a//")); // really want this as a string
+    Path    p6(UnixPath("/a"));   // really want this as a string
 
 	CPPUNIT_ASSERT_EQUAL(p0, p2);
 	CPPUNIT_ASSERT_EQUAL(p3, p4);
@@ -135,16 +135,16 @@ void PathUnit::testBasename()
 	Path	p2;
 	// Make sure we don't crap out on empty ones.
 	CPPUNIT_ASSERT_EQUAL(p1.basename(), p2);
-	CPPUNIT_ASSERT_EQUAL(Path("a"), Path("///a").basename());
-	CPPUNIT_ASSERT_EQUAL(Path("b"), Path("/a/b///").basename());
+	CPPUNIT_ASSERT_EQUAL(Path("a"), Path(UnixPath("///a")).basename());
+	CPPUNIT_ASSERT_EQUAL(Path("b"), Path(UnixPath("/a/b///")).basename());
 	CPPUNIT_ASSERT_EQUAL(Path("a"), Path("a").basename());
-	CPPUNIT_ASSERT_EQUAL(Path("a"), Path("/a").basename());
-	CPPUNIT_ASSERT_EQUAL(Path("b"), Path("/a/b").basename());
-	CPPUNIT_ASSERT_EQUAL(Path("b"), Path("/a/b/").basename());
-	CPPUNIT_ASSERT_EQUAL(Path("/"), Path("/").basename());
-	CPPUNIT_ASSERT_EQUAL(Path("/"), Path("////").basename());
-	CPPUNIT_ASSERT_EQUAL(Path("b"), Path("b/").basename());
-	CPPUNIT_ASSERT_EQUAL(Path("b"), Path ("b///").basename());
+	CPPUNIT_ASSERT_EQUAL(Path("a"), Path(UnixPath("/a")).basename());
+	CPPUNIT_ASSERT_EQUAL(Path("b"), Path(UnixPath("/a/b")).basename());
+	CPPUNIT_ASSERT_EQUAL(Path("b"), Path(UnixPath("/a/b/")).basename());
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/")), Path(UnixPath("/")).basename());
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/")), Path(UnixPath("////")).basename());
+	CPPUNIT_ASSERT_EQUAL(Path("b"), Path(UnixPath("b/")).basename());
+	CPPUNIT_ASSERT_EQUAL(Path("b"), Path (UnixPath("b///")).basename());
 
 }
 
@@ -154,22 +154,22 @@ void PathUnit::testBasename()
 void PathUnit::testDirname()
 {
 	CPPUNIT_ASSERT_EQUAL(Path(""), Path("a").dirname());
-	CPPUNIT_ASSERT_EQUAL(Path(""), Path("a////").dirname());
-	CPPUNIT_ASSERT_EQUAL(Path("/a"), Path("/a/b").dirname());
-	CPPUNIT_ASSERT_EQUAL(Path("/"), Path("/a").dirname());
-	CPPUNIT_ASSERT_EQUAL(Path("a"), Path("a///b").dirname());
+	CPPUNIT_ASSERT_EQUAL(Path(""), Path(UnixPath("a////")).dirname());
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a")), Path(UnixPath("/a/b")).dirname());
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/")), Path(UnixPath("/a")).dirname());
+	CPPUNIT_ASSERT_EQUAL(Path("a"), Path(UnixPath("a///b")).dirname());
 
 }
 
 void PathUnit::testExtension()
 {
 	CPPUNIT_ASSERT_EQUAL(std::string(".c"), Path("a.c").extension());
-	CPPUNIT_ASSERT_EQUAL(std::string(".c"), Path("/a/b/t.c").extension());
+	CPPUNIT_ASSERT_EQUAL(std::string(".c"), Path(UnixPath("/a/b/t.c")).extension());
 	CPPUNIT_ASSERT_EQUAL(std::string(".bak"), Path("a.bak").extension());
 	CPPUNIT_ASSERT_EQUAL(std::string(".bak"), Path("a.c.bak").extension());
 	CPPUNIT_ASSERT_EQUAL(std::string(""), Path("a").extension());
-	CPPUNIT_ASSERT_EQUAL(std::string(""), Path("/a/b/cd").extension());
-	CPPUNIT_ASSERT_EQUAL(std::string(".c"), Path("/a.x/b.c").extension());
+	CPPUNIT_ASSERT_EQUAL(std::string(""), Path(UnixPath("/a/b/cd")).extension());
+	CPPUNIT_ASSERT_EQUAL(std::string(".c"), Path(UnixPath("/a.x/b.c")).extension());
 	CPPUNIT_ASSERT_EQUAL(std::string("."), Path("a.").extension());
 	CPPUNIT_ASSERT_EQUAL(std::string(".c"), Path("a....c").extension());
 }
@@ -177,8 +177,8 @@ void PathUnit::testExtension()
 void PathUnit::testStem()
 {
 	CPPUNIT_ASSERT_EQUAL(std::string("abc"), Path("abc.c").stem());
-	CPPUNIT_ASSERT_EQUAL(std::string(".abc"), Path("/a/b/.abc").stem());
-	CPPUNIT_ASSERT_EQUAL(std::string(".abc"), Path("/a/.abc.xyz").stem());
+	CPPUNIT_ASSERT_EQUAL(std::string(".abc"), Path(UnixPath("/a/b/.abc")).stem());
+	CPPUNIT_ASSERT_EQUAL(std::string(".abc"), Path(UnixPath("/a/.abc.xyz")).stem());
 	CPPUNIT_ASSERT_EQUAL(std::string("a"), Path("a.c").stem());
 	CPPUNIT_ASSERT_EQUAL(std::string(""), Path("").stem());
 }
@@ -187,10 +187,10 @@ void PathUnit::testAbs()
 {
 	CPPUNIT_ASSERT_EQUAL(Path("abc").abs(), false);
 	CPPUNIT_ASSERT_EQUAL(Path("").abs(), false);
-	CPPUNIT_ASSERT_EQUAL(Path("a/b/c/fas").abs(), false);
-	CPPUNIT_ASSERT_EQUAL(Path("/a/bc").abs(), true);
-	CPPUNIT_ASSERT_EQUAL(Path("/a").abs(), true);
-	CPPUNIT_ASSERT_EQUAL(Path("/").abs(), true);
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("a/b/c/fas")).abs(), false);
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a/bc")).abs(), true);
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a")).abs(), true);
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/")).abs(), true);
 
 	Path	p1("abc");
 	Path	p2(p1.makeAbs());
@@ -203,7 +203,7 @@ void PathUnit::testJoin()
 	Path	p1("abc");
 	Path	p2("def");
 
-	CPPUNIT_ASSERT_EQUAL(Path("abc/def"), p1.join(p2));
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("abc/def")), p1.join(p2));
 	CPPUNIT_ASSERT_EQUAL(p1.join(p2).abs(), false);
 
 	std::vector<std::string>	paths;
@@ -211,22 +211,21 @@ void PathUnit::testJoin()
 	paths.push_back("a");
 	paths.push_back("b");
 	paths.push_back("c");
-	CPPUNIT_ASSERT_EQUAL(Path("abc/a/b/c"), p1.join(paths));
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("abc/a/b/c")), p1.join(paths));
 	p1 = p1.makeAbs();
-	CPPUNIT_ASSERT_EQUAL(Path("/abc/a/b/c"), p1.join(paths));
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/abc/a/b/c")), p1.join(paths));
 }
-
 
 void PathUnit::testSplit()
 {
-    Path    p("/a/b/c");
+    Path    p(UnixPath("/a/b/c"));
     std::vector<Path>  paths;
     
     paths = p.split();
     CPPUNIT_ASSERT_EQUAL(3UL, paths.size());
     
     CPPUNIT_ASSERT(paths[0].abs());
-    p = Path("a/b");
+    p = Path(UnixPath("a/b"));
     CPPUNIT_ASSERT_EQUAL(false, p.abs());
     paths = p.split();
     CPPUNIT_ASSERT_EQUAL(2UL, paths.size());

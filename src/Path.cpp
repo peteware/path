@@ -30,22 +30,24 @@ Path::Path(const PathRules *rules)
  * Initialize path, set rules to NULL (i.e. default)
  */
 Path::Path(const char *path)
-    : m_path(path),
-     m_rules(0),
-     m_cannon(0),
-     m_pathStr(0)
+    : m_path(),
+      m_rules(0),
+      m_cannon(new Cannonical(path)),
+      m_pathStr(0)
 {
+    m_path = rules()->join(*m_cannon);
 }
 
 /**
  * Initialize path, set rules to NULL (i.e. default)
  */
 Path::Path(const std::string &path)
-    : m_path(path),
+    : m_path(),
       m_rules(0),
-      m_cannon(0),
+      m_cannon(new Cannonical(path)),
       m_pathStr(0)
 {
+    m_path = rules()->join(*m_cannon);
 }
 
 /**
@@ -63,6 +65,7 @@ Path::Path(const Cannonical &cannon, const PathRules *param_rules)
     m_path = rules()->join(cannon);
 }
 
+#ifdef notdef
 /**
  * Set path to a raw string.
  * This may contain environment variables, "~",
@@ -79,6 +82,7 @@ Path::Path(const std::string &path, const PathRules *rules)
       m_pathStr(0)
 {
 }
+#endif
 
 /**
  * Copy the m_path, make m_rules the same (pointer copy)
@@ -193,35 +197,6 @@ Path Path::basename() const
     {
         return Path(components[components.size() - 1], m_rules);
     }
-
-#ifdef notdef
-	std::string::size_type start, index;
-	std::string::size_type count;
-	std::string::size_type end = std::string::npos;
-	
-	start = std::string::npos;
-	for (index = 0, count = m_path.size(); index < count; ++index)
-	{
-		if (m_path[index] == '/')
-			continue;
-		start = index;
-		for (end = index + 1; end < count; ++end)
-		{
-			if (m_path[end] == '/')
-			{
-				break;
-			}
-		}
-		index = end;
-	}
-	if (start == std::string::npos) 
-	{	// It's all "///"
-		start = 0;
-		end = 1;
-	}
-	std::string base = m_path.substr(start, end - start);
-	return Path(base, m_rules);
-#endif
 }
 
 
@@ -245,79 +220,10 @@ Path Path::dirname() const
     if (cannon().components().size() > 0)
         --last;
     std::vector<std::string> com(cannon().components().begin(), last);
-    
+
     Cannonical  c(cannon(), com);
-    return(rules()->convert(c));
-#ifdef notdef
-	int						index;
-	std::string::size_type	end = std::string::npos;
-	int						state = 0;
-
-	index = static_cast<int>(m_path.size()) - 1;
-	while (index >= 0 && state != 3) 
-	{
-		switch (state) 
-		{
-		case 0:
-			/*
-			 * Searching for the end with the '/' on end
-			 */
-			if (m_path[index] != '/') 
-			{
-				state = 1;
-			}
-			else 
-			{
-				--index;
-			}
-			break;
-		case 1:
-			/*
-			 * We are at the end, past any terminating '/'
-			 * and now we are searching the '/' that is for
-			 * the directory
-			 */
-			if (m_path[index] == '/') 
-			{
-				state = 2;
-			}
-			else 
-			{
-				--index;
-			}
-			break;
-		case 2:
-			/**
-			 * We've found the '/' for the directory and now
-			 * need to remove any repeating /'s
-			 */
-			if (m_path[index] != '/' || index == 0) 
-			{
-				state = 3;
-			}
-			else 
-			{
-				--index;
-			}
-			end = index + 1;
-			break;
-		}
-	}
-
-	index = std::max (0, index);
-	if (state == 2)
-	{
-		return Path(m_path.substr(0, end), m_rules);
-	}
-	else if (state == 3)
-	{
-		return Path (m_path.substr (0, end), m_rules);
-	}
-	else
-	{
-		return Path(".", m_rules);
-	}
-#endif
+    return Path(c, m_rules);
+    //return(rules()->convert(c));
 }
 
 
@@ -495,7 +401,10 @@ std::vector<Path> Path::split()
 bool Path::operator==(const Path & op2) const
 {
     //return m_path == op2.m_path;
-    return rules() == op2.rules() && cannon() == op2.cannon();
+    //return rules() == op2.rules() && cannon() == op2.cannon();
+    bool r = (rules() == op2.rules());
+    bool c = (cannon() == op2.cannon());
+    return r && c;
 }
 
 /**
@@ -561,7 +470,8 @@ PathRules * Path::defaultPathRules()
  */
 Path Path::getcwd()
 {
-	return Path(SysCalls().getcwd(), defaultPathRules());
+    PathRules   *r = defaultPathRules();
+	return Path(r->cannonical(SysCalls().getcwd()), r);
 }
 
 /**

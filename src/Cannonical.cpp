@@ -12,7 +12,7 @@
 
 
 /**
- * Sets everything to be empty
+ * Sets everything to be empty and this to be a relative path.
  */
 Cannonical::Cannonical()
 	: m_protocol(),
@@ -39,19 +39,6 @@ Cannonical::Cannonical(const Cannonical &copy)
 }
 
 /**
- * Better to get rid of this and just use some properties.
- */
-Cannonical::Cannonical(const std::string &protocol, const std::string &host, const std::string &extra)
-	: m_protocol(protocol),
-	  m_host(host),	  
-	  m_extra(extra),
-      m_drive(),
-	  m_abs(false),
-	  m_components()
-{
-}
-
-/**
  * Easy way to copy basic info but with a new path
  *
  * @param copy Provides the protocol, host and extra info
@@ -68,10 +55,98 @@ Cannonical::Cannonical(const Cannonical &copy, const std::vector<std::string> &c
 }
 
 /**
+ * Initialized info (see copyInfo()) to empty and makes this a relative path.
+ *
+ * @param dir1 First directory
+ */
+Cannonical::Cannonical(const std::string &dir1)
+	: m_protocol(),
+	  m_host(),	  
+	  m_extra(),
+      m_drive(),
+	  m_abs(false),
+	  m_components()
+
+{
+    add(dir1);
+}
+
+/**
+ * Initialized info (see copyInfo()) to empty and makes this a relative path.
+ *
+ * @param dir1 First directory
+ * @param dir2 First directory
+ */
+Cannonical::Cannonical(const std::string &dir1, const std::string &dir2)
+	: m_protocol(),
+	  m_host(),	  
+	  m_extra(),
+      m_drive(),
+	  m_abs(false),
+	  m_components()
+
+{
+    add(dir1, dir2);
+}
+
+/**
+ * Initialized info (see copyInfo()) to empty and makes this a relative path.
+ *
+ * @param dir1 First directory
+ * @param dir2 Second directory
+ * @param dir3 Third directory
+ */
+Cannonical::Cannonical(const std::string &dir1, const std::string &dir2, const std::string &dir3)
+	: m_protocol(),
+	  m_host(),	  
+	  m_extra(),
+      m_drive(),
+	  m_abs(false),
+	  m_components()
+
+{
+    add(dir1, dir2, dir3);
+}
+/**
+ * Initialized info (see copyInfo()) to empty and makes this a relative path.
+ *
+ * @param dir1 First directory
+ * @param dir2 Second directory
+ * @param dir3 Third directory
+ * @param dir4 Third directory
+ */
+Cannonical::Cannonical(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4)
+	: m_protocol(),
+	  m_host(),	  
+	  m_extra(),
+      m_drive(),
+	  m_abs(false),
+	  m_components()
+
+{
+    add(dir1, dir2, dir3, dir4);
+}
+
+
+/**
  * Empty destructor
  */
 Cannonical::~Cannonical()
 {
+}
+
+/**
+ * The protocol is something like "http", "ftp", "file" and
+ * is meaningful only for a specific type of PathRule.  For example,
+ * UnixRules ignore protocol.
+ *
+ * @param proto The new protocol
+ * @return A reference to this object
+ */
+Cannonical &  Cannonical::setProtocol(const std::string &proto)
+{
+    m_protocol = proto;
+    return *this;
 }
 
 const std::string & Cannonical::protocol() const
@@ -79,9 +154,35 @@ const std::string & Cannonical::protocol() const
 	return m_protocol;
 }
 
+/**
+ * The host is something like "www.peteware.com" and is meaningful
+ * only for a specific type of PathRule (such as UriRules).
+ *
+ * @param host The new hostname to use
+ * @return A reference to this object
+ */
+Cannonical &  Cannonical::setHost(const std::string &host)
+{
+    m_host = host;
+    return *this;
+}
+
 const std::string & Cannonical::host() const
 {
 	return m_host;
+}
+
+/**
+ * For example, in http, you can specify the port number
+ * such as 8080 in the example: "http://www.peteware.com:8080/index.html"
+ *
+ * @param extra The additional value for the protocol
+ * @return A reference to this object
+ */
+Cannonical &  Cannonical::setExtra(const std::string &extra)
+{
+    m_extra = extra;
+    return *this;
 }
 
 const std::string & Cannonical::extra() const
@@ -101,10 +202,13 @@ const std::string & Cannonical::extra() const
  * @code
  * \\somehostname\C$\temp
  * @endcode
+ * @param drive The drive letter
+ * @return A reference to this object
  */
-void Cannonical::setDrive(const std::string &drive)
+Cannonical &  Cannonical::setDrive(const std::string &drive)
 {
     m_drive = drive;
+    return *this;
 }
 
 const std::string &Cannonical::drive() const
@@ -115,10 +219,66 @@ const std::string &Cannonical::drive() const
 /**
  * This is a simplified way to append an item
  * See components() to get full access.
+ *
+ * @param dir The component to append
+ * @return A reference to this object
  */
-void Cannonical::add(const std::string &dir)
+Cannonical & Cannonical::add(const std::string &dir)
 {
-	m_components.push_back(dir);
+    if (!dir.empty())
+        m_components.push_back(dir);
+    return *this;
+}
+
+/**
+ * This is a simplified way to append an item
+ * See components() to get full access.
+ *
+ * @param dir1 The component to append
+ * @param dir2 The component to append
+ * @return A reference to this object
+ */
+Cannonical & Cannonical::add(const std::string &dir1, const std::string &dir2)
+{
+	add(dir1);
+	add(dir2);
+    return *this;
+}
+
+/**
+ * This is a simplified way to append an item
+ * See components() to get full access.
+ *
+ * @param dir1 The component to append
+ * @param dir2 The component to append
+ * @param dir3 The component to append
+ * @return A reference to this object
+ */
+Cannonical & Cannonical::add(const std::string &dir1, const std::string &dir2, const std::string &dir3)
+{
+    add(dir1);
+    add(dir2);
+    add(dir3);
+    return *this;
+}
+
+/**
+ * This is a simplified way to append an item
+ * See components() to get full access.
+ *
+ * @param dir1 The component to append
+ * @param dir2 The component to append
+ * @param dir3 The component to append
+ * @param dir4 The component to append
+ * @return A reference to this object
+ */
+Cannonical & Cannonical::add(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4)
+{
+    add(dir1);
+    add(dir2);
+    add(dir3);
+    add(dir4);
+    return *this;
 }
 
 /**
@@ -151,12 +311,12 @@ const std::vector<std::string> &Cannonical::components() const
  * relative to the current working directory.
  *
  * @param abs	If this path starts at root
- * @return Previous value of abs().
+ * @return A reference to this object
  */
-bool Cannonical::setAbs(bool abs)
+Cannonical & Cannonical::setAbs(bool abs)
 {
 	std::swap(abs, m_abs);
-	return abs;
+	return *this;
 }
 
 /**

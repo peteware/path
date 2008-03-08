@@ -37,7 +37,7 @@ public:
     /// Use a Cannonical path and PathRules
     Path(const Cannonical &cannon, const PathRules *rules = 0);
     /// Constructor from std::string with non-default PathRules
-	Path(const std::string &path, const PathRules *rules);
+	//Path(const std::string &path, const PathRules *rules);
     /// Construct from a NUL terminatd strin
     Path(const char *path);
 	/// Copy constructor

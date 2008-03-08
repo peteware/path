@@ -28,17 +28,6 @@ Cannonical UriRules::canonical(const std::string &path) const
 }
 
 /**
- * Converts the canonical representation of a path to a form used by the rules.
- * 
- * Any special characters are converted to a safe form.  For example, in UnixRules,
- * a '/' is converted to '|' (or whatever).
- */
-Path UriRules::convert(const Cannonical &canonical) const
-{
-	return Path();
-}
-
-/**
  * Return a string properly quoted with any system special components replaces.
  * For example, UriRules would replace spaces with %040.  Only single path
  * components should be passed.  For example, passing 'a/b' to UnixRules would

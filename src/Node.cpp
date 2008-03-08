@@ -10,6 +10,7 @@
 #include <path/NodeIter.h>
 #include <path/SubNode.h>
 #include <path/SysCalls.h>
+#include <path/Cannonical.h>
 
 /**
  * Create an empty Node.
@@ -36,7 +37,7 @@ Node::Node(const char *path)
  * Construct from a std::string.  May throw PathException
  */
 Node::Node(const std::string &str)
-	: Path(str),
+	: Path(Cannonical(str)),
 	  m_cache(0),
       m_nodes(0)
 {
