@@ -67,8 +67,12 @@ std::vector<std::string> SysCalls::listdir(const std::string &path) const
 	{
 		if (!entry_ptr)
 			break;
+#ifdef notdef
 		if ((entry.d_namlen == 1 || entry.d_namlen == 2) &&
 			(strcmp(entry.d_name, ".") == 0 || strcmp(entry.d_name, "..") == 0))
+			continue;
+#endif
+		if (strcmp(entry.d_name, ".") == 0 || strcmp(entry.d_name, "..") == 0)
 			continue;
 		dirs.push_back(entry.d_name);
 	}

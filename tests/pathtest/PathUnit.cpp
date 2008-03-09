@@ -222,13 +222,13 @@ void PathUnit::testSplit()
     std::vector<Path>  paths;
     
     paths = p.split();
-    CPPUNIT_ASSERT_EQUAL(3UL, paths.size());
+    CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(3), paths.size());
     
     CPPUNIT_ASSERT(paths[0].abs());
     p = Path(UnixPath("a/b"));
     CPPUNIT_ASSERT_EQUAL(false, p.abs());
     paths = p.split();
-    CPPUNIT_ASSERT_EQUAL(2UL, paths.size());
+    CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(2), paths.size());
     CPPUNIT_ASSERT_EQUAL(false, paths[0].abs());
 }
 

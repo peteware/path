@@ -45,10 +45,10 @@ void Win32RulesUnit::cannon()
     Cannonical  cannon;
     
     cannon = rules.cannonical("a\\b\\c");
-    CPPUNIT_ASSERT_EQUAL(3UL, cannon.components().size());
+    CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(3), cannon.components().size());
     
     cannon = rules.cannonical("\\a");
-    CPPUNIT_ASSERT_EQUAL(1UL, cannon.components().size());
+    CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(1), cannon.components().size());
     CPPUNIT_ASSERT_EQUAL(std::string("a"), cannon.components()[0]);
     CPPUNIT_ASSERT(cannon.abs());
     

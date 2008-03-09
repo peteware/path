@@ -134,6 +134,6 @@ void CannonicalUnit::testAdd()
     Cannonical  c2;
     c2.add("a").add("b").add("c").add("d");
     
-    CPPUNIT_ASSERT_EQUAL(4UL, c1.components().size());
+    CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(4), c1.components().size());
     CPPUNIT_ASSERT_EQUAL(c1, c2);
 }

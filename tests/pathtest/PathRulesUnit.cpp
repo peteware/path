@@ -8,8 +8,7 @@
 CPPUNIT_TEST_SUITE_REGISTRATION(PathRulesUnit);
 void PathRulesUnit::setUp()
 {
-    if (!m_rules)
-        m_rules = new UnixRules;
+	m_rules = new UnixRules;
 }
 void PathRulesUnit::tearDown()
 {
@@ -48,26 +47,26 @@ void PathRulesUnit::cannonical()
 	CPPUNIT_ASSERT_EQUAL(std::string("a"), cannon.components()[0]);
 	CPPUNIT_ASSERT_EQUAL(std::string("b"), cannon.components()[1]);
 	CPPUNIT_ASSERT_EQUAL(std::string("c"), cannon.components()[2]);
-	CPPUNIT_ASSERT_EQUAL(3UL, cannon.components().size());
+	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(3), cannon.components().size());
 	CPPUNIT_ASSERT_EQUAL(true, cannon.abs());
 	
 	cannon = unix_rules.cannonical("");
-	CPPUNIT_ASSERT_EQUAL(0UL, cannon.components().size());
+	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(0), cannon.components().size());
 	CPPUNIT_ASSERT_EQUAL(false, cannon.abs());
 
 	cannon = unix_rules.cannonical("///");
-	CPPUNIT_ASSERT_EQUAL(0UL, cannon.components().size());
+	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(0), cannon.components().size());
 	CPPUNIT_ASSERT_EQUAL(true, cannon.abs());
 	
 	cannon = unix_rules.cannonical("a");
 	CPPUNIT_ASSERT_EQUAL(std::string("a"), cannon.components()[0]);
-	CPPUNIT_ASSERT_EQUAL(1UL, cannon.components().size());
+	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(1), cannon.components().size());
 	CPPUNIT_ASSERT_EQUAL(false, cannon.abs());
 
 	cannon = unix_rules.cannonical("ab/cd/");
 	CPPUNIT_ASSERT_EQUAL(std::string("ab"), cannon.components()[0]);
 	CPPUNIT_ASSERT_EQUAL(std::string("cd"), cannon.components()[1]);
-	CPPUNIT_ASSERT_EQUAL(2UL, cannon.components().size());
+	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(2), cannon.components().size());
 	CPPUNIT_ASSERT_EQUAL(false, cannon.abs());
 }
 
