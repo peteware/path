@@ -9,9 +9,11 @@
 #if !defined(_PATH_CANNONICAL_H_)
 #define _PATH_CANNONICAL_H_
 
+#include <path/Strings.h>
 #include <vector>
 #include <string>
 #include <iosfwd>
+
 /**
  * Represents a Path in a standard form.
  * 
@@ -33,7 +35,7 @@ public:
 	/// Construct with basics but no path
 	//Cannonical(const std::string &protocol, const std::string &host, const std::string &extra);
 	/// Copy but with new path
-	Cannonical(const Cannonical &copy, const std::vector<std::string> &components);
+	Cannonical(const Cannonical &copy, const Strings &components);
 
     /// Create with a single componenent
 	Cannonical(const std::string &p1);
@@ -79,9 +81,9 @@ public:
     Cannonical & add(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4);
     
 	/// Return reference; you can change this.
-	std::vector<std::string> &components();
+	Strings &components();
 	/// Return const reference for const object
-	const std::vector<std::string> &components() const;
+	const Strings &components() const;
 
 	/// Set if this is an absolute path
 	Cannonical & setAbs(bool abs);
@@ -102,7 +104,7 @@ protected:
 	 * 
 	 * The raw components (e.g. environment varables are not expaned) are stored.
 	 */
-	std::vector<std::string> m_components;
+	Strings m_components;
 
 };
 /// Print this out for debugging purposes!

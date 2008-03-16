@@ -10,6 +10,7 @@
 #define _PATH_PATH_H_
 
 #include <path/PathRules.h>
+#include <path/Strings.h>
 
 #include <vector>
 #include <string>
@@ -25,7 +26,47 @@
  * happen without worrying about the result being a Path to a valid
  * file or directory.  See the Node class to handle actual files and
  * directories.
+ *
+ * The primary purpose of using a Path instead of a string is
+ * to encourage operating system independence.   To support
+ * the Node class (represnting actual files and directories), the
+ * Path class is defined with value semantics.  This means to change
+ * something a copy is created.  This what the
+ * Node class can derive from Path and maintain it's
+ * own semantics.  For example, it doesn't make sense
+ * to change a Node's suffix().
+ *
+ * The choice made in this design is that a Path manipulates a Cannonical
+ * representation of a path.  The unfortunate side affect is
+ * it's difficult to just use a string to create a Path and you must
+ * be explicit about the rules you want to use when initializing
+ * a Path.  For example
+ *
+ * @code
+ * Path     path1(UnixPath("/a/b/c"));
+ * Path     path2(Win32Path("\\a\\b\\c"));
+ * @endcode
  * 
+ * Result in two identical paths.
+ *
+ * UnixPath() and Win32Path() take strings and return a Cannonical
+ * object for that set of rules.
+ *
+ * To make things easier, the Cannonical class design has most
+ * methods returning a reference to the Cannonical object so you can chain
+ * several operations together (this is antithesis
+ * of how the Path class works).  For example:
+ *
+ * @code
+ * Path     path1(UnixPath("a").setAbs(true).setDrive("C"));
+ * Path     path2(Win32Path("C:\\a"));
+ * @endcode
+ *
+ * Result in two identical paths.
+ *
+ * @sa 
+ * Cannonical, PathRules, UnixRules, Wn32Rules, UriRules, Win32Path, 
+ * UnixPath.
  */
 class Path
 {
@@ -36,8 +77,6 @@ public:
     Path(const std::string &path);
     /// Use a Cannonical path and PathRules
     Path(const Cannonical &cannon, const PathRules *rules = 0);
-    /// Constructor from std::string with non-default PathRules
-	//Path(const std::string &path, const PathRules *rules);
     /// Construct from a NUL terminatd strin
     Path(const char *path);
 	/// Copy constructor
@@ -72,15 +111,14 @@ public:
 	/// Concatenate this and Path
 	Path join(const Path &path) const;
 	/// Concatenate vector of strings with each as a component.
-	Path join(const std::vector<std::string> &strings) const;
+	Path join(const Strings &strings) const;
+    /// Concatenate a single string
+    Path add(const std::string &p) const;
 	/// Return each directory component as a Path.
-	std::vector<Path> split();
+	std::vector<Path> split() const;
 
-	/// Check if raw names are the same	
-	bool operator==(const Path &op2) const;
-	/// Check if raw names are different.
-	bool operator!=(const Path &op2) const;
-
+	/// Return the Cannonical representation of the path
+	const Cannonical &cannon() const;
 
 	/// Return the rules (may be NULL)
 	const PathRules *pathRules() const;
@@ -97,8 +135,6 @@ public:
 private:
 	/// Use these rules if none are set.
 	static PathRules *	s_defaultPathRules;
-	/// Convert m_path into Cannonical or using existing one
-	const Cannonical &cannon() const;
 	/**
 	 * The path as set.
 	 * 
@@ -114,8 +150,14 @@ private:
 
 };
 
+/// Check if raw names are the same	
+bool operator==(const Path &op1, const Path &op2);
+/// Check if raw names are different.
+bool operator!=(const Path &op1, const Path &op2);
 /// Print out the path
 std::ostream &operator<<(std::ostream &out, const Path&path);
+/// Add a new directory
+Path operator+(const Path &path, const std::string &dir);
 
 // Shortcuts for handling different paths as strings
 /// Convert a unix style path ("/a/b/c") to Cannonical

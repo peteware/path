@@ -206,7 +206,7 @@ void PathUnit::testJoin()
 	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("abc/def")), p1.join(p2));
 	CPPUNIT_ASSERT_EQUAL(p1.join(p2).abs(), false);
 
-	std::vector<std::string>	paths;
+	Strings	paths;
 	CPPUNIT_ASSERT_EQUAL(p1, p1.join(paths));
 	paths.push_back("a");
 	paths.push_back("b");
@@ -214,6 +214,16 @@ void PathUnit::testJoin()
 	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("abc/a/b/c")), p1.join(paths));
 	p1 = p1.makeAbs();
 	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/abc/a/b/c")), p1.join(paths));
+    
+    p1 = Path(UnixPath("/a")).add("b");
+    CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a/b")), p1);
+    
+    p1 = p1 + "c";
+    CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a/b/c")), p1);
+    
+    p1 = Path();
+    p1 = p1 + "a" + "b" + "c";
+    CPPUNIT_ASSERT_EQUAL(Path(UnixPath("a/b/c")), p1);
 }
 
 void PathUnit::testSplit()

@@ -56,11 +56,11 @@ void CannonicalUnit::init()
 	CPPUNIT_ASSERT_EQUAL(std::string("http"), c3.protocol());
 	CPPUNIT_ASSERT_EQUAL(std::string("peteware.com"), c3.host());
 	CPPUNIT_ASSERT_EQUAL(std::string("8080"), c3.extra());
-	std::vector<std::string>	dirs;
+	Strings	dirs;
 	dirs.push_back("a");
 	dirs.push_back("b");
 	dirs.push_back("c");
-	for (std::vector<std::string>::const_iterator iter = dirs.begin();
+	for (Strings::const_iterator iter = dirs.begin();
 		iter != dirs.end(); ++iter)
 	{
 		c1.add(*iter);

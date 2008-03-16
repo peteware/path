@@ -9,6 +9,8 @@
 #if !defined(_PATH_SYSCALLS_H_)
 #define _PATH_SYSCALLS_H_
 
+
+#include <path/Strings.h>
 #include <string>
 #include <vector>
 
@@ -35,7 +37,7 @@ public:
     /// Remove a file
     virtual void remove(const std::string &file) const;
     /// Return a vector with directory contents
-	virtual std::vector<std::string> listdir(const std::string &dir) const;
+	virtual Strings listdir(const std::string &dir) const;
     /// Return info about a file or directory
 	virtual NodeInfo * stat(const std::string & path) const;
     /// Return the current working directory

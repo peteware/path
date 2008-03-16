@@ -170,7 +170,7 @@ void Node::subNodeCreate() const
     if (m_nodes)
         return;
 	m_nodes = new SubNode;
-	std::vector<std::string>	files = SysCalls().listdir(path());
+	Strings	files = SysCalls().listdir(path());
 	std::copy(files.begin(), files.end(),
 			  std::back_insert_iterator<std::vector<SubNode::Entry> > (m_nodes->m_entries));
     

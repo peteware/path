@@ -53,9 +53,9 @@ void SysCalls::remove(const std::string &file) const
         throw PathException(file, errno);
 }
 
-std::vector<std::string> SysCalls::listdir(const std::string &path) const
+Strings SysCalls::listdir(const std::string &path) const
 {
-	std::vector<std::string>	dirs;
+	Strings	dirs;
 
 	DIR *dir = opendir(path.c_str());
 	if (!dir)

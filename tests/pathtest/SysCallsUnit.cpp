@@ -39,7 +39,7 @@ void SysCallsUnit::listdir()
 {
 	SysCalls	sys;
 
-	std::vector<std::string>	dirs = sys.listdir(".");
+	Strings	dirs = sys.listdir(".");
 	CPPUNIT_ASSERT(dirs.size() > 0);
 
 	dirs = sys.listdir("does not exit!");

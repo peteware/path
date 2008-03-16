@@ -44,7 +44,7 @@ Cannonical::Cannonical(const Cannonical &copy)
  * @param copy Provides the protocol, host and extra info
  * @param components Replaces that path from copy
  */
-Cannonical::Cannonical(const Cannonical &copy, const std::vector<std::string> &components)
+Cannonical::Cannonical(const Cannonical &copy, const Strings &components)
 	: m_protocol(copy.m_protocol),
 	  m_host(copy.m_host),
 	  m_extra(copy.m_extra),
@@ -288,7 +288,7 @@ Cannonical & Cannonical::add(const std::string &dir1, const std::string &dir2, c
  *
  * @return Componenets in a path
  */
-std::vector<std::string> &Cannonical::components()
+Strings &Cannonical::components()
 {
 	return m_components;
 }
@@ -296,7 +296,7 @@ std::vector<std::string> &Cannonical::components()
 /**
  * @return Components in a path
  */
-const std::vector<std::string> &Cannonical::components() const
+const Strings &Cannonical::components() const
 {
 	return m_components;
 }

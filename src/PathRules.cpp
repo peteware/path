@@ -32,11 +32,11 @@ PathRules::~PathRules()
 Cannonical PathRules::cannonical(const std::string &path) const
 {
 	Cannonical	cannon;
-	std::vector<std::string>	components;
+	Strings	components;
 	bool		first = true;
 	
 	split(path, m_sep, components);
-	std::vector<std::string>::iterator iter = components.begin();
+	Strings::iterator iter = components.begin();
 	while (iter != components.end())
 	{
 		if (iter->empty())
@@ -96,7 +96,7 @@ std::string PathRules::join(const Cannonical &cannon) const
     if (cannon.abs())
         p += m_sep;
     bool first = true;
-    for (std::vector<std::string>::const_iterator iter = cannon.components().begin();
+    for (Strings::const_iterator iter = cannon.components().begin();
          iter != cannon.components().end(); ++iter)
     {
         if (first)
@@ -115,7 +115,7 @@ std::string PathRules::join(const Cannonical &cannon) const
  * @param sep The character to use to split the path
  * @param subdirs vector of strings that each component is push_back()'d on
  */
-void PathRules::split(const std::string &path, char sep, std::vector<std::string> &subdirs)
+void PathRules::split(const std::string &path, char sep, Strings &subdirs)
 {
 	std::string::size_type	start = 0;
 	std::string::size_type	end = 0;

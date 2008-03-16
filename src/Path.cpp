@@ -65,25 +65,6 @@ Path::Path(const Cannonical &cannon, const PathRules *param_rules)
     m_path = rules()->join(cannon);
 }
 
-#ifdef notdef
-/**
- * Set path to a raw string.
- * This may contain environment variables, "~",
- * multiple directory seperators, etc.  Use
- * str() to get this raw version back.  Use
- * path() to get it back as usable filename 
- * and finally use normpath() to get it back
- * in a cleaned up form.
- */
-Path::Path(const std::string &path, const PathRules *rules)
-	: m_path(path),
-	  m_rules(rules),
-	  m_cannon(0),
-      m_pathStr(0)
-{
-}
-#endif
-
 /**
  * Copy the m_path, make m_rules the same (pointer copy)
  * and duplicate the m_cannon.
@@ -133,7 +114,6 @@ Path & Path::operator=(const Path &op)
     
 	return  *this;
 }
-
 
 /**
  * The raw, uninterpreted string is returned.
@@ -185,7 +165,7 @@ std::string Path::normpath() const
  */
 Path Path::basename() const
 {
-    const std::vector<std::string> &components = cannon().components();
+    const Strings &components = cannon().components();
     if (components.size() == 0)
     {
         if (cannon().abs())
@@ -215,15 +195,14 @@ Path Path::basename() const
  */
 Path Path::dirname() const
 {
-    std::vector<std::string>::const_iterator last;  // end elements
+    Strings::const_iterator last;  // end elements
     last = cannon().components().end();
     if (cannon().components().size() > 0)
         --last;
-    std::vector<std::string> com(cannon().components().begin(), last);
+    Strings com(cannon().components().begin(), last);
 
     Cannonical  c(cannon(), com);
     return Path(c, m_rules);
-    //return(rules()->convert(c));
 }
 
 
@@ -243,11 +222,12 @@ Path Path::dirname() const
  */
 std::string Path::extension() const
 {
-	std::string::size_type	index = m_path.find_last_of (".");
+    Path    last = basename();
+	std::string::size_type	index = last.m_path.find_last_of (".");
 	if (index == std::string::npos)
 		return "";
 	else
-		return m_path.substr (index, m_path.size() - index);
+		return last.m_path.substr (index, last.m_path.size() - index);
 }
 
 /**
@@ -319,7 +299,8 @@ Path Path::join(const Path &path) const
     std::copy(path.cannon().components().begin(),
               path.cannon().components().end(),
               std::back_inserter(c.components()));
-    return rules()->convert(c);
+    return Path (c, m_rules);
+    //return rules()->convert(c);
 }
 
 /**
@@ -337,30 +318,21 @@ Path Path::join(const Path &path) const
  * @endcode
  * 
  */
-Path Path::join(const std::vector<std::string> &strings) const
+Path Path::join(const Strings &strings) const
 {
     
     Cannonical c(cannon());
     std::copy(strings.begin(), strings.end(),
               std::back_inserter(c.components()));
-    return rules()->convert(c);
-
-#ifdef notdef
-	std::string		str = m_path;
-	bool			first = m_path.empty();
-	for (std::vector<std::string>::const_iterator iter = strings.begin();
-		iter != strings.end(); ++iter)
-	{
-		if (first)
-			first = false;
-		else
-			str += "/";
-		str += *iter;
-	}
-	return Path(str, m_rules);
-#endif
+    return Path(c, m_rules);
 }
 
+Path Path::add(const std::string &p) const
+{
+    Cannonical c(cannon());
+    c.add(p);
+    return Path(c, m_rules);
+}
 
 /**
  * Returns each component of the path as an individual Path
@@ -368,13 +340,13 @@ Path Path::join(const std::vector<std::string> &strings) const
  * If the path is abs(), then the first component is also abs().  Each component
  * shares the same PathRules.  String::join() should return an equivalent path.
  */
-std::vector<Path> Path::split()
+std::vector<Path> Path::split() const
 {
     const Cannonical &      c = cannon();
     std::vector<Path>       paths;
     bool                    first = true;
     
-    for (std::vector<std::string>::const_iterator iter = c.components().begin();
+    for (Strings::const_iterator iter = c.components().begin();
          iter != c.components().end(); ++iter)
     {
         Path    p (*iter, rules());
@@ -386,33 +358,6 @@ std::vector<Path> Path::split()
         paths.push_back(p);
     }
 	return paths;
-}
-
-/**
- * Does a simple string comparison between two paths
- * to see if they are the same.  So while two paths
- * might be logically the same, "a" and "/a/b/.." are logically
- * the same, they will not compare equally.  See
- * normpath() as a way to make them compare the same
- * 
- * @param op2 The second argument to ==
- * @return True if the same, false otherwise.
- */
-bool Path::operator==(const Path & op2) const
-{
-    //return m_path == op2.m_path;
-    //return rules() == op2.rules() && cannon() == op2.cannon();
-    bool r = (rules() == op2.rules());
-    bool c = (cannon() == op2.cannon());
-    return r && c;
-}
-
-/**
- * Inverse of operator==()
- */
-bool Path::operator!=(const Path &op2) const
-{
-	return !(*this == op2);
 }
 
 /**
@@ -488,6 +433,32 @@ const Cannonical & Path::cannon() const
 	}
 	return *m_cannon;
 }
+
+/**
+ * Compares the PathRules and Cannonical componenets
+ * to see if they are the same.  So while two paths
+ * might be logically the same, "a" and "/a/b/.." are logically
+ * the same, they will not compare equally.  See
+ * normpath() as a way to make them compare the same
+ * 
+ * @param op2 The second argument to ==
+ * @return True if the same, false otherwise.
+ */
+bool operator==(const Path &op1, const Path & op2)
+{
+    bool r = (op1.rules() == op2.rules());
+    bool c = (op1.cannon() == op2.cannon());
+    return r && c;
+}
+
+/**
+ * Inverse of operator==()
+ */
+bool operator!=(const Path &op1, const Path &op2)
+{
+	return !(op1 == op2);
+}
+
 /**
  * Print's the raw form of the Path.  See normpath() 
  * to get a cleaner version of the Path.  
@@ -495,4 +466,16 @@ const Cannonical & Path::cannon() const
 std::ostream &operator<<(std::ostream &out, const Path&path)
 {
 	return out << path.path();
+}
+
+/**
+ * Add another directory to path and return a new one
+ *
+ * @param path The path to add to
+ * @param dir The directory to add to path
+ * @return A new Path
+ */
+Path operator+(const Path &path, const std::string &dir)
+{
+    return path.add(dir);
 }

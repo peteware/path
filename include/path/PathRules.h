@@ -1,6 +1,7 @@
 #if !defined(_PATH_PATHRULES_H_)
 #define _PATH_PATHRULES_H_
 
+#include <path/Strings.h>
 #include <string>
 #include <vector>
 
@@ -34,7 +35,7 @@ public:
     virtual std::string join(const Cannonical &canononical) const;
 protected:
 	/// Split a string into it's components
-	static void split(const std::string &path, char sep, std::vector<std::string> &subdirs);
+	static void split(const std::string &path, char sep, Strings &subdirs);
 protected:
 	char		m_sep;							///< Seperator
 };
