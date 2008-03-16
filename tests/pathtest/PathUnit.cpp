@@ -133,18 +133,21 @@ void PathUnit::testBasename()
 {
 	Path	p1;
 	Path	p2;
+    std::string e = "";
+    std::string a = "a";
+    std::string b = "b";
 	// Make sure we don't crap out on empty ones.
-	CPPUNIT_ASSERT_EQUAL(p1.basename(), p2);
-	CPPUNIT_ASSERT_EQUAL(Path("a"), Path(UnixPath("///a")).basename());
-	CPPUNIT_ASSERT_EQUAL(Path("b"), Path(UnixPath("/a/b///")).basename());
-	CPPUNIT_ASSERT_EQUAL(Path("a"), Path("a").basename());
-	CPPUNIT_ASSERT_EQUAL(Path("a"), Path(UnixPath("/a")).basename());
-	CPPUNIT_ASSERT_EQUAL(Path("b"), Path(UnixPath("/a/b")).basename());
-	CPPUNIT_ASSERT_EQUAL(Path("b"), Path(UnixPath("/a/b/")).basename());
-	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/")), Path(UnixPath("/")).basename());
-	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/")), Path(UnixPath("////")).basename());
-	CPPUNIT_ASSERT_EQUAL(Path("b"), Path(UnixPath("b/")).basename());
-	CPPUNIT_ASSERT_EQUAL(Path("b"), Path (UnixPath("b///")).basename());
+	CPPUNIT_ASSERT_EQUAL(e, p1.basename());
+	CPPUNIT_ASSERT_EQUAL(a, Path(UnixPath("///a")).basename());
+	CPPUNIT_ASSERT_EQUAL(a, Path(UnixPath("/a/a///")).basename());
+	CPPUNIT_ASSERT_EQUAL(a, Path("a").basename());
+	CPPUNIT_ASSERT_EQUAL(a, Path(UnixPath("/a")).basename());
+	CPPUNIT_ASSERT_EQUAL(b, Path(UnixPath("/a/b")).basename());
+	CPPUNIT_ASSERT_EQUAL(b, Path(UnixPath("/a/b/")).basename());
+	CPPUNIT_ASSERT_EQUAL(e, Path(UnixPath("/")).basename());
+	CPPUNIT_ASSERT_EQUAL(e, Path(UnixPath("////")).basename());
+	CPPUNIT_ASSERT_EQUAL(b, Path(UnixPath("b/")).basename());
+	CPPUNIT_ASSERT_EQUAL(b, Path (UnixPath("b///")).basename());
 
 }
 

@@ -161,24 +161,21 @@ std::string Path::normpath() const
  * Returns the last component of the path.
  * 
  * For example, basename('/a/b/c') returns 'c'.  basename('/a/b/') returns 'b' 
- * This ia analogous to the Unix shell utility "basename".
+ * This is analogous to the Unix shell utility "basename".
  */
-Path Path::basename() const
+std::string Path::basename() const
 {
     const Strings &components = cannon().components();
+
     if (components.size() == 0)
     {
-        if (cannon().abs())
-            return rules()->convert(cannon());
-        else
-            return *this;
+        return std::string();
     }
     else
     {
-        return Path(components[components.size() - 1], m_rules);
+        return components[components.size() - 1];
     }
 }
-
 
 /**
  * Returns the directory component of Path.
@@ -269,14 +266,9 @@ bool Path::abs() const
  */
 Path Path::makeAbs() const
 {
-	if (abs())
-		return *this;
-	else
-    {
-        Cannonical  c (cannon());
-        c.setAbs(true);
-        return rules()->convert(c);
-    }
+    Cannonical  c (cannon());
+    c.setAbs(true);
+    return Path(c, m_rules);
 }
 
 /**

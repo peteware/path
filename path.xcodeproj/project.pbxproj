@@ -18,7 +18,6 @@
 		506939AD0D88727300E050F1 /* PathExtra.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142C0CE2B3F600ADA70C /* PathExtra.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939AE0D88727300E050F1 /* PathRules.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142D0CE2B3F600ADA70C /* PathRules.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939AF0D88727300E050F1 /* Permission.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142E0CE2B3F600ADA70C /* Permission.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		506939B00D88727300E050F1 /* Strings.h in Headers */ = {isa = PBXBuildFile; fileRef = 506939900D886B4D00E050F1 /* Strings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939B10D88727300E050F1 /* SysCalls.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142F0CE2B3F600ADA70C /* SysCalls.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939B20D88727300E050F1 /* Unimplemented.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914300CE2B3F600ADA70C /* Unimplemented.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939B30D88727300E050F1 /* UnixRules.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914310CE2B3F600ADA70C /* UnixRules.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -53,6 +52,7 @@
 		50693A2E0D8873F100E050F1 /* PathRulesUnit.h in Sources */ = {isa = PBXBuildFile; fileRef = 5009487C0D6656AC000B393F /* PathRulesUnit.h */; };
 		50693A2F0D8873F100E050F1 /* Win32RulesUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500948B30D6EF039000B393F /* Win32RulesUnit.cpp */; };
 		50B973F90D8D897800E8B628 /* libpath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506939A10D8871F300E050F1 /* libpath.a */; };
+		50B9744A0D8DA9F800E8B628 /* Strings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50B974490D8DA9F800E8B628 /* Strings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -109,11 +109,11 @@
 		500948620D665356000B393F /* UnixRulesUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnixRulesUnit.cpp; sourceTree = "<group>"; };
 		5009487C0D6656AC000B393F /* PathRulesUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathRulesUnit.h; sourceTree = "<group>"; };
 		500948B30D6EF039000B393F /* Win32RulesUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Win32RulesUnit.cpp; sourceTree = "<group>"; };
-		506939900D886B4D00E050F1 /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Strings.h; path = ../../src/Strings.h; sourceTree = "<group>"; };
 		506939910D886B4D00E050F1 /* Strings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Strings.cpp; sourceTree = "<group>"; };
 		506939A10D8871F300E050F1 /* libpath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpath.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		50693A1E0D8873B300E050F1 /* pathtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pathtest; sourceTree = BUILT_PRODUCTS_DIR; };
 		507AECBF0D2BCE4B0071EB10 /* SubNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SubNode.cpp; sourceTree = "<group>"; };
+		50B974490D8DA9F800E8B628 /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,7 +204,7 @@
 		500914230CE2B3F600ADA70C /* path */ = {
 			isa = PBXGroup;
 			children = (
-				506939900D886B4D00E050F1 /* Strings.h */,
+				50B974490D8DA9F800E8B628 /* Strings.h */,
 				500914240CE2B3F600ADA70C /* BadPath.h */,
 				500914250CE2B3F600ADA70C /* Cannonical.h */,
 				500914260CE2B3F600ADA70C /* FileStream.h */,
@@ -274,12 +274,12 @@
 				506939AD0D88727300E050F1 /* PathExtra.h in Headers */,
 				506939AE0D88727300E050F1 /* PathRules.h in Headers */,
 				506939AF0D88727300E050F1 /* Permission.h in Headers */,
-				506939B00D88727300E050F1 /* Strings.h in Headers */,
 				506939B10D88727300E050F1 /* SysCalls.h in Headers */,
 				506939B20D88727300E050F1 /* Unimplemented.h in Headers */,
 				506939B30D88727300E050F1 /* UnixRules.h in Headers */,
 				506939B40D88727300E050F1 /* UriRules.h in Headers */,
 				506939B50D88727300E050F1 /* Win32Rules.h in Headers */,
+				50B9744A0D8DA9F800E8B628 /* Strings.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,8 +462,12 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				HEADER_SEARCH_PATHS = /usr/local/include;
+				HEADER_SEARCH_PATHS = (
+					.,
+					/usr/local/include,
+				);
 				INSTALL_PATH = /usr/local/bin;
+				ONLY_ACTIVE_ARCH = NO;
 				PREBINDING = NO;
 				PRODUCT_NAME = pathtest;
 				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";

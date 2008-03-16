@@ -95,7 +95,7 @@ public:
 
 
 	/// Return the last component of Path
-	Path basename() const;
+    std::string basename() const;
 	/// Return the directory component of Path
 	Path dirname() const;
 	/// Return the filename extension
