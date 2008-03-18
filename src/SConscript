@@ -5,7 +5,7 @@ env = Environment (CCFLAGS = ['-g', '-Wall', '-O3'],
 #env = Environment (CPPFLAGS = '/EHsc')
 env.Library('path',
             ['BadPath.cpp',
-             'Cannonical.cpp',
+             'Canonical.cpp',
              'FileStream.cpp',
              'Node.cpp',
              'NodeInfo.cpp',

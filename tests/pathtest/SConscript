@@ -6,7 +6,7 @@ env = Environment(CPPPATH=['#include'], CCFLAGS=['-g', '-Wall'])
 env.Program(target = 'pathtest',
             source =
             ['main.cpp',
-             'CannonicalUnit.cpp',
+             'CanonicalUnit.cpp',
              'NodeUnit.cpp',
              'PathRulesUnit.cpp',
              'PathUnit.cpp',
