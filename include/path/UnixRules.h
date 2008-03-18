@@ -12,7 +12,7 @@
 #include <path/PathRules.h>
 // Forward declarations
 class Path;
-class Cannonical;
+class Canonical;
 
 class UnixRules : public PathRules
 {
@@ -20,10 +20,10 @@ public:
 	UnixRules();
 	virtual ~UnixRules();
 
-	virtual Cannonical cannonical(const std::string &path) const;
+	virtual Canonical canonical(const std::string &path) const;
 	virtual std::string quote(const std::string & path) const;
 
-    static Cannonical   cannon(const std::string &path);
+    static Canonical   canon(const std::string &path);
 	static UnixRules	rules;
 
 };

@@ -1,7 +1,7 @@
 #include <path/Path.h>
 #include <path/PathRules.h>
 #include <path/UnixRules.h>
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
@@ -99,9 +99,9 @@ void PathUnit::init()
  */
 void PathUnit::equal()
 {
-	Path	p0(UnixRules::cannon("/a//"));
-	Path	p1(UnixRules::cannon("/a/b/c"));
-	Path	p2(UnixRules::cannon("/a"));
+	Path	p0(UnixRules::canon("/a//"));
+	Path	p1(UnixRules::canon("/a/b/c"));
+	Path	p2(UnixRules::canon("/a"));
 	Path	p3, p4;
     Path    p5(UnixPath("/a//")); // really want this as a string
     Path    p6(UnixPath("/a"));   // really want this as a string

@@ -8,7 +8,7 @@
  */
 
 #include <path/UnixRules.h>
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 #include <path/Path.h>
 
 #include <cppunit/TestCase.h>

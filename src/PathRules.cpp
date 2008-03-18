@@ -6,7 +6,7 @@
  *  Original author: Pete Ware
  */
 #include <path/PathRules.h>
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 #include <path/Path.h>
 #include <path/Unimplemented.h>
 
@@ -29,9 +29,9 @@ PathRules::~PathRules()
  * This allows Path to implement it's manipulations without
  * knowing system implementation details.
  */
-Cannonical PathRules::cannonical(const std::string &path) const
+Canonical PathRules::canonical(const std::string &path) const
 {
-	Cannonical	cannon;
+	Canonical	canon;
 	Strings	components;
 	bool		first = true;
 	
@@ -42,7 +42,7 @@ Cannonical PathRules::cannonical(const std::string &path) const
 		if (iter->empty())
 		{
 			if (first)
-				cannon.setAbs(true);
+				canon.setAbs(true);
 			iter = components.erase(iter);
 		}
 		else {
@@ -54,8 +54,8 @@ Cannonical PathRules::cannonical(const std::string &path) const
 		first = false;
 				
 	}
-	cannon.components().swap(components);
-	return cannon;
+	canon.components().swap(components);
+	return canon;
 }
 
 /**
@@ -64,7 +64,7 @@ Cannonical PathRules::cannonical(const std::string &path) const
  * Any special characters are converted to a safe form.  For example,
  * in UnixRules, a '/' is converted to '|' (or whatever).
  */
-Path PathRules::convert(const Cannonical &canonical) const 
+Path PathRules::convert(const Canonical &canonical) const 
 {
 	return Path(canonical, this);
 }
@@ -80,24 +80,24 @@ std::string PathRules::quote(const std::string & subdir) const
 	throw Unimplemented("PathRules::quote()");
 }
 
-std::string PathRules::add(const Cannonical &cannon) const
+std::string PathRules::add(const Canonical &canon) const
 {
     std::string     p;
-    if (!cannon.protocol().empty())
+    if (!canon.protocol().empty())
     {
-        p += cannon.protocol() + ":";
-        if (!cannon.host().empty())
-            p += "//" + cannon.host() + "/";
+        p += canon.protocol() + ":";
+        if (!canon.host().empty())
+            p += "//" + canon.host() + "/";
     }
-    if (!cannon.drive().empty())
+    if (!canon.drive().empty())
     {
-        p += cannon.drive() + ":";
+        p += canon.drive() + ":";
     }
-    if (cannon.abs())
+    if (canon.abs())
         p += m_sep;
     bool first = true;
-    for (Strings::const_iterator iter = cannon.components().begin();
-         iter != cannon.components().end(); ++iter)
+    for (Strings::const_iterator iter = canon.components().begin();
+         iter != canon.components().end(); ++iter)
     {
         if (first)
             first = false;

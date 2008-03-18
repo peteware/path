@@ -6,7 +6,7 @@
  *  Original author: Pete Ware
  */
 #include <path/UriRules.h>
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 #include <path/Path.h>
 
 UriRules::UriRules()
@@ -22,9 +22,9 @@ UriRules::~UriRules()
  * Converts Path into a 'canonical' form.  This allows a Path to be converted from
  * one PathRules to another PathRules.
  */
-Cannonical UriRules::canonical(const std::string &path) const
+Canonical UriRules::canonical(const std::string &path) const
 {
-	return Cannonical();
+	return Canonical();
 }
 
 /**

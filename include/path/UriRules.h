@@ -13,7 +13,7 @@
 #include <string>
 
 // Forward declarations
-class Cannonical;
+class Canonical;
 class Path;
 
 class UriRules : public PathRules
@@ -23,7 +23,7 @@ public:
 	UriRules();
 	virtual ~UriRules();
 
-	virtual Cannonical canonical(const std::string &path) const;
+	virtual Canonical canonical(const std::string &path) const;
 	virtual std::string quote(const std::string & subdirs) const;
 
 };

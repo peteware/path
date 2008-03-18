@@ -1,7 +1,7 @@
 /**  
- * @file Cannonical.h
+ * @file Canonical.h
  *
- * Implementation of the Class Cannonical
+ * Implementation of the Class Canonical
  *
  * Created on:      11-May-2007 5:09:30 PM
  * Original author: Pete Ware
@@ -24,61 +24,61 @@
  *
  * This is used to convert from one PathRules type to another.
  */
-class Cannonical
+class Canonical
 {
 
 public:
 	/// Default constructor
-	Cannonical();
+	Canonical();
 	/// Copy constructor
-	Cannonical(const Cannonical &copy);
+	Canonical(const Canonical &copy);
 	/// Construct with basics but no path
-	//Cannonical(const std::string &protocol, const std::string &host, const std::string &extra);
+	//Canonical(const std::string &protocol, const std::string &host, const std::string &extra);
 	/// Copy but with new path
-	Cannonical(const Cannonical &copy, const Strings &components);
+	Canonical(const Canonical &copy, const Strings &components);
 
     /// Create with a single componenent
-	Cannonical(const std::string &p1);
+	Canonical(const std::string &p1);
     /// Create with two componenents
-	Cannonical(const std::string &p1, const std::string &p2);
+	Canonical(const std::string &p1, const std::string &p2);
     /// Create with three componenents
-	Cannonical(const std::string &p1, const std::string &p2, const std::string &p3);
+	Canonical(const std::string &p1, const std::string &p2, const std::string &p3);
     /// Create with four componenents
-	Cannonical(const std::string &p1, const std::string &p2, const std::string &p3, const std::string &p4);
+	Canonical(const std::string &p1, const std::string &p2, const std::string &p3, const std::string &p4);
 
 	/// Destructor
-	virtual ~Cannonical();
+	virtual ~Canonical();
 
     /// Set the protocol, host, and extra without changing drive or components
-    Cannonical & copyInfo(const Cannonical &cannon);
+    Canonical & copyInfo(const Canonical &canon);
     /// Set the protocol (e.g. "http")
-    Cannonical &  setProtocol(const std::string &proto);
+    Canonical &  setProtocol(const std::string &proto);
 	/// Return the protocol string (may be empty)
 	const std::string &	protocol() const;
 
     /// Set the hostname (e.g. "www.peteware.com")
-    Cannonical & setHost(const std::string &host);
+    Canonical & setHost(const std::string &host);
 	/// Return the host string (may be empty)
 	const std::string &	host() const;
 
     /// Set the extra part (e.g. "8080")
-    Cannonical &  setExtra(const std::string &extra);
+    Canonical &  setExtra(const std::string &extra);
 	/// Return the extra string (may be empty)
 	const std::string &	extra() const;
 
     /// Set the drive letter (e.g. "C")
-    Cannonical &  setDrive(const std::string &drive);
+    Canonical &  setDrive(const std::string &drive);
     /// Return the drive letter (may be empty)
     const std::string & drive() const;
 
 	/// Add another component to the end
-	Cannonical & add(const std::string &dir);
+	Canonical & add(const std::string &dir);
 	/// Add another two components to the end
-    Cannonical & add(const std::string &dir1, const std::string &dir2);
+    Canonical & add(const std::string &dir1, const std::string &dir2);
 	/// Add another three components to the end
-    Cannonical & add(const std::string &dir1, const std::string &dir2, const std::string &dir3);
+    Canonical & add(const std::string &dir1, const std::string &dir2, const std::string &dir3);
     /// Add another four components to the end
-    Cannonical & add(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4);
+    Canonical & add(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4);
     
 	/// Return reference; you can change this.
 	Strings &components();
@@ -86,7 +86,7 @@ public:
 	const Strings &components() const;
 
 	/// Set if this is an absolute path
-	Cannonical & setAbs(bool abs);
+	Canonical & setAbs(bool abs);
 	/// Return if this is an absolute path
 	bool	abs() const;
 
@@ -108,10 +108,10 @@ protected:
 
 };
 /// Print this out for debugging purposes!
-std::ostream& operator<<(std::ostream &out, const Cannonical &cannon);
+std::ostream& operator<<(std::ostream &out, const Canonical &canon);
 /// Return true if these two Cannoical objects are the same values
-bool operator==(const Cannonical &op1, const Cannonical &op2);
-/// Return true if these tow Cannonical objects are different values
-bool operator!=(const Cannonical &op1, const Cannonical &op2);
+bool operator==(const Canonical &op1, const Canonical &op2);
+/// Return true if these tow Canonical objects are different values
+bool operator!=(const Canonical &op1, const Canonical &op2);
 
 #endif // !defined(_PATH_CANNONICAL_H_)

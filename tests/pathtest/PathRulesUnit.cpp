@@ -1,6 +1,6 @@
 #include <path/PathRules.h>
 #include <path/UnixRules.h>
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 #include <path/Path.h>
 
 #include "PathRulesUnit.h"
@@ -36,59 +36,59 @@ void PathRulesUnit::init()
 	UnixRules	unix_rules;
 }
 
-void PathRulesUnit::cannonical()
+void PathRulesUnit::canonical()
 {
 	UnixRules	unix_rules;
-	Cannonical	cannon = unix_rules.cannonical("/a/b/c");
+	Canonical	canon = unix_rules.canonical("/a/b/c");
 
-	CPPUNIT_ASSERT(cannon.protocol().empty());
-	CPPUNIT_ASSERT(cannon.host().empty());
-	CPPUNIT_ASSERT(cannon.extra().empty());
-	CPPUNIT_ASSERT_EQUAL(std::string("a"), cannon.components()[0]);
-	CPPUNIT_ASSERT_EQUAL(std::string("b"), cannon.components()[1]);
-	CPPUNIT_ASSERT_EQUAL(std::string("c"), cannon.components()[2]);
-	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(3), cannon.components().size());
-	CPPUNIT_ASSERT_EQUAL(true, cannon.abs());
+	CPPUNIT_ASSERT(canon.protocol().empty());
+	CPPUNIT_ASSERT(canon.host().empty());
+	CPPUNIT_ASSERT(canon.extra().empty());
+	CPPUNIT_ASSERT_EQUAL(std::string("a"), canon.components()[0]);
+	CPPUNIT_ASSERT_EQUAL(std::string("b"), canon.components()[1]);
+	CPPUNIT_ASSERT_EQUAL(std::string("c"), canon.components()[2]);
+	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(3), canon.components().size());
+	CPPUNIT_ASSERT_EQUAL(true, canon.abs());
 	
-	cannon = unix_rules.cannonical("");
-	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(0), cannon.components().size());
-	CPPUNIT_ASSERT_EQUAL(false, cannon.abs());
+	canon = unix_rules.canonical("");
+	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(0), canon.components().size());
+	CPPUNIT_ASSERT_EQUAL(false, canon.abs());
 
-	cannon = unix_rules.cannonical("///");
-	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(0), cannon.components().size());
-	CPPUNIT_ASSERT_EQUAL(true, cannon.abs());
+	canon = unix_rules.canonical("///");
+	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(0), canon.components().size());
+	CPPUNIT_ASSERT_EQUAL(true, canon.abs());
 	
-	cannon = unix_rules.cannonical("a");
-	CPPUNIT_ASSERT_EQUAL(std::string("a"), cannon.components()[0]);
-	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(1), cannon.components().size());
-	CPPUNIT_ASSERT_EQUAL(false, cannon.abs());
+	canon = unix_rules.canonical("a");
+	CPPUNIT_ASSERT_EQUAL(std::string("a"), canon.components()[0]);
+	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(1), canon.components().size());
+	CPPUNIT_ASSERT_EQUAL(false, canon.abs());
 
-	cannon = unix_rules.cannonical("ab/cd/");
-	CPPUNIT_ASSERT_EQUAL(std::string("ab"), cannon.components()[0]);
-	CPPUNIT_ASSERT_EQUAL(std::string("cd"), cannon.components()[1]);
-	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(2), cannon.components().size());
-	CPPUNIT_ASSERT_EQUAL(false, cannon.abs());
+	canon = unix_rules.canonical("ab/cd/");
+	CPPUNIT_ASSERT_EQUAL(std::string("ab"), canon.components()[0]);
+	CPPUNIT_ASSERT_EQUAL(std::string("cd"), canon.components()[1]);
+	CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(2), canon.components().size());
+	CPPUNIT_ASSERT_EQUAL(false, canon.abs());
 }
 
 void PathRulesUnit::convert()
 {
-	Cannonical	cannon;
+	Canonical	canon;
 	UnixRules	rules;
-	Path		path (cannon, &rules);
+	Path		path (canon, &rules);
 
 	CPPUNIT_ASSERT_EQUAL(std::string(""), path.str());
 	CPPUNIT_ASSERT(!path.abs());
 	
-	cannon.add("a");
-	cannon.add("b");
+	canon.add("a");
+	canon.add("b");
 
-	path = Path(cannon, &rules);
+	path = Path(canon, &rules);
 
 	CPPUNIT_ASSERT_EQUAL(std::string("a/b"), path.str());
 	CPPUNIT_ASSERT(!path.abs());
 
-	cannon.setAbs(true);
-	path = Path(cannon, &rules);
+	canon.setAbs(true);
+	path = Path(canon, &rules);
 	CPPUNIT_ASSERT_EQUAL(std::string("/a/b"), path.str());
 	CPPUNIT_ASSERT(path.abs());
 }

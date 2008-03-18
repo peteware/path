@@ -15,7 +15,7 @@ class PathRulesUnit: public CppUnit::TestCase
 	CPPUNIT_TEST_SUITE(PathRulesUnit);
     
 	CPPUNIT_TEST(init);
-	CPPUNIT_TEST(cannonical);
+	CPPUNIT_TEST(canonical);
 	CPPUNIT_TEST(convert);
     
 	CPPUNIT_TEST_SUITE_END();
@@ -31,8 +31,8 @@ protected:
     PathRules * m_rules;
 	/// Make sure constructors/destructor works
 	void init();
-	/// Test conversion to cannonical form
-	void cannonical();
+	/// Test conversion to canonical form
+	void canonical();
 	/// Test conversion to Path form
 	void convert();
 };

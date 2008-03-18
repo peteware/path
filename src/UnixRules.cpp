@@ -6,7 +6,7 @@
  *  Original author: Pete Ware
  */
 #include <path/UnixRules.h>
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 #include <path/Path.h>
 
 UnixRules	UnixRules::rules;
@@ -24,9 +24,9 @@ UnixRules::~UnixRules()
  * Converts Path into a 'canonical' form.  This allows a Path to be converted from
  * one PathRules to another PathRules.
  */
-Cannonical UnixRules::cannonical(const std::string &path) const
+Canonical UnixRules::canonical(const std::string &path) const
 {
-	return PathRules::cannonical(path);
+	return PathRules::canonical(path);
 }
 
 /**
@@ -41,19 +41,19 @@ std::string UnixRules::quote(const std::string & subdir) const
 }
 
 /**
- * Convert a Unix style path into the cannonical representation
+ * Convert a Unix style path into the canonical representation
  *
  * This is a good way to create a path that is compatible with
  * the local operating system but still have independent paths.
  * @code
- * Path p (UnixRules::cannon("/a/b/c");
+ * Path p (UnixRules::canon("/a/b/c");
  * @endcode
  *
  * @param path The Unix style path to convert.
  */
-Cannonical UnixRules::cannon(const std::string &path)
+Canonical UnixRules::canon(const std::string &path)
 {
-    return UnixRules::rules.cannonical(path);
+    return UnixRules::rules.canonical(path);
 }
 
 /**
@@ -73,9 +73,9 @@ Cannonical UnixRules::cannon(const std::string &path)
  * @sa Win32Path(),  URLPath()
  *
  * @param path A string with a Unix style path
- * @return A Cannonical object representing that path
+ * @return A Canonical object representing that path
  */
-Cannonical UnixPath(const std::string &path)
+Canonical UnixPath(const std::string &path)
 {
-    return UnixRules::rules.cannonical(path);
+    return UnixRules::rules.canonical(path);
 }

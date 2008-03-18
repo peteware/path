@@ -13,7 +13,7 @@
 #include <string>
 
 // Forward declarations
-class Cannonical;
+class Canonical;
 class Path;
 
 class Win32Rules : public PathRules
@@ -25,8 +25,8 @@ public:
     
     static Win32Rules    rules;
 
-	virtual Cannonical cannonical(const std::string &path) const;
+	virtual Canonical canonical(const std::string &path) const;
 	virtual std::string quote(const std::string & path) const;
-    //virtual std::string add(const Cannonical &canonical) const;
+    //virtual std::string add(const Canonical &canonical) const;
 };
 #endif // !defined(_PATH_WIN32RULES_H_)

@@ -6,7 +6,7 @@
  *  Original author: Pete Ware
  */
 #include <path/Path.h>
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 #include <path/UnixRules.h>
 #include <path/SysCalls.h>
 
@@ -20,7 +20,7 @@ PathRules * Path::s_defaultPathRules;
 Path::Path(const PathRules *rules)
 	: m_path(),
 	  m_rules(rules),
-	  m_cannon(0),
+	  m_canon(0),
       m_pathStr(0)
 {
 }
@@ -31,10 +31,10 @@ Path::Path(const PathRules *rules)
 Path::Path(const char *path)
     : m_path(),
       m_rules(0),
-      m_cannon(new Cannonical(path)),
+      m_canon(new Canonical(path)),
       m_pathStr(0)
 {
-    m_path = rules()->add(*m_cannon);
+    m_path = rules()->add(*m_canon);
 }
 
 /**
@@ -43,49 +43,49 @@ Path::Path(const char *path)
 Path::Path(const std::string &path)
     : m_path(),
       m_rules(0),
-      m_cannon(new Cannonical(path)),
+      m_canon(new Canonical(path)),
       m_pathStr(0)
 {
-    m_path = rules()->add(*m_cannon);
+    m_path = rules()->add(*m_canon);
 }
 
 /**
- * Create a path from a Cannonical and a PathRules.
+ * Create a path from a Canonical and a PathRules.
  *
  * Initialized m_path by converting from Canonical to a string
  * via the PathRules
  */
-Path::Path(const Cannonical &cannon, const PathRules *param_rules)
+Path::Path(const Canonical &canon, const PathRules *param_rules)
     : m_path(),
       m_rules(param_rules),
-      m_cannon(new Cannonical(cannon)),
+      m_canon(new Canonical(canon)),
       m_pathStr(0)
 {
-    m_path = rules()->add(cannon);
+    m_path = rules()->add(canon);
 }
 
 /**
  * Copy the m_path, make m_rules the same (pointer copy)
- * and duplicate the m_cannon.
+ * and duplicate the m_canon.
  */
 Path::Path(const Path &copy)
 	: m_path(copy.m_path),
 	  m_rules(copy.m_rules),
-	  m_cannon(0),
+	  m_canon(0),
       m_pathStr(0)
 {
-	if (copy.m_cannon)
-		m_cannon = new Cannonical (*copy.m_cannon);
+	if (copy.m_canon)
+		m_canon = new Canonical (*copy.m_canon);
     if (copy.m_pathStr)
         m_pathStr = new std::string(*copy.m_pathStr);
 }
 
 /**
- * Delete m_cannon
+ * Delete m_canon
  */
 Path::~Path()
 {
-	delete m_cannon;
+	delete m_canon;
     delete m_pathStr;
 }
 
@@ -99,11 +99,11 @@ Path & Path::operator=(const Path &op)
     m_path = op.m_path;
     m_rules = op.m_rules;
 
-    delete m_cannon;
-    if (op.m_cannon)
-        m_cannon = new Cannonical(*op.m_cannon);
+    delete m_canon;
+    if (op.m_canon)
+        m_canon = new Canonical(*op.m_canon);
     else
-        m_cannon = 0;
+        m_canon = 0;
 
     delete m_pathStr;
     if (op.m_pathStr)
@@ -137,7 +137,7 @@ const std::string& Path::path() const
 {
     if (m_pathStr)
         return *m_pathStr;
-    m_pathStr = new std::string(rules()->add(cannon()));
+    m_pathStr = new std::string(rules()->add(canon()));
 	return *m_pathStr;
 }
 
@@ -164,7 +164,7 @@ std::string Path::normpath() const
  */
 std::string Path::basename() const
 {
-    const Strings &components = cannon().components();
+    const Strings &components = canon().components();
 
     if (components.size() == 0)
     {
@@ -192,12 +192,12 @@ std::string Path::basename() const
 Path Path::dirname() const
 {
     Strings::const_iterator last;  // end elements
-    last = cannon().components().end();
-    if (cannon().components().size() > 0)
+    last = canon().components().end();
+    if (canon().components().size() > 0)
         --last;
-    Strings com(cannon().components().begin(), last);
+    Strings com(canon().components().begin(), last);
 
-    Cannonical  c(cannon(), com);
+    Canonical  c(canon(), com);
     return Path(c, m_rules);
 }
 
@@ -256,7 +256,7 @@ std::string Path::stem() const
  */
 bool Path::abs() const 
 {
-    return cannon().abs();
+    return canon().abs();
 }
 
 /**
@@ -265,42 +265,42 @@ bool Path::abs() const
  */
 Path Path::makeAbs() const
 {
-    Cannonical  c (cannon());
+    Canonical  c (canon());
     c.setAbs(true);
     return Path(c, m_rules);
 }
 
 /**
- * @return The Cannonical representation's drive().  May be empty.
+ * @return The Canonical representation's drive().  May be empty.
  */
 const std::string & Path::drive() const
 {
-    return cannon().drive();
+    return canon().drive();
 }
 
 /**
- * @return The Cannonical representation's protocol().  May be empty.
+ * @return The Canonical representation's protocol().  May be empty.
  */
 const std::string & Path::protocol() const
 {
-    return cannon().protocol();
+    return canon().protocol();
 
 }
 
 /**
- * @return The Cannonical representation's host().  May be empty.
+ * @return The Canonical representation's host().  May be empty.
  */
 const std::string & Path::host() const
 {
-    return cannon().host();
+    return canon().host();
 }
 
 /**
- * @return The Cannonical representation's extra().  May be empty.
+ * @return The Canonical representation's extra().  May be empty.
  */
 const std::string & Path::extra() const
 {
-    return cannon().extra();
+    return canon().extra();
 }
 
 /**
@@ -320,9 +320,9 @@ Path Path::add(const Path &path) const
 {
 	if (path.abs())
 		return path;
-    Cannonical c(cannon());
-    std::copy(path.cannon().components().begin(),
-              path.cannon().components().end(),
+    Canonical c(canon());
+    std::copy(path.canon().components().begin(),
+              path.canon().components().end(),
               std::back_inserter(c.components()));
     return Path (c, m_rules);
     //return rules()->convert(c);
@@ -343,12 +343,12 @@ Path Path::add(const Path &path) const
  * @endcode
  * 
  * @param List of strings to be added
- * @return A new path with the same cannonical and the strings added.
+ * @return A new path with the same canonical and the strings added.
  */
 Path Path::add(const Strings &strings) const
 {
     
-    Cannonical c(cannon());
+    Canonical c(canon());
     std::copy(strings.begin(), strings.end(),
               std::back_inserter(c.components()));
     return Path(c, m_rules);
@@ -358,18 +358,18 @@ Path Path::add(const Strings &strings) const
  * Add a single directory element to the end of the path components
  *
  * @param p Extra component to be added
- * @return A new path with the same Cannonical but one more element to components.
+ * @return A new path with the same Canonical but one more element to components.
  */
 Path Path::add(const std::string &p) const
 {
-    Cannonical c(cannon());
+    Canonical c(canon());
     c.add(p);
     return Path(c, m_rules);
 }
 
 /**
  * @param p Extra component to be added
- * @return A new path with the same Cannonical but one more element to components.
+ * @return A new path with the same Canonical but one more element to components.
  */
 Path Path::add(const char *p) const
 {
@@ -387,16 +387,16 @@ Path Path::add(const char *p) const
  */
 std::vector<Path> Path::split() const
 {
-    const Cannonical &      c = cannon();
-    Cannonical              newcannon(c);
+    const Canonical &      c = canon();
+    Canonical              newcanon(c);
     std::vector<Path>       paths;
 
-    newcannon.components().clear();
+    newcanon.components().clear();
     for (Strings::const_iterator iter = c.components().begin();
          iter != c.components().end(); ++iter)
     {
-        newcannon.add(*iter);
-        Path    p (newcannon, m_rules);
+        newcanon.add(*iter);
+        Path    p (newcanon, m_rules);
         paths.push_back(p);
     }
 	return paths;
@@ -458,26 +458,26 @@ PathRules * Path::defaultPathRules()
 Path Path::getcwd()
 {
     PathRules   *r = defaultPathRules();
-	return Path(r->cannonical(SysCalls().getcwd()), r);
+	return Path(r->canonical(SysCalls().getcwd()), r);
 }
 
 /**
- * Returns the cannonical representation of this path.
+ * Returns the canonical representation of this path.
  *
  * If the result has not already been determined, it
  * is calculated.
  */
-const Cannonical & Path::cannon() const
+const Canonical & Path::canon() const
 {
-	if (!m_cannon)
+	if (!m_canon)
 	{
-		m_cannon = new Cannonical(rules()->cannonical(m_path));
+		m_canon = new Canonical(rules()->canonical(m_path));
 	}
-	return *m_cannon;
+	return *m_canon;
 }
 
 /**
- * Compares the PathRules and Cannonical componenets
+ * Compares the PathRules and Canonical componenets
  * to see if they are the same.  So while two paths
  * might be logically the same, "a" and "/a/b/.." are logically
  * the same, they will not compare equally.  See
@@ -489,7 +489,7 @@ const Cannonical & Path::cannon() const
 bool operator==(const Path &op1, const Path & op2)
 {
     bool r = (op1.rules() == op2.rules());
-    bool c = (op1.cannon() == op2.cannon());
+    bool c = (op1.canon() == op2.canon());
     return r && c;
 }
 

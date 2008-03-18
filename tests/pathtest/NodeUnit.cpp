@@ -2,7 +2,7 @@
 #include <path/NodeIter.h>
 #include <path/SysCalls.h>
 #include <path/PathException.h>
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
@@ -47,7 +47,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(NodeUnit);
 
 void NodeUnit::setUp()
 {
-    m_base = Path(Cannonical("temp"));
+    m_base = Path(Canonical("temp"));
     initFiles();
 }
 

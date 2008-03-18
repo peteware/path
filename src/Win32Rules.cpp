@@ -6,7 +6,7 @@
  *  Original author: Pete Ware
  */
 #include <path/Win32Rules.h>
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 #include <path/Path.h>
 
 /**
@@ -27,21 +27,21 @@ Win32Rules::~Win32Rules()
  * Converts Path into a 'canonical' form.  This allows a Path to be converted from
  * one PathRules to another PathRules.
  */
-Cannonical Win32Rules::cannonical(const std::string &path) const
+Canonical Win32Rules::canonical(const std::string &path) const
 {
-    Cannonical cannon;
+    Canonical canon;
     
     if (path.size() >= 2 && path[1] == ':')
     {
-        cannon = PathRules::cannonical(path.substr(2, path.size() - 2));
-        cannon.setDrive(path.substr(0,1));
-        cannon.setAbs(true);
+        canon = PathRules::canonical(path.substr(2, path.size() - 2));
+        canon.setDrive(path.substr(0,1));
+        canon.setAbs(true);
     }
     else
     {
-        cannon = PathRules::cannonical(path);
+        canon = PathRules::canonical(path);
     }
-	return cannon;
+	return canon;
 }
 
 /**
@@ -74,9 +74,9 @@ std::string Win32Rules::quote(const std::string & path) const
  * @sa UnixPath(),  URLPath()
  *
  * @param path A string with a Windows/DOS style path
- * @return A Cannonical object representing that path
+ * @return A Canonical object representing that path
  */
-Cannonical Win32Path(const std::string &path)
+Canonical Win32Path(const std::string &path)
 {
-    return Win32Rules::rules.cannonical(path);
+    return Win32Rules::rules.canonical(path);
 }

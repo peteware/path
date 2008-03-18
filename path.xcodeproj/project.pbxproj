@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		506939A50D88727300E050F1 /* BadPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914240CE2B3F600ADA70C /* BadPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		506939A60D88727300E050F1 /* Cannonical.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914250CE2B3F600ADA70C /* Cannonical.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		506939A60D88727300E050F1 /* Canonical.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914250CE2B3F600ADA70C /* Canonical.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939A70D88727300E050F1 /* FileStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914260CE2B3F600ADA70C /* FileStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939A80D88727300E050F1 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914270CE2B3F600ADA70C /* Node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939A90D88727300E050F1 /* NodeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914280CE2B3F600ADA70C /* NodeInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -24,7 +24,7 @@
 		506939B40D88727300E050F1 /* UriRules.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914320CE2B3F600ADA70C /* UriRules.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939B50D88727300E050F1 /* Win32Rules.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914330CE2B3F600ADA70C /* Win32Rules.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939B60D88728E00E050F1 /* BadPath.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500913FF0CE2B3E300ADA70C /* BadPath.cpp */; };
-		506939B70D88728E00E050F1 /* Cannonical.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914000CE2B3E300ADA70C /* Cannonical.cpp */; };
+		506939B70D88728E00E050F1 /* Canonical.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914000CE2B3E300ADA70C /* Canonical.cpp */; };
 		506939B80D88728E00E050F1 /* FileStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914010CE2B3E300ADA70C /* FileStream.cpp */; };
 		506939B90D88728E00E050F1 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914020CE2B3E300ADA70C /* Node.cpp */; };
 		506939BA0D88728E00E050F1 /* NodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914030CE2B3E300ADA70C /* NodeInfo.cpp */; };
@@ -43,7 +43,7 @@
 		506939C70D88728E00E050F1 /* Win32Rules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140F0CE2B3E300ADA70C /* Win32Rules.cpp */; };
 		50693A220D8873C500E050F1 /* libcppunit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009152A0CE5238000ADA70C /* libcppunit.a */; };
 		50693A270D8873F100E050F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914860CE333AE00ADA70C /* main.cpp */; };
-		50693A280D8873F100E050F1 /* CannonicalUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914850CE333AE00ADA70C /* CannonicalUnit.cpp */; };
+		50693A280D8873F100E050F1 /* CanonicalUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914850CE333AE00ADA70C /* CanonicalUnit.cpp */; };
 		50693A290D8873F100E050F1 /* NodeUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914870CE333AE00ADA70C /* NodeUnit.cpp */; };
 		50693A2A0D8873F100E050F1 /* PathRulesUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914880CE333AE00ADA70C /* PathRulesUnit.cpp */; };
 		50693A2B0D8873F100E050F1 /* PathUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914890CE333AE00ADA70C /* PathUnit.cpp */; };
@@ -67,7 +67,7 @@
 
 /* Begin PBXFileReference section */
 		500913FF0CE2B3E300ADA70C /* BadPath.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = BadPath.cpp; sourceTree = "<group>"; };
-		500914000CE2B3E300ADA70C /* Cannonical.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Cannonical.cpp; sourceTree = "<group>"; };
+		500914000CE2B3E300ADA70C /* Canonical.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Canonical.cpp; sourceTree = "<group>"; };
 		500914010CE2B3E300ADA70C /* FileStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = FileStream.cpp; sourceTree = "<group>"; };
 		500914020CE2B3E300ADA70C /* Node.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Node.cpp; sourceTree = "<group>"; };
 		500914030CE2B3E300ADA70C /* NodeInfo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = NodeInfo.cpp; sourceTree = "<group>"; };
@@ -83,7 +83,7 @@
 		5009140E0CE2B3E300ADA70C /* UriRules.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = UriRules.cpp; sourceTree = "<group>"; };
 		5009140F0CE2B3E300ADA70C /* Win32Rules.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Win32Rules.cpp; sourceTree = "<group>"; };
 		500914240CE2B3F600ADA70C /* BadPath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BadPath.h; sourceTree = "<group>"; };
-		500914250CE2B3F600ADA70C /* Cannonical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cannonical.h; sourceTree = "<group>"; };
+		500914250CE2B3F600ADA70C /* Canonical.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Canonical.h; sourceTree = "<group>"; };
 		500914260CE2B3F600ADA70C /* FileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileStream.h; sourceTree = "<group>"; };
 		500914270CE2B3F600ADA70C /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		500914280CE2B3F600ADA70C /* NodeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeInfo.h; sourceTree = "<group>"; };
@@ -98,7 +98,7 @@
 		500914310CE2B3F600ADA70C /* UnixRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UnixRules.h; sourceTree = "<group>"; };
 		500914320CE2B3F600ADA70C /* UriRules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UriRules.h; sourceTree = "<group>"; };
 		500914330CE2B3F600ADA70C /* Win32Rules.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Win32Rules.h; sourceTree = "<group>"; };
-		500914850CE333AE00ADA70C /* CannonicalUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = CannonicalUnit.cpp; sourceTree = "<group>"; };
+		500914850CE333AE00ADA70C /* CanonicalUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = CanonicalUnit.cpp; sourceTree = "<group>"; };
 		500914860CE333AE00ADA70C /* main.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = main.cpp; sourceTree = "<group>"; };
 		500914870CE333AE00ADA70C /* NodeUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = NodeUnit.cpp; sourceTree = "<group>"; };
 		500914880CE333AE00ADA70C /* PathRulesUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = PathRulesUnit.cpp; sourceTree = "<group>"; };
@@ -172,7 +172,7 @@
 			isa = PBXGroup;
 			children = (
 				500913FF0CE2B3E300ADA70C /* BadPath.cpp */,
-				500914000CE2B3E300ADA70C /* Cannonical.cpp */,
+				500914000CE2B3E300ADA70C /* Canonical.cpp */,
 				500914010CE2B3E300ADA70C /* FileStream.cpp */,
 				500914020CE2B3E300ADA70C /* Node.cpp */,
 				507AECBF0D2BCE4B0071EB10 /* SubNode.cpp */,
@@ -206,7 +206,7 @@
 			children = (
 				50B974490D8DA9F800E8B628 /* Strings.h */,
 				500914240CE2B3F600ADA70C /* BadPath.h */,
-				500914250CE2B3F600ADA70C /* Cannonical.h */,
+				500914250CE2B3F600ADA70C /* Canonical.h */,
 				500914260CE2B3F600ADA70C /* FileStream.h */,
 				500914270CE2B3F600ADA70C /* Node.h */,
 				500914280CE2B3F600ADA70C /* NodeInfo.h */,
@@ -236,7 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				500914860CE333AE00ADA70C /* main.cpp */,
-				500914850CE333AE00ADA70C /* CannonicalUnit.cpp */,
+				500914850CE333AE00ADA70C /* CanonicalUnit.cpp */,
 				500914870CE333AE00ADA70C /* NodeUnit.cpp */,
 				500914880CE333AE00ADA70C /* PathRulesUnit.cpp */,
 				500914890CE333AE00ADA70C /* PathUnit.cpp */,
@@ -264,7 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				506939A50D88727300E050F1 /* BadPath.h in Headers */,
-				506939A60D88727300E050F1 /* Cannonical.h in Headers */,
+				506939A60D88727300E050F1 /* Canonical.h in Headers */,
 				506939A70D88727300E050F1 /* FileStream.h in Headers */,
 				506939A80D88727300E050F1 /* Node.h in Headers */,
 				506939A90D88727300E050F1 /* NodeInfo.h in Headers */,
@@ -344,7 +344,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				506939B60D88728E00E050F1 /* BadPath.cpp in Sources */,
-				506939B70D88728E00E050F1 /* Cannonical.cpp in Sources */,
+				506939B70D88728E00E050F1 /* Canonical.cpp in Sources */,
 				506939B80D88728E00E050F1 /* FileStream.cpp in Sources */,
 				506939B90D88728E00E050F1 /* Node.cpp in Sources */,
 				506939BA0D88728E00E050F1 /* NodeInfo.cpp in Sources */,
@@ -369,7 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				50693A270D8873F100E050F1 /* main.cpp in Sources */,
-				50693A280D8873F100E050F1 /* CannonicalUnit.cpp in Sources */,
+				50693A280D8873F100E050F1 /* CanonicalUnit.cpp in Sources */,
 				50693A290D8873F100E050F1 /* NodeUnit.cpp in Sources */,
 				50693A2A0D8873F100E050F1 /* PathRulesUnit.cpp in Sources */,
 				50693A2B0D8873F100E050F1 /* PathUnit.cpp in Sources */,
@@ -429,9 +429,10 @@
 				HEADER_SEARCH_PATHS = include;
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
-				PRIVATE_HEADERS_FOLDER_PATH = path;
+				PRIVATE_HEADERS_FOLDER_PATH = include/path/private;
 				PRODUCT_NAME = path;
-				PUBLIC_HEADERS_FOLDER_PATH = path;
+				PUBLIC_HEADERS_FOLDER_PATH = include/path;
+				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
 			};
 			name = Debug;
 		};

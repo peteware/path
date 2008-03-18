@@ -1,11 +1,11 @@
 /**
- * @file Cannonical.cpp
+ * @file Canonical.cpp
  *
- * Implementation of the Class Cannonical
+ * Implementation of the Class Canonical
  *  Created on:      11-May-2007 5:09:30 PM
  *  Original author: Pete Ware
  */
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 #include <iostream>
 #include <algorithm>
 #include <iterator>
@@ -14,7 +14,7 @@
 /**
  * Sets everything to be empty and this to be a relative path.
  */
-Cannonical::Cannonical()
+Canonical::Canonical()
 	: m_protocol(),
 	  m_host(),	  
 	  m_extra(),
@@ -28,7 +28,7 @@ Cannonical::Cannonical()
 /**
  * @param copy Provides the protocol, host, and component info
  */
-Cannonical::Cannonical(const Cannonical &copy)
+Canonical::Canonical(const Canonical &copy)
 	: m_protocol(copy.m_protocol),
 	  m_host(copy.m_host),
 	  m_extra(copy.m_extra),
@@ -44,7 +44,7 @@ Cannonical::Cannonical(const Cannonical &copy)
  * @param copy Provides the protocol, host and extra info
  * @param components Replaces that path from copy
  */
-Cannonical::Cannonical(const Cannonical &copy, const Strings &components)
+Canonical::Canonical(const Canonical &copy, const Strings &components)
 	: m_protocol(copy.m_protocol),
 	  m_host(copy.m_host),
 	  m_extra(copy.m_extra),
@@ -59,7 +59,7 @@ Cannonical::Cannonical(const Cannonical &copy, const Strings &components)
  *
  * @param dir1 First directory
  */
-Cannonical::Cannonical(const std::string &dir1)
+Canonical::Canonical(const std::string &dir1)
 	: m_protocol(),
 	  m_host(),	  
 	  m_extra(),
@@ -77,7 +77,7 @@ Cannonical::Cannonical(const std::string &dir1)
  * @param dir1 First directory
  * @param dir2 First directory
  */
-Cannonical::Cannonical(const std::string &dir1, const std::string &dir2)
+Canonical::Canonical(const std::string &dir1, const std::string &dir2)
 	: m_protocol(),
 	  m_host(),	  
 	  m_extra(),
@@ -96,7 +96,7 @@ Cannonical::Cannonical(const std::string &dir1, const std::string &dir2)
  * @param dir2 Second directory
  * @param dir3 Third directory
  */
-Cannonical::Cannonical(const std::string &dir1, const std::string &dir2, const std::string &dir3)
+Canonical::Canonical(const std::string &dir1, const std::string &dir2, const std::string &dir3)
 	: m_protocol(),
 	  m_host(),	  
 	  m_extra(),
@@ -115,7 +115,7 @@ Cannonical::Cannonical(const std::string &dir1, const std::string &dir2, const s
  * @param dir3 Third directory
  * @param dir4 Third directory
  */
-Cannonical::Cannonical(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4)
+Canonical::Canonical(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4)
 	: m_protocol(),
 	  m_host(),	  
 	  m_extra(),
@@ -131,7 +131,7 @@ Cannonical::Cannonical(const std::string &dir1, const std::string &dir2, const s
 /**
  * Empty destructor
  */
-Cannonical::~Cannonical()
+Canonical::~Canonical()
 {
 }
 
@@ -143,13 +143,13 @@ Cannonical::~Cannonical()
  * @param proto The new protocol
  * @return A reference to this object
  */
-Cannonical &  Cannonical::setProtocol(const std::string &proto)
+Canonical &  Canonical::setProtocol(const std::string &proto)
 {
     m_protocol = proto;
     return *this;
 }
 
-const std::string & Cannonical::protocol() const
+const std::string & Canonical::protocol() const
 {
 	return m_protocol;
 }
@@ -161,13 +161,13 @@ const std::string & Cannonical::protocol() const
  * @param host The new hostname to use
  * @return A reference to this object
  */
-Cannonical &  Cannonical::setHost(const std::string &host)
+Canonical &  Canonical::setHost(const std::string &host)
 {
     m_host = host;
     return *this;
 }
 
-const std::string & Cannonical::host() const
+const std::string & Canonical::host() const
 {
 	return m_host;
 }
@@ -179,13 +179,13 @@ const std::string & Cannonical::host() const
  * @param extra The additional value for the protocol
  * @return A reference to this object
  */
-Cannonical &  Cannonical::setExtra(const std::string &extra)
+Canonical &  Canonical::setExtra(const std::string &extra)
 {
     m_extra = extra;
     return *this;
 }
 
-const std::string & Cannonical::extra() const
+const std::string & Canonical::extra() const
 {
 	return m_extra;
 }
@@ -205,13 +205,13 @@ const std::string & Cannonical::extra() const
  * @param drive The drive letter
  * @return A reference to this object
  */
-Cannonical &  Cannonical::setDrive(const std::string &drive)
+Canonical &  Canonical::setDrive(const std::string &drive)
 {
     m_drive = drive;
     return *this;
 }
 
-const std::string &Cannonical::drive() const
+const std::string &Canonical::drive() const
 {
     return m_drive;
 }
@@ -223,7 +223,7 @@ const std::string &Cannonical::drive() const
  * @param dir The component to append
  * @return A reference to this object
  */
-Cannonical & Cannonical::add(const std::string &dir)
+Canonical & Canonical::add(const std::string &dir)
 {
     if (!dir.empty())
         m_components.push_back(dir);
@@ -238,7 +238,7 @@ Cannonical & Cannonical::add(const std::string &dir)
  * @param dir2 The component to append
  * @return A reference to this object
  */
-Cannonical & Cannonical::add(const std::string &dir1, const std::string &dir2)
+Canonical & Canonical::add(const std::string &dir1, const std::string &dir2)
 {
 	add(dir1);
 	add(dir2);
@@ -254,7 +254,7 @@ Cannonical & Cannonical::add(const std::string &dir1, const std::string &dir2)
  * @param dir3 The component to append
  * @return A reference to this object
  */
-Cannonical & Cannonical::add(const std::string &dir1, const std::string &dir2, const std::string &dir3)
+Canonical & Canonical::add(const std::string &dir1, const std::string &dir2, const std::string &dir3)
 {
     add(dir1);
     add(dir2);
@@ -272,7 +272,7 @@ Cannonical & Cannonical::add(const std::string &dir1, const std::string &dir2, c
  * @param dir4 The component to append
  * @return A reference to this object
  */
-Cannonical & Cannonical::add(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4)
+Canonical & Canonical::add(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4)
 {
     add(dir1);
     add(dir2);
@@ -288,7 +288,7 @@ Cannonical & Cannonical::add(const std::string &dir1, const std::string &dir2, c
  *
  * @return Componenets in a path
  */
-Strings &Cannonical::components()
+Strings &Canonical::components()
 {
 	return m_components;
 }
@@ -296,7 +296,7 @@ Strings &Cannonical::components()
 /**
  * @return Components in a path
  */
-const Strings &Cannonical::components() const
+const Strings &Canonical::components() const
 {
 	return m_components;
 }
@@ -313,7 +313,7 @@ const Strings &Cannonical::components() const
  * @param abs	If this path starts at root
  * @return A reference to this object
  */
-Cannonical & Cannonical::setAbs(bool abs)
+Canonical & Canonical::setAbs(bool abs)
 {
 	std::swap(abs, m_abs);
 	return *this;
@@ -322,7 +322,7 @@ Cannonical & Cannonical::setAbs(bool abs)
 /**
  * @return If this is an absolute path
  */
-bool Cannonical::abs() const
+bool Canonical::abs() const
 {
 	return m_abs;
 }
@@ -347,45 +347,45 @@ bool Cannonical::abs() const
  */
 
 std::ostream &
-operator<<(std::ostream &out, const Cannonical &cannon)
+operator<<(std::ostream &out, const Canonical &canon)
 {
     bool    seperator = true;
-	if (!cannon.protocol().empty())
-		out << cannon.protocol() << ':';
-	if (!cannon.host().empty())
+	if (!canon.protocol().empty())
+		out << canon.protocol() << ':';
+	if (!canon.host().empty())
     {
-		out << "//" << cannon.host();
+		out << "//" << canon.host();
         seperator = false;
     }
-	if (!cannon.extra().empty())
+	if (!canon.extra().empty())
     {
-		out << ":" << cannon.extra();
+		out << ":" << canon.extra();
         seperator = false;
     }
     if (!seperator)
         out << '/';
 
-    if (!cannon.drive().empty())
+    if (!canon.drive().empty())
     {
-        out << cannon.drive() << ':';
+        out << canon.drive() << ':';
     }
-    if (cannon.abs())
+    if (canon.abs())
         out << '/';
-	std::copy(cannon.components().begin(),
-		cannon.components().end(),
+	std::copy(canon.components().begin(),
+		canon.components().end(),
 		std::ostream_iterator<std::string>(out, "/"));
 	return out;
 }
 
 /**
- * Return true if all the values in the Cannonical objects op1 and op2 
+ * Return true if all the values in the Canonical objects op1 and op2 
  * are identical; false otherwise
  *
  * @param op1 The left hand side
  * @param op2 The right hand side
  * @return true if identical, false otherwise.
  */
-bool operator==(const Cannonical &op1, const Cannonical &op2)
+bool operator==(const Canonical &op1, const Canonical &op2)
 {
     if (op1.abs() != op2.abs())
         return false;
@@ -403,14 +403,14 @@ bool operator==(const Cannonical &op1, const Cannonical &op2)
 }
 
 /**
- * Return true if any of the values in the Cannonical objects op1 and op2 
+ * Return true if any of the values in the Canonical objects op1 and op2 
  * are diffrent; false otherwise
  *
  * @param op1 The left hand side
  * @param op2 The right hand side
  * @return true if different, false otherwise.
  */
-bool operator!=(const Cannonical &op1, const Cannonical &op2)
+bool operator!=(const Canonical &op1, const Canonical &op2)
 {
     return !(op1 == op2);
 }

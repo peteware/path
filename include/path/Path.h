@@ -36,7 +36,7 @@
  * own semantics.  For example, it doesn't make sense
  * to change a Node's suffix().
  *
- * The choice made in this design is that a Path manipulates a Cannonical
+ * The choice made in this design is that a Path manipulates a Canonical
  * representation of a path.  The unfortunate side affect is
  * it's difficult to just use a string to create a Path and you must
  * be explicit about the rules you want to use when initializing
@@ -49,11 +49,11 @@
  * 
  * Result in two identical paths.
  *
- * UnixPath() and Win32Path() take strings and return a Cannonical
+ * UnixPath() and Win32Path() take strings and return a Canonical
  * object for that set of rules.
  *
- * To make things easier, the Cannonical class design has most
- * methods returning a reference to the Cannonical object so you can chain
+ * To make things easier, the Canonical class design has most
+ * methods returning a reference to the Canonical object so you can chain
  * several operations together (this is antithesis
  * of how the Path class works).  For example:
  *
@@ -65,7 +65,7 @@
  * Result in two identical paths.
  *
  * @sa 
- * Cannonical, PathRules, UnixRules, Wn32Rules, UriRules, Win32Path, 
+ * Canonical, PathRules, UnixRules, Wn32Rules, UriRules, Win32Path, 
  * UnixPath.
  */
 class Path
@@ -75,8 +75,8 @@ public:
 	Path(const PathRules *rules = 0);
 	/// Constructor from std::string
     Path(const std::string &path);
-    /// Use a Cannonical path and PathRules
-    Path(const Cannonical &cannon, const PathRules *rules = 0);
+    /// Use a Canonical path and PathRules
+    Path(const Canonical &canon, const PathRules *rules = 0);
     /// Construct from a NUL terminatd strin
     Path(const char *path);
 	/// Copy constructor
@@ -128,8 +128,8 @@ public:
 	/// Return each directory component as a Path.
 	std::vector<Path> split() const;
 
-	/// Return the Cannonical representation of the path
-	const Cannonical &cannon() const;
+	/// Return the Canonical representation of the path
+	const Canonical &canon() const;
 
 	/// Return the rules (may be NULL)
 	const PathRules *pathRules() const;
@@ -154,8 +154,8 @@ private:
 	std::string		m_path;
 	/// These are the rules we use for this path; may be NULL
 	const PathRules *		m_rules;
-	/// The path in cannonical form; may be NULL
-	mutable Cannonical *m_cannon;
+	/// The path in canonical form; may be NULL
+	mutable Canonical *m_canon;
     /// Cached value path converted by path();
     mutable std::string *   m_pathStr;
 
@@ -171,10 +171,10 @@ std::ostream &operator<<(std::ostream &out, const Path&path);
 Path operator+(const Path &path, const std::string &dir);
 
 // Shortcuts for handling different paths as strings
-/// Convert a unix style path ("/a/b/c") to Cannonical
-Cannonical UnixPath(const std::string &path);
-/// Convert a Win32 style path ("C:\temp") to Cannonical
-Cannonical Win32Path(const std::string &path);
-/// Convert a URL style path ("http://www.peteware.com/a") to Cannonical
-Cannonical URLPath(const std::string &path);
+/// Convert a unix style path ("/a/b/c") to Canonical
+Canonical UnixPath(const std::string &path);
+/// Convert a Win32 style path ("C:\temp") to Canonical
+Canonical Win32Path(const std::string &path);
+/// Convert a URL style path ("http://www.peteware.com/a") to Canonical
+Canonical URLPath(const std::string &path);
 #endif // !defined(_PATH_PATH_H_)

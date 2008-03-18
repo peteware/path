@@ -1,4 +1,4 @@
-#include <path/Cannonical.h>
+#include <path/Canonical.h>
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
@@ -8,12 +8,12 @@
 #include <string>
 
 /**
- * Implements unit tests for Cannonical class
+ * Implements unit tests for Canonical class
  *
  */
-class CannonicalUnit : public CppUnit::TestCase
+class CanonicalUnit : public CppUnit::TestCase
 {
-	CPPUNIT_TEST_SUITE(CannonicalUnit);
+	CPPUNIT_TEST_SUITE(CanonicalUnit);
 
 	CPPUNIT_TEST(init);
     CPPUNIT_TEST(testOstream);
@@ -35,21 +35,21 @@ protected:
     void testAdd();
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(CannonicalUnit);
+CPPUNIT_TEST_SUITE_REGISTRATION(CanonicalUnit);
 
-void CannonicalUnit::init()
+void CanonicalUnit::init()
 {
-	Cannonical	c1;
+	Canonical	c1;
 	CPPUNIT_ASSERT(c1.components().empty());
 	CPPUNIT_ASSERT(c1.protocol().empty());
 	CPPUNIT_ASSERT(c1.host().empty());
 	CPPUNIT_ASSERT(c1.extra().empty());
     CPPUNIT_ASSERT(c1.drive().empty());
 
-	Cannonical	c2 = c1;
+	Canonical	c2 = c1;
 	CPPUNIT_ASSERT(c2.components().empty());
 
-	Cannonical	c3;
+	Canonical	c3;
     c3.setProtocol("http");
     c3.setHost("peteware.com");
     c3.setExtra("8080");
@@ -70,7 +70,7 @@ void CannonicalUnit::init()
 
 	dirs.clear();
 	dirs.push_back("x");
-	Cannonical	c4 (c3, dirs);
+	Canonical	c4 (c3, dirs);
 	CPPUNIT_ASSERT_EQUAL(c3.protocol(), c4.protocol());
 	CPPUNIT_ASSERT_EQUAL(c3.host(), c4.host());
 	CPPUNIT_ASSERT_EQUAL(c3.extra(), c4.extra());
@@ -78,9 +78,9 @@ void CannonicalUnit::init()
 	CPPUNIT_ASSERT(c4.components() == dirs);
 }
 
-void CannonicalUnit::testOstream()
+void CanonicalUnit::testOstream()
 {
-	Cannonical	c1;
+	Canonical	c1;
     c1.setProtocol("ftp");
     c1.setHost("ftp.peteware.com");
     c1.setExtra("8080");
@@ -92,7 +92,7 @@ void CannonicalUnit::testOstream()
 	CPPUNIT_ASSERT_EQUAL(std::string("ftp://ftp.peteware.com:8080/a/b/"), out.str());
     
     std::ostringstream  out2;
-    Cannonical c2;
+    Canonical c2;
     c2.add("a");
     c2.setDrive("C");
     out2 << c2;
@@ -104,34 +104,34 @@ void CannonicalUnit::testOstream()
     
 }
 
-void CannonicalUnit::testDrive()
+void CanonicalUnit::testDrive()
 {
-    Cannonical  c1;
+    Canonical  c1;
     c1.setDrive("abc");
     CPPUNIT_ASSERT_EQUAL(std::string("abc"), c1.drive());
     c1.setDrive("abc:");
     CPPUNIT_ASSERT_EQUAL(std::string("abc:"), c1.drive());
     /// Test copy operator
-    Cannonical c2(c1);
-    Cannonical c3;
+    Canonical c2(c1);
+    Canonical c3;
     CPPUNIT_ASSERT_EQUAL(c1.drive(), c2.drive());
     
     c3 = c1;
     CPPUNIT_ASSERT_EQUAL(c1.drive(), c3.drive());    
 }
 
-void CannonicalUnit::testCompare()
+void CanonicalUnit::testCompare()
 {
-    Cannonical  c1;
-    Cannonical  c2;
+    Canonical  c1;
+    Canonical  c2;
     CPPUNIT_ASSERT(c1 == c2);
     CPPUNIT_ASSERT(!(c1 != c2));
 }
 
-void CannonicalUnit::testAdd()
+void CanonicalUnit::testAdd()
 {
-    Cannonical  c1("a", "b", "c", "d");
-    Cannonical  c2;
+    Canonical  c1("a", "b", "c", "d");
+    Canonical  c2;
     c2.add("a").add("b").add("c").add("d");
     
     CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(4), c1.components().size());
