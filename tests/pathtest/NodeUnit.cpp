@@ -59,12 +59,12 @@ void NodeUnit::tearDown()
 void NodeUnit::initFiles()
 {
     m_files.push_back(DirHiearchy(m_base, true));
-    m_files.push_back(DirHiearchy(m_base.join("1"), false));
-    m_files.push_back(DirHiearchy(m_base.join("22"), false));
-    m_files.push_back(DirHiearchy(m_base.join("333"), false));
-    m_files.push_back(DirHiearchy(m_base.join("4444"), false));
-    m_files.push_back(DirHiearchy(m_base.join("subdir"), true));
-    //m_files.push_back(DirHiearchy(m_base.join("subdir").join("abc"), false));
+    m_files.push_back(DirHiearchy(m_base.add("1"), false));
+    m_files.push_back(DirHiearchy(m_base.add("22"), false));
+    m_files.push_back(DirHiearchy(m_base.add("333"), false));
+    m_files.push_back(DirHiearchy(m_base.add("4444"), false));
+    m_files.push_back(DirHiearchy(m_base.add("subdir"), true));
+    //m_files.push_back(DirHiearchy(m_base.add("subdir").add("abc"), false));
 }
 
 void NodeUnit::buildFiles()
@@ -152,7 +152,7 @@ void NodeUnit::iter()
 
 void NodeUnit::iter_file()
 {
-    Path    testfile = m_base.join("regularfile");
+    Path    testfile = m_base.add("regularfile");
     buildFiles();
     SysCalls().touch(testfile.str());
     Node    n (testfile);

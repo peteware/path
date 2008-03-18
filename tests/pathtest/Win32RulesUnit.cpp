@@ -66,25 +66,28 @@ void Win32RulesUnit::convert()
     Path        path;
     
     // Test empty
-    path = rules.convert(cannon);
+    path = Path(cannon, &rules);
     CPPUNIT_ASSERT_EQUAL(std::string(""), path.str());
     CPPUNIT_ASSERT(!path.abs());
     CPPUNIT_ASSERT(path.rules() == &rules);
     
     cannon.add("a");
-    path = rules.convert(cannon);
+    path = Path(cannon, &rules);
     CPPUNIT_ASSERT_EQUAL(std::string("a"), path.str());
     CPPUNIT_ASSERT(!path.abs());
     CPPUNIT_ASSERT(path.rules() == &rules);
     
     cannon.setAbs(true);
-    path = rules.convert(cannon);
+    path = Path(cannon, &rules);
     CPPUNIT_ASSERT_EQUAL(std::string("\\a"), path.str());
     cannon.add("b");
-    path = rules.convert(cannon);
+
+    path = Path(cannon, &rules);
     CPPUNIT_ASSERT_EQUAL(std::string("\\a\\b"), path.str());
     
     std::string s = "C:\\temp\\x.c";
-    path = Path (s, &rules);
+    path = Path (Win32Path(s), &rules);
     CPPUNIT_ASSERT_EQUAL(s, path.path());
+    CPPUNIT_ASSERT_EQUAL(std::string("C"), path.drive());
+    CPPUNIT_ASSERT_EQUAL(static_cast<std::string::size_type> (2), path.cannon().components().size());
 }

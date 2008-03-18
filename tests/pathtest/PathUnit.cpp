@@ -32,7 +32,7 @@ class PathUnit : public CppUnit::TestCase
 	CPPUNIT_TEST(testExtension);
 	CPPUNIT_TEST(testStem);
 	CPPUNIT_TEST(testAbs);
-	CPPUNIT_TEST(testJoin);
+	CPPUNIT_TEST(testadd);
 	CPPUNIT_TEST(testRules);
    	CPPUNIT_TEST(testGetcwd);
     CPPUNIT_TEST(testSplit);
@@ -56,8 +56,8 @@ protected:
 	void testStem();
 	/// Test Path::abs() and Path:;setAbs()
 	void testAbs();
-	/// Test Path::join()
-	void testJoin();
+	/// Test Path::add()
+	void testadd();
     /// Check that Path::split() works
     void testSplit();
 	/// Check that we can set the path rules
@@ -201,22 +201,22 @@ void PathUnit::testAbs()
 	CPPUNIT_ASSERT_EQUAL(p1.abs(), false);
 }
 
-void PathUnit::testJoin()
+void PathUnit::testadd()
 {
 	Path	p1("abc");
 	Path	p2("def");
 
-	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("abc/def")), p1.join(p2));
-	CPPUNIT_ASSERT_EQUAL(p1.join(p2).abs(), false);
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("abc/def")), p1.add(p2));
+	CPPUNIT_ASSERT_EQUAL(p1.add(p2).abs(), false);
 
 	Strings	paths;
-	CPPUNIT_ASSERT_EQUAL(p1, p1.join(paths));
+	CPPUNIT_ASSERT_EQUAL(p1, p1.add(paths));
 	paths.push_back("a");
 	paths.push_back("b");
 	paths.push_back("c");
-	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("abc/a/b/c")), p1.join(paths));
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("abc/a/b/c")), p1.add(paths));
 	p1 = p1.makeAbs();
-	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/abc/a/b/c")), p1.join(paths));
+	CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/abc/a/b/c")), p1.add(paths));
     
     p1 = Path(UnixPath("/a")).add("b");
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a/b")), p1);
@@ -236,6 +236,9 @@ void PathUnit::testSplit()
     
     paths = p.split();
     CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(3), paths.size());
+    CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a")), paths[0]);
+    CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a/b")), paths[1]);
+    CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a/b/c")), paths[2]);
     
     CPPUNIT_ASSERT(paths[0].abs());
     p = Path(UnixPath("a/b"));

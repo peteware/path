@@ -32,7 +32,7 @@ public:
 	/// Quote an element of path
 	virtual std::string quote(const std::string & subdir) const = 0;
     /// Convert Cannonical into a string
-    virtual std::string join(const Cannonical &canononical) const;
+    virtual std::string add(const Cannonical &canononical) const;
 protected:
 	/// Split a string into it's components
 	static void split(const std::string &path, char sep, Strings &subdirs);

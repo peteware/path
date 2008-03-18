@@ -8,7 +8,6 @@
 #include <path/Path.h>
 #include <path/Cannonical.h>
 #include <path/UnixRules.h>
-
 #include <path/SysCalls.h>
 
 #include <iostream>
@@ -35,7 +34,7 @@ Path::Path(const char *path)
       m_cannon(new Cannonical(path)),
       m_pathStr(0)
 {
-    m_path = rules()->join(*m_cannon);
+    m_path = rules()->add(*m_cannon);
 }
 
 /**
@@ -47,7 +46,7 @@ Path::Path(const std::string &path)
       m_cannon(new Cannonical(path)),
       m_pathStr(0)
 {
-    m_path = rules()->join(*m_cannon);
+    m_path = rules()->add(*m_cannon);
 }
 
 /**
@@ -62,7 +61,7 @@ Path::Path(const Cannonical &cannon, const PathRules *param_rules)
       m_cannon(new Cannonical(cannon)),
       m_pathStr(0)
 {
-    m_path = rules()->join(cannon);
+    m_path = rules()->add(cannon);
 }
 
 /**
@@ -138,7 +137,7 @@ const std::string& Path::path() const
 {
     if (m_pathStr)
         return *m_pathStr;
-    m_pathStr = new std::string(rules()->join(cannon()));
+    m_pathStr = new std::string(rules()->add(cannon()));
 	return *m_pathStr;
 }
 
@@ -183,10 +182,10 @@ std::string Path::basename() const
  * dirname('/a/b/c') returns '/a/b'.  You just be able to do
  * 
  * @code
- * Path p1('/a/b/c');
+ * Path p1(UnixRules("/a/b/c"));
  * Path p2;
  * 
- * p2 = p1.join(p1.basename()));
+ * p2 = p1.add(p1.basename()));
  * assert(p1 == p2);
  * @endcode
  */
@@ -253,7 +252,7 @@ std::string Path::stem() const
 /**
  * Returns true if this String represents an absolute path.
  * 
- * This affects how join() works.
+ * This affects how add() works.
  */
 bool Path::abs() const 
 {
@@ -261,7 +260,7 @@ bool Path::abs() const
 }
 
 /**
- * Another alternative is to use Path::getcwd().join(path))
+ * Another alternative is to use Path::getcwd().add(path))
  * which might return something closer to what you expect.
  */
 Path Path::makeAbs() const
@@ -276,14 +275,14 @@ Path Path::makeAbs() const
  * @code
  * Path	path1("/tmp");
  * Path path2("a/b/c");
- * Path path3 = path1.join(path2);
+ * Path path3 = path1.add(path2);
  * std::cout << path3 << std::endl;
  * @endcode
  * Would print out "/tmp/a/b/c"
  * @param path Append path to this and return a new copy
  * @return A new path.
  */
-Path Path::join(const Path &path) const
+Path Path::add(const Path &path) const
 {
 	if (path.abs())
 		return path;
@@ -298,19 +297,19 @@ Path Path::join(const Path &path) const
 /**
  * Return a Path by joining all the std::strings in the vector.
  * 
- * This is comparable to repeated calling join() with each component of the vector.
- *  Creating an empty String and then calling join() should do what you'd expect.
+ * This is comparable to repeated calling add() with each component of the vector.
+ *  Creating an empty String and then calling add() should do what you'd expect.
  * For example:
  * 
  * @code
  * std::string  str; // initialize this...
  * Path  path;
  * 
- * path = path.join(str.split());
+ * path = path.add(str.split());
  * @endcode
  * 
  */
-Path Path::join(const Strings &strings) const
+Path Path::add(const Strings &strings) const
 {
     
     Cannonical c(cannon());
@@ -326,27 +325,32 @@ Path Path::add(const std::string &p) const
     return Path(c, m_rules);
 }
 
+Path Path::add(const char *p) const
+{
+    return add(std::string(p));
+}
+
 /**
- * Returns each component of the path as an individual Path
+ * Returns a vector of components to reach this path.
  * 
- * If the path is abs(), then the first component is also abs().  Each component
- * shares the same PathRules.  String::join() should return an equivalent path.
+ * If the path is abs(), then each component is also abs().  Each component
+ * shares the same PathRules.
+ *
+ * Using Unix style paths as a shorthand, the following path "/a/b/c"
+ * would return three vectors: ["/a", "/a/b", "/a/b/c"]
  */
 std::vector<Path> Path::split() const
 {
     const Cannonical &      c = cannon();
+    Cannonical              newcannon(c);
     std::vector<Path>       paths;
-    bool                    first = true;
-    
+
+    newcannon.components().clear();
     for (Strings::const_iterator iter = c.components().begin();
          iter != c.components().end(); ++iter)
     {
-        Path    p (*iter, rules());
-        if (first && abs())
-        {
-            p = p.makeAbs();
-        }
-        first = false;
+        newcannon.add(*iter);
+        Path    p (newcannon, m_rules);
         paths.push_back(p);
     }
 	return paths;

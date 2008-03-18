@@ -80,7 +80,7 @@ std::string PathRules::quote(const std::string & subdir) const
 	throw Unimplemented("PathRules::quote()");
 }
 
-std::string PathRules::join(const Cannonical &cannon) const
+std::string PathRules::add(const Cannonical &cannon) const
 {
     std::string     p;
     if (!cannon.protocol().empty())

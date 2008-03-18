@@ -74,7 +74,7 @@ void PathRulesUnit::convert()
 {
 	Cannonical	cannon;
 	UnixRules	rules;
-	Path		path = rules.convert(cannon);
+	Path		path (cannon, &rules);
 
 	CPPUNIT_ASSERT_EQUAL(std::string(""), path.str());
 	CPPUNIT_ASSERT(!path.abs());
@@ -82,13 +82,13 @@ void PathRulesUnit::convert()
 	cannon.add("a");
 	cannon.add("b");
 
-	path = rules.convert(cannon);
+	path = Path(cannon, &rules);
 
 	CPPUNIT_ASSERT_EQUAL(std::string("a/b"), path.str());
 	CPPUNIT_ASSERT(!path.abs());
 
 	cannon.setAbs(true);
-	path = rules.convert(cannon);
+	path = Path(cannon, &rules);
 	CPPUNIT_ASSERT_EQUAL(std::string("/a/b"), path.str());
 	CPPUNIT_ASSERT(path.abs());
 }

@@ -21,7 +21,7 @@
  * or directory.  The operations on a Path make no attempt to validate
  * if the file or directory actually exists. 
  * 
- * You can operate on a Path with some common operations such as join(),
+ * You can operate on a Path with some common operations such as add(),
  * extension(), split(), dirname(), basename(), last().  All such operations 
  * happen without worrying about the result being a Path to a valid
  * file or directory.  See the Node class to handle actual files and
@@ -109,11 +109,13 @@ public:
 	Path makeAbs() const;
 
 	/// Concatenate this and Path
-	Path join(const Path &path) const;
+	Path add(const Path &path) const;
 	/// Concatenate vector of strings with each as a component.
-	Path join(const Strings &strings) const;
+	Path add(const Strings &strings) const;
     /// Concatenate a single string
     Path add(const std::string &p) const;
+    /// Concatenate a NUL terminated string
+    Path add(const char *p) const;
 	/// Return each directory component as a Path.
 	std::vector<Path> split() const;
 
