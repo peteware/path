@@ -511,7 +511,7 @@ std::ostream &operator<<(std::ostream &out, const Path&path)
 }
 
 /**
- * Add another directory to path and return a new one
+ * Add another component to path and return a new one
  *
  * @param path The path to add to
  * @param dir The directory to add to path
@@ -520,4 +520,29 @@ std::ostream &operator<<(std::ostream &out, const Path&path)
 Path operator+(const Path &path, const std::string &dir)
 {
     return path.add(dir);
+
+}
+/**
+ * Add another component to path and return a new one
+ *
+ * @param path The path to add to
+ * @param dir The directory to add to path
+ * @return A new Path
+ */
+Path operator+(const Path &path, const char *dir)
+{
+    return path.add(std::string(dir));
+
+}
+
+/**
+ * Add another component to path and return a new path
+ *
+ * @param path The path to add to
+ * @param op2 The directory to add to path
+ * @return A new path
+ */
+Path operator+(const Path &path, const Path &op2)
+{
+    return path.add(op2);
 }

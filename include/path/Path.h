@@ -161,14 +161,18 @@ private:
 
 };
 
-/// Check if raw names are the same	
+/// Check if Cannonical names are the same	
 bool operator==(const Path &op1, const Path &op2);
-/// Check if raw names are different.
+/// Check if Cannonical names are different.
 bool operator!=(const Path &op1, const Path &op2);
 /// Print out the path
 std::ostream &operator<<(std::ostream &out, const Path&path);
 /// Add a new directory
+Path operator+(const Path &path, const char *dir);
+/// Add a new directory
 Path operator+(const Path &path, const std::string &dir);
+/// Concatenate two paths
+Path operator+(const Path &path, const Path &op2);
 
 // Shortcuts for handling different paths as strings
 /// Convert a unix style path ("/a/b/c") to Canonical

@@ -227,6 +227,8 @@ void PathUnit::testadd()
     p1 = Path();
     p1 = p1 + "a" + "b" + "c";
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("a/b/c")), p1);
+    p1 = p1 + p1;
+    CPPUNIT_ASSERT_EQUAL(Path(UnixPath("a/b/c/a/b/c")), p1);
 }
 
 void PathUnit::testSplit()
