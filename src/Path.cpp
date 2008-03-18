@@ -270,22 +270,34 @@ Path Path::makeAbs() const
     return Path(c, m_rules);
 }
 
+/**
+ * @return The Cannonical representation's drive().  May be empty.
+ */
 const std::string & Path::drive() const
 {
     return cannon().drive();
 }
 
+/**
+ * @return The Cannonical representation's protocol().  May be empty.
+ */
 const std::string & Path::protocol() const
 {
     return cannon().protocol();
 
 }
 
+/**
+ * @return The Cannonical representation's host().  May be empty.
+ */
 const std::string & Path::host() const
 {
     return cannon().host();
 }
 
+/**
+ * @return The Cannonical representation's extra().  May be empty.
+ */
 const std::string & Path::extra() const
 {
     return cannon().extra();
@@ -300,6 +312,7 @@ const std::string & Path::extra() const
  * std::cout << path3 << std::endl;
  * @endcode
  * Would print out "/tmp/a/b/c"
+ *
  * @param path Append path to this and return a new copy
  * @return A new path.
  */
@@ -329,6 +342,8 @@ Path Path::add(const Path &path) const
  * path = path.add(str.split());
  * @endcode
  * 
+ * @param List of strings to be added
+ * @return A new path with the same cannonical and the strings added.
  */
 Path Path::add(const Strings &strings) const
 {
@@ -339,6 +354,12 @@ Path Path::add(const Strings &strings) const
     return Path(c, m_rules);
 }
 
+/**
+ * Add a single directory element to the end of the path components
+ *
+ * @param p Extra component to be added
+ * @return A new path with the same Cannonical but one more element to components.
+ */
 Path Path::add(const std::string &p) const
 {
     Cannonical c(cannon());
@@ -346,6 +367,10 @@ Path Path::add(const std::string &p) const
     return Path(c, m_rules);
 }
 
+/**
+ * @param p Extra component to be added
+ * @return A new path with the same Cannonical but one more element to components.
+ */
 Path Path::add(const char *p) const
 {
     return add(std::string(p));
