@@ -270,6 +270,27 @@ Path Path::makeAbs() const
     return Path(c, m_rules);
 }
 
+const std::string & Path::drive() const
+{
+    return cannon().drive();
+}
+
+const std::string & Path::protocol() const
+{
+    return cannon().protocol();
+
+}
+
+const std::string & Path::host() const
+{
+    return cannon().host();
+}
+
+const std::string & Path::extra() const
+{
+    return cannon().extra();
+}
+
 /**
  * Return a Path by appending another path.  For example:
  * @code

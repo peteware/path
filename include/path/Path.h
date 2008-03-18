@@ -108,6 +108,15 @@ public:
 	/// Return a new path by converting this one to an absolute path
 	Path makeAbs() const;
 
+    /// Return the drive letter (may be empty)
+    const std::string &drive() const;
+    /// Return the protocol (may be empty)
+    const std::string &protocol() const;
+    /// Return the host (may be empty)
+    const std::string &host() const;
+    /// Return the extra parameters
+    const std::string &extra() const;
+    
 	/// Concatenate this and Path
 	Path add(const Path &path) const;
 	/// Concatenate vector of strings with each as a component.
