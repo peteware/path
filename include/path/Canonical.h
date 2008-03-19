@@ -48,8 +48,11 @@ public:
 
 	/// Destructor
 	virtual ~Canonical();
+    
+    /// Assignment operator
+    Canonical &operator=(const Canonical & op2);
 
-    /// Set the protocol, host, and extra without changing drive or components
+    /// Copy the protocol, host, and extra without changing drive or components
     Canonical & copyInfo(const Canonical &canon);
     /// Set the protocol (e.g. "http")
     Canonical &  setProtocol(const std::string &proto);

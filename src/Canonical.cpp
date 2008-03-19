@@ -136,6 +136,43 @@ Canonical::~Canonical()
 }
 
 /**
+ * @param op2 The right hand side for assignment
+ * @return A reference to this object.
+ */
+Canonical & Canonical::operator=(const Canonical &op2)
+{
+    if (this == &op2)
+        return *this;
+	m_protocol = op2.m_protocol;
+    m_host = op2.m_host;
+    m_extra = op2.m_extra;
+    m_drive = op2.m_drive;
+    m_abs = op2.m_abs;
+    m_components = op2.m_components;
+    return *this;
+}
+
+/**
+ * This makes it easier to start with a given Canonical
+ * but provide new components and drive.
+ *
+ * @code
+ * Canonical c;
+ * c.copyInfo(somepath.canon());
+ * c.add("a");
+ * @endcode
+ *
+ * @param from The Canonical object to copy protocol, host, extra
+ * @return A reference to this object.
+ */
+Canonical & Canonical::copyInfo(const Canonical &from)
+{
+    m_protocol = from.m_protocol;
+    m_host = from.m_host;
+    m_extra = from.m_extra;
+    return *this;
+}
+/**
  * The protocol is something like "http", "ftp", "file" and
  * is meaningful only for a specific type of PathRule.  For example,
  * UnixRules ignore protocol.

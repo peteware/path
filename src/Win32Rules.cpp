@@ -30,7 +30,7 @@ Win32Rules::~Win32Rules()
 Canonical Win32Rules::canonical(const std::string &path) const
 {
     Canonical canon;
-    
+
     if (path.size() >= 2 && path[1] == ':')
     {
         canon = PathRules::canonical(path.substr(2, path.size() - 2));

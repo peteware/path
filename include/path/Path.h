@@ -1,10 +1,7 @@
 /**  
  * @file Path.h
  *
- * Implementation of the Class Path
- *
- * Created on:      11-May-2007 5:09:31 PM
- * Original author: Pete Ware
+ * Implementation of the class Path
  */
 #if !defined(_PATH_PATH_H_)
 #define _PATH_PATH_H_
@@ -18,23 +15,20 @@
 
 /**
  * A Path is an arbitrary string used to represent a path to a file
- * or directory.  The operations on a Path make no attempt to validate
- * if the file or directory actually exists. 
+ * or directory.  The primary purpose of using a Path instead of a string is
+ * to encourage operating system independence.  A secondary purpose
+ * is to make typical filename operators easier.  The operations on a Path 
+ * make no attempt to validate if the file or directory actually exists. 
  * 
  * You can operate on a Path with some common operations such as add(),
- * extension(), split(), dirname(), basename(), last().  All such operations 
- * happen without worrying about the result being a Path to a valid
- * file or directory.  See the Node class to handle actual files and
- * directories.
+ * extension(), split(), dirname(), basename(), stem(), + and &.  All
+ * such operations leave the original Path object unchanged and
+ * return a copy.
  *
- * The primary purpose of using a Path instead of a string is
- * to encourage operating system independence.   To support
- * the Node class (represnting actual files and directories), the
- * Path class is defined with value semantics.  This means to change
- * something a copy is created.  This what the
- * Node class can derive from Path and maintain it's
- * own semantics.  For example, it doesn't make sense
- * to change a Node's suffix().
+ * To interact with the rest of the system, you can use path(), str(), and 
+ * normpath() to return a std::string or path_c(), str_c(), normpath_c() 
+ * to return C-style, NUL terminated strings.  path() and normpath() 
+ * also expand environment variables (e.g. $HOME) and "~".
  *
  * The choice made in this design is that a Path manipulates a Canonical
  * representation of a path.  The unfortunate side affect is
@@ -54,7 +48,7 @@
  *
  * To make things easier, the Canonical class design has most
  * methods returning a reference to the Canonical object so you can chain
- * several operations together (this is antithesis
+ * several operations together (this is the antithesis
  * of how the Path class works).  For example:
  *
  * @code
@@ -63,6 +57,13 @@
  * @endcode
  *
  * Result in two identical paths.
+ *
+ * To support the Node class (represnting actual files and directories),
+ * the Path class is defined with value semantics.  This means to change
+ * something a copy is created.  This what the
+ * Node class can derive from Path and maintain it's
+ * own semantics.  For example, it doesn't make sense
+ * to change a Node's suffix().
  *
  * @sa 
  * Canonical, PathRules, UnixRules, Wn32Rules, UriRules, Win32Path, 
@@ -86,13 +87,16 @@ public:
 	/// Assignment operator
 	Path & operator=(const Path &op2);
 
-	/// Return original string
+	/// Return original path
 	const std::string & str() const;
-	/// Return original string
+    /// Return orignal path as C-style, NUL terminated string
+    const char * str_c() const;
+	/// Return path with ~ and environment variables expanded
 	const std::string & path() const;
+  	/// Same as path() but a C-style, NUL terminated string
+    const char * path_c() const;
 	/// Return original string but cleaned up
 	std::string normpath() const;
-
 
 	/// Return the last component of Path
     std::string basename() const;
@@ -100,7 +104,7 @@ public:
 	Path dirname() const;
 	/// Return the filename extension
 	std::string extension() const;
-	/// Return without extension
+	/// Return basename() without extension
 	std::string stem() const;
 
 	/// Return if this is an absolute path (not relative)
@@ -130,6 +134,9 @@ public:
 
 	/// Return the Canonical representation of the path
 	const Canonical &canon() const;
+    
+    /// Append a string to last element.
+    Path operator&(const std::string &append) const;
 
 	/// Return the rules (may be NULL)
 	const PathRules *pathRules() const;
@@ -173,6 +180,8 @@ Path operator+(const Path &path, const char *dir);
 Path operator+(const Path &path, const std::string &dir);
 /// Concatenate two paths
 Path operator+(const Path &path, const Path &op2);
+/// Append a string to last component in path
+Path operator&(const std::string &append);
 
 // Shortcuts for handling different paths as strings
 /// Convert a unix style path ("/a/b/c") to Canonical

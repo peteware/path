@@ -99,9 +99,9 @@ void PathUnit::init()
  */
 void PathUnit::equal()
 {
-	Path	p0(UnixRules::canon("/a//"));
-	Path	p1(UnixRules::canon("/a/b/c"));
-	Path	p2(UnixRules::canon("/a"));
+	Path	p0(UnixPath("/a//"));
+	Path	p1(UnixPath("/a/b/c"));
+	Path	p2(UnixPath("/a"));
 	Path	p3, p4;
     Path    p5(UnixPath("/a//")); // really want this as a string
     Path    p6(UnixPath("/a"));   // really want this as a string
@@ -229,6 +229,11 @@ void PathUnit::testadd()
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("a/b/c")), p1);
     p1 = p1 + p1;
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("a/b/c/a/b/c")), p1);
+    
+    p1 = Path(UnixPath("/a"));
+    p1 = p1 & ".txt";
+    CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a.txt")), p1);
+    CPPUNIT_ASSERT_EQUAL(std::string("a.txt"), p1.basename());
 }
 
 void PathUnit::testSplit()
@@ -248,6 +253,11 @@ void PathUnit::testSplit()
     paths = p.split();
     CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(2), paths.size());
     CPPUNIT_ASSERT_EQUAL(false, paths[0].abs());
+    
+    Path     header(UnixPath("/a/b/file.h"));
+    Path     src = header.dirname() + header.stem() & ".C" ;
+    CPPUNIT_ASSERT_EQUAL(std::string("file.C"), src.basename());
+    
 }
 
 void PathUnit::testRules()

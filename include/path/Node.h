@@ -24,7 +24,7 @@ class SubNode;
 class Node : public Path
 {
 private:
-	/// Defau lt constructor (avoid using)
+	/// Default constructor (avoid using)
 	Node();
 public:
     

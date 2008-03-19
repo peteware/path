@@ -125,6 +125,11 @@ const std::string &Path::str() const
 	return m_path;
 }
 
+const char * Path::str_c() const
+{
+    return m_path.c_str();
+}
+
 /**
  * Return the path as a string.
  * 
@@ -132,6 +137,8 @@ const std::string &Path::str() const
  * 
  * See also normpath() which does the same but cleans things up a little more and
  * str() which returns the raw path being used.
+ *
+ * @return String with the actual path.
  */
 const std::string& Path::path() const
 {
@@ -139,6 +146,14 @@ const std::string& Path::path() const
         return *m_pathStr;
     m_pathStr = new std::string(rules()->add(canon()));
 	return *m_pathStr;
+}
+
+/**
+ * @return A NUL terminated string same as path()
+ */
+const char * Path::path_c() const
+{
+    return path().c_str();
 }
 
 /**
@@ -403,6 +418,21 @@ std::vector<Path> Path::split() const
 }
 
 /**
+ * Returns the canonical representation of this path.
+ *
+ * If the result has not already been determined, it
+ * is calculated.
+ */
+const Canonical & Path::canon() const
+{
+	if (!m_canon)
+	{
+		m_canon = new Canonical(rules()->canonical(m_path));
+	}
+	return *m_canon;
+}
+
+/**
  * Return the PathRules used by the Path.  May
  * be NULL.  Do not delete the returned rules.
  */
@@ -462,18 +492,25 @@ Path Path::getcwd()
 }
 
 /**
- * Returns the canonical representation of this path.
+ * This is useful for things like adding a version
+ * number or changing the extension of a file.  For example:
  *
- * If the result has not already been determined, it
- * is calculated.
+ * @code
+ * Path     header(UnixPath("/a/b/file.h"));
+ * Path     src = header.dirname() + header.stem() & ".C";
+ * Path     backup = src & ".bak";
+ * @endcode
+ *
+ * @param append String to be added
+ * @return A new Path with the same rules.
  */
-const Canonical & Path::canon() const
+Path Path::operator&(const std::string &append) const
 {
-	if (!m_canon)
-	{
-		m_canon = new Canonical(rules()->canonical(m_path));
-	}
-	return *m_canon;
+    Canonical c(canon());
+    
+    if (c.components().size() > 0)
+        c.components()[c.components().size() - 1] += append;
+    return Path(c, m_rules);
 }
 
 /**
