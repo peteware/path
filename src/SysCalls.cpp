@@ -7,6 +7,7 @@
  */
 #include <path/SysCalls.h>
 #include <path/Unimplemented.h>
+#include <path/NodeInfo.h>
 
 #include <dirent.h>
 #include <errno.h>
@@ -80,9 +81,49 @@ Strings SysCalls::listdir(const std::string &path) const
 	return dirs;
 }
 
+/**
+ * Gets the basic information about a file and returns
+ * the a new NodeInfo object.
+ *
+ * @param path The path to look for
+ * @return Newly created NodeInfo object.
+ */
 NodeInfo * SysCalls::stat(const std::string & path) const 
 {
-	return NULL;
+    struct stat     statbuf;
+    NodeInfo *node = 0;
+    NodeInfo::Type type = NodeInfo::OTHER;
+
+    if (::stat(path.c_str(), &statbuf) < 0)
+        return node;
+    node = new NodeInfo();
+    
+    node->setSize(statbuf.st_size);
+    switch (statbuf.st_mode & S_IFMT) {
+        case S_IFDIR:
+            type = NodeInfo::DIRECTORY;
+            break;
+        case S_IFREG:
+            type = NodeInfo::FILE;
+            break;
+        case S_IFLNK:
+            type = NodeInfo::SYMLINK;
+            break;
+        case S_IFCHR:
+        case S_IFBLK:
+            type = NodeInfo::DEVICE;
+            break;
+        default:
+            type = NodeInfo::OTHER;
+            break;
+    }
+    node->setType(type);
+	return node;
+}
+
+bool SysCalls::exists(const std::string &path) const
+{
+    return (::access(path.c_str(), F_OK) >= 0);
 }
 
 std::string SysCalls::getcwd() const

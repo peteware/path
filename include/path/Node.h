@@ -53,6 +53,13 @@ public:
 	/// And return the end of the list
 	NodeIter end();
 
+    /// Return basic info about the Node (size, type, etc).
+    const NodeInfo &info() const;
+    
+    /// Return the size in bytes of this file
+    off_t size() const; 
+    
+    
 	/// Check if this Node exists
 	bool exists() const;
 
@@ -61,9 +68,6 @@ public:
 
 	/// Resolve symbolic links, etc
 	Node realpath() const;
-
-	/// Return the size of the node in bytes
-	size_t size() const;
 
     /// Return a Node
     Node *subNode(int index) const;

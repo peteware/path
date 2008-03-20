@@ -49,7 +49,6 @@
 		50693A2B0D8873F100E050F1 /* PathUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914890CE333AE00ADA70C /* PathUnit.cpp */; };
 		50693A2C0D8873F100E050F1 /* SysCallsUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009148B0CE333AE00ADA70C /* SysCallsUnit.cpp */; };
 		50693A2D0D8873F100E050F1 /* UnixRulesUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500948620D665356000B393F /* UnixRulesUnit.cpp */; };
-		50693A2E0D8873F100E050F1 /* PathRulesUnit.h in Sources */ = {isa = PBXBuildFile; fileRef = 5009487C0D6656AC000B393F /* PathRulesUnit.h */; };
 		50693A2F0D8873F100E050F1 /* Win32RulesUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500948B30D6EF039000B393F /* Win32RulesUnit.cpp */; };
 		50B973F90D8D897800E8B628 /* libpath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506939A10D8871F300E050F1 /* libpath.a */; };
 		50B9744A0D8DA9F800E8B628 /* Strings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50B974490D8DA9F800E8B628 /* Strings.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -235,6 +234,7 @@
 		500914840CE333AE00ADA70C /* pathtest */ = {
 			isa = PBXGroup;
 			children = (
+				5009487C0D6656AC000B393F /* PathRulesUnit.h */,
 				500914860CE333AE00ADA70C /* main.cpp */,
 				500914850CE333AE00ADA70C /* CanonicalUnit.cpp */,
 				500914870CE333AE00ADA70C /* NodeUnit.cpp */,
@@ -242,7 +242,6 @@
 				500914890CE333AE00ADA70C /* PathUnit.cpp */,
 				5009148B0CE333AE00ADA70C /* SysCallsUnit.cpp */,
 				500948620D665356000B393F /* UnixRulesUnit.cpp */,
-				5009487C0D6656AC000B393F /* PathRulesUnit.h */,
 				500948B30D6EF039000B393F /* Win32RulesUnit.cpp */,
 			);
 			name = pathtest;
@@ -375,7 +374,6 @@
 				50693A2B0D8873F100E050F1 /* PathUnit.cpp in Sources */,
 				50693A2C0D8873F100E050F1 /* SysCallsUnit.cpp in Sources */,
 				50693A2D0D8873F100E050F1 /* UnixRulesUnit.cpp in Sources */,
-				50693A2E0D8873F100E050F1 /* PathRulesUnit.h in Sources */,
 				50693A2F0D8873F100E050F1 /* Win32RulesUnit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

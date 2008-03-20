@@ -40,6 +40,8 @@ public:
 	virtual Strings listdir(const std::string &dir) const;
     /// Return info about a file or directory
 	virtual NodeInfo * stat(const std::string & path) const;
+    /// Return if the path exists.
+    virtual bool exists(const std::string &path) const;
     /// Return the current working directory
     virtual std::string getcwd() const;
 

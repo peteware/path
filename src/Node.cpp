@@ -109,15 +109,6 @@ Node Node::realpath() const
 	return Node();
 }
 
-
-/**
- * Return the size in bytes
- */
-size_t Node::size() const
-{
-	return 0;
-}
-
 NodeIter Node::begin()
 {
     subNodeCreate();
@@ -135,6 +126,18 @@ NodeIter Node::end()
 
 	//return  NodeIter(Node());
 	return  NodeIter();
+}
+
+const NodeInfo & Node::info() const
+{
+    if (!m_cache)
+        m_cache = SysCalls().stat(path());
+    return *m_cache;
+}
+
+off_t Node::size() const
+{
+    return info().size();
 }
 
 Node *Node::subNode(int index) const
