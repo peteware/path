@@ -166,6 +166,9 @@ void NodeUnit::opers()
     Node        node(".");
     Node::iterator  iter = node.begin();
     
+    CPPUNIT_ASSERT(node.exists());
+    CPPUNIT_ASSERT(node.size() != 0);
+    
     // Honestly, I couldn't figure out how to figure out
     // what the first node being returned is!  So no 
     // comparison on results; just make sure they compile

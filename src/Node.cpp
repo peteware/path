@@ -11,6 +11,9 @@
 #include <path/SubNode.h>
 #include <path/SysCalls.h>
 #include <path/Canonical.h>
+#include <path/PathException.h>
+
+#include <sys/errno.h>  // System dependency?
 
 /**
  * Create an empty Node.
@@ -49,11 +52,13 @@ Node::Node(const std::string &str)
  * 
  * If there is no corresponding filesystem object, then an exception is raised.
  */
-Node::Node(const Path &path)
-    : Path(path),
+Node::Node(const Path &the_path)
+    : Path(the_path),
      m_cache(0),
      m_nodes(0)
 {
+	if (!SysCalls().exists(path()))
+        throw PathException(path(), errno);
 }
 
 
@@ -81,7 +86,7 @@ Node * Node::create(const Path &path)
  */
 bool Node::exists() const
 {
-	return  false;
+	return  SysCalls().exists(path());
 }
 
 NodeIter Node::glob(const std::string & pattern) const
@@ -98,7 +103,7 @@ NodeIter Node::glob(const std::string & pattern) const
  */
 bool Node::isDir() const 
 {
-	return false;
+	return info().isDir();
 }
 
 /**
@@ -153,7 +158,7 @@ Node *Node::subNode(int index) const
 	if (!n)
 	{
 		std::string		name = m_nodes->m_entries[index].m_name;
-		Path			path(name);
+		Path			path = *this + name;
 		n = Node::create(path);
  		m_nodes->m_entries[index].m_node = n;
 	}
