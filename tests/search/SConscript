@@ -1,0 +1,11 @@
+# -*- python -*-
+
+env = Environment(CPPPATH=['#include'], CCFLAGS=['-g', '-Wall'])
+#env = Environment(CPPPATH=["#include/path", 'C:/cppunit/cppunit-1.12.0/include'],
+#					CPPFLAGS='/EHsc')
+env.Program(target = 'search',
+            source =
+            ['main.cpp',
+             ],
+            LIBS = ['path'],
+            LIBPATH = ['../../src'])
