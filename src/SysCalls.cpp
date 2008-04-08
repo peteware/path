@@ -27,58 +27,27 @@ SysCalls::~SysCalls()
 
 void SysCalls::mkdir(const std::string & dir, int mode) const
 {
-    int status = ::mkdir(dir.c_str(), mode);
-    if (status < 0)
-        throw PathException(dir, errno);
+    throw Unimplemented("SysCalls::mkdir");
 }
 
 void SysCalls::rmdir(const std::string & dir) const
 {
-    int status = ::rmdir(dir.c_str());
-    if (status < 0)
-        throw PathException(dir, errno);
+    throw Unimplemented("SysCalls::rmdir");
 }
 
 void SysCalls::touch(const std::string &file) const
 {
-    int fd = ::open(file.c_str(), O_WRONLY|O_CREAT, 0777);
-    if (fd < 0)
-        throw PathException(file, errno);
-    (void) ::close(fd);
+    throw Unimplemented("SysCalls::touch");
 }
 
 void SysCalls::remove(const std::string &file) const
 {
-    int status = ::unlink(file.c_str());
-    if (status < 0)
-        throw PathException(file, errno);
+    throw Unimplemented("SysCalls::remove");
 }
 
 Strings SysCalls::listdir(const std::string &path) const
 {
-	Strings	dirs;
-
-	DIR *dir = opendir(path.c_str());
-	if (!dir)
-		return dirs;
-
-	struct dirent	*entry_ptr;
-	struct dirent	entry;
-	while (readdir_r(dir, &entry, &entry_ptr) == 0) 
-	{
-		if (!entry_ptr)
-			break;
-#ifdef notdef
-		if ((entry.d_namlen == 1 || entry.d_namlen == 2) &&
-			(strcmp(entry.d_name, ".") == 0 || strcmp(entry.d_name, "..") == 0))
-			continue;
-#endif
-		if (strcmp(entry.d_name, ".") == 0 || strcmp(entry.d_name, "..") == 0)
-			continue;
-		dirs.push_back(entry.d_name);
-	}
-	closedir(dir);
-	return dirs;
+    throw Unimplemented("SysCalls::listdir");
 }
 
 /**
@@ -90,46 +59,15 @@ Strings SysCalls::listdir(const std::string &path) const
  */
 NodeInfo * SysCalls::stat(const std::string & path) const 
 {
-    struct stat     statbuf;
-    NodeInfo *node = 0;
-    NodeInfo::Type type = NodeInfo::OTHER;
-
-    if (::stat(path.c_str(), &statbuf) < 0)
-        return node;
-    node = new NodeInfo();
-    
-    node->setSize(statbuf.st_size);
-    switch (statbuf.st_mode & S_IFMT) {
-        case S_IFDIR:
-            type = NodeInfo::DIRECTORY;
-            break;
-        case S_IFREG:
-            type = NodeInfo::FILE;
-            break;
-        case S_IFLNK:
-            type = NodeInfo::SYMLINK;
-            break;
-        case S_IFCHR:
-        case S_IFBLK:
-            type = NodeInfo::DEVICE;
-            break;
-        default:
-            type = NodeInfo::OTHER;
-            break;
-    }
-    node->setType(type);
-	return node;
+    throw Unimplemented("SysCalls::stat");
 }
 
 bool SysCalls::exists(const std::string &path) const
 {
-    return (::access(path.c_str(), F_OK) >= 0);
+    throw Unimplemented("SysCalls::exists");
 }
 
 std::string SysCalls::getcwd() const
 {
-    char        buf[MAXPATHLEN];
-    
-    ::getcwd(buf, sizeof(buf));
-    return std::string(buf);
+    throw Unimplemented("SysCalls::getcwd");
 }

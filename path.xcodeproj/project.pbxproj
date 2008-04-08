@@ -54,6 +54,8 @@
 		50693A2F0D8873F100E050F1 /* Win32RulesUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500948B30D6EF039000B393F /* Win32RulesUnit.cpp */; };
 		50B973F90D8D897800E8B628 /* libpath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506939A10D8871F300E050F1 /* libpath.a */; };
 		50B9744A0D8DA9F800E8B628 /* Strings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50B974490D8DA9F800E8B628 /* Strings.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50C967880DA42FF3004E7B67 /* SysUnixBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50C967870DA42FF3004E7B67 /* SysUnixBase.cpp */; };
+		50C9678A0DA4300B004E7B67 /* SysUnixBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 50C967890DA4300B004E7B67 /* SysUnixBase.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,6 +126,8 @@
 		507833F40D96CA180011FC60 /* search */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = search; sourceTree = BUILT_PRODUCTS_DIR; };
 		507AECBF0D2BCE4B0071EB10 /* SubNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SubNode.cpp; sourceTree = "<group>"; };
 		50B974490D8DA9F800E8B628 /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
+		50C967870DA42FF3004E7B67 /* SysUnixBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SysUnixBase.cpp; sourceTree = "<group>"; };
+		50C967890DA4300B004E7B67 /* SysUnixBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SysUnixBase.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +212,7 @@
 				5009140E0CE2B3E300ADA70C /* UriRules.cpp */,
 				5009140F0CE2B3E300ADA70C /* Win32Rules.cpp */,
 				506939910D886B4D00E050F1 /* Strings.cpp */,
+				50C967870DA42FF3004E7B67 /* SysUnixBase.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -240,6 +245,7 @@
 				500914310CE2B3F600ADA70C /* UnixRules.h */,
 				500914320CE2B3F600ADA70C /* UriRules.h */,
 				500914330CE2B3F600ADA70C /* Win32Rules.h */,
+				50C967890DA4300B004E7B67 /* SysUnixBase.h */,
 			);
 			path = path;
 			sourceTree = "<group>";
@@ -308,6 +314,7 @@
 				506939B40D88727300E050F1 /* UriRules.h in Headers */,
 				506939B50D88727300E050F1 /* Win32Rules.h in Headers */,
 				50B9744A0D8DA9F800E8B628 /* Strings.h in Headers */,
+				50C9678A0DA4300B004E7B67 /* SysUnixBase.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -407,6 +414,7 @@
 				506939C50D88728E00E050F1 /* UnixRules.cpp in Sources */,
 				506939C60D88728E00E050F1 /* UriRules.cpp in Sources */,
 				506939C70D88728E00E050F1 /* Win32Rules.cpp in Sources */,
+				50C967880DA42FF3004E7B67 /* SysUnixBase.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@
 #include <path/SysCalls.h>
 #include <path/Canonical.h>
 #include <path/PathException.h>
+#include <path/Unimplemented.h>
 
 #include <sys/errno.h>  // System dependency?
 
@@ -57,7 +58,7 @@ Node::Node(const Path &the_path)
      m_cache(0),
      m_nodes(0)
 {
-	if (!SysCalls().exists(path()))
+	if (!System.exists(path()))
         throw PathException(path(), errno);
 }
 
@@ -86,7 +87,7 @@ Node * Node::create(const Path &path)
  */
 bool Node::exists() const
 {
-	return  SysCalls().exists(path());
+	return  System.exists(path());
 }
 
 NodeIter Node::glob(const std::string & pattern) const
@@ -111,7 +112,7 @@ bool Node::isDir() const
  */
 Node Node::realpath() const
 {
-	return Node();
+	throw Unimplemented("Node::realpath");
 }
 
 NodeIter Node::begin()
@@ -136,7 +137,7 @@ NodeIter Node::end()
 const NodeInfo & Node::info() const
 {
     if (!m_cache)
-        m_cache = SysCalls().stat(path());
+        m_cache = System.stat(path());
     return *m_cache;
 }
 
@@ -178,7 +179,7 @@ void Node::subNodeCreate() const
     if (m_nodes)
         return;
 	m_nodes = new SubNode;
-	Strings	files = SysCalls().listdir(path());
+	Strings	files = System.listdir(path());
 	std::copy(files.begin(), files.end(),
 			  std::back_insert_iterator<std::vector<SubNode::Entry> > (m_nodes->m_entries));
     

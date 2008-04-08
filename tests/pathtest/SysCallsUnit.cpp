@@ -37,29 +37,26 @@ void SysCallsUnit::init()
 
 void SysCallsUnit::listdir()
 {
-	SysCalls	sys;
-
-	Strings	dirs = sys.listdir(".");
+	Strings	dirs = System.listdir(".");
 	CPPUNIT_ASSERT(dirs.size() > 0);
 
-	dirs = sys.listdir("does not exit!");
+	dirs = System.listdir("does not exit!");
 	CPPUNIT_ASSERT(dirs.size() == 0);
 	
 }
 
 void SysCallsUnit::mkdir()
 {
-    SysCalls    sys;
-    sys.mkdir("xxx");
-    sys.rmdir("xxx");
+    System.mkdir("xxx");
+    System.rmdir("xxx");
 }
 
 void SysCallsUnit::mkdir_fail()
 {
-   SysCalls().mkdir("/a/b/c/1");
+   System.mkdir("/a/b/c/1");
 }
 
 void SysCallsUnit::rmdir_fail()
 {
-   SysCalls().rmdir("/a/b/c/1");
+   System.rmdir("/a/b/c/1");
 }

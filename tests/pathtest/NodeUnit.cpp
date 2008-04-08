@@ -75,7 +75,7 @@ void NodeUnit::buildFiles()
     {
         if (iter->m_isDir) 
         {
-            SysCalls().mkdir(iter->m_path.path());
+            System.mkdir(iter->m_path.path());
         }
     }
     for (std::vector<DirHiearchy>::iterator iter = m_files.begin();
@@ -83,7 +83,7 @@ void NodeUnit::buildFiles()
     {
         if (!iter->m_isDir) 
         {
-            SysCalls().touch(iter->m_path.path());
+            System.touch(iter->m_path.path());
         }
     }
 }
@@ -97,7 +97,7 @@ void NodeUnit::cleanFiles()
         {
             try
             {
-                SysCalls().remove(iter->m_path.path());
+                System.remove(iter->m_path.path());
             }
             catch (PathException e)
             {
@@ -113,7 +113,7 @@ void NodeUnit::cleanFiles()
         {
             try
             {
-                SysCalls().rmdir(iter->m_path.path());                
+                System.rmdir(iter->m_path.path());                
             }
             catch (PathException e)
             {
@@ -154,10 +154,10 @@ void NodeUnit::iter_file()
 {
     Path    testfile = m_base.add("regularfile");
     buildFiles();
-    SysCalls().touch(testfile.str());
+    System.touch(testfile.str());
     Node    n (testfile);
     CPPUNIT_ASSERT_EQUAL(0, std::distance(n.begin(), n.end()));
-    SysCalls().remove(testfile.str());
+    System.remove(testfile.str());
 }
 
 void NodeUnit::opers()

@@ -9,18 +9,21 @@
 #if !defined(_PATH_UNIMPLEMENTED_H_)
 #define _PATH_UNIMPLEMENTED_H_
 
-#include <path/PathException.h>
+#include <exception>
+#include <string>
 
 /**
  * The operation is not implemented.
  * 
  */
-class Unimplemented : public PathException
+class Unimplemented : public std::exception
 {
 
 public:
 	Unimplemented(const std::string &operation);
 	virtual ~Unimplemented() throw();
-
+	virtual const char* what() const throw();    
+private:
+    std::string     m_what;
 };
 #endif // !defined(_PATH_UNIMPLEMENTED_H_)

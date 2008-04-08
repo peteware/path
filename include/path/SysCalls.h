@@ -16,6 +16,16 @@
 
 // Forward declarations
 class NodeInfo;
+class SysCalls;
+
+/**
+ * This is the object you should reference for making all System calls.  On a given
+ * build (machine) this gets initialized by exactly one of the classes
+ * derived from SysCalls.  It's done at compile time.
+ *
+ * Examples of other SysCalls are: SysWin32, SysLinux, SysMacOS, etc.  
+ */
+extern SysCalls &System;
 
 /**
  * Implements the basic set of system calls to create, remove and traverse

@@ -48,7 +48,12 @@ int main(int argc, char **argv)
             std::cout << node.path() << std::endl;
             for (Node::iterator iter = node.begin(); iter != node.end(); ++iter)
             {
-                std::cout << iter->path() << std::endl;
+                if (size > 0 && iter->size() < size)
+                    continue;
+                std::cout << iter->path();
+                if (iter->isDir())
+                    std::cout << '/';
+                std::cout << std::endl;
             }
         }
         catch (PathException ex)
