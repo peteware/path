@@ -48,7 +48,7 @@ int main(int argc, char **argv)
             std::cout << node.path() << std::endl;
             for (Node::iterator iter = node.begin(); iter != node.end(); ++iter)
             {
-                if (size > 0 && iter->size() < size)
+                if (size > 0UL && iter->size() < size)
                     continue;
                 std::cout << iter->path();
                 if (iter->isDir())
