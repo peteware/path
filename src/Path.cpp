@@ -487,8 +487,7 @@ PathRules * Path::defaultPathRules()
  */
 Path Path::getcwd()
 {
-    PathRules   *r = defaultPathRules();
-	return Path(r->canonical(System.getcwd()), r);
+    return Path(System.rules()->canonical(System.getcwd()));
 }
 
 /**
