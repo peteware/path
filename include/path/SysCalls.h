@@ -17,6 +17,7 @@
 // Forward declarations
 class NodeInfo;
 class SysCalls;
+class PathRules;
 
 /**
  * This is the object you should reference for making all System calls.  On a given
@@ -38,6 +39,8 @@ public:
 	SysCalls();
 	virtual ~SysCalls();
 
+    /// Return the default path rules used by this system
+    virtual const PathRules *rules() const;
     /// Create a Directory
 	virtual void mkdir(const std::string & dir, int mode = 0777) const;
     /// Remove a directory

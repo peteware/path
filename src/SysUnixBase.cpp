@@ -4,6 +4,7 @@
 #include <path/SysUnixBase.h>
 #include <path/PathException.h>
 #include <path/NodeInfo.h>
+#include <path/UnixRules.h>
 
 #include <dirent.h>
 #include <errno.h>
@@ -24,6 +25,14 @@ SysUnixBase::SysUnixBase()
 
 SysUnixBase::~SysUnixBase()
 {
+}
+
+/**
+ * @return A pointer to the UnixRules::rules
+ */
+const PathRules *SysUnixBase::rules() const
+{
+    return &UnixRules::rules;
 }
 
 void SysUnixBase::mkdir(const std::string & dir, int mode) const

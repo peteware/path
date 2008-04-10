@@ -11,12 +11,17 @@
 
 #include <path/SysCalls.h>
 
+// Forward declarations
+class PathRules;
+
 class SysUnixBase: public SysCalls
 {
 public:
 	SysUnixBase();
 	virtual ~SysUnixBase();
     
+    /// Return PathRules suitable for Unix-like systems
+    virtual const PathRules *rules() const;
     /// Create a Directory
 	virtual void mkdir(const std::string & dir, int mode = 0777) const;
     /// Remove a directory

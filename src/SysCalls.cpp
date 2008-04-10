@@ -25,6 +25,10 @@ SysCalls::~SysCalls()
 {
 }
 
+const PathRules *SysCalls::rules() const
+{
+    throw Unimplemented("SysCalls::rules");
+}
 void SysCalls::mkdir(const std::string & dir, int mode) const
 {
     throw Unimplemented("SysCalls::mkdir");
