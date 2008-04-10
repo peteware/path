@@ -72,13 +72,13 @@
 class Path
 {
 public:
-	/// Default constructory
+	/// Default constructor
 	Path(const PathRules *rules = 0);
 	/// Constructor from std::string
     Path(const std::string &path);
     /// Use a Canonical path and PathRules
     Path(const Canonical &canon, const PathRules *rules = 0);
-    /// Construct from a NUL terminatd strin
+    /// Construct from a NUL terminated string
     Path(const char *path);
 	/// Copy constructor
 	Path(const Path &copy);
