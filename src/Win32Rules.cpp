@@ -9,52 +9,53 @@
 #include <path/Canonical.h>
 #include <path/Path.h>
 
-/**
- * Provides a default instance of Win32Rules
- */
-Win32Rules Win32Rules::rules;
-
-Win32Rules::Win32Rules()
+namespace path {
+    /**
+     * Provides a default instance of Win32Rules
+     */
+    Win32Rules Win32Rules::rules;
+    
+    Win32Rules::Win32Rules()
 	: PathRules('\\')
-{
-}
-
-Win32Rules::~Win32Rules()
-{
-}
-
-/**
- * Converts Path into a 'canonical' form.  This allows a Path to be converted from
- * one PathRules to another PathRules.
- */
-Canonical Win32Rules::canonical(const std::string &path) const
-{
-    Canonical canon;
-
-    if (path.size() >= 2 && path[1] == ':')
     {
-        canon = PathRules::canonical(path.substr(2, path.size() - 2));
-        canon.setDrive(path.substr(0,1));
-        canon.setAbs(true);
     }
-    else
+    
+    Win32Rules::~Win32Rules()
     {
-        canon = PathRules::canonical(path);
     }
-	return canon;
+    
+    /**
+     * Converts Path into a 'canonical' form.  This allows a Path to be converted from
+     * one PathRules to another PathRules.
+     */
+    Canonical Win32Rules::canonical(const std::string &path) const
+    {
+        Canonical canon;
+        
+        if (path.size() >= 2 && path[1] == ':')
+        {
+            canon = PathRules::canonical(path.substr(2, path.size() - 2));
+            canon.setDrive(path.substr(0,1));
+            canon.setAbs(true);
+        }
+        else
+        {
+            canon = PathRules::canonical(path);
+        }
+        return canon;
+    }
+    
+    /**
+     * Return a string properly quoted with any system special components replaces.
+     * For example, UriRules would replace spaces with %040.  Only single path
+     * components should be passed.  For example, passing 'a/b' to UnixRules would
+     * return 'a_b'.
+     */
+    std::string Win32Rules::quote(const std::string & path) const
+    {
+        return path;
+    }
 }
-
-/**
- * Return a string properly quoted with any system special components replaces.
- * For example, UriRules would replace spaces with %040.  Only single path
- * components should be passed.  For example, passing 'a/b' to UnixRules would
- * return 'a_b'.
- */
-std::string Win32Rules::quote(const std::string & path) const
-{
-	return path;
-}
-
 /**
  * Shortcut for handling a Win32 style path
  *
@@ -76,7 +77,7 @@ std::string Win32Rules::quote(const std::string & path) const
  * @param path A string with a Windows/DOS style path
  * @return A Canonical object representing that path
  */
-Canonical Win32Path(const std::string &path)
+path::Canonical Win32Path(const std::string &path)
 {
-    return Win32Rules::rules.canonical(path);
+    return path::Win32Rules::rules.canonical(path);
 }

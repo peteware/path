@@ -12,12 +12,15 @@
 #include <path/Node.h>
 #include <fstream>
 
-class FileStream : public Node, public std::fstream
+namespace path 
 {
-
-public:
-	FileStream(const Path &p);
-	virtual ~FileStream();
-
-};
+    class FileStream : public Node, public std::fstream
+    {
+        
+    public:
+        FileStream(const Path &p);
+        virtual ~FileStream();
+        
+    };
+}
 #endif // !defined(_PATH_FILESTREAM_H_)

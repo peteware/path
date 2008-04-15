@@ -12,21 +12,23 @@
 #include <path/PathRules.h>
 #include <string>
 
-// Forward declarations
-class Canonical;
-class Path;
-
-class Win32Rules : public PathRules
-{
-
-public:
-	Win32Rules();
-	virtual ~Win32Rules();
+namespace path {
+    // Forward declarations
+    class Canonical;
+    class Path;
     
-    static Win32Rules    rules;
-
-	virtual Canonical canonical(const std::string &path) const;
-	virtual std::string quote(const std::string & path) const;
-    //virtual std::string add(const Canonical &canonical) const;
-};
+    class Win32Rules : public PathRules
+    {
+        
+    public:
+        Win32Rules();
+        virtual ~Win32Rules();
+        
+        static Win32Rules    rules;
+        
+        virtual Canonical canonical(const std::string &path) const;
+        virtual std::string quote(const std::string & path) const;
+        //virtual std::string add(const Canonical &canonical) const;
+    };
+}
 #endif // !defined(_PATH_WIN32RULES_H_)

@@ -7,13 +7,17 @@
  */
 #include <path/BadPath.h>
 
-
-BadPath::BadPath()
+namespace path 
 {
-
-}
-
-BadPath::~BadPath() throw()
-{
-
+    
+    BadPath::BadPath()
+    {
+        
+    }
+    
+    BadPath::~BadPath() throw()
+    {
+        
+    }
+    
 }

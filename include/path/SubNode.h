@@ -4,9 +4,13 @@
 #include <string>
 #include <vector> 
 
-class Node;
-struct SubNode
+namespace path 
 {
+    // Forward declaration
+    class Node;
+
+    struct SubNode
+    {
         struct Entry 
         {
             Entry();
@@ -18,5 +22,6 @@ struct SubNode
             Node *			m_node;
         };
         std::vector<Entry>	m_entries;
-};
+    };
+}
 #endif

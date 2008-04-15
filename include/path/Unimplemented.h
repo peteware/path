@@ -12,18 +12,20 @@
 #include <exception>
 #include <string>
 
-/**
- * The operation is not implemented.
- * 
- */
-class Unimplemented : public std::exception
-{
-
-public:
-	Unimplemented(const std::string &operation);
-	virtual ~Unimplemented() throw();
-	virtual const char* what() const throw();    
-private:
-    std::string     m_what;
-};
+namespace path {
+    /**
+     * The operation is not implemented.
+     * 
+     */
+    class Unimplemented : public std::exception
+    {
+        
+    public:
+        Unimplemented(const std::string &operation);
+        virtual ~Unimplemented() throw();
+        virtual const char* what() const throw();    
+    private:
+        std::string     m_what;
+    };
+}
 #endif // !defined(_PATH_UNIMPLEMENTED_H_)

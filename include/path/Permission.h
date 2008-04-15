@@ -10,16 +10,17 @@
 #define _PATH_PERMISSION_H_
 
 #include <path/PathException.h>
-
-/**
- * An operation failed because of permissions.
- */
-class Permission : public PathException
-{
-
-public:
-	Permission();
-	virtual ~Permission() throw();
-
-};
+namespace path {
+    /**
+     * An operation failed because of permissions.
+     */
+    class Permission : public PathException
+    {
+        
+    public:
+        Permission();
+        virtual ~Permission() throw();
+        
+    };
+}
 #endif // !defined(_PATH_PERMISSION_H_)

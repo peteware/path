@@ -7,19 +7,21 @@
  */
 #include <path/Unimplemented.h>
 
-
-Unimplemented::Unimplemented(const std::string &operation)
+namespace path {
+    
+    Unimplemented::Unimplemented(const std::string &operation)
     : exception(),
-      m_what(operation)
-{
-}
-
-Unimplemented::~Unimplemented() throw()
-{
-
-}
-
-const char* Unimplemented::what() const throw()
-{
-	return m_what.c_str();
+    m_what(operation)
+    {
+    }
+    
+    Unimplemented::~Unimplemented() throw()
+    {
+        
+    }
+    
+    const char* Unimplemented::what() const throw()
+    {
+        return m_what.c_str();
+    }
 }

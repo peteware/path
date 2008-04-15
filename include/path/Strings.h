@@ -9,5 +9,6 @@
 
 #include <vector>
 #include <string>
-
-typedef std::vector<std::string> Strings;
+namespace path {
+    typedef std::vector<std::string> Strings;
+}

@@ -11,12 +11,14 @@
 
 #include <path/PathException.h>
 
-class BadPath : public PathException
+namespace path
 {
-
-public:
-	BadPath();
-	virtual ~BadPath() throw();
-
-};
+    class BadPath : public PathException
+    {
+    public:
+        BadPath();
+        virtual ~BadPath() throw();
+        
+    };
+}
 #endif // !defined(_PATH_BADPATH_H_)

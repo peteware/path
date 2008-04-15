@@ -8,14 +8,14 @@
 
 #include <path/FileStream.h>
 
-FileStream::FileStream(const Path &p)
+namespace path 
+{
+    FileStream::FileStream(const Path &p)
 	: Node(p)
-{
-}
-
-
-
-FileStream::~FileStream()
-{
-
+    {
+    }
+    
+    FileStream::~FileStream()
+    {
+    }
 }

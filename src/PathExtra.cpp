@@ -1,9 +1,11 @@
 #include <path/PathExtra.h>
 
-PathExtra::PathExtra(void)
-{
-}
-
-PathExtra::~PathExtra(void)
-{
+namespace path {
+    PathExtra::PathExtra(void)
+    {
+    }
+    
+    PathExtra::~PathExtra(void)
+    {
+    }
 }

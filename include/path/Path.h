@@ -13,6 +13,7 @@
 #include <string>
 #include <iosfwd>
 
+namespace path {
 /**
  * A Path is an arbitrary string used to represent a path to a file
  * or directory.  The primary purpose of using a Path instead of a string is
@@ -167,27 +168,27 @@ private:
     mutable std::string *   m_pathStr;
 
 };
-
+}
 /// Check if Cannonical names are the same	
-bool operator==(const Path &op1, const Path &op2);
+bool operator==(const path::Path &op1, const path::Path &op2);
 /// Check if Cannonical names are different.
-bool operator!=(const Path &op1, const Path &op2);
+bool operator!=(const path::Path &op1, const path::Path &op2);
 /// Print out the path
-std::ostream &operator<<(std::ostream &out, const Path&path);
+std::ostream &operator<<(std::ostream &out, const path::Path&path);
 /// Add a new directory
-Path operator+(const Path &path, const char *dir);
+path::Path operator+(const path::Path &path, const char *dir);
 /// Add a new directory
-Path operator+(const Path &path, const std::string &dir);
+path::Path operator+(const path::Path &path, const std::string &dir);
 /// Concatenate two paths
-Path operator+(const Path &path, const Path &op2);
+path::Path operator+(const path::Path &path, const path::Path &op2);
 /// Append a string to last component in path
-Path operator&(const std::string &append);
+path::Path operator&(const std::string &append);
 
 // Shortcuts for handling different paths as strings
 /// Convert a unix style path ("/a/b/c") to Canonical
-Canonical UnixPath(const std::string &path);
+path::Canonical UnixPath(const std::string &path);
 /// Convert a Win32 style path ("C:\temp") to Canonical
-Canonical Win32Path(const std::string &path);
+path::Canonical Win32Path(const std::string &path);
 /// Convert a URL style path ("http://www.peteware.com/a") to Canonical
-Canonical URLPath(const std::string &path);
+path::Canonical URLPath(const std::string &path);
 #endif // !defined(_PATH_PATH_H_)
