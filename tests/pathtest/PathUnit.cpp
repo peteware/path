@@ -6,6 +6,8 @@
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
 
+using namespace path;
+
 /**
  * Implements unit tests for Path class
  *

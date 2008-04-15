@@ -14,6 +14,8 @@
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
 
+using namespace path;
+
 class Win32RulesUnit : public CppUnit::TestCase
 {
     CPPUNIT_TEST_SUITE(Win32RulesUnit);

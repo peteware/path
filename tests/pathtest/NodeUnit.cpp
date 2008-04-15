@@ -7,6 +7,8 @@
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
 
+using namespace path;
+
 class NodeUnit: public CppUnit::TestCase
 {
 	CPPUNIT_TEST_SUITE(NodeUnit);

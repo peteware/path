@@ -9,6 +9,7 @@
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
+#include <path/PathRules.h>
 
 class PathRulesUnit: public CppUnit::TestCase
 {
@@ -23,12 +24,12 @@ public:
     virtual void setUp();
     virtual void tearDown();
     /// Set the rules and returns the previous one
-    PathRules * setRules (PathRules *rules);
+    path::PathRules * setRules (path::PathRules *rules);
     /// Return the rules
-    PathRules *rules() const;
+    path::PathRules *rules() const;
 protected:
     /// Rules to use for the test.
-    PathRules * m_rules;
+    path::PathRules * m_rules;
 	/// Make sure constructors/destructor works
 	void init();
 	/// Test conversion to canonical form

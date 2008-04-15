@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 
+using namespace path;
 /**
  * Implements unit tests for Canonical class
  *

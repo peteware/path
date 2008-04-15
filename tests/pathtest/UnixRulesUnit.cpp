@@ -15,6 +15,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 
 #include "PathRulesUnit.h"
+using namespace path;
 
 class UnixRulesUnit: public PathRulesUnit
 {

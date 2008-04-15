@@ -4,6 +4,8 @@
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
 
+using namespace path;
+
 class SysCallsUnit: public CppUnit::TestCase
 {
 	CPPUNIT_TEST_SUITE(SysCallsUnit);

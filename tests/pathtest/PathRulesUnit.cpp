@@ -4,6 +4,7 @@
 #include <path/Path.h>
 
 #include "PathRulesUnit.h"
+using namespace path;
 
 CPPUNIT_TEST_SUITE_REGISTRATION(PathRulesUnit);
 void PathRulesUnit::setUp()
