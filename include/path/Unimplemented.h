@@ -9,7 +9,7 @@
 #if !defined(_PATH_UNIMPLEMENTED_H_)
 #define _PATH_UNIMPLEMENTED_H_
 
-#include <exception>
+#include <path/Exception.h>
 #include <string>
 
 namespace path {
@@ -17,15 +17,12 @@ namespace path {
      * The operation is not implemented.
      * 
      */
-    class Unimplemented : public std::exception
+    class Unimplemented : public Exception
     {
-        
     public:
         Unimplemented(const std::string &operation);
         virtual ~Unimplemented() throw();
-        virtual const char* what() const throw();    
     private:
-        std::string     m_what;
     };
 }
 #endif // !defined(_PATH_UNIMPLEMENTED_H_)

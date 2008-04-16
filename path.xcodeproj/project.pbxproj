@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		500C69B00D9C858200E865F0 /* libpath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506939A10D8871F300E050F1 /* libpath.a */; };
+		501A0C940DB595F300C7E54C /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 501A0C930DB595F300C7E54C /* Exception.cpp */; };
+		501A0C980DB597C300C7E54C /* Exception.h in Headers */ = {isa = PBXBuildFile; fileRef = 501A0C970DB597C300C7E54C /* Exception.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5021487C0D9C7D59006885B5 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5021487B0D9C7D59006885B5 /* main.cpp */; };
 		506939A50D88727300E050F1 /* BadPath.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914240CE2B3F600ADA70C /* BadPath.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939A60D88727300E050F1 /* Canonical.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914250CE2B3F600ADA70C /* Canonical.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -119,6 +121,8 @@
 		500948620D665356000B393F /* UnixRulesUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UnixRulesUnit.cpp; sourceTree = "<group>"; };
 		5009487C0D6656AC000B393F /* PathRulesUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathRulesUnit.h; sourceTree = "<group>"; };
 		500948B30D6EF039000B393F /* Win32RulesUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Win32RulesUnit.cpp; sourceTree = "<group>"; };
+		501A0C930DB595F300C7E54C /* Exception.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Exception.cpp; sourceTree = "<group>"; };
+		501A0C970DB597C300C7E54C /* Exception.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exception.h; sourceTree = "<group>"; };
 		5021487B0D9C7D59006885B5 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = search/main.cpp; sourceTree = "<group>"; };
 		506939910D886B4D00E050F1 /* Strings.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Strings.cpp; sourceTree = "<group>"; };
 		506939A10D8871F300E050F1 /* libpath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpath.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -213,6 +217,7 @@
 				5009140F0CE2B3E300ADA70C /* Win32Rules.cpp */,
 				506939910D886B4D00E050F1 /* Strings.cpp */,
 				50C967870DA42FF3004E7B67 /* SysUnixBase.cpp */,
+				501A0C930DB595F300C7E54C /* Exception.cpp */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -246,6 +251,7 @@
 				500914320CE2B3F600ADA70C /* UriRules.h */,
 				500914330CE2B3F600ADA70C /* Win32Rules.h */,
 				50C967890DA4300B004E7B67 /* SysUnixBase.h */,
+				501A0C970DB597C300C7E54C /* Exception.h */,
 			);
 			path = path;
 			sourceTree = "<group>";
@@ -315,6 +321,7 @@
 				506939B50D88727300E050F1 /* Win32Rules.h in Headers */,
 				50B9744A0D8DA9F800E8B628 /* Strings.h in Headers */,
 				50C9678A0DA4300B004E7B67 /* SysUnixBase.h in Headers */,
+				501A0C980DB597C300C7E54C /* Exception.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +422,7 @@
 				506939C60D88728E00E050F1 /* UriRules.cpp in Sources */,
 				506939C70D88728E00E050F1 /* Win32Rules.cpp in Sources */,
 				50C967880DA42FF3004E7B67 /* SysUnixBase.cpp in Sources */,
+				501A0C940DB595F300C7E54C /* Exception.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

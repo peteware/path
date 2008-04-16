@@ -6,8 +6,9 @@
 #if !defined(_PATH_PATHEXCEPTION_H_)
 #define _PATH_PATHEXCEPTION_H_
 
+#include <path/Exception.h>
 #include <string>
-#include <exception>
+
 
 namespace path {
     /**
@@ -18,7 +19,7 @@ namespace path {
      * value of errno is saved.  what() is set to be the value of strerror() plus the
      * filename.
      */
-    class PathException : public std::exception
+    class PathException : public Exception
     {
         
     public:
@@ -28,11 +29,9 @@ namespace path {
         virtual ~PathException() throw();
         int 		err() const;
         std::string filename() const;
-        virtual const char* what() const throw();
     private:
         std::string		m_filename;
         int				m_errno;
-        std::string     m_message;
     };
 }
 #endif // !defined(_PATH_PATHEXCEPTION_H_)
