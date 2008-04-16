@@ -8,7 +8,7 @@
 #include <path/NodeIter.h>
 #include <path/Node.h>
 #include <path/SysCalls.h>
-#include <path/BadPath.h>
+//#include <path/BadPath.h>
 
 #include <iterator>
 
