@@ -2,8 +2,6 @@
  * @file UnixRules.cpp
  *
  * Implementation of the Class UnixRules
- *  Created on:      11-May-2007 5:09:33 PM
- *  Original author: Pete Ware
  */
 #include <path/UnixRules.h>
 #include <path/Canonical.h>
@@ -56,28 +54,29 @@ namespace path {
     {
         return UnixRules::rules.canonical(path);
     }
+    
+    /**
+     * Shortcut for handling a Unix style path
+     *
+     * Useful for creating a path from a string such as:
+     * @code
+     * Path     p(UnixPath("/a/b/c"));
+     * @endcode
+     * This results in a path, p, that uses the default rules for
+     * names but you can specify it as a string.
+     *
+     * Note that this declared in <path/Path.h> even though
+     * it is implemented in UnixRules.cpp.  I did this so
+     * people could use the Path() constructor easily.
+     *
+     * @sa Win32Path(),  URLPath()
+     *
+     * @param path A string with a Unix style path
+     * @return A Canonical object representing that path
+     */
+    path::Canonical UnixPath(const std::string &path)
+    {
+        return path::UnixRules::rules.canonical(path);
+    }
 }
 
-/**
- * Shortcut for handling a Unix style path
- *
- * Useful for creating a path from a string such as:
- * @code
- * Path     p(UnixPath("/a/b/c"));
- * @endcode
- * This results in a path, p, that uses the default rules for
- * names but you can specify it as a string.
- *
- * Note that this declared in <path/Path.h> even though
- * it is implemented in UnixRules.cpp.  I did this so
- * people could use the Path() constructor easily.
- *
- * @sa Win32Path(),  URLPath()
- *
- * @param path A string with a Unix style path
- * @return A Canonical object representing that path
- */
-path::Canonical UnixPath(const std::string &path)
-{
-    return path::UnixRules::rules.canonical(path);
-}

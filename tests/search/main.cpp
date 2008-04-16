@@ -44,9 +44,9 @@ int main(int argc, char **argv)
 	{
         try
         {
-            Node	node (Path(UnixPath(argv[i])));
+            path::Node	node (path::Path(path::UnixPath(argv[i])));
             std::cout << node.path() << std::endl;
-            for (Node::iterator iter = node.begin(); iter != node.end(); ++iter)
+            for (path::Node::iterator iter = node.begin(); iter != node.end(); ++iter)
             {
                 if (size > 0UL && iter->size() < size)
                     continue;
@@ -56,7 +56,7 @@ int main(int argc, char **argv)
                 std::cout << std::endl;
             }
         }
-        catch (PathException ex)
+        catch (path::PathException ex)
         {
 			std::cerr << ex.what() << std::endl;
         }

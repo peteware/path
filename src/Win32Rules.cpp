@@ -55,29 +55,29 @@ namespace path {
     {
         return path;
     }
-}
-/**
- * Shortcut for handling a Win32 style path
- *
- * Useful for creating a path from a string such as:
- * @code
- * Path     p(Win32Path("C:\\a\\b\\c"));
- * @endcode
- * This results in a path, p, that uses the default rules for
- * names but you can specify it as a string using Win32
- * style.  Note that the "\\" is for C++ as a backslash
- * is a special character to the compiler.
- *
- * Note that this declared in <path/Path.h> even though
- * it is implemented in Win32Rules.cpp.  I did this so
- * people could use the Path() constructor easily.
- *
- * @sa UnixPath(),  URLPath()
- *
- * @param path A string with a Windows/DOS style path
- * @return A Canonical object representing that path
- */
-path::Canonical Win32Path(const std::string &path)
-{
-    return path::Win32Rules::rules.canonical(path);
+    /**
+     * Shortcut for handling a Win32 style path
+     *
+     * Useful for creating a path from a string such as:
+     * @code
+     * Path     p(Win32Path("C:\\a\\b\\c"));
+     * @endcode
+     * This results in a path, p, that uses the default rules for
+     * names but you can specify it as a string using Win32
+     * style.  Note that the "\\" is for C++ as a backslash
+     * is a special character to the compiler.
+     *
+     * Note that this declared in <path/Path.h> even though
+     * it is implemented in Win32Rules.cpp.  I did this so
+     * people could use the Path() constructor easily.
+     *
+     * @sa UnixPath(),  URLPath()
+     *
+     * @param path A string with a Windows/DOS style path
+     * @return A Canonical object representing that path
+     */
+    path::Canonical Win32Path(const std::string &path)
+    {
+        return path::Win32Rules::rules.canonical(path);
+    }
 }

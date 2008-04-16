@@ -168,6 +168,14 @@ private:
     mutable std::string *   m_pathStr;
 
 };
+    
+    // Shortcuts for handling different paths as strings
+    /// Convert a unix style path ("/a/b/c") to Canonical
+    path::Canonical UnixPath(const std::string &path);
+    /// Convert a Win32 style path ("C:\temp") to Canonical
+    path::Canonical Win32Path(const std::string &path);
+    /// Convert a URL style path ("http://www.peteware.com/a") to Canonical
+    path::Canonical URLPath(const std::string &path);
 }
 /// Check if Cannonical names are the same	
 bool operator==(const path::Path &op1, const path::Path &op2);
@@ -183,12 +191,4 @@ path::Path operator+(const path::Path &path, const std::string &dir);
 path::Path operator+(const path::Path &path, const path::Path &op2);
 /// Append a string to last component in path
 path::Path operator&(const std::string &append);
-
-// Shortcuts for handling different paths as strings
-/// Convert a unix style path ("/a/b/c") to Canonical
-path::Canonical UnixPath(const std::string &path);
-/// Convert a Win32 style path ("C:\temp") to Canonical
-path::Canonical Win32Path(const std::string &path);
-/// Convert a URL style path ("http://www.peteware.com/a") to Canonical
-path::Canonical URLPath(const std::string &path);
 #endif // !defined(_PATH_PATH_H_)

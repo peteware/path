@@ -2,9 +2,6 @@
  * @file UnixRules.h
  *
  * Implementation of the Class UnixRules
- *
- * Created on:      11-May-2007 5:09:33 PM
- * Original author: Pete Ware
  */
 #if !defined(_PATH_UNIXRULES_H_)
 #define _PATH_UNIXRULES_H_
@@ -12,7 +9,6 @@
 #include <path/PathRules.h>
 namespace path {
     // Forward declarations
-    class Path;
     class Canonical;
     
     class UnixRules : public PathRules
