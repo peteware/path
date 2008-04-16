@@ -26,4 +26,3 @@ namespace path {
         return m_message.c_str();
     }
 }
-
