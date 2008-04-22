@@ -157,35 +157,7 @@ namespace path {
     std::string Path::expand(const StringMap &vars) const
     {
         const std::string &p = path();
-        std::string     newpath;
-        const char      intro = '$';
-        
-        for (std::string::const_iterator iter = p.begin(); iter != p.end();)
-        {
-            // Search for a '$'
-            if (*iter != intro) 
-            {
-                newpath += *iter++;
-                continue;
-            }
-            std::string var;
-            
-            ++iter;
-            // Treat $$ as an escape for a single '$'
-            if (*iter == intro) 
-            {
-                newpath += *iter++;
-                continue;
-            }
-
-            // Get the actual variable
-            while (iter != p.end() && isalnum(*iter) || *iter == '_')
-                var += *iter++;
-            StringMap::const_iterator variter = vars.find(var);
-            if (variter != vars.end())
-                newpath += variter->second;
-        }
-        return newpath;
+        return path::expand(p, vars);
     }
     /**
      * Normalized the path and returns it as a std::string.

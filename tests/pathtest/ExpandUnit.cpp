@@ -61,4 +61,7 @@ void ExpandUnit::nested()
     env["HOME"] = "abc";
     
     CPPUNIT_ASSERT_EQUAL(std::string("abc"), p.expand(env));
+    p = path::Path("$X$HOME");
+    CPPUNIT_ASSERT_EQUAL(std::string("abcabc"), p.expand(env));
+    
 }
