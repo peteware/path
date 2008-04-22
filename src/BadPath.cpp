@@ -9,6 +9,7 @@ namespace path
 {
     
     BadPath::BadPath()
+    : PathException()
     {
         
     }

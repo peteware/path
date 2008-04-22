@@ -12,7 +12,11 @@
 
 #include <vector>
 #include <string>
+#include <map>
 namespace path {
+    /// A vector of strings
     typedef std::vector<std::string> Strings;
+    /// Mapping from one string to another.
+    typedef std::map<std::string, std::string> StringMap;
 }
 #endif /* _PATH_STRINGS_H_ */

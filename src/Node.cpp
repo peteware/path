@@ -30,13 +30,15 @@ namespace path {
     }
     
     /**
-     * Construct from a NUL terminated string.  May throw PathException.
+     * May throw PathException.
      */
-    Node::Node(const char *path)
-    : Path(path),
+    Node::Node(const char *str)
+    : Path(str),
     m_cache(0),
     m_nodes(0)
     {
+        if (!exists())
+            throw PathException(path(), errno);
     }
     
     /**
@@ -47,6 +49,8 @@ namespace path {
     m_cache(0),
     m_nodes(0)
     {
+        if (!exists())
+            throw PathException(path(), errno);
     }
     
     
@@ -55,48 +59,167 @@ namespace path {
      * 
      * If there is no corresponding filesystem object, then an exception is raised.
      */
-    Node::Node(const Path &the_path)
-    : Path(the_path),
+    Node::Node(const Path &p)
+    : Path(p),
     m_cache(0),
     m_nodes(0)
     {
-        if (!System.exists(path()))
+        if (!exists())
             throw PathException(path(), errno);
     }
     
+    /**
+     * Use a Canonical object to construct this using the given set of rules
+     * to translate convert the Canonical path into a string.
+     *
+     * If there is no corresponding filesystem object, then an exception is raised.
+     *
+     * @param can The Canonical path
+     * @param rules PathRules to use to translate into a path name
+     */
+    Node::Node(const Canonical &can, const PathRules *rules)
+    : Path(can, rules),
+    m_cache(0),
+    m_nodes(0)
+    {
+        if (!exists())
+            throw PathException(path(), errno);
+    }
     
+    /**
+     * We bypass the check for existence.  Let's assume
+     * if the orig existed, it still does.
+     */
+    Node::Node(const Node &orig)
+    : Path(orig),
+    m_cache(0),
+    m_nodes(0)
+    {
+    }
+
+    /**
+     * Clean up the m_cache and m_nodes
+     */
     Node::~Node()
     {
         delete m_cache;
         delete m_nodes;
     }
-    
-    
+
     /**
-     * Take a path String and return a Node.  If there is no corresponding file object,
-     * a NULL is returned; otherwise a Node allocated with 'new' is returned.
-     * 
-     * This is the same as calling the Node::Node() constructor but it catches any
-     * exception.
+     * Call the Path assignment operator then delete m_cache and m_nodes
+     * and set them to NULL
+     *
+     * @param op2 The right hand side of the assignment
+     * @return a Reference to this object so you can chain use the result
      */
-    Node * Node::create(const Path &path)
+    Node &Node::operator=(const Node &op2)
     {
-        return new Node(path);
+        if (this == &op2)
+            return *this;
+        Path::operator=(op2);
+        delete m_cache;
+        delete m_nodes;
+        m_cache = 0;
+        m_nodes = 0;
+        return *this;
+    }
+    
+    Node::iterator Node::begin()
+    {
+        subNodeCreate();
+        if (!m_nodes || m_nodes->m_entries.size() == 0)
+            return end();
+        else
+            return  NodeIter(*this);
+    }
+    
+    Node::const_iterator Node::begin() const
+    {
+        subNodeCreate();
+        if (!m_nodes || m_nodes->m_entries.size() == 0)
+            return end();
+        else
+            return  NodeIter(*this);
     }
     
     /**
-     * Returns if Node exists.
+     * Return an iterator to the end of Nodes
+     */
+    Node::iterator Node::end()
+    {
+        return  NodeIter();
+    }
+    
+    /**
+     * Return an iterator to the end of Nodes
+     */
+    Node::const_iterator Node::end() const
+    {
+        return  NodeIter();
+    }
+    
+    /**
+     * Use shell pattern expansion to list
+     * contents of a directory.  Returns an
+     * iterator to the list.  Note that this
+     * only works within the specied directory
+     * that this Node already represents.
+     *
+     * Not yet implemented
+     *
+     * @param pattern A shell pattern ("*.C", "*", *.[Cho]")
+     */
+    Node::iterator Node::glob(const std::string & pattern)
+    {
+        throw Unimplemented("Node::glob");
+        return  NodeIter();
+    }
+
+    /**
+     * @param pattern A shell pattern ("*.C", "*", *.[Cho]")
+     */
+    Node::const_iterator Node::glob(const std::string & pattern) const
+    {
+        throw Unimplemented("Node::glob");
+        return  NodeIter();
+    }
+    
+    const NodeInfo & Node::info() const
+    {
+        if (!m_cache)
+            m_cache = System.stat(path());
+        return *m_cache;
+    }
+
+    /**
+     * This is a shorthand for Node:info().size().
+     * @return bytes used by file
+     */
+    off_t Node::size() const
+    {
+        return info().size();
+    }
+    
+    /**
+     * Returns if Node still exists.  Remember, you'll get
+     * PathException when constructing the Node but
+     * someone else can always remove the file.  Just
+     * to increase your stress level, there's no
+     * guarantee that the file won't get removed
+     * between the time you call this and when
+     * you do the next operation.  Don't worry; be happy!
+     *
+     * Summary: It's nice for the user to check
+     * but the reality is you should always be prepared
+     * for file operations to fail.
+     *
+     * @return True if the file exists, false otherwise.
      */
     bool Node::exists() const
     {
         return  System.exists(path());
     }
-    
-    NodeIter Node::glob(const std::string & pattern) const
-    {
-        return  NodeIter();
-    }
-    
     
     /**
      * Returns pointer to a newly allocated Directory of the Path represents a
@@ -117,37 +240,11 @@ namespace path {
         throw Unimplemented("Node::realpath");
     }
     
-    NodeIter Node::begin()
-    {
-        subNodeCreate();
-        if (!m_nodes || m_nodes->m_entries.size() == 0)
-            return end();
-        else
-            return  NodeIter(*this);
-    }
-    
+
     /**
-     * Return an iterator to the end of Nodes
+     * @param index First is 0.  
+     * @return Node refered by index.
      */
-    NodeIter Node::end()
-    {
-        
-        //return  NodeIter(Node());
-        return  NodeIter();
-    }
-    
-    const NodeInfo & Node::info() const
-    {
-        if (!m_cache)
-            m_cache = System.stat(path());
-        return *m_cache;
-    }
-    
-    off_t Node::size() const
-    {
-        return info().size();
-    }
-    
     Node *Node::subNode(int index) const
     {
         Node *n = 0;
@@ -168,6 +265,9 @@ namespace path {
         return n;
     }
     
+    /**
+     * Return how many files are in this directory
+     */
     int Node::subNodeCount() const
     {
         if (!m_nodes)
@@ -175,13 +275,40 @@ namespace path {
         return m_nodes->m_entries.size();
         
     }
+
     
+    /**
+     * Take a path String and return a Node.  If there is no corresponding file object,
+     * a NULL is returned; otherwise a Node allocated with 'new' is returned.
+     * 
+     * This is the same as calling the Node::Node() constructor but it catches any
+     * exception.
+     */
+    Node * Node::create(const Path &path)
+    {
+        try
+        {
+            return new Node(path);
+        }
+        catch (PathException)
+        {
+            return 0;
+        }
+    }
+    
+    /**
+     * If m_nodes is already initialized, this returns immediately.
+     *
+     * Otherwise, it calls System.listdir() and saves the list
+     * of filenames.
+     */
     void Node::subNodeCreate() const
     {
         if (m_nodes)
             return;
         m_nodes = new SubNode;
         Strings	files = System.listdir(path());
+        std::sort(files.begin(), files.end());
         std::copy(files.begin(), files.end(),
                   std::back_insert_iterator<std::vector<SubNode::Entry> > (m_nodes->m_entries));
         

@@ -1,14 +1,11 @@
 /**
  * @file Path.cpp
- *
- * Implementation of the Class Path
- *  Created on:      11-May-2007 5:09:31 PM
- *  Original author: Pete Ware
  */
 #include <path/Path.h>
 #include <path/Canonical.h>
 #include <path/UnixRules.h>
 #include <path/SysCalls.h>
+#include <path/Strings.h>
 
 #include <iostream>
 
@@ -157,6 +154,39 @@ namespace path {
         return path().c_str();
     }
     
+    std::string Path::expand(const StringMap &vars) const
+    {
+        const std::string &p = path();
+        std::string     newpath;
+        const char      intro = '$';
+        
+        for (std::string::const_iterator iter = p.begin(); iter != p.end();)
+        {
+            // Search for a '$'
+            if (*iter != intro) 
+            {
+                newpath += *iter++;
+                continue;
+            }
+            std::string var;
+            
+            ++iter;
+            // Treat $$ as an escape for a single '$'
+            if (*iter == intro) 
+            {
+                newpath += *iter++;
+                continue;
+            }
+
+            // Get the actual variable
+            while (iter != p.end() && isalnum(*iter) || *iter == '_')
+                var += *iter++;
+            StringMap::const_iterator variter = vars.find(var);
+            if (variter != vars.end())
+                newpath += variter->second;
+        }
+        return newpath;
+    }
     /**
      * Normalized the path and returns it as a std::string.
      * 
@@ -474,13 +504,21 @@ namespace path {
     /**
      * Returns the default rules; never NULL.
      *
-     * Uses UnixRules::rules as the default value.
+     * Typical
+     * behaviour is to create a Path with the PathRules set to NULL.
+     * All such paths will use whatever the defaultPathRules()
+     * returns.
+     *
+     * Uses System.rules() if s_defaultPathRules is NULL.  System
+     * is usually initialized at compile time to refer to the
+     * SysCalls used by this particular machine.
      */
-    PathRules * Path::defaultPathRules()
+    const PathRules * Path::defaultPathRules()
     {
-        if (!s_defaultPathRules)
-            s_defaultPathRules = &UnixRules::rules;
-        return s_defaultPathRules;
+        if (s_defaultPathRules)
+            return s_defaultPathRules;
+        else
+            return System.rules();
     }
     
     /**

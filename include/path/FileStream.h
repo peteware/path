@@ -18,7 +18,7 @@ namespace path
     {
         
     public:
-        FileStream(const Path &p);
+        FileStream(const Path &p, std::ios_base::openmode mode);
         virtual ~FileStream();
         
     };
