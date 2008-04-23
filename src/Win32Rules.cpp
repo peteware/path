@@ -55,6 +55,7 @@ namespace path {
     {
         return path;
     }
+    
     /**
      * Shortcut for handling a Win32 style path
      *

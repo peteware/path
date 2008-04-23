@@ -142,7 +142,7 @@ namespace path {
     {
         if (m_pathStr)
             return *m_pathStr;
-        m_pathStr = new std::string(rules()->add(canon()));
+        m_pathStr = new std::string(path::expand(rules()->add(canon()), System.env()));
         return *m_pathStr;
     }
     
@@ -154,11 +154,52 @@ namespace path {
         return path().c_str();
     }
     
-    std::string Path::expand(const StringMap &vars) const
+    /**
+     * Return a new Path witl all the environment
+     * variables expanded based on System.env()
+     *
+     * @return A path with all $VAR expanded
+     */
+     Path Path::expand() const
     {
-        const std::string &p = path();
-        return path::expand(p, vars);
+        return expand(System.env());
     }
+    /**
+     * Return a new Path witl all the environment
+     * variables expanded into individual
+     * components
+     *
+     * @param vars Map from $VAR to value
+     * @return A Path
+     */
+    Path Path::expand(const StringMap &vars) const
+    {
+        Strings     entries;    // Saves each directory component
+        const Strings &   comp = canon().components();
+        
+        for (Strings::const_iterator iter = comp.begin(); iter != comp.end(); ++iter)
+        {
+            std::string p = path::expand(*iter, vars);
+            if (p == *iter)
+            {
+                // Nothing changed; just add it
+                entries.push_back(p);
+            }
+            else
+            {
+                // Convert the expanded variable into list of componenets
+                // using the rules()
+                Canonical   c(rules()->canonical(p));
+                Strings &   s = c.components();
+                std::copy(s.begin(), s.end(), 
+                          std::back_insert_iterator<Strings>(entries));
+            }
+        }
+        // Take the meta info from cannon(), the built up list
+        // of components and our set of rules and return a path.
+        return Path(Canonical(canon(), entries), m_rules);
+    }
+    
     /**
      * Normalized the path and returns it as a std::string.
      * 

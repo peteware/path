@@ -98,8 +98,10 @@ namespace path {
             const char * path_c() const;
             /// Return original string but cleaned up
             std::string normpath() const;
-            /// Expand any environment variables and return as a string
-            std::string expand(const StringMap &vars) const;
+            /// Expand any environment variables
+            Path expand() const;
+            /// Expand any environment variables
+            Path expand(const StringMap &vars) const;
             /// Return the last component of Path
             std::string basename() const;
             /// Return the directory component of Path

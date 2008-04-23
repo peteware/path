@@ -1,10 +1,6 @@
 /*
  *  ExpandUnit.cpp
  *  path
- *
- *  Created by Peter Ware on 4/22/08.
- *  Copyright 2008 __MyCompanyName__. All rights reserved.
- *
  */
 
 #include <path/Path.h>
@@ -40,17 +36,17 @@ void ExpandUnit::simple()
     path::StringMap   env;
     env["HOME"] = "abc";
     
-    CPPUNIT_ASSERT_EQUAL(std::string("abc"), p.expand(env));
+    CPPUNIT_ASSERT_EQUAL(path::Path("abc"), p.expand(env));
     p = path::Path("xxx$HOME abc");
-    CPPUNIT_ASSERT_EQUAL(std::string("xxxabc abc"), p.expand(env));
+    CPPUNIT_ASSERT_EQUAL(path::Path("xxxabc abc"), p.expand(env));
     p = path::Path("$x");
-    CPPUNIT_ASSERT_EQUAL(std::string(""), p.expand(env));
+    CPPUNIT_ASSERT_EQUAL(path::Path(""), p.expand(env));
     p = path::Path("$$HOME");
-    CPPUNIT_ASSERT_EQUAL(std::string("$HOME"), p.expand(env));
+    CPPUNIT_ASSERT_EQUAL(path::Path("$HOME"), p.expand(env));
     
     env["AB_123"] = "x";
     p = path::Path("z$AB_123 abc");
-    CPPUNIT_ASSERT_EQUAL(std::string("zx abc"), p.expand(env));
+    CPPUNIT_ASSERT_EQUAL(path::Path("zx abc"), p.expand(env));
 }
 
 void ExpandUnit::nested()
@@ -60,8 +56,8 @@ void ExpandUnit::nested()
     env["X"] = "$HOME";
     env["HOME"] = "abc";
     
-    CPPUNIT_ASSERT_EQUAL(std::string("abc"), p.expand(env));
+    CPPUNIT_ASSERT_EQUAL(path::Path("abc"), p.expand(env));
     p = path::Path("$X$HOME");
-    CPPUNIT_ASSERT_EQUAL(std::string("abcabc"), p.expand(env));
+    CPPUNIT_ASSERT_EQUAL(path::Path("abcabc"), p.expand(env));
     
 }
