@@ -58,6 +58,10 @@ namespace path {
         virtual bool exists(const std::string &path) const;
         /// Return the current working directory
         virtual std::string getcwd() const;
+        /// Return a map of environment variables
+        virtual StringMap &env() const;
+    protected:
+        mutable StringMap *m_env;   ///< Map from environment variable
     };
 }
 #endif // !defined(_PATH_SYSCALLS_H_)

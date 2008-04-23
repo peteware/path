@@ -20,11 +20,13 @@
 namespace path {
     
     SysCalls::SysCalls()
+    : m_env(0)
     {
     }
     
     SysCalls::~SysCalls()
     {
+        delete m_env;
     }
     
     const PathRules *SysCalls::rules() const
@@ -72,9 +74,14 @@ namespace path {
     {
         throw Unimplemented("SysCalls::exists");
     }
-    
+
     std::string SysCalls::getcwd() const
     {
         throw Unimplemented("SysCalls::getcwd");
+    }
+    
+    StringMap& SysCalls::env() const
+    {
+        throw Unimplemented("Syscalls::env");
     }
 }

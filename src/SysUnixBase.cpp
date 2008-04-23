@@ -14,6 +14,10 @@
 #include <sys/stat.h>
 #include <sys/param.h>
 
+extern "C" {
+    extern char **environ;
+}
+
 namespace path {
     SysUnixBase::SysUnixBase    defSysUniBase;
     
@@ -143,5 +147,25 @@ namespace path {
         
         ::getcwd(buf, sizeof(buf));
         return std::string(buf);
+    }
+    
+    StringMap &SysUnixBase::env() const
+    {
+        if (!m_env)
+        {
+            m_env = new StringMap();
+            for (char **e = environ; *e !=  0; e++)
+            {
+                char * equalptr = ::index(*e, '=');
+                if (equalptr == 0)
+                    equalptr = *e;
+                std::string key (*e, equalptr);
+                std::string val (equalptr+1, (*e) + strlen(*e));
+
+                
+                (*m_env)[key] = val;
+            }
+        }
+        return *m_env;
     }
 }

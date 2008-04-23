@@ -39,6 +39,7 @@ namespace path {
             virtual bool exists(const std::string &path) const;
             /// Return the current working directory
             virtual std::string getcwd() const;
+            virtual StringMap &env() const;
         };
 }
 #endif /* _PATH_SYSUNIXBASE_H_ */
