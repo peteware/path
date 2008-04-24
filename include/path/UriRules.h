@@ -12,6 +12,10 @@ namespace path {
     class Canonical;
     class Path;
     
+    /**
+     * @class UriRules path/UrilRules.h
+     * Handle URI's rules.
+     */
     class UriRules : public PathRules
     {
         

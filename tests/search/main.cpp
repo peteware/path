@@ -1,3 +1,8 @@
+/**
+ * @file main.cpp
+ * @defgroup SearchTest
+ * @ingroup SearchTest
+ */
 #include <path/Node.h>
 #include <path/NodeIter.h>
 #include <path/Canonical.h>

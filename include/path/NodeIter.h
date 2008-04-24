@@ -12,6 +12,7 @@ namespace path {
     class Node;
     
     /**
+     * @class NodeIter path/NodeIter.h
      * Used to iterate over the Nodes within a Directory.
      * 
      * There are several ways to iterate over a directory:

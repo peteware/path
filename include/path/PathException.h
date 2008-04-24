@@ -11,6 +11,8 @@
 
 namespace path {
     /**
+     * @class PathException path/Exceptioin.h
+     *
      * Anytime a Node interacts with the filesystem, there's a chance for something to
      * go wrong.  All such exceptions derive from this.
      * 

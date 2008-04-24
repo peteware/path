@@ -14,6 +14,7 @@ namespace path {
     class SubNode;
     
     /**
+     * @class Node path/Node.h
      * A Node represents both files, directories and any other object 
      * that can be in a filesystem.
      */

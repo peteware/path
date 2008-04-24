@@ -1,4 +1,4 @@
-/*
+/**
  * @file Exception.h
  */
 #ifndef _PATH_EXCEPTION_H_
@@ -8,6 +8,10 @@
 
 namespace path {
     
+    /**
+     * @class Exception path/Exception.h
+     * Base class for all path related exceptions.
+     */
     class Exception : public std::exception
     {
     public:

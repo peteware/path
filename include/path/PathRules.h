@@ -14,6 +14,7 @@ namespace path {
     class Canonical;
     
     /**
+     * @class PathRules path/PathRules.h
      * Defines an interface for manipulating Path components.
      *
      * For example, the difference between using a forward slash between

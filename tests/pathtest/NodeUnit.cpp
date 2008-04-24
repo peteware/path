@@ -1,3 +1,7 @@
+/**
+ * @file NodeUnit.cpp
+ * @ingroup PathTest
+ */
 #include <path/Node.h>
 #include <path/NodeIter.h>
 #include <path/SysCalls.h>

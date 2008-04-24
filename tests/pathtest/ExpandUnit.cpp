@@ -1,6 +1,6 @@
-/*
- *  ExpandUnit.cpp
- *  path
+/**
+ * @file ExpandUnit.cpp
+ * @ingroup PathTest
  */
 
 #include <path/Path.h>
@@ -10,7 +10,7 @@
 #include <cppunit/extensions/HelperMacros.h>
 
 /**
- * Implements unit tests for Canonical class
+ * Implements unit tests for expand() in Path class
  *
  */
 class ExpandUnit : public CppUnit::TestCase

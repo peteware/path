@@ -1,3 +1,8 @@
+/**
+ * @file main.cpp
+ * @defgroup PathTest Unit tests for path library
+ * @ingroup PathTest
+ */
 #include <cppunit/BriefTestProgressListener.h>
 #include <cppunit/CompilerOutputter.h>
 #include <cppunit/extensions/TestFactoryRegistry.h>

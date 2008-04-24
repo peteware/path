@@ -11,6 +11,7 @@
 namespace path
 {
     /**
+     * @class Canonical path/Canonical.h
      * Represents a Path in a standard form.
      * 
      * Each component added represents a new element

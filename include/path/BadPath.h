@@ -8,6 +8,10 @@
 
 namespace path
 {
+    /**
+     * @class BadPath path/BadPath.h
+     * Handle faults related to BadPath's.
+     */
     class BadPath : public PathException
     {
     public:

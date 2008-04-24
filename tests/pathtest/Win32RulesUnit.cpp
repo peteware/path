@@ -1,10 +1,6 @@
-/*
- *  Win32RulesUnit.cpp
- *  path
- *
- *  Created by Peter Ware on 2/22/08.
- *  Copyright 2008 __MyCompanyName__. All rights reserved.
- *
+/**
+ * @file Win32RulesUnit.cpp
+ * @ingroup PathTest
  */
 
 #include <path/Win32Rules.h>

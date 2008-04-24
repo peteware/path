@@ -1,4 +1,4 @@
-/*
+/**
  *  @file Strings.cpp
  */
 #include <path/Strings.h>

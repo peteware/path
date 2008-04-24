@@ -1,3 +1,6 @@
+/**
+ * @file SubNode.h
+ */
 #ifndef _PATH_SUBNODE_H_
 #define _PATH_SUBNODE_H_
 
@@ -9,6 +12,10 @@ namespace path
     // Forward declaration
     class Node;
 
+    /**
+     * @class SubNode path/SubNode.h
+     * Used for keeping track of directory entries
+     */
     struct SubNode
     {
         struct Entry 

@@ -9,6 +9,7 @@
 namespace path 
 {
     /**
+     * @class NodeInfo path/NodeInfo.h
      * Provides basic information about a Node: size, modified time, owner, etc.
      */
     class NodeInfo

@@ -14,6 +14,8 @@
 
 namespace path {
     /**
+     * @class Path path/Path.h
+     *
      * A Path is an arbitrary string used to represent a path to a file
      * or directory.  The primary purpose of using a Path instead of a string is
      * to encourage operating system independence.  A secondary purpose

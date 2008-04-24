@@ -7,6 +7,7 @@
 #include <vector>
 #include <string>
 #include <map>
+
 namespace path {
     /// A vector of strings
     typedef std::vector<std::string> Strings;

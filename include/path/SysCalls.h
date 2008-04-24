@@ -24,6 +24,7 @@ namespace path {
     extern SysCalls &System;
     
     /**
+     * @class SysCalls path/SysCalls.h
      * Implements the basic set of system calls to create, remove and traverse
      * directories.
      */

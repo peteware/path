@@ -1,4 +1,4 @@
-/*
+/**
  *  @file Exception.cpp
  *
  * Implementation of class Exception

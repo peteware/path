@@ -1,10 +1,6 @@
-/*
- *  PathUnitTest.h
- *  path
- *
- *  Created by Peter Ware on 2/15/08.
- *  Copyright 2008 __MyCompanyName__. All rights reserved.
- *
+/**
+ * @file PathRulesUnit.h
+ * @ingroup PathTest
  */
 
 #include <cppunit/TestCase.h>

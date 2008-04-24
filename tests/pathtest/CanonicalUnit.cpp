@@ -1,3 +1,7 @@
+/**
+ * @file CanonicalUnit.cpp
+ * @ingroup PathTest
+ */
 #include <path/Canonical.h>
 
 #include <cppunit/TestCase.h>

@@ -9,6 +9,10 @@
 
 namespace path 
 {
+    /**
+     * @class FileStream path/FileStream.h
+     * Implements a Node that supports fstream
+     */
     class FileStream : public Node, public std::fstream
     {
         

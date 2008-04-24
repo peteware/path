@@ -9,6 +9,10 @@ namespace path {
     // Forward declarations
     class Canonical;
     
+    /**
+     * @class UnixRules path/UnixRules.h
+     * Implement PathRules for Unix like pathnames.
+     */
     class UnixRules : public PathRules
     {
     public:

@@ -1,3 +1,7 @@
+/**
+ * @file PathUnit.cpp
+ * @ingroup PathTest
+ */
 #include <path/Path.h>
 #include <path/PathRules.h>
 #include <path/UnixRules.h>

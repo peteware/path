@@ -13,8 +13,9 @@ namespace path {
     class PathRules;
     
     /**
-     * This exists entirely to make a Path be smaller and simpler
-     to 
+     * @class PathExtra path/PathExtra.h
+     *
+     * This exists entirely to make a Path be smaller and simpler to 
      * insure binaryu compatibility.  The typical Path
      * class is just a string.  But we can cache some
      * extra information such as the normalized path

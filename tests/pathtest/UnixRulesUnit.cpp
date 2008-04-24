@@ -1,10 +1,6 @@
-/*
- *  UnixRulesUnit.cpp
- *  path
- *
- *  Created by Peter Ware on 2/15/08.
- *  Copyright 2008 __MyCompanyName__. All rights reserved.
- *
+/**
+ * @file UnixRulesUnit.cpp
+ * @ingroup PathTest
  */
 
 #include <path/UnixRules.h>

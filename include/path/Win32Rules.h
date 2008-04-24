@@ -12,6 +12,11 @@ namespace path {
     class Canonical;
     class Path;
     
+    /**
+     * @class Win32Rules path/Win32Rules.h
+     * Implements the Windows path rules
+     * (Not yet implemented)
+     */
     class Win32Rules : public PathRules
     {
         

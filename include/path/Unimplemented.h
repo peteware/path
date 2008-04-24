@@ -9,6 +9,7 @@
 
 namespace path {
     /**
+     * @class Unimplemented path/Unimplemented.h
      * The operation is not implemented.
      * 
      */
