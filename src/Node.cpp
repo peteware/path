@@ -1,9 +1,5 @@
 /**
  * @file Node.cpp
- *
- * Implementation of the Class Node
- *  Created on:      11-May-2007 5:09:30 PM
- *  Original author: Pete Ware
  */
 #include <path/Node.h>
 #include <path/NodeInfo.h>

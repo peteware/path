@@ -1,9 +1,5 @@
 /**
  * @file UriRules.cpp
- *
- * Implementation of the Class UriRules
- *  Created on:      11-May-2007 5:09:33 PM
- *  Original author: Pete Ware
  */
 #include <path/UriRules.h>
 #include <path/Canonical.h>

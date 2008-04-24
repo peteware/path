@@ -1,3 +1,6 @@
+/**
+ * @file SubNode.cpp
+ */
 #include <path/SubNode.h>
 #include <path/Node.h>
 

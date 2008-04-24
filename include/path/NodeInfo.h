@@ -1,10 +1,5 @@
 /**  
  * @file NodeInfo.h
- *
- * Implementation of the Class NodeInfo
- *
- * Created on:      11-May-2007 5:09:31 PM
- * Original author: Pete Ware
  */
 #if !defined(_PATH_NODEINFO_H_)
 #define _PATH_NODEINFO_H_
@@ -29,8 +24,9 @@ namespace path
             DEVICE,     ///< This is a device 
             OTHER,      ///< Not one of the above
         };
-        
+        /// Default constructor
         NodeInfo();
+        /// Destructor
         virtual ~NodeInfo();
         
         /// Set the size in bytes

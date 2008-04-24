@@ -1,14 +1,8 @@
 /**  
  * @file SysCalls.h
- *
- * Implementation of the Class SysCalls
- *
- * Created on:      11-May-2007 5:09:32 PM
- * Original author: Pete Ware
  */
 #if !defined(_PATH_SYSCALLS_H_)
 #define _PATH_SYSCALLS_H_
-
 
 #include <path/Strings.h>
 #include <string>

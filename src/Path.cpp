@@ -3,7 +3,6 @@
  */
 #include <path/Path.h>
 #include <path/Canonical.h>
-#include <path/UnixRules.h>
 #include <path/SysCalls.h>
 #include <path/Strings.h>
 
@@ -166,7 +165,7 @@ namespace path {
     }
     
     /**
-     * Return a new Path witl all the environment
+     * Return a new Path with all the environment
      * variables expanded into individual
      * components.
      *

@@ -1,7 +1,5 @@
 /**  
  * @file UnixRules.h
- *
- * Implementation of the Class UnixRules
  */
 #if !defined(_PATH_UNIXRULES_H_)
 #define _PATH_UNIXRULES_H_

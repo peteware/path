@@ -1,9 +1,5 @@
 /**
  * @file SysCalls.cpp
- *
- * Implementation of the Class SysCalls
- *  Created on:      11-May-2007 5:09:33 PM
- *  Original author: Pete Ware
  */
 #include <path/SysCalls.h>
 #include <path/Unimplemented.h>

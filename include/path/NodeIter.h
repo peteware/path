@@ -1,3 +1,6 @@
+/**
+ * @file NodeIter.h
+ */
 #if !defined(_PATH_NODEITER_H_)
 #define _PATH_NODEITER_H_
 

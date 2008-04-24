@@ -1,22 +1,15 @@
 /**  
  * @file Canonical.h
- *
- * Implementation of the Class Canonical
- *
- * Created on:      11-May-2007 5:09:30 PM
- * Original author: Pete Ware
  */
 #if !defined(_PATH_CANNONICAL_H_)
 #define _PATH_CANNONICAL_H_
 
 #include <path/Strings.h>
-#include <vector>
 #include <string>
 #include <iosfwd>
 
 namespace path
 {
-    
     /**
      * Represents a Path in a standard form.
      * 

@@ -1,9 +1,5 @@
 /**
  * @file NodeIter.cpp
- *
- * Implementation of the Class NodeIter
- *  Created on:      11-May-2007 5:09:31 PM
- *  Original author: Pete Ware
  */
 #include <path/NodeIter.h>
 #include <path/Node.h>

@@ -1,7 +1,5 @@
 /*
- *  Exception.h
- *  path
- *
+ * @file Exception.h
  */
 #ifndef _PATH_EXCEPTION_H_
 #define _PATH_EXCEPTION_H_

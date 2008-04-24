@@ -1,12 +1,6 @@
-/*
- *  Strings.h
- *  path
- *
- *  Created by Peter Ware on 3/12/08.
- *  Copyright 2008 __MyCompanyName__. All rights reserved.
- *
+/**
+ * @file Strings.h
  */
-
 #ifndef _PATH_STRINGS_H_
 #define _PATH_STRINGS_H_
 

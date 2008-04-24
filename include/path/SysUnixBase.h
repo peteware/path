@@ -1,13 +1,8 @@
-#ifndef _PATH_SYSUNIXBASE_H_
-#define _PATH_SYSUNIXBASE_H_
 /*
  *  SysUnixBase.h
- *  path
- *
- *  Created by Peter Ware on 4/2/08.
- *  Copyright 2008 __MyCompanyName__. All rights reserved.
- *
  */
+#ifndef _PATH_SYSUNIXBASE_H_
+#define _PATH_SYSUNIXBASE_H_
 
 #include <path/SysCalls.h>
 

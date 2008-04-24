@@ -1,3 +1,6 @@
+/**
+ * @file PathRules.h
+ */
 #if !defined(_PATH_PATHRULES_H_)
 #define _PATH_PATHRULES_H_
 

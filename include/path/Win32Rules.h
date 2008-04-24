@@ -1,10 +1,5 @@
 /**  
  * @file Win32Rules.h
- *
- * Implementation of the Class Win32Rules
- *
- * Created on:      11-May-2007 5:09:33 PM
- * Original author: Pete Ware
  */
 #if !defined(_PATH_WIN32RULES_H_)
 #define _PATH_WIN32RULES_H_

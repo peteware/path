@@ -9,7 +9,6 @@
 #include <path/PathRules.h>
 #include <path/Strings.h>
 
-#include <vector>
 #include <string>
 #include <iosfwd>
 

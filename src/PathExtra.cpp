@@ -1,3 +1,6 @@
+/**
+ * @file PathExtra.cpp
+ */
 #include <path/PathExtra.h>
 
 namespace path {

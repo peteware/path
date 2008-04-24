@@ -1,10 +1,5 @@
 /**  
  * @file Node.h
- *
- * Implementation of the Class Node
- *
- * Created on:      11-May-2007 5:09:30 PM
- * Original author: Pete Ware
  */
 #if !defined(_PATH_NODE_H_)
 #define _PATH_NODE_H_

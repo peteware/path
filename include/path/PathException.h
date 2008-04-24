@@ -9,7 +9,6 @@
 #include <path/Exception.h>
 #include <string>
 
-
 namespace path {
     /**
      * Anytime a Node interacts with the filesystem, there's a chance for something to

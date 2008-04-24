@@ -1,9 +1,5 @@
 /**
  * @file Win32Rules.cpp
- *
- * Implementation of the Class Win32Rules
- *  Created on:      11-May-2007 5:09:34 PM
- *  Original author: Pete Ware
  */
 #include <path/Win32Rules.h>
 #include <path/Canonical.h>

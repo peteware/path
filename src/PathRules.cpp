@@ -1,9 +1,5 @@
 /**
  * @file PathRules.cpp
- *
- * Implementation of the Class PathRules
- *  Created on:      11-May-2007 5:09:32 PM
- *  Original author: Pete Ware
  */
 #include <path/PathRules.h>
 #include <path/Canonical.h>
