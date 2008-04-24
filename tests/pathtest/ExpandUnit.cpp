@@ -43,6 +43,8 @@ void ExpandUnit::simple()
     CPPUNIT_ASSERT_EQUAL(path::Path(""), p.expand(env));
     p = path::Path("$$HOME");
     CPPUNIT_ASSERT_EQUAL(path::Path("$HOME"), p.expand(env));
+    p = path::Path("~");
+    CPPUNIT_ASSERT_EQUAL(path::Path(env["HOME"]), p.expand(env));
     
     env["AB_123"] = "x";
     p = path::Path("z$AB_123 abc");

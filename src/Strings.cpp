@@ -22,15 +22,27 @@ namespace path
      *
      * @param str The String to be expanded
      * @param vars A std::map from std::string to std::string
+     * @param tilde True if expand ~ to $HOME (at start)
      * @return a string with all $VARs expanded.
      */
-    std::string expand(const std::string &str, const StringMap &vars)
+    std::string expand(const std::string &str, const StringMap &vars, bool tilde)
     {
         std::string     newstr;
         const char      intro = '$';
+        const char      tilde_char = '~';
         
         for (std::string::const_iterator iter = str.begin(); iter != str.end();)
         {
+            if (tilde)
+            {
+                tilde = false;  // only at the very start
+                if (*iter == tilde_char)
+                {
+                    ++iter;
+                    newstr += expand("$HOME", vars, false);
+                    continue;
+                }
+            }
             // Search for a '$'
             if (*iter != intro) 
             {
@@ -52,7 +64,7 @@ namespace path
                 var += *iter++;
             StringMap::const_iterator variter = vars.find(var);
             if (variter != vars.end())
-                newstr += expand(variter->second, vars);
+                newstr += expand(variter->second, vars, false);
         }
         return newstr;
     }

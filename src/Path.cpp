@@ -142,7 +142,7 @@ namespace path {
     {
         if (m_pathStr)
             return *m_pathStr;
-        m_pathStr = new std::string(path::expand(rules()->add(canon()), System.env()));
+        m_pathStr = new std::string(path::expand(rules()->add(canon()), System.env(), true));
         return *m_pathStr;
     }
     
@@ -164,10 +164,11 @@ namespace path {
     {
         return expand(System.env());
     }
+    
     /**
      * Return a new Path witl all the environment
      * variables expanded into individual
-     * components
+     * components.
      *
      * @param vars Map from $VAR to value
      * @return A Path
@@ -176,10 +177,12 @@ namespace path {
     {
         Strings     entries;    // Saves each directory component
         const Strings &   comp = canon().components();
+        bool        tilde = true;
         
         for (Strings::const_iterator iter = comp.begin(); iter != comp.end(); ++iter)
         {
-            std::string p = path::expand(*iter, vars);
+            std::string p = path::expand(*iter, vars, tilde);
+            tilde = false;
             if (p == *iter)
             {
                 // Nothing changed; just add it
