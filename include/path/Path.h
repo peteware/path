@@ -154,6 +154,10 @@ namespace path {
             
             /// Return the current working directory
             static Path getcwd();
+            /// Create all directories in Path
+            static void mkdirs(const Path &path);
+            /// Create all directories and the file in Path
+            static void mkfile(const Path &path);
             
         private:
             /// Use these rules if none are set.

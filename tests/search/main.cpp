@@ -20,7 +20,11 @@ extern int opterr;
 extern int optreset;
 
 void count(std::ostream &out, path::Node &node);
-
+/**
+ * Test applicaton that uses the Path library to search
+ * for files
+ *
+ */
 int main(int argc, char **argv)
 {
 	int		ch;		// Input option
@@ -83,6 +87,12 @@ int main(int argc, char **argv)
 	
 }
 
+/**
+ * Print the filename and number of lines for a Node
+ * 
+ * @param out The output stream, usualy std::cout, to print to
+ * @param node the Node to count the number of lines
+ */
 void count(std::ostream &out, path::Node &node)
 {
     path::FileStream    str (node, std::ios_base::binary);

@@ -543,6 +543,36 @@ namespace path {
     {
         return Path(System.rules()->canonical(System.getcwd()));
     }
+    
+    /**
+     * Create all the directories along the path.
+     *
+     * @param path The path to create
+     */
+    void Path::mkdirs(const Path &path)
+    {
+        std::vector<Path> hier = path.expand().split();
+        for (std::vector<Path>::iterator iter = hier.begin();
+             iter != hier.end(); ++iter)
+        {
+            if (System.exists(iter->path()))
+                continue;
+            System.mkdir(iter->path(), 0777);
+        }
+    }
+
+    /**
+     * Create any directories along the path and make
+     * create the file.
+     *
+     * @param path The file to make sure it exists.
+     */
+    void Path::mkfile(const Path &path)
+    {
+        mkdirs(path.dirname());
+        System.touch(path.path());
+    }
+    
     /**
      * This is useful for things like adding a version
      * number or changing the extension of a file.  For example:
@@ -562,6 +592,8 @@ namespace path {
         
         if (c.components().size() > 0)
             c.components()[c.components().size() - 1] += append;
+        else
+            c.components().push_back(append);
         return Path(c, m_rules);
     }
 }

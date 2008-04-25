@@ -42,6 +42,7 @@ class PathUnit : public CppUnit::TestCase
 	CPPUNIT_TEST(testRules);
    	CPPUNIT_TEST(testGetcwd);
     CPPUNIT_TEST(testSplit);
+    CPPUNIT_TEST(testmk);
     
 	CPPUNIT_TEST_SUITE_END();
 
@@ -70,6 +71,8 @@ protected:
 	void testRules();
     /// Check static member function getcwd() works
     void testGetcwd();
+    /// Test mkdir() and mkfile()
+    void testmk();
     
 };
 
@@ -240,6 +243,10 @@ void PathUnit::testadd()
     p1 = p1 & ".txt";
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a.txt")), p1);
     CPPUNIT_ASSERT_EQUAL(std::string("a.txt"), p1.basename());
+    
+    p1 = Path();
+    p1 = p1 & "x";
+    CPPUNIT_ASSERT_EQUAL(Path("x"), p1);
 }
 
 void PathUnit::testSplit()
@@ -295,4 +302,14 @@ void PathUnit::testGetcwd()
 {
     Path    p = Path::getcwd();
     CPPUNIT_ASSERT(p.abs());
+}
+
+void PathUnit::testmk()
+{
+    Path    p(path::UnixPath("x/y/abc"));
+    
+    Path::mkdirs(p);
+    p = Path(path::UnixPath("a/b/c/file"));
+    Path::mkfile(p);
+             
 }
