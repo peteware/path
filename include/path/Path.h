@@ -167,7 +167,7 @@ namespace path {
              * 
              * This is the uninterpreted string and is the value returned by str().
              */
-            std::string		m_path;
+            mutable std::string *           m_path;
             /// These are the rules we use for this path; may be NULL
             const PathRules *		m_rules;
             /// The path in canonical form; may be NULL

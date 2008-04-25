@@ -15,7 +15,7 @@ namespace path {
      * Initialize an empty Path
      */
     Path::Path(const PathRules *rules)
-	: m_path(),
+	: m_path(0),
     m_rules(rules),
     m_canon(0),
     m_pathStr(0)
@@ -26,24 +26,22 @@ namespace path {
      * Initialize path, set rules to NULL (i.e. default)
      */
     Path::Path(const char *path)
-    : m_path(),
+    : m_path(0),
     m_rules(0),
     m_canon(new Canonical(path)),
     m_pathStr(0)
     {
-        m_path = rules()->add(*m_canon);
     }
     
     /**
      * Initialize path, set rules to NULL (i.e. default)
      */
     Path::Path(const std::string &path)
-    : m_path(),
+    : m_path(0),
     m_rules(0),
     m_canon(new Canonical(path)),
     m_pathStr(0)
     {
-        m_path = rules()->add(*m_canon);
     }
     
     /**
@@ -53,12 +51,11 @@ namespace path {
      * via the PathRules
      */
     Path::Path(const Canonical &canon, const PathRules *param_rules)
-    : m_path(),
+    : m_path(0),
     m_rules(param_rules),
     m_canon(new Canonical(canon)),
     m_pathStr(0)
     {
-        m_path = rules()->add(canon);
     }
     
     /**
@@ -66,11 +63,13 @@ namespace path {
      * and duplicate the m_canon.
      */
     Path::Path(const Path &copy)
-	: m_path(copy.m_path),
+	:m_path(0),
     m_rules(copy.m_rules),
     m_canon(0),
     m_pathStr(0)
     {
+        if (copy.m_path)
+            m_path = new std::string(*copy.m_path);
         if (copy.m_canon)
             m_canon = new Canonical (*copy.m_canon);
         if (copy.m_pathStr)
@@ -82,18 +81,21 @@ namespace path {
      */
     Path::~Path()
     {
+        delete m_path;
         delete m_canon;
         delete m_pathStr;
     }
     
     /**
      * Do the assignment.
+     *
+     * @param op The right hand side
+     * @return A reference to this path
      */
     Path & Path::operator=(const Path &op)
     {
         if (this == &op)
             return *this;
-        m_path = op.m_path;
         m_rules = op.m_rules;
         
         delete m_canon;
@@ -102,6 +104,12 @@ namespace path {
         else
             m_canon = 0;
         
+        delete m_path;
+        if (op.m_path)
+            m_path = new std::string(*op.m_path);
+        else
+            m_path = 0;
+
         delete m_pathStr;
         if (op.m_pathStr)
             m_pathStr = new std::string(*op.m_pathStr);
@@ -112,19 +120,25 @@ namespace path {
     }
     
     /**
-     * The raw, uninterpreted string is returned.
-     * Use normpath() to get an expanded, clean path and
-     * path() to get an expanded but without duplicate
-     * directory seperators or ".." collapsed.
+     * The unexpanded string is returned (no $VAR) expansion)
+     *
+     * Use path() to get a string with environment
+     * variables and ~ expanded. Use normpath() to get an expanded clean path
+     * (".." collapsed).
      */
     const std::string &Path::str() const
     {
-        return m_path;
+        if (!m_path)
+            m_path = new std::string(rules()->add(canon()));
+        return *m_path;
     }
     
+    /**
+     * Same as str() but a NUL terminated string
+     */
     const char * Path::str_c() const
     {
-        return m_path.c_str();
+        return str().c_str();
     }
     
     /**
@@ -280,11 +294,11 @@ namespace path {
     std::string Path::extension() const
     {
         Path    last = basename();
-        std::string::size_type	index = last.m_path.find_last_of (".");
+        std::string::size_type	index = last.str().find_last_of (".");
         if (index == std::string::npos)
             return "";
         else
-            return last.m_path.substr (index, last.m_path.size() - index);
+            return last.str().substr (index, last.str().size() - index);
     }
     
     /**
@@ -297,17 +311,18 @@ namespace path {
      * Path p2("/a/b/.name");
      * p2.stem() == ".name";
      * @endcode
+     * This works on the unexpanded version (i.e. no $VAR).
      */
     std::string Path::stem() const
     {
         Path	base = basename();
-        std::string::size_type	index = base.m_path.find_last_of (".");
+        std::string::size_type	index = base.str().find_last_of (".");
         if (index == std::string::npos)
-            return base.m_path;
+            return base.str();
         else if (index == 0)
-            return base.m_path;
+            return base.str();
         else
-            return base.m_path.substr (0, index);
+            return base.str().substr (0, index);
     }
     
     /**
@@ -390,10 +405,10 @@ namespace path {
     }
     
     /**
-     * Return a Path by joining all the std::strings in the vector.
+     * Return a Path by adding all the std::strings in the vector.
      * 
      * This is comparable to repeated calling add() with each component of the vector.
-     *  Creating an empty String and then calling add() should do what you'd expect.
+     * Creating an empty Path and then calling add() should do what you'd expect.
      * For example:
      * 
      * @code
@@ -472,9 +487,7 @@ namespace path {
     const Canonical & Path::canon() const
     {
         if (!m_canon)
-        {
-            m_canon = new Canonical(rules()->canonical(m_path));
-        }
+            m_canon = new Canonical();
         return *m_canon;
     }
     
