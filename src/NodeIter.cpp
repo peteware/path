@@ -83,6 +83,9 @@ namespace path {
     
     /**
      * Compares two iterators to see if they refer to the same Node
+     *
+     * @param op2 Right hand side comparison
+     * @return true if same, false otherwise
      */
     bool NodeIter::operator==(const NodeIter & op2) const
     {

@@ -9,7 +9,7 @@
 namespace path {
     
     /**
-     * @class UriRules path/UrilRules.h
+     * @class UriRules path/UriRules.h
      * Handle URI's rules.
      */
     class UriRules : public PathRules

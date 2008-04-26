@@ -1,6 +1,6 @@
 /**
  * @file SysCallsUnit.cpp
- * @ingroup 
+ * @ingroup PathTest
  */
 #include <path/SysCalls.h>
 #include <path/PathException.h>

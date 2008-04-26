@@ -1,7 +1,6 @@
 /**
- * @file main.cpp
- * @defgroup SearchTest
- * @ingroup SearchTest
+ * @file search/main.cpp
+ * @defgroup SearchTest Test applicaiton that searches for files
  */
 #include <path/Node.h>
 #include <path/NodeIter.h>

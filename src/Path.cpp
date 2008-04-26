@@ -426,7 +426,7 @@ namespace path {
      * path = path.add(str.split());
      * @endcode
      * 
-     * @param List of strings to be added
+     * @param strings List of strings to be added
      * @return A new path with the same canonical and the strings added.
      */
     Path Path::add(const Strings &strings) const
@@ -625,6 +625,7 @@ namespace path {
  * the same, they will not compare equally.  See
  * normpath() as a way to make them compare the same
  * 
+ * @param op1 The first argument to ==
  * @param op2 The second argument to ==
  * @return True if the same, false otherwise.
  */
