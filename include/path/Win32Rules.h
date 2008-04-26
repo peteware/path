@@ -5,13 +5,8 @@
 #define _PATH_WIN32RULES_H_
 
 #include <path/PathRules.h>
-#include <string>
 
 namespace path {
-    // Forward declarations
-    class Canonical;
-    class Path;
-    
     /**
      * @class Win32Rules path/Win32Rules.h
      * Implements the Windows path rules
@@ -28,7 +23,8 @@ namespace path {
         
         virtual Canonical canonical(const std::string &path) const;
         virtual std::string quote(const std::string & path) const;
-        //virtual std::string add(const Canonical &canonical) const;
+        /// Unquote (dequote?) an element of path
+        virtual std::string unquote(const std::string &subdir) const;
     };
 }
 #endif // !defined(_PATH_WIN32RULES_H_)

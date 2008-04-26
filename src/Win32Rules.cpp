@@ -51,6 +51,11 @@ namespace path {
     {
         return path;
     }
+
+    std::string Win32Rules::unquote(const std::string & subdir) const
+    {
+        return subdir;
+    }
     
     /**
      * Shortcut for handling a Win32 style path

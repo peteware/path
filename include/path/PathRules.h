@@ -6,11 +6,9 @@
 
 #include <path/Strings.h>
 #include <string>
-#include <vector>
 
 namespace path {
     // Forward declarations
-    class Path;
     class Canonical;
     
     /**
@@ -30,14 +28,14 @@ namespace path {
         PathRules(char sep);
         virtual ~PathRules();
         
+        /// Convert Canonical into a string
+        virtual std::string str(const Canonical &canononical) const;
         /// Convert a raw path (aka a string) into Canonical
         virtual Canonical canonical(const std::string &path) const = 0;
-        /// Convert Canonical into a Path
-        virtual Path convert(const Canonical &canonical) const;
         /// Quote an element of path
         virtual std::string quote(const std::string & subdir) const = 0;
-        /// Convert Canonical into a string
-        virtual std::string add(const Canonical &canononical) const;
+        /// Unquote (dequote?) an element of path
+        virtual std::string unquote(const std::string &path) const = 0;
     protected:
         /// Split a string into it's components
         static void split(const std::string &path, char sep, Strings &subdirs);

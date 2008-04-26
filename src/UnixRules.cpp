@@ -39,6 +39,11 @@ namespace path {
         return subdir;
     }
     
+    std::string UnixRules::unquote(const std::string &subdir) const
+    {
+        return subdir;
+    }
+    
     /**
      * Convert a Unix style path into the canonical representation
      *

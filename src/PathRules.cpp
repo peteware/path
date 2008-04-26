@@ -24,13 +24,50 @@ namespace path {
     }
     
     /**
+     * Convert the canonical representation into a 
+     * suitable string.  No varaiable ($VAR) expansion
+     * happens.  Special characters, i.e. path_sep such as
+     * '/' are escaped.
+     *
+     * @param canon The protocol, drive, components to stringify
+     * @return The PathRules specific string
+     */
+    std::string PathRules::str(const Canonical &canon) const
+    {
+        std::string     p;
+        if (!canon.protocol().empty())
+        {
+            p += canon.protocol() + ":";
+            if (!canon.host().empty())
+                p += "//" + canon.host() + "/";
+        }
+        if (!canon.drive().empty())
+        {
+            p += canon.drive() + ":";
+        }
+        if (canon.abs())
+            p += m_sep;
+        bool first = true;
+        for (Strings::const_iterator iter = canon.components().begin();
+             iter != canon.components().end(); ++iter)
+        {
+            if (first)
+                first = false;
+            else
+                p += m_sep;
+            p += quote(*iter);
+        }
+        return p;
+    }
+    
+    /**
      * This allows Path to implement it's manipulations without
      * knowing system implementation details.
      */
     Canonical PathRules::canonical(const std::string &path) const
     {
         Canonical	canon;
-        Strings	components;
+        Strings     components;
         bool		first = true;
         
         split(path, m_sep, components);
@@ -57,53 +94,28 @@ namespace path {
     }
     
     /**
-     * Converts the canonical representation of a path to a form used by the rules.
-     * 
-     * Any special characters are converted to a safe form.  For example,
-     * in UnixRules, a '/' is converted to '|' (or whatever).
-     */
-    Path PathRules::convert(const Canonical &canonical) const 
-    {
-        return Path(canonical, this);
-    }
-    
-    /**
      * Return a string properly quoted with any system special components replaces.
      * For example, UriRules would replace spaces with %040.  Only single path
      * components should be passed.  For example, passing 'a/b' to UnixRules would
      * return 'a_b'.
+     *
+     * See unquote() which does the inverse.
+     *
+     * @param subdir Element to be quoted
+     * @return Element with special characters translated
      */
     std::string PathRules::quote(const std::string & subdir) const
     {
         throw Unimplemented("PathRules::quote()");
     }
-    
-    std::string PathRules::add(const Canonical &canon) const
+
+    /**
+     * Take an already quoted element and return it with things
+     * translated back to te original.
+     */
+    std::string PathRules::unquote(const std::string &subdir) const
     {
-        std::string     p;
-        if (!canon.protocol().empty())
-        {
-            p += canon.protocol() + ":";
-            if (!canon.host().empty())
-                p += "//" + canon.host() + "/";
-        }
-        if (!canon.drive().empty())
-        {
-            p += canon.drive() + ":";
-        }
-        if (canon.abs())
-            p += m_sep;
-        bool first = true;
-        for (Strings::const_iterator iter = canon.components().begin();
-             iter != canon.components().end(); ++iter)
-        {
-            if (first)
-                first = false;
-            else
-                p += m_sep;
-            p += quote(*iter);
-        }
-        return p;
+        throw Unimplemented("PathRules::unquote()");
     }
     
     /**

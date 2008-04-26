@@ -5,10 +5,8 @@
 #define _PATH_UNIXRULES_H_
 
 #include <path/PathRules.h>
+
 namespace path {
-    // Forward declarations
-    class Canonical;
-    
     /**
      * @class UnixRules path/UnixRules.h
      * Implement PathRules for Unix like pathnames.
@@ -19,10 +17,11 @@ namespace path {
         UnixRules();
         virtual ~UnixRules();
         
-        virtual Canonical canonical(const std::string &path) const;
+        virtual Canonical   canonical(const std::string &path) const;
         virtual std::string quote(const std::string & path) const;
+        virtual std::string unquote(const std::string &subdir) const;
         
-        static Canonical   canon(const std::string &path);
+        static Canonical    canon(const std::string &path);
         static UnixRules	rules;
         
     };

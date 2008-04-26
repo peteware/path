@@ -5,12 +5,8 @@
 #define _PATH_URIRULES_H_
 
 #include <path/PathRules.h>
-#include <string>
 
 namespace path {
-    // Forward declarations
-    class Canonical;
-    class Path;
     
     /**
      * @class UriRules path/UrilRules.h

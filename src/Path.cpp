@@ -125,11 +125,19 @@ namespace path {
      * Use path() to get a string with environment
      * variables and ~ expanded. Use normpath() to get an expanded clean path
      * (".." collapsed).
+     *
+     * This is typically the path you want to display to a person.  Since
+     * it includes $VAR it may be a little more natural and conveniant
+     * for a person to see.  On the hand, you always want to
+     * use path() to get a pathname that is usable to the operating system.
+     * You should also you path() to report errors, etc.
+     *
+     * @return A string of the path.
      */
     const std::string &Path::str() const
     {
         if (!m_path)
-            m_path = new std::string(rules()->add(canon()));
+            m_path = new std::string(rules()->str(canon()));
         return *m_path;
     }
     
@@ -155,7 +163,7 @@ namespace path {
     {
         if (m_pathStr)
             return *m_pathStr;
-        m_pathStr = new std::string(path::expand(rules()->add(canon()), System.env(), true));
+        m_pathStr = new std::string(path::expand(rules()->str(canon()), System.env(), true));
         return *m_pathStr;
     }
     
