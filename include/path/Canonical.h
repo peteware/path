@@ -49,7 +49,7 @@ namespace path
         Canonical &operator=(const Canonical & op2);
         
         /// Copy the protocol, host, and extra without changing drive or components
-        Canonical & copyInfo(const Canonical &canon);
+        Canonical & setInfo(const Canonical &canon);
         /// Set the protocol (e.g. "http")
         Canonical &  setProtocol(const std::string &proto);
         /// Return the protocol string (may be empty)

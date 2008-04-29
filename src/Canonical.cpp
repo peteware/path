@@ -155,14 +155,14 @@ namespace path
      *
      * @code
      * Canonical c;
-     * c.copyInfo(somepath.canon());
+     * c.setInfo(somepath.canon());
      * c.add("a");
      * @endcode
      *
      * @param from The Canonical object to copy protocol, host, extra
      * @return A reference to this object.
      */
-    Canonical & Canonical::copyInfo(const Canonical &from)
+    Canonical & Canonical::setInfo(const Canonical &from)
     {
         m_protocol = from.m_protocol;
         m_host = from.m_host;

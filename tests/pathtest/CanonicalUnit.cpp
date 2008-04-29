@@ -25,7 +25,7 @@ class CanonicalUnit : public CppUnit::TestCase
 	CPPUNIT_TEST(testDrive);
     CPPUNIT_TEST(testCompare);
     CPPUNIT_TEST(testAdd);
-    CPPUNIT_TEST(testCopyInfo);
+    CPPUNIT_TEST(testSetInfo);
     
     CPPUNIT_TEST_SUITE_END();
 protected:
@@ -40,7 +40,7 @@ protected:
     /// Test the .add() and variations
     void testAdd();
     /// Test the copyInfo() method
-    void testCopyInfo();
+    void testSetInfo();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(CanonicalUnit);
@@ -169,7 +169,7 @@ void CanonicalUnit::testAdd()
     CPPUNIT_ASSERT_EQUAL(c1, c2);
 }
 
-void CanonicalUnit::testCopyInfo()
+void CanonicalUnit::testSetInfo()
 {
     Canonical   c1("a", "b", "c");
     Canonical   c2;
@@ -179,7 +179,7 @@ void CanonicalUnit::testCopyInfo()
     c1.setExtra("8080");
     c1.setHost("www.peteware.com");
     
-    c2.copyInfo(c1);
+    c2.setInfo(c1);
     CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(0), c2.components().size());
     CPPUNIT_ASSERT_EQUAL(c1.protocol(), c2.protocol());
     CPPUNIT_ASSERT_EQUAL(c1.host(), c2.host());
@@ -187,7 +187,7 @@ void CanonicalUnit::testCopyInfo()
     CPPUNIT_ASSERT_EQUAL(std::string(""), c2.drive());
 
     c2.setHost("nowhere");
-    c2.copyInfo(c1).setDrive("A");
+    c2.setInfo(c1).setDrive("A");
     CPPUNIT_ASSERT_EQUAL(c1.host(), c2.host());
     CPPUNIT_ASSERT_EQUAL(std::string("A"), c2.drive());
 }
