@@ -21,6 +21,8 @@ namespace path {
     
     /**
      * Makes iterator return all Nodes within a directory.
+     *
+     * @param node The Node this is going to iterate through
      */
     NodeIter::NodeIter(const Node &node)
 	: m_parent(&node),
@@ -32,6 +34,12 @@ namespace path {
     
     /**
      * Makes iterator return all Nodes within a directory.
+     *
+     * Not yet implemented, just iterates through all
+     *
+     * @param node The Node this is going to interate through
+     * @param pattern Pattern to match (shell or regular expression)
+     * @param regexp This is a regular expression, not a shell pattern
      */
     NodeIter::NodeIter(const Node &node, const std::string & pattern, bool regexp)
 	: m_parent(&node),
@@ -105,6 +113,8 @@ namespace path {
     
     /**
      * Compares two iterators to see if they refer to different Nodes
+     *
+     * @param op2 Right hand side for comparison
      */
     bool NodeIter::operator!=(const NodeIter & op2) const
     {

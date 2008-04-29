@@ -380,6 +380,10 @@ namespace path
  * If protocol, host, and extra are empty it'll
  * look like a regular path with "/" seperating
  * components.
+ *
+ * @param out The stream to print to (e.g. std::cout)
+ * @param canon The Canonical object to print
+ * @return out
  */
 
 std::ostream &

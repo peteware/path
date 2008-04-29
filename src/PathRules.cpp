@@ -63,6 +63,8 @@ namespace path {
     /**
      * This allows Path to implement it's manipulations without
      * knowing system implementation details.
+     *
+     * @param path The path to convert to Canonical
      */
     Canonical PathRules::canonical(const std::string &path) const
     {
@@ -112,6 +114,8 @@ namespace path {
     /**
      * Take an already quoted element and return it with things
      * translated back to te original.
+     *
+     * @param subdir Subdirectory to have any quoted characters unquoted
      */
     std::string PathRules::unquote(const std::string &subdir) const
     {

@@ -13,6 +13,8 @@ namespace path {
     
     /**
      * Initialize an empty Path
+     *
+     * @param rules Rules to initialize.  May be NULL.
      */
     Path::Path(const PathRules *rules)
 	: m_path(0),
@@ -24,6 +26,8 @@ namespace path {
     
     /**
      * Initialize path, set rules to NULL (i.e. default)
+     *
+     * @param path The directory
      */
     Path::Path(const char *path)
     : m_path(0),
@@ -35,6 +39,8 @@ namespace path {
     
     /**
      * Initialize path, set rules to NULL (i.e. default)
+     *
+     * @param path The directory
      */
     Path::Path(const std::string &path)
     : m_path(0),
@@ -49,6 +55,9 @@ namespace path {
      *
      * Initialized m_path by converting from Canonical to a string
      * via the PathRules
+     *
+     * @param canon Canonical version of path
+     * @param param_rules Rules to use
      */
     Path::Path(const Canonical &canon, const PathRules *param_rules)
     : m_path(0),
@@ -61,6 +70,8 @@ namespace path {
     /**
      * Copy the m_path, make m_rules the same (pointer copy)
      * and duplicate the m_canon.
+     *
+     * @param copy Path to be copied
      */
     Path::Path(const Path &copy)
 	:m_path(0),
@@ -409,7 +420,6 @@ namespace path {
                   path.canon().components().end(),
                   std::back_inserter(c.components()));
         return Path (c, m_rules);
-        //return rules()->convert(c);
     }
     
     /**
@@ -530,6 +540,9 @@ namespace path {
      * Sets the default path rules to be used by any newly created Path objects.
      * 
      * This should be done at compile time to match the operations on the system.
+     *
+     * @param rules Set the rules to be used by default
+     * @return Previous value of ruls
      */
     PathRules * Path::setDefaultPathRules(PathRules * rules)
     {
@@ -638,6 +651,10 @@ bool operator==(const path::Path &op1, const path::Path & op2)
 
 /**
  * Inverse of operator==()
+ *
+ * @param op1 Left hand side
+ * @param op2 Right hand side
+ * @return True if different, false otherwise
  */
 bool operator!=(const path::Path &op1, const path::Path &op2)
 {
@@ -647,6 +664,10 @@ bool operator!=(const path::Path &op1, const path::Path &op2)
 /**
  * Print's the raw form of the Path.  See normpath() 
  * to get a cleaner version of the Path.  
+ *
+ * @param out Stream to print to
+ * @param path Path to be printed
+ * @return Returns out
  */
 std::ostream &operator<<(std::ostream &out, const path::Path&path)
 {

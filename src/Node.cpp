@@ -27,6 +27,8 @@ namespace path {
     
     /**
      * May throw PathException.
+     *
+     * @param str A string representing a directory
      */
     Node::Node(const char *str)
     : Path(str),
@@ -39,6 +41,8 @@ namespace path {
     
     /**
      * Construct from a std::string.  May throw PathException
+     *
+     * @param str A string representing a directory
      */
     Node::Node(const std::string &str)
 	: Path(Canonical(str)),
@@ -54,6 +58,8 @@ namespace path {
      * Create a Node from a Path.
      * 
      * If there is no corresponding filesystem object, then an exception is raised.
+     *
+     * @param p Path to be copied from
      */
     Node::Node(const Path &p)
     : Path(p),
@@ -85,6 +91,8 @@ namespace path {
     /**
      * We bypass the check for existence.  Let's assume
      * if the orig existed, it still does.
+     *
+     * @param orig The Node being copied
      */
     Node::Node(const Node &orig)
     : Path(orig),

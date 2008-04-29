@@ -1,5 +1,5 @@
 /**
- * @file search/main.cpp
+ * @file main.cpp search/main.cpp
  * @defgroup SearchTest Test applicaiton that searches for files
  */
 #include <path/Node.h>
