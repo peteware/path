@@ -18,9 +18,10 @@ namespace path {
      * For example, the difference between using a forward slash between
      * directories (Unix) for backward slash (Win32) is encapsulating
      * here.  Characters that are special can be quoted by the
-     * implementation.  Finally, an implementation provides a way to
-     * convert between path rules.
+     * implementation. 
      *
+     * Mostly, this is about converting between a std::string
+     * and Canonical objects.
      */
     class PathRules
     {

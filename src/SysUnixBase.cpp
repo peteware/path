@@ -98,7 +98,7 @@ namespace path {
     
     /**
      * Gets the basic information about a file and returns
-     * the a new NodeInfo object.
+     * a new NodeInfo object (you must delete it)
      *
      * @param path The path to look for
      * @return Newly created NodeInfo object.

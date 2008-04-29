@@ -609,12 +609,12 @@ namespace path {
     
     /**
      * This is useful for things like adding a version
-     * number or changing the extension of a file.  For example:
+     * number or a backup of a file.  For example:
      *
      * @code
      * Path     header(UnixPath("/a/b/file.h"));
-     * Path     src = header.dirname() + header.stem() & ".C";
-     * Path     backup = src & ".bak";
+     * Path     src = header.dirname() + header.stem() + ".C";
+     * Path     backup = header & ".bak";
      * @endcode
      *
      * @param append String to be added
@@ -671,11 +671,11 @@ bool operator!=(const path::Path &op1, const path::Path &op2)
  */
 std::ostream &operator<<(std::ostream &out, const path::Path&path)
 {
-	return out << path.path();
+	return out << path.str();
 }
 
 /**
- * Add another component to path and return a new one
+ * Add another component to path and return a new Path
  *
  * @param path The path to add to
  * @param dir The directory to add to path
@@ -687,7 +687,7 @@ path::Path operator+(const path::Path &path, const std::string &dir)
     
 }
 /**
- * Add another component to path and return a new one
+ * Add another component to path and return a new Path
  *
  * @param path The path to add to
  * @param dir The directory to add to path
@@ -700,7 +700,7 @@ path::Path operator+(const path::Path &path, const char *dir)
 }
 
 /**
- * Add another component to path and return a new path
+ * Add another component to path and return a new Path
  *
  * @param path The path to add to
  * @param op2 The directory to add to path

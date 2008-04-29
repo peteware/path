@@ -5,6 +5,7 @@
  */
 
 #include <path/PathException.h>
+#include <stdio.h>
 
 namespace path {
     

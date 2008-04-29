@@ -287,6 +287,9 @@ namespace path {
      * 
      * This is the same as calling the Node::Node() constructor but it catches any
      * exception.
+     *
+     * @param path The path to create a Node for
+     * @return Newly created Node or NULL if it doesn't already exist
      */
     Node * Node::create(const Path &path)
     {
