@@ -145,6 +145,23 @@ void NodeUnit::iter()
     buildFiles();
 	Node	node(m_base);
 
+    /*
+     * Test NodeIte assignment and copy constructors and destructor
+     */
+    {
+        NodeIter    iter1;
+        NodeIter    iter2;
+        iter1 = iter2;
+        NodeIter    iter3(iter1);
+    }
+    
+    /*
+     * Tet NodeIter constructror from Node and destructor
+     */
+    {
+        NodeIter    iter1(node);
+    }
+
     std::vector<Node>   nodes;
     std::copy(node.begin(), node.end(), std::back_insert_iterator<std::vector<Node> > (nodes));
 	int count = 0;

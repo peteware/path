@@ -11,7 +11,7 @@ namespace path {
     // Forward declarations
     class NodeIter;
     class NodeInfo;
-    class SubNode;
+
     
     /**
      * @class Node path/Node.h
@@ -67,21 +67,13 @@ namespace path {
         /// Resolve symbolic links, etc
         Node realpath() const;
         
-        /// Return a Node
-        Node *subNode(int index) const;
-         /// Return how many subnodes there are
-        int subNodeCount() const;
-        
         /// Create a new node and handle exceptions if it doesn't exist
         static Node * create(const Path &path);
         
     protected:
-        /// Initialzie m_nodes (if needed)
-        void subNodeCreate() const;
         
     private:
         mutable NodeInfo * m_cache;
-        mutable SubNode * m_nodes;
     };
 }
 #endif // !defined(_PATH_NODE_H)

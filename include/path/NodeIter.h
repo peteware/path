@@ -10,7 +10,7 @@
 namespace path {
     // Forward declarations
     class Node;
-    
+    class SubNode;    
     /**
      * @class NodeIter path/NodeIter.h
      * Used to iterate over the Nodes within a Directory.
@@ -38,9 +38,15 @@ namespace path {
         /// The end() iterator
         NodeIter();
         /// Copy constructor
+        NodeIter(const NodeIter &copy);
+        /// Create from a Node.
         NodeIter(const Node &node);
         /// Regular expression macher
         NodeIter(const Node &node, const std::string &pattern, bool regexp);
+        /// Destructor
+        ~NodeIter();
+        /// Assignment operator
+        NodeIter &operator=(const NodeIter &op2);
         /// Dereferencing
         Node * operator->();
         /// Dereferencing
@@ -56,12 +62,21 @@ namespace path {
         /// Make this a recursive iterator
         void setRecursive();
     private:
+        /// Return a Node
+        Node *subNode(int index) const;
+        /// Return how many subnodes there are
+        int subNodeCount() const;
+        /// Initialzie m_nodes (if needed)
+        void subNodeCreate() const;
+       
         /// Returns the node this iterator is referencing
         Node *      findNode();
         /// Return number of SubNode's in Node
         int         size() const;
-        /// Actual Node being iterator over
+        /// Actual Node being iterated over
         const Node *m_parent;
+        mutable SubNode * m_nodes;
+
         /// Current index
         int			m_current;
     };

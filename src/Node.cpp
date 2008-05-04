@@ -4,7 +4,6 @@
 #include <path/Node.h>
 #include <path/NodeInfo.h>
 #include <path/NodeIter.h>
-#include <path/SubNode.h>
 #include <path/SysCalls.h>
 #include <path/Canonical.h>
 #include <path/PathException.h>
@@ -20,8 +19,7 @@ namespace path {
      * I'm not happy about this but it became necessary to support NodeIter from Node::end().
      */
     Node::Node()
-	: m_cache(0),
-    m_nodes(0)
+	: m_cache(0)
     {
     }
     
@@ -32,8 +30,7 @@ namespace path {
      */
     Node::Node(const char *str)
     : Path(str),
-    m_cache(0),
-    m_nodes(0)
+    m_cache(0)
     {
         if (!exists())
             throw PathException(path(), errno);
@@ -46,8 +43,7 @@ namespace path {
      */
     Node::Node(const std::string &str)
 	: Path(Canonical(str)),
-    m_cache(0),
-    m_nodes(0)
+    m_cache(0)
     {
         if (!exists())
             throw PathException(path(), errno);
@@ -63,8 +59,7 @@ namespace path {
      */
     Node::Node(const Path &p)
     : Path(p),
-    m_cache(0),
-    m_nodes(0)
+    m_cache(0)
     {
         if (!exists())
             throw PathException(path(), errno);
@@ -81,8 +76,7 @@ namespace path {
      */
     Node::Node(const Canonical &can, const PathRules *rules)
     : Path(can, rules),
-    m_cache(0),
-    m_nodes(0)
+    m_cache(0)
     {
         if (!exists())
             throw PathException(path(), errno);
@@ -96,8 +90,7 @@ namespace path {
      */
     Node::Node(const Node &orig)
     : Path(orig),
-    m_cache(0),
-    m_nodes(0)
+    m_cache(0)
     {
     }
 
@@ -107,7 +100,6 @@ namespace path {
     Node::~Node()
     {
         delete m_cache;
-        delete m_nodes;
     }
 
     /**
@@ -123,28 +115,18 @@ namespace path {
             return *this;
         Path::operator=(op2);
         delete m_cache;
-        delete m_nodes;
         m_cache = 0;
-        m_nodes = 0;
         return *this;
     }
     
     Node::iterator Node::begin()
     {
-        subNodeCreate();
-        if (!m_nodes || m_nodes->m_entries.size() == 0)
-            return end();
-        else
-            return  NodeIter(*this);
+        return  NodeIter(*this);
     }
     
     Node::const_iterator Node::begin() const
     {
-        subNodeCreate();
-        if (!m_nodes || m_nodes->m_entries.size() == 0)
-            return end();
-        else
-            return  NodeIter(*this);
+       return  NodeIter(*this);
     }
     
     /**
@@ -246,42 +228,6 @@ namespace path {
     
 
     /**
-     * @param index First is 0.  
-     * @return Node refered by index.
-     */
-    Node *Node::subNode(int index) const
-    {
-        Node *n = 0;
-        
-        subNodeCreate();
-        if (!m_nodes)
-            return 0;
-        if (index < 0 || index >= static_cast<int>(m_nodes->m_entries.size()))
-            return 0;
-        n = m_nodes->m_entries[index].m_node;
-        if (!n)
-        {
-            std::string		name = m_nodes->m_entries[index].m_name;
-            Path			path = *this + name;
-            n = Node::create(path);
-            m_nodes->m_entries[index].m_node = n;
-        }
-        return n;
-    }
-    
-    /**
-     * Return how many files are in this directory
-     */
-    int Node::subNodeCount() const
-    {
-        if (!m_nodes)
-            return 0;
-        return m_nodes->m_entries.size();
-        
-    }
-
-    
-    /**
      * Take a path String and return a Node.  If there is no corresponding file object,
      * a NULL is returned; otherwise a Node allocated with 'new' is returned.
      * 
@@ -303,21 +249,4 @@ namespace path {
         }
     }
     
-    /**
-     * If m_nodes is already initialized, this returns immediately.
-     *
-     * Otherwise, it calls System.listdir() and saves the list
-     * of filenames.
-     */
-    void Node::subNodeCreate() const
-    {
-        if (m_nodes)
-            return;
-        m_nodes = new SubNode;
-        Strings	files = System.listdir(path());
-        std::sort(files.begin(), files.end());
-        std::copy(files.begin(), files.end(),
-                  std::back_insert_iterator<std::vector<SubNode::Entry> > (m_nodes->m_entries));
-        
-    }
 }
