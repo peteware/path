@@ -17,18 +17,27 @@ namespace path {
     NodeIter::NodeIter()
 	: m_parent(0),
     m_current(-1),
-    m_nodes(0)
-
+    m_nodes(0),
+    m_recursive(false)
     {
     }
     
+    /**
+     * @param copy The NodeIter to copy
+     */
     NodeIter::NodeIter(const NodeIter &copy)
     : m_parent(copy.m_parent),
     m_current(copy.m_current),
-    m_nodes(0)
+    m_nodes(0),
+    m_recursive(copy.m_recursive)
     {
         if (copy.m_nodes)
             m_nodes = new SubNode(*copy.m_nodes);
+        for (std::vector<Node *>::const_iterator iter = copy.m_nodeList.begin();
+             iter != copy.m_nodeList.end(); ++iter)
+        {
+            m_nodeList.push_back(new Node(**iter));
+        }
     }
 
     /**
@@ -39,8 +48,8 @@ namespace path {
     NodeIter::NodeIter(const Node &node)
 	: m_parent(&node),
     m_current(0),
-    m_nodes(0)
-
+    m_nodes(0),
+    m_recursive(false)
     {
         subNodeCreate();
         if (subNodeCount() == 0)
@@ -59,8 +68,8 @@ namespace path {
     NodeIter::NodeIter(const Node &node, const std::string & pattern, bool regexp)
 	: m_parent(&node),
     m_current(0),
-    m_nodes(0)
-
+    m_nodes(0),
+    m_recursive(false)
     {
         subNodeCreate();
         if (subNodeCount() == 0)
@@ -70,6 +79,10 @@ namespace path {
     NodeIter::~NodeIter()
     {
         delete m_nodes;
+        for(std::vector<Node *>::iterator iter = m_nodeList.begin();
+            iter != m_nodeList.end(); ++iter)
+            delete *iter;
+        m_nodeList.clear();
     }
     
     NodeIter &NodeIter::operator=(const NodeIter &op2)
@@ -83,6 +96,16 @@ namespace path {
             m_nodes = new SubNode(*op2.m_nodes);
         else
             m_nodes = 0;
+        for(std::vector<Node *>::iterator iter = m_nodeList.begin();
+            iter != m_nodeList.end(); ++iter)
+            delete *iter;
+        m_nodeList.clear();
+        for (std::vector<Node *>::const_iterator iter = op2.m_nodeList.begin();
+             iter != op2.m_nodeList.end(); ++iter)
+        {
+            m_nodeList.push_back(new Node(**iter));
+        }
+        m_recursive = op2.m_recursive;
         return *this;
     }
     
@@ -105,19 +128,31 @@ namespace path {
     }
     
     /**
-     * Prefix increment Moves to the next Node in the
+     * Prefix increment moves to the next Node.
      */
     NodeIter &NodeIter::operator++()
     {
         if (m_current >= 0 && m_current + 1 < size())
+        {
             ++m_current;
+            if (m_recursive) 
+            {
+                Node *n = findNode();
+                if (n && n->isDir())
+                    addNodes(n);
+            }
+        }
         else
             m_current = -1;
         return *this;
     }
     
     /**
-     * Postfix increment
+     * Postfix increment.
+     *
+     * It's much, much better to use the pre-fix increment as
+     * this one makes a complete copy of the list of subnodes
+     * and other data.
      */
     NodeIter NodeIter::operator++(int)
     {
@@ -156,14 +191,20 @@ namespace path {
     bool NodeIter::operator!=(const NodeIter & op2) const
     {
         return !(*this == op2);
-        
     }
     
     /**
      * Traverse into each subdirectory.
+     *
+     * @return A reference to this object
      */
-    void NodeIter::setRecursive()
+    NodeIter & NodeIter::setRecursive()
     {
+        m_recursive = true;
+        Node *n = subNode(m_current);
+        if (n->isDir())
+            addNodes(n);
+        return *this;
     }
     
     Node *NodeIter::findNode()
@@ -185,8 +226,11 @@ namespace path {
      */
     Node *NodeIter::subNode(int index) const
     {
-        Node *n = 0;
+        if (index < 0 || index >= static_cast<int>(m_nodeList.size()))
+            return 0;
         
+        return m_nodeList[index];
+#ifdef notdef
         subNodeCreate();
         if (!m_nodes)
             return 0;
@@ -201,6 +245,7 @@ namespace path {
             m_nodes->m_entries[index].m_node = n;
         }
         return n;
+#endif
     }
     
     /**
@@ -208,10 +253,12 @@ namespace path {
      */
     int NodeIter::subNodeCount() const
     {
+        return static_cast<int>(m_nodeList.size());
+#ifdef notdef
         if (!m_nodes)
             return 0;
         return m_nodes->m_entries.size();
-        
+#endif        
     }
     /**
      * If m_nodes is already initialized, this returns immediately.
@@ -219,8 +266,10 @@ namespace path {
      * Otherwise, it calls System.listdir() and saves the list
      * of filenames.
      */
-    void NodeIter::subNodeCreate() const
+    void NodeIter::subNodeCreate()
     {
+        addNodes(m_parent);
+#ifdef notdef
         if (m_nodes)
             return;
         m_nodes = new SubNode;
@@ -229,5 +278,18 @@ namespace path {
         std::copy(files.begin(), files.end(),
                   std::back_insert_iterator<std::vector<SubNode::Entry> > (m_nodes->m_entries));
         
+#endif
+    }
+    
+    void NodeIter::addNodes(const Node *node)
+    {
+        if (!node)
+            return;
+        Strings	files = System.listdir(node->path());
+        std::sort(files.begin(), files.end());
+        for (Strings::iterator iter = files.begin(); iter != files.end(); ++iter)
+        {
+            m_nodeList.push_back(new Node(*node + *iter));
+        }
     }
 }

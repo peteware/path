@@ -6,6 +6,7 @@
 
 #include <iterator>
 #include <string>
+#include <vector>
 
 namespace path {
     // Forward declarations
@@ -60,25 +61,30 @@ namespace path {
         /// Postfix increment
         NodeIter NodeIter::operator++(int);
         /// Make this a recursive iterator
-        void setRecursive();
+        NodeIter & setRecursive();
     private:
         /// Return a Node
         Node *subNode(int index) const;
         /// Return how many subnodes there are
         int subNodeCount() const;
         /// Initialzie m_nodes (if needed)
-        void subNodeCreate() const;
+        void subNodeCreate();
        
         /// Returns the node this iterator is referencing
         Node *      findNode();
+        /// List all Node's in node and add to m_nodeList
+        void addNodes(const Node *node);
         /// Return number of SubNode's in Node
         int         size() const;
         /// Actual Node being iterated over
         const Node *m_parent;
         mutable SubNode * m_nodes;
+        std::vector<Node *> m_nodeList;
 
         /// Current index
         int			m_current;
+        /// Traverse subdirectories, too
+        bool        m_recursive;
     };
 }
 #endif // !defined(_PATH_NODEITER_H_)
