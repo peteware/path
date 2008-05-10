@@ -65,7 +65,7 @@ int main(int argc, char **argv)
             std::cout << "start " << node.path() << std::endl;
             for (path::Node::iterator iter = node.begin().setRecursive(); iter != node.end(); ++iter)
             {
-                if (size > static_cast<size_t>(0) && iter->size() < size)
+                if (size > static_cast<size_t>(0) && static_cast<size_t>(iter->size()) < size)
                     continue;
                 if (countLines)
                     count(std::cout, *iter);
