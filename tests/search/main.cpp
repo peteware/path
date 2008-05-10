@@ -63,7 +63,7 @@ int main(int argc, char **argv)
         {
             path::Node	node (path::Path(rules->canonical(argv[i])));
             std::cout << "start " << node.path() << std::endl;
-            for (path::Node::iterator iter = node.begin(); iter != node.end(); ++iter)
+            for (path::Node::iterator iter = node.begin().setRecursive(); iter != node.end(); ++iter)
             {
                 if (size > static_cast<size_t>(0) && iter->size() < size)
                     continue;

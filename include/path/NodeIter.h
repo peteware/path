@@ -63,24 +63,16 @@ namespace path {
         /// Make this a recursive iterator
         NodeIter & setRecursive();
     private:
-        /// Return a Node
-        Node *subNode(int index) const;
-        /// Return how many subnodes there are
-        int subNodeCount() const;
-        /// Initialzie m_nodes (if needed)
-        void subNodeCreate();
-       
         /// Returns the node this iterator is referencing
-        Node *      findNode();
+        Node *      findNode(int index) const;
         /// List all Node's in node and add to m_nodeList
         void addNodes(const Node *node);
         /// Return number of SubNode's in Node
         int         size() const;
         /// Actual Node being iterated over
         const Node *m_parent;
-        mutable SubNode * m_nodes;
+        /// List of subdirs
         std::vector<Node *> m_nodeList;
-
         /// Current index
         int			m_current;
         /// Traverse subdirectories, too
