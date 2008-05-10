@@ -1,4 +1,0 @@
-# -*- python -*-
-env = Environment(CPPPATH="../../src")
-env.Program(target = 'pathtest', source = ['main.cpp', 'PathUnit.cpp'],
-            LIBS=['path', 'cppunit', 'dl'], LIBPATH='../../src')
