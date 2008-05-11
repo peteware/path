@@ -10,7 +10,8 @@
 
 namespace path {
     /**
-     * Default set of rules if none are specified
+     * Default set of rules if none are specified.  Also
+     * see System::rules();
      */
     PathRules * Path::s_defaultPathRules;
     
