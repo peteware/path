@@ -11,7 +11,6 @@
 namespace path {
     // Forward declarations
     class Node;
-    class SubNode;    
     /**
      * @class NodeIter path/NodeIter.h
      * Used to iterate over the Nodes within a Directory.
@@ -67,7 +66,7 @@ namespace path {
         Node *      findNode(int index) const;
         /// List all Node's in node and add to m_nodeList
         void addNodes(const Node *node);
-        /// Return number of SubNode's in Node
+        /// Return number of Node
         int         size() const;
         /// Actual Node being iterated over
         const Node *m_parent;
