@@ -9,6 +9,9 @@
 #include <iostream>
 
 namespace path {
+    /**
+     * Default set of rules if none are specified
+     */
     PathRules * Path::s_defaultPathRules;
     
     /**
