@@ -40,7 +40,6 @@
 		506939BF0D88728E00E050F1 /* PathRules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914080CE2B3E300ADA70C /* PathRules.cpp */; };
 		506939C00D88728E00E050F1 /* Permission.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914090CE2B3E300ADA70C /* Permission.cpp */; };
 		506939C10D88728E00E050F1 /* Strings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 506939910D886B4D00E050F1 /* Strings.cpp */; };
-		506939C20D88728E00E050F1 /* SubNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 507AECBF0D2BCE4B0071EB10 /* SubNode.cpp */; };
 		506939C30D88728E00E050F1 /* SysCalls.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140B0CE2B3E300ADA70C /* SysCalls.cpp */; };
 		506939C40D88728E00E050F1 /* Unimplemented.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140C0CE2B3E300ADA70C /* Unimplemented.cpp */; };
 		506939C50D88728E00E050F1 /* UnixRules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140D0CE2B3E300ADA70C /* UnixRules.cpp */; };
@@ -130,7 +129,6 @@
 		506939A10D8871F300E050F1 /* libpath.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libpath.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		50693A1E0D8873B300E050F1 /* pathtest */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pathtest; sourceTree = BUILT_PRODUCTS_DIR; };
 		507833F40D96CA180011FC60 /* search */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = search; sourceTree = BUILT_PRODUCTS_DIR; };
-		507AECBF0D2BCE4B0071EB10 /* SubNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SubNode.cpp; sourceTree = "<group>"; };
 		50B974490D8DA9F800E8B628 /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Strings.h; sourceTree = "<group>"; };
 		50C967870DA42FF3004E7B67 /* SysUnixBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SysUnixBase.cpp; sourceTree = "<group>"; };
 		50C967890DA4300B004E7B67 /* SysUnixBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SysUnixBase.h; sourceTree = "<group>"; };
@@ -204,7 +202,6 @@
 				500914000CE2B3E300ADA70C /* Canonical.cpp */,
 				500914010CE2B3E300ADA70C /* FileStream.cpp */,
 				500914020CE2B3E300ADA70C /* Node.cpp */,
-				507AECBF0D2BCE4B0071EB10 /* SubNode.cpp */,
 				500914030CE2B3E300ADA70C /* NodeInfo.cpp */,
 				500914040CE2B3E300ADA70C /* NodeIter.cpp */,
 				500914050CE2B3E300ADA70C /* Path.cpp */,
@@ -418,7 +415,6 @@
 				506939BF0D88728E00E050F1 /* PathRules.cpp in Sources */,
 				506939C00D88728E00E050F1 /* Permission.cpp in Sources */,
 				506939C10D88728E00E050F1 /* Strings.cpp in Sources */,
-				506939C20D88728E00E050F1 /* SubNode.cpp in Sources */,
 				506939C30D88728E00E050F1 /* SysCalls.cpp in Sources */,
 				506939C40D88728E00E050F1 /* Unimplemented.cpp in Sources */,
 				506939C50D88728E00E050F1 /* UnixRules.cpp in Sources */,
