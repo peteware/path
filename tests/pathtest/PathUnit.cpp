@@ -131,7 +131,7 @@ void PathUnit::testOstream()
 {
 	std::ostringstream	oss;
 	std::string			pathstr("/a/b c d/e ");
-	Path				p1(pathstr);
+	Path				p1(UnixPath(pathstr));
 
 	oss << p1;
 

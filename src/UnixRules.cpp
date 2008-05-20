@@ -36,7 +36,21 @@ namespace path {
      */
     std::string UnixRules::quote(const std::string & subdir) const
     {
-        return subdir;
+        std::string quoted;
+
+        for (std::string::const_iterator iter = subdir.begin();
+             iter != subdir.end(); ++iter)
+        {
+            if (*iter == '/')
+            {
+                quoted.push_back('_');
+            }
+            else
+            {
+                quoted.push_back(*iter);
+            }
+        }
+        return quoted;
     }
     
     std::string UnixRules::unquote(const std::string &subdir) const
