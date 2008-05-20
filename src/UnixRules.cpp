@@ -44,6 +44,8 @@ namespace path {
             if (*iter == '/')
             {
                 quoted.push_back('_');
+                quoted.push_back('!');
+                quoted.push_back('_');
             }
             else
             {
@@ -55,7 +57,54 @@ namespace path {
     
     std::string UnixRules::unquote(const std::string &subdir) const
     {
-        return subdir;
+        std::string unquoted;
+        int state = 0;
+
+        for (std::string::const_iterator iter = subdir.begin();
+             iter != subdir.end(); ++iter)
+        {
+            if (*iter == '_')
+            {
+                if (state == 0)
+                    state = 1;
+                else if (state == 1)
+                {
+                    // only push first '_' since this one his handled in next state
+                    // contemplate: '__!_'
+                    unquoted.push_back('_');
+                }
+                else
+                {
+                    state = 0;
+                    unquoted.push_back('/');
+                }
+            }
+            else if (*iter == '!')
+            {
+                if (state == 1)
+                    state = 2;
+                else
+                {
+                    state = 0;
+                    unquoted.push_back('_');
+                    unquoted.push_back('!');
+                }
+            }
+            else
+            {
+                if (state >= 1)
+                    unquoted.push_back('_');
+                if (state >= 2)
+                    unquoted.push_back('!');
+                state = 0;
+                unquoted.push_back(*iter);
+            }
+        }
+        if (state >= 1)
+            unquoted.push_back('_');
+        if (state >= 2)
+            unquoted.push_back('!');
+        return unquoted;
     }
     
     /**

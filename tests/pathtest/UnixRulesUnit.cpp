@@ -52,8 +52,18 @@ void UnixRulesUnit::testQuote()
 {
     CPPUNIT_ASSERT_EQUAL(std::string("a"), rules()->quote("a"));
     CPPUNIT_ASSERT_EQUAL(std::string(""), rules()->quote(""));
-    CPPUNIT_ASSERT_EQUAL(std::string("a_b"), rules()->quote("a/b"));
-    CPPUNIT_ASSERT_EQUAL(std::string("a__b"), rules()->quote("a//b"));
-    CPPUNIT_ASSERT_EQUAL(std::string("_"), rules()->quote("/"));
-    CPPUNIT_ASSERT_EQUAL(std::string("abc__"), rules()->quote("abc//"));
+    CPPUNIT_ASSERT_EQUAL(std::string("a_!_b"), rules()->quote("a/b"));
+    CPPUNIT_ASSERT_EQUAL(std::string("a_!__!_b"), rules()->quote("a//b"));
+    CPPUNIT_ASSERT_EQUAL(std::string("_!_"), rules()->quote("/"));
+    CPPUNIT_ASSERT_EQUAL(std::string("abc_!__!_"), rules()->quote("abc//"));
+
+    CPPUNIT_ASSERT_EQUAL(std::string("a"), rules()->unquote("a"));
+    CPPUNIT_ASSERT_EQUAL(std::string("_"), rules()->unquote("_"));
+    CPPUNIT_ASSERT_EQUAL(std::string("_!"), rules()->unquote("_!"));
+    CPPUNIT_ASSERT_EQUAL(std::string("_!a"), rules()->unquote("_!a"));
+    CPPUNIT_ASSERT_EQUAL(std::string("/"), rules()->unquote("_!_"));
+    CPPUNIT_ASSERT_EQUAL(std::string("/"), rules()->unquote(rules()->quote("/")));
+    CPPUNIT_ASSERT_EQUAL(std::string("__"), rules()->unquote("__"));
+    CPPUNIT_ASSERT_EQUAL(std::string("__a"), rules()->unquote("__a"));
+    CPPUNIT_ASSERT_EQUAL(std::string("_/"), rules()->unquote("__!_"));
 }
