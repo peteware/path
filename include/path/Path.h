@@ -151,7 +151,10 @@ namespace path {
             static PathRules * setDefaultPathRules(PathRules * rules);
             /// Return the rules
             static const PathRules * defaultPathRules();
-            
+            /// Return the size in bytes of this file
+            off_t size() const; 
+            /// Return if this is a directory
+            bool isDir() const;
             /// Return the current working directory
             static Path getcwd();
             /// Create all directories in Path

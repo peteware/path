@@ -21,7 +21,6 @@ namespace path {
         virtual std::string quote(const std::string & path) const;
         virtual std::string unquote(const std::string &subdir) const;
         
-        static Canonical    canon(const std::string &path);
         static UnixRules	rules;
         
     };

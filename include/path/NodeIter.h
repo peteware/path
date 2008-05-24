@@ -10,7 +10,7 @@
 
 namespace path {
     // Forward declarations
-    class Node;
+    class Path;
     /**
      * @class NodeIter path/NodeIter.h
      * Used to iterate over the Nodes within a Directory.
@@ -31,7 +31,7 @@ namespace path {
      * or Directory should be examined.
      * 
      */
-    class NodeIter :  public std::iterator<std::forward_iterator_tag, Node>
+    class NodeIter :  public std::iterator<std::forward_iterator_tag, Path>
     {
         
     public:
@@ -40,17 +40,17 @@ namespace path {
         /// Copy constructor
         NodeIter(const NodeIter &copy);
         /// Create from a Node.
-        NodeIter(const Node &node);
+        NodeIter(const Path &node);
         /// Regular expression macher
-        NodeIter(const Node &node, const std::string &pattern, bool regexp);
+        NodeIter(const Path &node, const std::string &pattern, bool regexp);
         /// Destructor
         ~NodeIter();
         /// Assignment operator
         NodeIter &operator=(const NodeIter &op2);
         /// Dereferencing
-        Node * operator->();
+        Path * operator->();
         /// Dereferencing
-        Node & operator*();
+        Path & operator*();
         /// Comparison
         bool operator!=(const NodeIter & op2) const;
         /// Comparison
@@ -63,15 +63,15 @@ namespace path {
         NodeIter & setRecursive();
     private:
         /// Returns the node this iterator is referencing
-        Node *      findNode(int index) const;
+        Path *      findNode(int index) const;
         /// List all Node's in node and add to m_nodeList
-        void addNodes(const Node *node);
+        void addNodes(const Path *node);
         /// Return number of Node
         int         size() const;
         /// Actual Node being iterated over
-        const Node *m_parent;
+        const Path *m_parent;
         /// List of subdirs
-        std::vector<Node *> m_nodeList;
+        std::vector<Path *> m_nodeList;
         /// Current index
         int			m_current;
         /// Traverse subdirectories, too

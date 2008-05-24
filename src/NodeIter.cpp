@@ -29,10 +29,10 @@ namespace path {
     m_current(copy.m_current),
     m_recursive(copy.m_recursive)
     {
-        for (std::vector<Node *>::const_iterator iter = copy.m_nodeList.begin();
+        for (std::vector<Path *>::const_iterator iter = copy.m_nodeList.begin();
              iter != copy.m_nodeList.end(); ++iter)
         {
-            m_nodeList.push_back(new Node(**iter));
+            m_nodeList.push_back(new Path(**iter));
         }
     }
 
@@ -41,7 +41,7 @@ namespace path {
      *
      * @param node The Node this is going to iterate through
      */
-    NodeIter::NodeIter(const Node &node)
+    NodeIter::NodeIter(const Path &node)
 	: m_parent(&node),
     m_nodeList(),
     m_current(0),
@@ -61,7 +61,7 @@ namespace path {
      * @param pattern Pattern to match (shell or regular expression)
      * @param regexp This is a regular expression, not a shell pattern
      */
-    NodeIter::NodeIter(const Node &node, const std::string & pattern, bool regexp)
+    NodeIter::NodeIter(const Path &node, const std::string & pattern, bool regexp)
 	: m_parent(&node),
     m_nodeList(),
     m_current(0),
@@ -77,7 +77,7 @@ namespace path {
      */
     NodeIter::~NodeIter()
     {
-        for(std::vector<Node *>::iterator iter = m_nodeList.begin();
+        for(std::vector<Path *>::iterator iter = m_nodeList.begin();
             iter != m_nodeList.end(); ++iter)
             delete *iter;
         m_nodeList.clear();
@@ -93,14 +93,14 @@ namespace path {
             return *this;
         m_parent = op2.m_parent;
         m_current = op2.m_current;
-        for(std::vector<Node *>::iterator iter = m_nodeList.begin();
+        for(std::vector<Path *>::iterator iter = m_nodeList.begin();
             iter != m_nodeList.end(); ++iter)
             delete *iter;
         m_nodeList.clear();
-        for (std::vector<Node *>::const_iterator iter = op2.m_nodeList.begin();
+        for (std::vector<Path *>::const_iterator iter = op2.m_nodeList.begin();
              iter != op2.m_nodeList.end(); ++iter)
         {
-            m_nodeList.push_back(new Node(**iter));
+            m_nodeList.push_back(new Path(**iter));
         }
         m_recursive = op2.m_recursive;
         return *this;
@@ -109,9 +109,9 @@ namespace path {
     /**
      * @return current node
      */
-    Node * NodeIter::operator->()
+    Path * NodeIter::operator->()
     {
-        Node *	n = findNode(m_current);
+        Path *	n = findNode(m_current);
         return n;
     }
     
@@ -120,9 +120,9 @@ namespace path {
      * 
      * @return an empty Node if there are no more nodes to examine.
      */
-    Node &NodeIter::operator*()
+    Path &NodeIter::operator*()
     {
-        Node *	n = findNode(m_current);
+        Path *	n = findNode(m_current);
         return *n;
     }
     
@@ -140,7 +140,7 @@ namespace path {
             ++m_current;
             if (m_recursive) 
             {
-                Node *n = findNode(m_current);
+                Path *n = findNode(m_current);
                 if (n && n->isDir())
                     addNodes(n);
             }
@@ -212,7 +212,7 @@ namespace path {
         if (m_recursive)
             return *this;
         m_recursive = true;
-        Node *n = findNode(m_current);
+        Path *n = findNode(m_current);
         if (n && n->isDir())
             addNodes(n);
         return *this;
@@ -232,7 +232,7 @@ namespace path {
      * @param index First is 0.  
      * @return Node refered by index.
      */
-    Node *NodeIter::findNode(int index) const
+    Path *NodeIter::findNode(int index) const
     {
         if (index < 0 || index >= static_cast<int>(m_nodeList.size()))
             return 0;
@@ -243,7 +243,7 @@ namespace path {
     /**
      * @param node Add list of subnodes from node
      */
-    void NodeIter::addNodes(const Node *node)
+    void NodeIter::addNodes(const Path *node)
     {
         if (!node)
             return;
@@ -252,7 +252,7 @@ namespace path {
         std::sort(files.begin(), files.end());
         for (Strings::iterator iter = files.begin(); iter != files.end(); ++iter)
         {
-            m_nodeList.push_back(new Node(*node + *iter));
+            m_nodeList.push_back(new Path(*node + *iter));
         }
     }
 }

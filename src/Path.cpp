@@ -5,6 +5,7 @@
 #include <path/Canonical.h>
 #include <path/SysCalls.h>
 #include <path/Strings.h>
+#include <path/Unimplemented.h>
 
 #include <iostream>
 
@@ -572,6 +573,28 @@ namespace path {
             return s_defaultPathRules;
         else
             return System.rules();
+    }
+
+    /**
+     * This is a shorthand for Node:info().size().
+     * @return bytes used by file
+     */
+    off_t Path::size() const
+    {
+        throw Unimplemented("Path::size()");
+        //return info().size();
+    }
+    
+    /**
+     * Returns pointer to a newly allocated Directory of the Path represents a
+     * directory.  Returns NULL otherwise.
+     * 
+     * Caller assumes responsibility for memory deallocation.
+     */
+    bool Path::isDir() const 
+    {
+        throw Unimplemented("Path::isDir()");
+        return false; //info().isDir();
     }
     
     /**
