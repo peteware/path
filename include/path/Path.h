@@ -177,6 +177,8 @@ namespace path {
             mutable Canonical *m_canon;
             /// Cached value path converted by path();
             mutable std::string *   m_pathStr;
+            mutable NodeInfo * m_cache;
+
             
         };
     
