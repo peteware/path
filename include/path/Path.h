@@ -13,6 +13,10 @@
 #include <iosfwd>
 
 namespace path {
+    // Forward declarations
+    class NodeInfo;
+    class NodeIter;
+    
     /**
      * @class Path path/Path.h
      *
@@ -72,116 +76,138 @@ namespace path {
      * UnixPath.
      */
     class Path
-        {
-        public:
-            /// Default constructor
-            Path(const PathRules *rules = 0);
-            /// Constructor from std::string
-            Path(const std::string &path);
-            /// Use a Canonical path and PathRules
-            Path(const Canonical &canon, const PathRules *rules = 0);
-            /// Construct from a NUL terminated string
-            Path(const char *path);
-            /// Copy constructor
-            Path(const Path &copy);
-            /// Destructor
-            virtual ~Path();
-            /// Assignment operator
-            Path & operator=(const Path &op2);
-            
-            /// Return original path
-            const std::string & str() const;
-            /// Return orignal path as C-style, NUL terminated string
-            const char * str_c() const;
-            /// Return path with ~ and environment variables expanded
-            const std::string & path() const;
-            /// Same as path() but a C-style, NUL terminated string
-            const char * path_c() const;
-            /// Return original string but cleaned up
-            std::string normpath() const;
-            /// Expand any environment variables
-            Path expand() const;
-            /// Expand any environment variables
-            Path expand(const StringMap &vars) const;
-            /// Return the last component of Path
-            std::string basename() const;
-            /// Return the directory component of Path
-            Path dirname() const;
-            /// Return the filename extension
-            std::string extension() const;
-            /// Return basename() without extension
-            std::string stem() const;
-            
-            /// Return if this is an absolute path (not relative)
-            bool abs() const;
-            /// Return a new path by converting this one to an absolute path
-            Path makeAbs() const;
-            
-            /// Return the drive letter (may be empty)
-            const std::string &drive() const;
-            /// Return the protocol (may be empty)
-            const std::string &protocol() const;
-            /// Return the host (may be empty)
-            const std::string &host() const;
-            /// Return the extra parameters
-            const std::string &extra() const;
-            
-            /// Concatenate this and Path
-            Path add(const Path &path) const;
-            /// Concatenate vector of strings with each as a component.
-            Path add(const Strings &strings) const;
-            /// Concatenate a single string
-            Path add(const std::string &p) const;
-            /// Concatenate a NUL terminated string
-            Path add(const char *p) const;
-            /// Return each directory component as a Path.
-            std::vector<Path> split() const;
-            
-            /// Return the Canonical representation of the path
-            const Canonical &canon() const;
-            
-            /// Append a string to last element.
-            Path operator&(const std::string &append) const;
-            
-            /// Return the rules (may be NULL)
-            const PathRules *pathRules() const;
-            /// Return PathRules, never null
-            const PathRules *	rules() const;
-            /// Set the default rules to be used by most paths
-            static PathRules * setDefaultPathRules(PathRules * rules);
-            /// Return the rules
-            static const PathRules * defaultPathRules();
-            /// Return the size in bytes of this file
-            off_t size() const; 
-            /// Return if this is a directory
-            bool isDir() const;
-            /// Return the current working directory
-            static Path getcwd();
-            /// Create all directories in Path
-            static void mkdirs(const Path &path);
-            /// Create all directories and the file in Path
-            static void mkfile(const Path &path);
-            
-        private:
-            /// Use these rules if none are set.
-            static PathRules *	s_defaultPathRules;
-            /**
-             * The path as set.
-             * 
-             * This is the uninterpreted string and is the value returned by str().
-             */
-            mutable std::string *           m_path;
-            /// These are the rules we use for this path; may be NULL
-            const PathRules *		m_rules;
-            /// The path in canonical form; may be NULL
-            mutable Canonical *m_canon;
-            /// Cached value path converted by path();
-            mutable std::string *   m_pathStr;
-            mutable NodeInfo * m_cache;
+    {
+    public:
+        /// Default constructor
+        Path(const PathRules *rules = 0);
+        /// Constructor from std::string
+        Path(const std::string &path);
+        /// Use a Canonical path and PathRules
+        Path(const Canonical &canon, const PathRules *rules = 0);
+        /// Construct from a NUL terminated string
+        Path(const char *path);
+        /// Copy constructor
+        Path(const Path &copy);
+        /// Destructor
+        virtual ~Path();
+        /// Assignment operator
+        Path & operator=(const Path &op2);
+        
+        /// Return original path
+        const std::string & str() const;
+        /// Return orignal path as C-style, NUL terminated string
+        const char * str_c() const;
+        /// Return path with ~ and environment variables expanded
+        const std::string & path() const;
+        /// Same as path() but a C-style, NUL terminated string
+        const char * path_c() const;
+        /// Return original string but cleaned up
+        std::string normpath() const;
+        /// Expand any environment variables
+        Path expand() const;
+        /// Expand any environment variables
+        Path expand(const StringMap &vars) const;
+        /// Return the last component of Path
+        std::string basename() const;
+        /// Return the directory component of Path
+        Path dirname() const;
+        /// Return the filename extension
+        std::string extension() const;
+        /// Return basename() without extension
+        std::string stem() const;
+        
+        /// Return if this is an absolute path (not relative)
+        bool abs() const;
+        /// Return a new path by converting this one to an absolute path
+        Path makeAbs() const;
+        
+        /// Return the drive letter (may be empty)
+        const std::string &drive() const;
+        /// Return the protocol (may be empty)
+        const std::string &protocol() const;
+        /// Return the host (may be empty)
+        const std::string &host() const;
+        /// Return the extra parameters
+        const std::string &extra() const;
+        
+        /// Concatenate this and Path
+        Path add(const Path &path) const;
+        /// Concatenate vector of strings with each as a component.
+        Path add(const Strings &strings) const;
+        /// Concatenate a single string
+        Path add(const std::string &p) const;
+        /// Concatenate a NUL terminated string
+        Path add(const char *p) const;
+        /// Return each directory component as a Path.
+        std::vector<Path> split() const;
+        
+        /// Return the Canonical representation of the path
+        const Canonical &canon() const;
+        
+        /// Append a string to last element.
+        Path operator&(const std::string &append) const;
+        
+        /// Return the rules (may be NULL)
+        const PathRules *pathRules() const;
+        /// Return PathRules, never null
+        const PathRules *	rules() const;
+        /// Set the default rules to be used by most paths
+        static PathRules * setDefaultPathRules(PathRules * rules);
+        /// Return the rules
+        static const PathRules * defaultPathRules();
+        
+        /// How to iterate through directory
+        typedef NodeIter	iterator;
+        /// And the const version of iterator
+        typedef const NodeIter	const_iterator;
+        /// Return iterator for examining files in this directory
+        iterator begin();
+        /// Return iterator for examining files in this directory, const version
+        const_iterator begin() const;
+        /// And return the end of the list
+        iterator end();
+        /// And return the end of the list, const version
+        const_iterator end() const;
+        /// Shorthand to only match a specific file in this directory
+        iterator glob(const std::string &pattern);
+        /// Shorthand to only match a specific file, const version
+        const_iterator glob(const std::string &pattern) const;
+        
+        /// Return meta info about the underlying file.
+        const NodeInfo &info() const;
+        /// Return the size in bytes of this file
+        off_t size() const; 
+        /// Check if this Node exists
+        bool exists() const;
+        /// Return if this is a directory
+        bool isDir() const;
+        /// Return the current working directory
+        static Path getcwd();
+        /// Create all directories in Path
+        static void mkdirs(const Path &path);
+        /// Create all directories and the file in Path
+        static void mkfile(const Path &path);
+        
+    private:
+        /// Use these rules if none are set.
+        static PathRules *	s_defaultPathRules;
+        /**
+         * The path as set.
+         * 
+         * This is the uninterpreted string and is the value returned by str().
+         */
+        mutable std::string *           m_path;
+        /// These are the rules we use for this path; may be NULL
+        const PathRules *		m_rules;
+        /// The path in canonical form; may be NULL
+        mutable Canonical *m_canon;
+        /// Cached value path converted by path();
+        mutable std::string *   m_pathStr;
+        mutable NodeInfo * m_cache;
+        
+        
+    };
 
-            
-        };
-    
     // Shortcuts for handling different paths as strings
     /// Convert a unix style path ("/a/b/c") to Canonical
     path::Canonical UnixPath(const std::string &path);

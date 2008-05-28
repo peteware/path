@@ -6,6 +6,8 @@
 #include <path/SysCalls.h>
 #include <path/Strings.h>
 #include <path/Unimplemented.h>
+#include <path/NodeInfo.h>
+#include <path/NodeIter.h>
 
 #include <iostream>
 
@@ -25,7 +27,8 @@ namespace path {
 	: m_path(0),
     m_rules(rules),
     m_canon(0),
-    m_pathStr(0)
+    m_pathStr(0),
+    m_cache(0)
     {
     }
     
@@ -38,7 +41,8 @@ namespace path {
     : m_path(0),
     m_rules(0),
     m_canon(new Canonical(path)),
-    m_pathStr(0)
+    m_pathStr(0),
+    m_cache(0)
     {
     }
     
@@ -51,7 +55,8 @@ namespace path {
     : m_path(0),
     m_rules(0),
     m_canon(new Canonical(path)),
-    m_pathStr(0)
+    m_pathStr(0),
+    m_cache(0)
     {
     }
     
@@ -68,7 +73,8 @@ namespace path {
     : m_path(0),
     m_rules(param_rules),
     m_canon(new Canonical(canon)),
-    m_pathStr(0)
+    m_pathStr(0),
+    m_cache(0)
     {
     }
     
@@ -82,7 +88,8 @@ namespace path {
 	:m_path(0),
     m_rules(copy.m_rules),
     m_canon(0),
-    m_pathStr(0)
+    m_pathStr(0),
+    m_cache(0)
     {
         if (copy.m_path)
             m_path = new std::string(*copy.m_path);
@@ -100,6 +107,7 @@ namespace path {
         delete m_path;
         delete m_canon;
         delete m_pathStr;
+        delete m_cache;
     }
     
     /**
@@ -131,6 +139,12 @@ namespace path {
             m_pathStr = new std::string(*op.m_pathStr);
         else
             m_pathStr = 0;
+        
+        delete m_cache;
+        if (op.m_cache)
+            m_cache = new NodeInfo(*op.m_cache);
+        else
+            m_cache = 0;
         
         return  *this;
     }
@@ -576,13 +590,86 @@ namespace path {
     }
 
     /**
+     * @return An iterator to step through directory contents
+     */
+    Path::iterator Path::begin()
+    {
+        return  NodeIter(*this);
+    }
+    
+    /**
+     * @return A const iterator to step through directory contents
+     */
+    Path::const_iterator Path::begin() const
+    {
+        return  NodeIter(*this);
+    }
+    
+    /**
+     * @return an iterator to the end of Nodes
+     */
+    Path::iterator Path::end()
+    {
+        return  NodeIter();
+    }
+    
+    /**
+     * @return an iterator to the end of Nodes
+     */
+    Path::const_iterator Path::end() const
+    {
+        return  NodeIter();
+    }
+    
+    /**
+     * Use shell pattern expansion to list
+     * contents of a directory.  Returns an
+     * iterator to the list.  Note that this
+     * only works within the specied directory
+     * that this Path already represents.
+     *
+     * Not yet implemented
+     *
+     * @param pattern A shell pattern ("*.C", "*", *.[Cho]")
+     */
+    Path::iterator Path::glob(const std::string & pattern)
+    {
+        throw Unimplemented("Path::glob");
+        return  NodeIter();
+    }
+    
+    /**
+     * @param pattern A shell pattern ("*.C", "*", *.[Cho]")
+     */
+    Path::const_iterator Path::glob(const std::string & pattern) const
+    {
+        throw Unimplemented("Path::glob");
+        return  NodeIter();
+    }
+    
+    
+    /**
+     * Gets the System.stat() on this path
+     */
+    const NodeInfo & Path::info() const
+    {
+        if (!m_cache)
+            m_cache = System.stat(path());
+        return *m_cache;
+    }
+    
+    bool Path::exists() const
+    {
+        return System.exists(path());
+    }
+
+    /**
      * This is a shorthand for Node:info().size().
      * @return bytes used by file
      */
     off_t Path::size() const
     {
-        throw Unimplemented("Path::size()");
-        //return info().size();
+        return info().size();
     }
     
     /**
@@ -593,8 +680,7 @@ namespace path {
      */
     bool Path::isDir() const 
     {
-        throw Unimplemented("Path::isDir()");
-        return false; //info().isDir();
+        return info().isDir();
     }
     
     /**

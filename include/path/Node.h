@@ -39,23 +39,7 @@ namespace path {
         /// Assignment operator
         Node &operator=(const Node &op2);       
 
-        /// How to iterate through directory
-        typedef NodeIter	iterator;
-        /// And the const version of iterator
-        typedef const NodeIter	const_iterator;
-        /// Return iterator for examining files in this directory
-        iterator begin();
-        /// Return iterator for examining files in this directory, const version
-        const_iterator begin() const;
-        /// And return the end of the list
-        iterator end();
-        /// And return the end of the list, const version
-        const_iterator end() const;
-        /// Shorthand to only match a specific file in this directory
-        iterator glob(const std::string &pattern);
-        /// Shorthand to only match a specific file, const version
-        const_iterator glob(const std::string &pattern) const;
-        
+#ifdef notdef
         /// Return basic info about the Node (size, type, etc).
         const NodeInfo &info() const;
         /// Return the size in bytes of this file
@@ -64,6 +48,7 @@ namespace path {
         bool exists() const;
         /// Return if this is a directory
         bool isDir() const;
+#endif
         /// Resolve symbolic links, etc
         Node realpath() const;
         
