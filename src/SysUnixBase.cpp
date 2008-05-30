@@ -98,7 +98,8 @@ namespace path {
     
     /**
      * Gets the basic information about a file and returns
-     * a new NodeInfo object (you must delete it)
+     * a new NodeInfo object (you must delete it).  Throws
+     * a PathException if path cannot be accessed.
      *
      * @param path The path to look for
      * @return Newly created NodeInfo object.
@@ -110,7 +111,7 @@ namespace path {
         NodeInfo::Type type = NodeInfo::OTHER;
         
         if (::stat(path.c_str(), &statbuf) < 0)
-            return node;
+            throw PathException(path, errno);
         node = new NodeInfo();
         
         node->setSize(statbuf.st_size);

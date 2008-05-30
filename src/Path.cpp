@@ -649,7 +649,9 @@ namespace path {
     
     
     /**
-     * Gets the System.stat() on this path
+     * Gets the System.stat() on this path.
+     * @throws PathException
+     * @return NodeInfo about this path
      */
     const NodeInfo & Path::info() const
     {
