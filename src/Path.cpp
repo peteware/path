@@ -667,6 +667,7 @@ namespace path {
 
     /**
      * This is a shorthand for Node:info().size().
+     * Throws PathException if not able to access path.
      * @return bytes used by file
      */
     off_t Path::size() const
@@ -675,8 +676,7 @@ namespace path {
     }
     
     /**
-     * Returns pointer to a newly allocated Directory of the Path represents a
-     * directory.  Returns NULL otherwise.
+     * Returns if path represents a directory.  Throws
      * 
      * Caller assumes responsibility for memory deallocation.
      */
