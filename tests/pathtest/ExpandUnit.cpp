@@ -47,6 +47,8 @@ void ExpandUnit::simple()
     
     env["AB_123"] = "x";
     CPPUNIT_ASSERT_EQUAL(std::string("zx abc"), path::expand("z$AB_123 abc", env, true));
+    
+    CPPUNIT_ASSERT_EQUAL(std::string("abc"), path::expand("abc$", env, true));
 }
 
 void ExpandUnit::nested()

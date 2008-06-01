@@ -51,7 +51,7 @@ namespace path
             std::string var;
             ++iter;
             // Treat $$ as an escape for a single '$'
-            if (*iter == intro) 
+            if (iter != str.end() && *iter == intro) 
             {
                 newstr += *iter++;
                 continue;
@@ -60,7 +60,7 @@ namespace path
             // Get the actual variable
             bool start = true;
             bool domatch = false;
-            char match; // for matching brace/parenthesis
+            char match = ')'; // for matching brace/parenthesis
             while (iter != str.end())
             {
                 if (start)
