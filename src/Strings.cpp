@@ -10,9 +10,12 @@ namespace path
      * the return value.  If VAR is not found, then the
      * empty string is used.  VAR can contain letters, digits, and
      * underscore ('_') (the usual).  To escape a dollar sign, use two
-     * dollar signs ('$$').
+     * dollar signs ('$$').  If you include the variable name in parenthesis,
+     * then any characters are ok: $(A $ %).  '[]' and '{}' work
+     * if you need more characters.
      *
-     * Variables are recursively expanded.
+     * Variables are recursively expanded.  So if the expansion includes
+     * a variable, that variable is also expanded.
      *
      * @param str The String to be expanded
      * @param vars A std::map from std::string to std::string
@@ -43,8 +46,9 @@ namespace path
                 newstr += *iter++;
                 continue;
             }
-            std::string var;
             
+            // We have a '$'
+            std::string var;
             ++iter;
             // Treat $$ as an escape for a single '$'
             if (*iter == intro) 
@@ -54,11 +58,65 @@ namespace path
             }
             
             // Get the actual variable
-            while (iter != str.end() && isalnum(*iter) || *iter == '_')
-                var += *iter++;
-            StringMap::const_iterator variter = vars.find(var);
-            if (variter != vars.end())
-                newstr += expand(variter->second, vars, false);
+            bool start = true;
+            bool domatch = false;
+            char match; // for matching brace/parenthesis
+            while (iter != str.end())
+            {
+                if (start)
+                {
+                    start = false;
+                    switch (*iter)
+                    {
+                        case '(':
+                            match = ')';
+                            domatch = true;
+                            ++iter;
+                            continue;
+                        case '{':
+                            match = '}';
+                            domatch = true;
+                            ++iter;
+                            continue;
+                        case '[':
+                            match = ']';
+                            domatch = true;
+                            ++iter;
+                            continue;
+                        default:
+                            break;
+                    }
+                }
+                if (domatch)
+                {
+                    if (*iter == match)
+                    {
+                        ++iter;
+                        domatch = false;
+                        break;
+                    }
+                    else
+                    {
+                        var += *iter++;
+                    }
+                }
+                else if (isalnum(*iter) || *iter == '_')
+                {
+                    var += *iter++;
+                }
+                else
+                {
+                    break;
+                }
+                
+            }
+            if (!domatch)
+            {
+                StringMap::const_iterator variter = vars.find(var);
+                // If we added an else, we could have non-matches expand
+                if (variter != vars.end())
+                    newstr += expand(variter->second, vars, false);
+            }
         }
         return newstr;
     }
