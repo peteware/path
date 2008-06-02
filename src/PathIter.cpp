@@ -1,7 +1,7 @@
 /**
- * @file NodeIter.cpp
+ * @file PathIter.cpp
  */
-#include <path/NodeIter.h>
+#include <path/PathIter.h>
 #include <path/Node.h>
 #include <path/SysCalls.h>
 
@@ -12,7 +12,7 @@ namespace path {
      * Create a default iterator.  This corresponds to the
      * end() iterator.
      */
-    NodeIter::NodeIter()
+    PathIter::PathIter()
 	: m_parent(0),
     m_nodeList(),
     m_current(-1),
@@ -21,9 +21,9 @@ namespace path {
     }
     
     /**
-     * @param copy The NodeIter to copy
+     * @param copy The PathIter to copy
      */
-    NodeIter::NodeIter(const NodeIter &copy)
+    PathIter::PathIter(const PathIter &copy)
     : m_parent(copy.m_parent),
     m_nodeList(),
     m_current(copy.m_current),
@@ -41,7 +41,7 @@ namespace path {
      *
      * @param node The Node this is going to iterate through
      */
-    NodeIter::NodeIter(const Path &node)
+    PathIter::PathIter(const Path &node)
 	: m_parent(&node),
     m_nodeList(),
     m_current(0),
@@ -61,7 +61,7 @@ namespace path {
      * @param pattern Pattern to match (shell or regular expression)
      * @param regexp This is a regular expression, not a shell pattern
      */
-    NodeIter::NodeIter(const Path &node, const std::string & pattern, bool regexp)
+    PathIter::PathIter(const Path &node, const std::string & pattern, bool regexp)
 	: m_parent(&node),
     m_nodeList(),
     m_current(0),
@@ -75,7 +75,7 @@ namespace path {
     /**
      * Delete all items in m_nodeList
      */
-    NodeIter::~NodeIter()
+    PathIter::~PathIter()
     {
         for(std::vector<Path *>::iterator iter = m_nodeList.begin();
             iter != m_nodeList.end(); ++iter)
@@ -87,7 +87,7 @@ namespace path {
      * @param op2 Right hand side
      * @return A reference to this object
      */
-    NodeIter &NodeIter::operator=(const NodeIter &op2)
+    PathIter &PathIter::operator=(const PathIter &op2)
     {
         if (this == &op2)
             return *this;
@@ -109,7 +109,7 @@ namespace path {
     /**
      * @return current node
      */
-    Path * NodeIter::operator->()
+    Path * PathIter::operator->()
     {
         Path *	n = findNode(m_current);
         return n;
@@ -120,7 +120,7 @@ namespace path {
      * 
      * @return an empty Node if there are no more nodes to examine.
      */
-    Path &NodeIter::operator*()
+    Path &PathIter::operator*()
     {
         Path *	n = findNode(m_current);
         return *n;
@@ -131,7 +131,7 @@ namespace path {
      *
      * @return Reference to this NodIter
      */
-    NodeIter &NodeIter::operator++()
+    PathIter &PathIter::operator++()
     {
         if (m_current < 0 || m_current + 1 >= size())
             m_current = - 1;
@@ -155,9 +155,9 @@ namespace path {
      * this one makes a complete copy of the list of subnodes
      * and other data.
      */
-    NodeIter NodeIter::operator++(int)
+    PathIter PathIter::operator++(int)
     {
-        NodeIter    iter(*this);
+        PathIter    iter(*this);
         ++(*this);
         return iter;
     }
@@ -168,7 +168,7 @@ namespace path {
      * @param op2 Right hand side comparison
      * @return true if same, false otherwise
      */
-    bool NodeIter::operator==(const NodeIter & op2) const
+    bool PathIter::operator==(const PathIter & op2) const
     {
         // Most comparisons are non-end against end() so make sure that is fast.
         if (m_current != op2.m_current)
@@ -189,7 +189,7 @@ namespace path {
      *
      * @param op2 Right hand side for comparison
      */
-    bool NodeIter::operator!=(const NodeIter & op2) const
+    bool PathIter::operator!=(const PathIter & op2) const
     {
         return !(*this == op2);
     }
@@ -207,7 +207,7 @@ namespace path {
      * 
      * @return A reference to this object
      */
-    NodeIter & NodeIter::setRecursive()
+    PathIter & PathIter::setRecursive()
     {
         if (m_recursive)
             return *this;
@@ -223,7 +223,7 @@ namespace path {
      *
      * @return Number of items
      */
-    int NodeIter::size() const
+    int PathIter::size() const
     {
         return static_cast<int>(m_nodeList.size());
     }
@@ -232,7 +232,7 @@ namespace path {
      * @param index First is 0.  
      * @return Node refered by index.
      */
-    Path *NodeIter::findNode(int index) const
+    Path *PathIter::findNode(int index) const
     {
         if (index < 0 || index >= static_cast<int>(m_nodeList.size()))
             return 0;
@@ -243,7 +243,7 @@ namespace path {
     /**
      * @param node Add list of subnodes from node
      */
-    void NodeIter::addNodes(const Path *node)
+    void PathIter::addNodes(const Path *node)
     {
         if (!node)
             return;

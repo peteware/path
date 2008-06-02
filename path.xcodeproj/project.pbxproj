@@ -17,7 +17,7 @@
 		506939A70D88727300E050F1 /* FileStream.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914260CE2B3F600ADA70C /* FileStream.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939A80D88727300E050F1 /* Node.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914270CE2B3F600ADA70C /* Node.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939A90D88727300E050F1 /* NodeInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914280CE2B3F600ADA70C /* NodeInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		506939AA0D88727300E050F1 /* NodeIter.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914290CE2B3F600ADA70C /* NodeIter.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		506939AA0D88727300E050F1 /* PathIter.h in Headers */ = {isa = PBXBuildFile; fileRef = 500914290CE2B3F600ADA70C /* PathIter.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939AB0D88727300E050F1 /* Path.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142A0CE2B3F600ADA70C /* Path.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939AC0D88727300E050F1 /* PathException.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142B0CE2B3F600ADA70C /* PathException.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		506939AD0D88727300E050F1 /* PathExtra.h in Headers */ = {isa = PBXBuildFile; fileRef = 5009142C0CE2B3F600ADA70C /* PathExtra.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -33,7 +33,7 @@
 		506939B80D88728E00E050F1 /* FileStream.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914010CE2B3E300ADA70C /* FileStream.cpp */; };
 		506939B90D88728E00E050F1 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914020CE2B3E300ADA70C /* Node.cpp */; };
 		506939BA0D88728E00E050F1 /* NodeInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914030CE2B3E300ADA70C /* NodeInfo.cpp */; };
-		506939BB0D88728E00E050F1 /* NodeIter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914040CE2B3E300ADA70C /* NodeIter.cpp */; };
+		506939BB0D88728E00E050F1 /* PathIter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914040CE2B3E300ADA70C /* PathIter.cpp */; };
 		506939BC0D88728E00E050F1 /* Path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914050CE2B3E300ADA70C /* Path.cpp */; };
 		506939BD0D88728E00E050F1 /* PathException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914060CE2B3E300ADA70C /* PathException.cpp */; };
 		506939BE0D88728E00E050F1 /* PathExtra.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914070CE2B3E300ADA70C /* PathExtra.cpp */; };
@@ -83,7 +83,7 @@
 		500914010CE2B3E300ADA70C /* FileStream.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = FileStream.cpp; sourceTree = "<group>"; };
 		500914020CE2B3E300ADA70C /* Node.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Node.cpp; sourceTree = "<group>"; };
 		500914030CE2B3E300ADA70C /* NodeInfo.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = NodeInfo.cpp; sourceTree = "<group>"; };
-		500914040CE2B3E300ADA70C /* NodeIter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = NodeIter.cpp; sourceTree = "<group>"; };
+		500914040CE2B3E300ADA70C /* PathIter.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = PathIter.cpp; sourceTree = "<group>"; };
 		500914050CE2B3E300ADA70C /* Path.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = Path.cpp; sourceTree = "<group>"; };
 		500914060CE2B3E300ADA70C /* PathException.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = PathException.cpp; sourceTree = "<group>"; };
 		500914070CE2B3E300ADA70C /* PathExtra.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; path = PathExtra.cpp; sourceTree = "<group>"; };
@@ -99,7 +99,7 @@
 		500914260CE2B3F600ADA70C /* FileStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileStream.h; sourceTree = "<group>"; };
 		500914270CE2B3F600ADA70C /* Node.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
 		500914280CE2B3F600ADA70C /* NodeInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeInfo.h; sourceTree = "<group>"; };
-		500914290CE2B3F600ADA70C /* NodeIter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NodeIter.h; sourceTree = "<group>"; };
+		500914290CE2B3F600ADA70C /* PathIter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathIter.h; sourceTree = "<group>"; };
 		5009142A0CE2B3F600ADA70C /* Path.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Path.h; sourceTree = "<group>"; };
 		5009142B0CE2B3F600ADA70C /* PathException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathException.h; sourceTree = "<group>"; };
 		5009142C0CE2B3F600ADA70C /* PathExtra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PathExtra.h; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 				500914010CE2B3E300ADA70C /* FileStream.cpp */,
 				500914020CE2B3E300ADA70C /* Node.cpp */,
 				500914030CE2B3E300ADA70C /* NodeInfo.cpp */,
-				500914040CE2B3E300ADA70C /* NodeIter.cpp */,
+				500914040CE2B3E300ADA70C /* PathIter.cpp */,
 				500914050CE2B3E300ADA70C /* Path.cpp */,
 				500914060CE2B3E300ADA70C /* PathException.cpp */,
 				500914070CE2B3E300ADA70C /* PathExtra.cpp */,
@@ -238,7 +238,7 @@
 				500914260CE2B3F600ADA70C /* FileStream.h */,
 				500914270CE2B3F600ADA70C /* Node.h */,
 				500914280CE2B3F600ADA70C /* NodeInfo.h */,
-				500914290CE2B3F600ADA70C /* NodeIter.h */,
+				500914290CE2B3F600ADA70C /* PathIter.h */,
 				5009142A0CE2B3F600ADA70C /* Path.h */,
 				5009142B0CE2B3F600ADA70C /* PathException.h */,
 				5009142C0CE2B3F600ADA70C /* PathExtra.h */,
@@ -308,7 +308,7 @@
 				506939A70D88727300E050F1 /* FileStream.h in Headers */,
 				506939A80D88727300E050F1 /* Node.h in Headers */,
 				506939A90D88727300E050F1 /* NodeInfo.h in Headers */,
-				506939AA0D88727300E050F1 /* NodeIter.h in Headers */,
+				506939AA0D88727300E050F1 /* PathIter.h in Headers */,
 				506939AB0D88727300E050F1 /* Path.h in Headers */,
 				506939AC0D88727300E050F1 /* PathException.h in Headers */,
 				506939AD0D88727300E050F1 /* PathExtra.h in Headers */,
@@ -408,7 +408,7 @@
 				506939B80D88728E00E050F1 /* FileStream.cpp in Sources */,
 				506939B90D88728E00E050F1 /* Node.cpp in Sources */,
 				506939BA0D88728E00E050F1 /* NodeInfo.cpp in Sources */,
-				506939BB0D88728E00E050F1 /* NodeIter.cpp in Sources */,
+				506939BB0D88728E00E050F1 /* PathIter.cpp in Sources */,
 				506939BC0D88728E00E050F1 /* Path.cpp in Sources */,
 				506939BD0D88728E00E050F1 /* PathException.cpp in Sources */,
 				506939BE0D88728E00E050F1 /* PathExtra.cpp in Sources */,

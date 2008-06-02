@@ -15,7 +15,7 @@
 namespace path {
     // Forward declarations
     class NodeInfo;
-    class NodeIter;
+    class PathIter;
     
     /**
      * @class Path path/Path.h
@@ -157,9 +157,9 @@ namespace path {
         static const PathRules * defaultPathRules();
         
         /// How to iterate through directory
-        typedef NodeIter	iterator;
+        typedef PathIter	iterator;
         /// And the const version of iterator
-        typedef const NodeIter	const_iterator;
+        typedef const PathIter	const_iterator;
         /// Return iterator for examining files in this directory
         iterator begin();
         /// Return iterator for examining files in this directory, const version

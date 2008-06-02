@@ -3,7 +3,7 @@
  * @defgroup SearchTest Test applicaiton that searches for files
  */
 #include <path/Node.h>
-#include <path/NodeIter.h>
+#include <path/PathIter.h>
 #include <path/Canonical.h>
 #include <path/PathException.h>
 #include <path/FileStream.h>

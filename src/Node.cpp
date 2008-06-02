@@ -3,7 +3,7 @@
  */
 #include <path/Node.h>
 #include <path/NodeInfo.h>
-#include <path/NodeIter.h>
+#include <path/PathIter.h>
 #include <path/SysCalls.h>
 #include <path/Canonical.h>
 #include <path/PathException.h>
@@ -16,7 +16,7 @@ namespace path {
     /**
      * Create an empty Node.
      *
-     * I'm not happy about this but it became necessary to support NodeIter from Node::end().
+     * I'm not happy about this but it became necessary to support PathIter from Node::end().
      */
     Node::Node()
 	: m_cache(0)

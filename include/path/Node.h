@@ -9,7 +9,7 @@
 
 namespace path {
     // Forward declarations
-    class NodeIter;
+    class PathIter;
     class NodeInfo;
 
     

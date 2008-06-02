@@ -7,7 +7,7 @@
 #include <path/Strings.h>
 #include <path/Unimplemented.h>
 #include <path/NodeInfo.h>
-#include <path/NodeIter.h>
+#include <path/PathIter.h>
 
 #include <iostream>
 
@@ -594,7 +594,7 @@ namespace path {
      */
     Path::iterator Path::begin()
     {
-        return  NodeIter(*this);
+        return  PathIter(*this);
     }
     
     /**
@@ -602,7 +602,7 @@ namespace path {
      */
     Path::const_iterator Path::begin() const
     {
-        return  NodeIter(*this);
+        return  PathIter(*this);
     }
     
     /**
@@ -610,7 +610,7 @@ namespace path {
      */
     Path::iterator Path::end()
     {
-        return  NodeIter();
+        return  PathIter();
     }
     
     /**
@@ -618,7 +618,7 @@ namespace path {
      */
     Path::const_iterator Path::end() const
     {
-        return  NodeIter();
+        return  PathIter();
     }
     
     /**
@@ -635,7 +635,7 @@ namespace path {
     Path::iterator Path::glob(const std::string & pattern)
     {
         throw Unimplemented("Path::glob");
-        return  NodeIter();
+        return  PathIter();
     }
     
     /**
@@ -644,7 +644,7 @@ namespace path {
     Path::const_iterator Path::glob(const std::string & pattern) const
     {
         throw Unimplemented("Path::glob");
-        return  NodeIter();
+        return  PathIter();
     }
     
     

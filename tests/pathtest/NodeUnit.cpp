@@ -3,7 +3,7 @@
  * @ingroup PathTest
  */
 #include <path/Node.h>
-#include <path/NodeIter.h>
+#include <path/PathIter.h>
 #include <path/SysCalls.h>
 #include <path/PathException.h>
 #include <path/Canonical.h>
@@ -32,7 +32,7 @@ protected:
 	void iter();
     /// Make sure we handle regular files
     void iter_file();
-    /// Test NodeIter operators
+    /// Test PathIter operators
     void opers();
     
     struct DirHiearchy 
@@ -149,17 +149,17 @@ void NodeUnit::iter()
      * Test NodeIte assignment and copy constructors and destructor
      */
     {
-        NodeIter    iter1;
-        NodeIter    iter2;
+        PathIter    iter1;
+        PathIter    iter2;
         iter1 = iter2;
-        NodeIter    iter3(iter1);
+        PathIter    iter3(iter1);
     }
     
     /*
-     * Tet NodeIter constructror from Node and destructor
+     * Tet PathIter constructror from Node and destructor
      */
     {
-        NodeIter    iter1(node);
+        PathIter    iter1(node);
     }
 
     std::vector<Node>   nodes;

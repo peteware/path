@@ -1,8 +1,8 @@
 /**
- * @file NodeIter.h
+ * @file PathIter.h
  */
-#if !defined(_PATH_NODEITER_H_)
-#define _PATH_NODEITER_H_
+#if !defined(_PATH_PATHITER_H_)
+#define _PATH_PATHITER_H_
 
 #include <iterator>
 #include <string>
@@ -12,7 +12,7 @@ namespace path {
     // Forward declarations
     class Path;
     /**
-     * @class NodeIter path/NodeIter.h
+     * @class PathIter path/PathIter.h
      * Used to iterate over the Nodes within a Directory.
      * 
      * There are several ways to iterate over a directory:
@@ -31,36 +31,36 @@ namespace path {
      * or Directory should be examined.
      * 
      */
-    class NodeIter :  public std::iterator<std::forward_iterator_tag, Path>
+    class PathIter :  public std::iterator<std::forward_iterator_tag, Path>
     {
         
     public:
         /// The end() iterator
-        NodeIter();
+        PathIter();
         /// Copy constructor
-        NodeIter(const NodeIter &copy);
+        PathIter(const PathIter &copy);
         /// Create from a Node.
-        NodeIter(const Path &node);
+        PathIter(const Path &node);
         /// Regular expression macher
-        NodeIter(const Path &node, const std::string &pattern, bool regexp);
+        PathIter(const Path &node, const std::string &pattern, bool regexp);
         /// Destructor
-        ~NodeIter();
+        ~PathIter();
         /// Assignment operator
-        NodeIter &operator=(const NodeIter &op2);
+        PathIter &operator=(const PathIter &op2);
         /// Dereferencing
         Path * operator->();
         /// Dereferencing
         Path & operator*();
         /// Comparison
-        bool operator!=(const NodeIter & op2) const;
+        bool operator!=(const PathIter & op2) const;
         /// Comparison
-        bool operator==(const NodeIter &op2) const;
+        bool operator==(const PathIter &op2) const;
         /// Prefix increment
-        NodeIter &operator++();
+        PathIter &operator++();
         /// Postfix increment
-        NodeIter NodeIter::operator++(int);
+        PathIter PathIter::operator++(int);
         /// Make this a recursive iterator
-        NodeIter & setRecursive();
+        PathIter & setRecursive();
     private:
         /// Returns the node this iterator is referencing
         Path *      findNode(int index) const;
@@ -78,4 +78,4 @@ namespace path {
         bool        m_recursive;
     };
 }
-#endif // !defined(_PATH_NODEITER_H_)
+#endif // !defined(_PATH_PATHITER_H_)
