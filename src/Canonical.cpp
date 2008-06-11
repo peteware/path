@@ -83,7 +83,7 @@ namespace path
     m_components()
     
     {
-        add(dir1, dir2);
+        add(dir1).add(dir2);
     }
     
     /**
@@ -102,7 +102,7 @@ namespace path
     m_components()
     
     {
-        add(dir1, dir2, dir3);
+        add(dir1).add(dir2).add(dir3);
     }
     /**
      * Initialized info (see copyInfo()) to empty and makes this a relative path.
@@ -121,7 +121,7 @@ namespace path
     m_components()
     
     {
-        add(dir1, dir2, dir3, dir4);
+        add(dir1).add(dir2).add(dir3).add(dir4);
     }
     
     
@@ -263,58 +263,7 @@ namespace path
             m_components.push_back(dir);
         return *this;
     }
-    
-    /**
-     * This is a simplified way to append an item
-     * See components() to get full access.
-     *
-     * @param dir1 The component to append
-     * @param dir2 The component to append
-     * @return A reference to this object
-     */
-    Canonical & Canonical::add(const std::string &dir1, const std::string &dir2)
-    {
-        add(dir1);
-        add(dir2);
-        return *this;
-    }
-    
-    /**
-     * This is a simplified way to append an item
-     * See components() to get full access.
-     *
-     * @param dir1 The component to append
-     * @param dir2 The component to append
-     * @param dir3 The component to append
-     * @return A reference to this object
-     */
-    Canonical & Canonical::add(const std::string &dir1, const std::string &dir2, const std::string &dir3)
-    {
-        add(dir1);
-        add(dir2);
-        add(dir3);
-        return *this;
-    }
-    
-    /**
-     * This is a simplified way to append an item
-     * See components() to get full access.
-     *
-     * @param dir1 The component to append
-     * @param dir2 The component to append
-     * @param dir3 The component to append
-     * @param dir4 The component to append
-     * @return A reference to this object
-     */
-    Canonical & Canonical::add(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4)
-    {
-        add(dir1);
-        add(dir2);
-        add(dir3);
-        add(dir4);
-        return *this;
-    }
-    
+   
     /**
      * Rather then anticipate every possible operation
      * on the list of components, this just
@@ -349,7 +298,7 @@ namespace path
      */
     Canonical & Canonical::setAbs(bool abs)
     {
-        std::swap(abs, m_abs);
+        m_abs = abs;
         return *this;
     }
     

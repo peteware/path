@@ -292,7 +292,7 @@ namespace path {
     /**
      * Returns the directory component of Path.
      * 
-     * dirname('/a/b/c') returns '/a/b'.  You just be able to do
+     * dirname('/a/b/c') returns '/a/b'.
      * 
      * @code
      * Path p1(UnixRules("/a/b/c"));
@@ -501,10 +501,10 @@ namespace path {
     std::vector<Path> Path::split() const
     {
         const Canonical &      c = canon();
-        Canonical              newcanon(c);
+        Canonical              newcanon;
         std::vector<Path>       paths;
         
-        newcanon.components().clear();
+        newcanon.setInfo(c).setAbs(c.abs());
         for (Strings::const_iterator iter = c.components().begin();
              iter != c.components().end(); ++iter)
         {

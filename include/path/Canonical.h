@@ -72,13 +72,7 @@ namespace path
         
         /// Add another component to the end
         Canonical & add(const std::string &dir);
-        /// Add another two components to the end
-        Canonical & add(const std::string &dir1, const std::string &dir2);
-        /// Add another three components to the end
-        Canonical & add(const std::string &dir1, const std::string &dir2, const std::string &dir3);
-        /// Add another four components to the end
-        Canonical & add(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4);
-        
+       
         /// Return reference; you can change this.
         Strings &components();
         /// Return const reference for const object
