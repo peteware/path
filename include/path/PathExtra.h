@@ -26,8 +26,8 @@ namespace path {
      */
     class PathExtra
     {
-    private:
-        friend class Path;
+    public:
+        //friend class Path;
         
         /// Default constructor
         PathExtra();

@@ -8,6 +8,7 @@
 #include <path/Unimplemented.h>
 #include <path/NodeInfo.h>
 #include <path/PathIter.h>
+#include <path/PathExtra.h>
 
 #include <iostream>
 
@@ -24,12 +25,16 @@ namespace path {
      * @param rules Rules to initialize.  May be NULL.
      */
     Path::Path(const PathRules *rules)
-	: m_path(0),
+	: m_meta(new PathExtra)
+#ifdef notdef
+    m_path(0),
     m_rules(rules),
     m_canon(0),
     m_pathStr(0),
     m_cache(0)
+#endif
     {
+        m_meta->m_rules = rules;
     }
     
     /**
@@ -38,12 +43,16 @@ namespace path {
      * @param path The directory
      */
     Path::Path(const char *path)
-    : m_path(0),
+    : m_meta(new PathExtra)
+#ifdef notdef
+    m_path(0),
     m_rules(0),
     m_canon(new Canonical(path)),
     m_pathStr(0),
     m_cache(0)
+#endif
     {
+        m_meta->m_canon = new Canonical(path);
     }
     
     /**
@@ -52,12 +61,16 @@ namespace path {
      * @param path The directory
      */
     Path::Path(const std::string &path)
-    : m_path(0),
+    : m_meta(new PathExtra)
+#ifdef notdef
+    m_path(0),
     m_rules(0),
     m_canon(new Canonical(path)),
     m_pathStr(0),
     m_cache(0)
+#endif
     {
+        m_meta->m_canon = new Canonical(path);
     }
     
     /**
@@ -70,12 +83,17 @@ namespace path {
      * @param param_rules Rules to use
      */
     Path::Path(const Canonical &canon, const PathRules *param_rules)
-    : m_path(0),
+    : m_meta(new PathExtra)
+#ifdef notdef
+    m_path(0),
     m_rules(param_rules),
     m_canon(new Canonical(canon)),
     m_pathStr(0),
     m_cache(0)
+#endif
     {
+        m_meta->m_rules = param_rules;
+        m_meta->m_canon = new Canonical(canon);
     }
     
     /**
@@ -85,18 +103,23 @@ namespace path {
      * @param copy Path to be copied
      */
     Path::Path(const Path &copy)
-	:m_path(0),
+	: m_meta(copy.m_meta)
+#ifdef notdef
+    m_path(0),
     m_rules(copy.m_rules),
     m_canon(0),
     m_pathStr(0),
     m_cache(0)
+#endif
     {
+#ifdef notdef
         if (copy.m_path)
             m_path = new std::string(*copy.m_path);
         if (copy.m_canon)
             m_canon = new Canonical (*copy.m_canon);
         if (copy.m_pathStr)
             m_pathStr = new std::string(*copy.m_pathStr);
+#endif
     }
     
     /**
@@ -104,10 +127,12 @@ namespace path {
      */
     Path::~Path()
     {
+#ifdef notdef
         delete m_path;
         delete m_canon;
         delete m_pathStr;
         delete m_cache;
+#endif
     }
     
     /**
@@ -120,6 +145,8 @@ namespace path {
     {
         if (this == &op)
             return *this;
+        m_meta = op.m_meta;
+#ifdef notdef
         m_rules = op.m_rules;
         
         delete m_canon;
@@ -145,7 +172,7 @@ namespace path {
             m_cache = new NodeInfo(*op.m_cache);
         else
             m_cache = 0;
-        
+#endif        
         return  *this;
     }
     
@@ -166,9 +193,9 @@ namespace path {
      */
     const std::string &Path::str() const
     {
-        if (!m_path)
-            m_path = new std::string(rules()->str(canon()));
-        return *m_path;
+        if (!m_meta->m_path)
+            m_meta->m_path = new std::string(rules()->str(canon()));
+        return *m_meta->m_path;
     }
     
     /**
@@ -191,10 +218,10 @@ namespace path {
      */
     const std::string& Path::path() const
     {
-        if (m_pathStr)
-            return *m_pathStr;
-        m_pathStr = new std::string(path::expand(rules()->str(canon()), System.env(), true));
-        return *m_pathStr;
+        if (m_meta->m_pathStr)
+            return *m_meta->m_pathStr;
+        m_meta->m_pathStr = new std::string(path::expand(rules()->str(canon()), System.env(), true));
+        return *m_meta->m_pathStr;
     }
     
     /**
@@ -251,7 +278,7 @@ namespace path {
         }
         // Take the meta info from cannon(), the built up list
         // of components and our set of rules and return a path.
-        return Path(Canonical(canon(), entries), m_rules);
+        return Path(Canonical(canon(), entries), m_meta->m_rules);
     }
     
     /**
@@ -311,7 +338,7 @@ namespace path {
         Strings com(canon().components().begin(), last);
         
         Canonical  c(canon(), com);
-        return Path(c, m_rules);
+        return Path(c, m_meta->m_rules);
     }
     
     
@@ -381,7 +408,7 @@ namespace path {
     {
         Canonical  c (canon());
         c.setAbs(true);
-        return Path(c, m_rules);
+        return Path(c, m_meta->m_rules);
     }
     
     /**
@@ -438,7 +465,7 @@ namespace path {
         std::copy(path.canon().components().begin(),
                   path.canon().components().end(),
                   std::back_inserter(c.components()));
-        return Path (c, m_rules);
+        return Path (c, m_meta->m_rules);
     }
     
     /**
@@ -464,7 +491,7 @@ namespace path {
         Canonical c(canon());
         std::copy(strings.begin(), strings.end(),
                   std::back_inserter(c.components()));
-        return Path(c, m_rules);
+        return Path(c, m_meta->m_rules);
     }
     
     /**
@@ -477,7 +504,7 @@ namespace path {
     {
         Canonical c(canon());
         c.add(p);
-        return Path(c, m_rules);
+        return Path(c, m_meta->m_rules);
     }
     
     /**
@@ -509,7 +536,7 @@ namespace path {
              iter != c.components().end(); ++iter)
         {
             newcanon.add(*iter);
-            Path    p (newcanon, m_rules);
+            Path    p (newcanon, m_meta->m_rules);
             paths.push_back(p);
         }
         return paths;
@@ -523,9 +550,9 @@ namespace path {
      */
     const Canonical & Path::canon() const
     {
-        if (!m_canon)
-            m_canon = new Canonical();
-        return *m_canon;
+        if (!m_meta->m_canon)
+            m_meta->m_canon = new Canonical();
+        return *m_meta->m_canon;
     }
     
     /**
@@ -534,7 +561,7 @@ namespace path {
      */
     const PathRules *Path::pathRules() const
     {
-        return m_rules;
+        return m_meta->m_rules;
     }
     
     /**
@@ -548,8 +575,8 @@ namespace path {
      */
     const PathRules *Path::rules() const
     {
-        if (m_rules)
-            return m_rules;
+        if (m_meta->m_rules)
+            return m_meta->m_rules;
         else
             return defaultPathRules();
     }
@@ -655,9 +682,9 @@ namespace path {
      */
     const NodeInfo & Path::info() const
     {
-        if (!m_cache)
-            m_cache = System.stat(path());
-        return *m_cache;
+        if (!m_meta->m_cache)
+            m_meta->m_cache = System.stat(path());
+        return *m_meta->m_cache;
     }
     
     bool Path::exists() const
@@ -743,7 +770,7 @@ namespace path {
             c.components()[c.components().size() - 1] += append;
         else
             c.components().push_back(append);
-        return Path(c, m_rules);
+        return Path(c, m_meta->m_rules);
     }
 }
 /**

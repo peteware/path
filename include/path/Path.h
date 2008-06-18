@@ -8,6 +8,7 @@
 
 #include <path/PathRules.h>
 #include <path/Strings.h>
+#include <path/Refcount.h>
 
 #include <string>
 #include <iosfwd>
@@ -16,6 +17,7 @@ namespace path {
     // Forward declarations
     class NodeInfo;
     class PathIter;
+    class PathExtra;
     
     /**
      * @class Path path/Path.h
@@ -191,6 +193,7 @@ namespace path {
     private:
         /// Use these rules if none are set.
         static PathRules *	s_defaultPathRules;
+#ifdef notdef
         /**
          * The path as set.
          * 
@@ -204,7 +207,8 @@ namespace path {
         /// Cached value path converted by path();
         mutable std::string *   m_pathStr;
         mutable NodeInfo * m_cache;
-        
+#endif
+        mutable Refcount<PathExtra> m_meta;
         
     };
 

@@ -80,6 +80,7 @@ namespace path {
         m_count = op2.m_count;
         m_data = op2.m_data;
         IncReference();
+        return *this;
     }
     
     template<typename Type>
