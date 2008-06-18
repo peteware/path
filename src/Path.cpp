@@ -26,13 +26,6 @@ namespace path {
      */
     Path::Path(const PathRules *rules)
 	: m_meta(new PathExtra)
-#ifdef notdef
-    m_path(0),
-    m_rules(rules),
-    m_canon(0),
-    m_pathStr(0),
-    m_cache(0)
-#endif
     {
         m_meta->m_rules = rules;
     }
@@ -44,13 +37,6 @@ namespace path {
      */
     Path::Path(const char *path)
     : m_meta(new PathExtra)
-#ifdef notdef
-    m_path(0),
-    m_rules(0),
-    m_canon(new Canonical(path)),
-    m_pathStr(0),
-    m_cache(0)
-#endif
     {
         m_meta->m_canon = new Canonical(path);
     }
@@ -62,13 +48,6 @@ namespace path {
      */
     Path::Path(const std::string &path)
     : m_meta(new PathExtra)
-#ifdef notdef
-    m_path(0),
-    m_rules(0),
-    m_canon(new Canonical(path)),
-    m_pathStr(0),
-    m_cache(0)
-#endif
     {
         m_meta->m_canon = new Canonical(path);
     }
@@ -84,13 +63,6 @@ namespace path {
      */
     Path::Path(const Canonical &canon, const PathRules *param_rules)
     : m_meta(new PathExtra)
-#ifdef notdef
-    m_path(0),
-    m_rules(param_rules),
-    m_canon(new Canonical(canon)),
-    m_pathStr(0),
-    m_cache(0)
-#endif
     {
         m_meta->m_rules = param_rules;
         m_meta->m_canon = new Canonical(canon);
@@ -104,22 +76,7 @@ namespace path {
      */
     Path::Path(const Path &copy)
 	: m_meta(copy.m_meta)
-#ifdef notdef
-    m_path(0),
-    m_rules(copy.m_rules),
-    m_canon(0),
-    m_pathStr(0),
-    m_cache(0)
-#endif
     {
-#ifdef notdef
-        if (copy.m_path)
-            m_path = new std::string(*copy.m_path);
-        if (copy.m_canon)
-            m_canon = new Canonical (*copy.m_canon);
-        if (copy.m_pathStr)
-            m_pathStr = new std::string(*copy.m_pathStr);
-#endif
     }
     
     /**
@@ -127,12 +84,6 @@ namespace path {
      */
     Path::~Path()
     {
-#ifdef notdef
-        delete m_path;
-        delete m_canon;
-        delete m_pathStr;
-        delete m_cache;
-#endif
     }
     
     /**
@@ -146,33 +97,6 @@ namespace path {
         if (this == &op)
             return *this;
         m_meta = op.m_meta;
-#ifdef notdef
-        m_rules = op.m_rules;
-        
-        delete m_canon;
-        if (op.m_canon)
-            m_canon = new Canonical(*op.m_canon);
-        else
-            m_canon = 0;
-        
-        delete m_path;
-        if (op.m_path)
-            m_path = new std::string(*op.m_path);
-        else
-            m_path = 0;
-
-        delete m_pathStr;
-        if (op.m_pathStr)
-            m_pathStr = new std::string(*op.m_pathStr);
-        else
-            m_pathStr = 0;
-        
-        delete m_cache;
-        if (op.m_cache)
-            m_cache = new NodeInfo(*op.m_cache);
-        else
-            m_cache = 0;
-#endif        
         return  *this;
     }
     

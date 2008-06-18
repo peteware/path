@@ -2,6 +2,8 @@
  * @file PathExtra.cpp
  */
 #include <path/PathExtra.h>
+#include <path/Canonical.h>
+#include <path/NodeInfo.h>
 
 namespace path {
     PathExtra::PathExtra()

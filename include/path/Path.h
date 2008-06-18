@@ -193,21 +193,6 @@ namespace path {
     private:
         /// Use these rules if none are set.
         static PathRules *	s_defaultPathRules;
-#ifdef notdef
-        /**
-         * The path as set.
-         * 
-         * This is the uninterpreted string and is the value returned by str().
-         */
-        mutable std::string *           m_path;
-        /// These are the rules we use for this path; may be NULL
-        const PathRules *		m_rules;
-        /// The path in canonical form; may be NULL
-        mutable Canonical *m_canon;
-        /// Cached value path converted by path();
-        mutable std::string *   m_pathStr;
-        mutable NodeInfo * m_cache;
-#endif
         mutable Refcount<PathExtra> m_meta;
         
     };

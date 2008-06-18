@@ -17,12 +17,8 @@ namespace path {
     /**
      * @class PathExtra path/PathExtra.h
      *
-     * This exists entirely to make a Path be smaller and simpler to 
-     * insure binaryu compatibility.  The typical Path
-     * class is just a string.  But we can cache some
-     * extra information such as the normalized path
-     * or if it is an absolute path.  We create the
-     * extra info on the fly as it is needed.
+     * Multiple copies of a Path object share the
+     * same underlying data.
      */
     class PathExtra
     {
@@ -39,14 +35,14 @@ namespace path {
          * 
          * This is the uninterpreted string and is the value returned by str().
          */
-        mutable std::string *           m_path;
+        std::string *           m_path;
         /// These are the rules we use for this path; may be NULL
         const PathRules *		m_rules;
         /// The path in canonical form; may be NULL
-        mutable Canonical *m_canon;
+        Canonical *m_canon;
         /// Cached value path converted by path();
-        mutable std::string *   m_pathStr;
-        mutable NodeInfo * m_cache;
+        std::string *   m_pathStr;
+        NodeInfo * m_cache;
     };
 }
 #endif /* _PATH_PATHEXTRA_H_ */
