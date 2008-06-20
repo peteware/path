@@ -38,9 +38,6 @@ namespace path {
         /// Unquote (dequote?) an element of path
         virtual std::string unquote(const std::string &path) const = 0;
     protected:
-        /// Split a string into it's components
-        static void split(const std::string &path, char sep, Strings &subdirs);
-    protected:
         char		m_sep;							///< Seperator
     };
 }

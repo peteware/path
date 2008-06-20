@@ -122,23 +122,4 @@ namespace path {
         throw Unimplemented("PathRules::unquote()");
     }
     
-    /**
-     * Calling this with "//abc/d/e//" would return a vector of
-     * "", "", "abc", "d", "e", "", ""
-     * @param path The string to split
-     * @param sep The character to use to split the path
-     * @param subdirs vector of strings that each component is push_back()'d on
-     */
-    void PathRules::split(const std::string &path, char sep, Strings &subdirs)
-    {
-        std::string::size_type	start = 0;
-        std::string::size_type	end = 0;
-        
-        while (start < path.size() && end != std::string::npos)
-        {
-            end = path.find_first_of(sep, start);
-            subdirs.push_back(path.substr(start, end - start));
-            start = end + 1;
-        }
-    }
 }

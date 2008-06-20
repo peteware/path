@@ -120,5 +120,25 @@ namespace path
         }
         return newstr;
     }
-
+    
+    /**
+     * Calling this with "//abc/d/e//" would return a vector of
+     * "", "", "abc", "d", "e", "", ""
+     * @param word The string to split
+     * @param sep The character to use to split the path
+     * @param strings vector of strings that each component is push_back()'d on
+     */
+    void split(const std::string &word, char sep, Strings &strings)
+    {
+        std::string::size_type	start = 0;
+        std::string::size_type	end = 0;
+        
+        while (start < word.size() && end != std::string::npos)
+        {
+            end = word.find_first_of(sep, start);
+            strings.push_back(word.substr(start, end - start));
+            start = end + 1;
+        }
+    }
+    
 }
