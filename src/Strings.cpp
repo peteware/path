@@ -137,6 +137,8 @@ namespace path
         {
             end = word.find_first_of(sep, start);
             strings.push_back(word.substr(start, end - start));
+            if (end == word.size() - 1)
+                strings.push_back(std::string(""));
             start = end + 1;
         }
     }

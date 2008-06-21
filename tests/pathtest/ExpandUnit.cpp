@@ -19,6 +19,7 @@ class ExpandUnit : public CppUnit::TestCase
 	CPPUNIT_TEST(simple);
     CPPUNIT_TEST(nested);
     CPPUNIT_TEST(braces);
+    CPPUNIT_TEST(split);
     
     CPPUNIT_TEST_SUITE_END();
 protected:
@@ -28,6 +29,8 @@ protected:
     void nested();
     /// Test that $(xxx) works
     void braces();
+    /// Test that path::split() works
+    void split();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(ExpandUnit);
@@ -74,4 +77,43 @@ void ExpandUnit::braces()
     CPPUNIT_ASSERT_EQUAL(std::string("abca"), path::expand("$(X)a", env, true));
     CPPUNIT_ASSERT_EQUAL(std::string("jklfa"), path::expand("$(X 2 $)a", env, true));
     CPPUNIT_ASSERT_EQUAL(std::string(""), path::expand("$(X", env, true));
+}
+
+void ExpandUnit::split()
+{
+    path::Strings  strings;
+
+    strings.clear();
+    path::split("", ',', strings);
+    CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(0), strings.size());
+
+    strings.clear();
+    path::split("a", ',', strings);
+    CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(1), strings.size());
+    CPPUNIT_ASSERT_EQUAL(std::string("a"), strings[0]);
+    
+    strings.clear();
+    path::split("a,b", ',', strings);
+    CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(2), strings.size());
+    CPPUNIT_ASSERT_EQUAL(std::string("a"), strings[0]);
+    CPPUNIT_ASSERT_EQUAL(std::string("b"), strings[1]);
+
+    strings.clear();
+    path::split(",", ',', strings);
+    CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(2), strings.size());
+    CPPUNIT_ASSERT_EQUAL(std::string(""), strings[0]);
+    CPPUNIT_ASSERT_EQUAL(std::string(""), strings[1]);
+
+    strings.clear();
+    path::split("//abc/d/e//", '/', strings);
+    CPPUNIT_ASSERT_EQUAL(static_cast<size_t>(7), strings.size());
+    CPPUNIT_ASSERT_EQUAL(std::string(""), strings[0]);
+    CPPUNIT_ASSERT_EQUAL(std::string(""), strings[1]);
+    CPPUNIT_ASSERT_EQUAL(std::string("abc"), strings[2]);
+    CPPUNIT_ASSERT_EQUAL(std::string("d"), strings[3]);
+    CPPUNIT_ASSERT_EQUAL(std::string("e"), strings[4]);
+    CPPUNIT_ASSERT_EQUAL(std::string(""), strings[5]);
+    CPPUNIT_ASSERT_EQUAL(std::string(""), strings[6]);
+    
+    
 }
