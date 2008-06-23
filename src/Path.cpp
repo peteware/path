@@ -696,6 +696,47 @@ namespace path {
             c.components().push_back(append);
         return Path(c, m_meta->m_rules);
     }
+    
+    struct ConvertToPath : public std::unary_function<std::string, Path>
+    {
+        const PathRules *m_rules;
+        ConvertToPath(const PathRules *rules)
+        : m_rules(rules)
+        {
+        }
+        
+        Path operator()(const std::string &arg)
+        {
+            const PathRules *r;
+            if (m_rules != NULL)
+                r = m_rules;
+            else
+                r = Path::defaultPathRules();
+            return Path(r->canonical(arg), m_rules);
+        }
+    };
+    
+    /**
+     * Takes the vector of strings and converts them to a vector
+     * of Path's.  If rules is NULL, then the Path::defaultPathRules()
+     * are used.
+     *
+     * @sa PathLookup for a complete interface to maintaining a
+     * list of Path's to search for a file.
+     *
+     * @param strings The vector of strings
+     * @param rules The PathRules to use to convert each element of strings
+     * @return A vector (possibly empty) of strings.
+     */
+    Paths strings2Paths(const Strings &strings, const PathRules *rules)
+    {
+        Paths paths;
+        std::transform(strings.begin(), strings.end(), 
+                       std::back_insert_iterator<Paths>(paths),
+                       ConvertToPath(rules));
+        return paths;
+    }
+    
 }
 /**
  * Compares the PathRules and Canonical componenets
@@ -776,3 +817,4 @@ path::Path operator+(const path::Path &path, const path::Path &op2)
 {
     return path.add(op2);
 }
+

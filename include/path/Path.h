@@ -18,6 +18,10 @@ namespace path {
     class NodeInfo;
     class PathIter;
     class PathExtra;
+    class Path;
+    
+    /// A list of Path
+    typedef std::vector<Path> Paths;
     
     /**
      * @class Path path/Path.h
@@ -141,7 +145,7 @@ namespace path {
         /// Concatenate a NUL terminated string
         Path add(const char *p) const;
         /// Return each directory component as a Path.
-        std::vector<Path> split() const;
+        Paths split() const;
         
         /// Return the Canonical representation of the path
         const Canonical &canon() const;
@@ -196,7 +200,8 @@ namespace path {
         mutable Refcount<PathExtra> m_meta;
         
     };
-
+    /// Convert an array of strings into an array of Paths
+    Paths strings2Paths(const Strings &strings, const PathRules *rules = 0);
     // Shortcuts for handling different paths as strings
     /// Convert a unix style path ("/a/b/c") to Canonical
     path::Canonical UnixPath(const std::string &path);

@@ -114,6 +114,5 @@ void ExpandUnit::split()
     CPPUNIT_ASSERT_EQUAL(std::string("e"), strings[4]);
     CPPUNIT_ASSERT_EQUAL(std::string(""), strings[5]);
     CPPUNIT_ASSERT_EQUAL(std::string(""), strings[6]);
-    
-    
+
 }

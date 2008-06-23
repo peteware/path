@@ -60,6 +60,8 @@
 		50B9744A0D8DA9F800E8B628 /* Strings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50B974490D8DA9F800E8B628 /* Strings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50C967880DA42FF3004E7B67 /* SysUnixBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50C967870DA42FF3004E7B67 /* SysUnixBase.cpp */; };
 		50C9678A0DA4300B004E7B67 /* SysUnixBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 50C967890DA4300B004E7B67 /* SysUnixBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50D354700E0C7E59007E1CF6 /* PathLookup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D3546F0E0C7E59007E1CF6 /* PathLookup.cpp */; };
+		50D354720E0C7EA3007E1CF6 /* PathLookup.h in Headers */ = {isa = PBXBuildFile; fileRef = 50D354710E0C7EA3007E1CF6 /* PathLookup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +138,8 @@
 		50B974490D8DA9F800E8B628 /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Strings.h; path = include/path/Strings.h; sourceTree = "<group>"; };
 		50C967870DA42FF3004E7B67 /* SysUnixBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SysUnixBase.cpp; path = src/SysUnixBase.cpp; sourceTree = "<group>"; };
 		50C967890DA4300B004E7B67 /* SysUnixBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysUnixBase.h; path = include/path/SysUnixBase.h; sourceTree = "<group>"; };
+		50D3546F0E0C7E59007E1CF6 /* PathLookup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathLookup.cpp; path = src/PathLookup.cpp; sourceTree = "<group>"; };
+		50D354710E0C7EA3007E1CF6 /* PathLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathLookup.h; path = include/path/PathLookup.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -228,6 +232,7 @@
 				500914060CE2B3E300ADA70C /* PathException.cpp */,
 				500914070CE2B3E300ADA70C /* PathExtra.cpp */,
 				500914040CE2B3E300ADA70C /* PathIter.cpp */,
+				50D3546F0E0C7E59007E1CF6 /* PathLookup.cpp */,
 				500914080CE2B3E300ADA70C /* PathRules.cpp */,
 				500914090CE2B3E300ADA70C /* Permission.cpp */,
 				506939910D886B4D00E050F1 /* Strings.cpp */,
@@ -262,6 +267,7 @@
 				500914280CE2B3F600ADA70C /* NodeInfo.h */,
 				5009142A0CE2B3F600ADA70C /* Path.h */,
 				500914290CE2B3F600ADA70C /* PathIter.h */,
+				50D354710E0C7EA3007E1CF6 /* PathLookup.h */,
 				5009142B0CE2B3F600ADA70C /* PathException.h */,
 				5009142C0CE2B3F600ADA70C /* PathExtra.h */,
 				5009142D0CE2B3F600ADA70C /* PathRules.h */,
@@ -312,6 +318,7 @@
 				50B9744A0D8DA9F800E8B628 /* Strings.h in Headers */,
 				50C9678A0DA4300B004E7B67 /* SysUnixBase.h in Headers */,
 				501A0C980DB597C300C7E54C /* Exception.h in Headers */,
+				50D354720E0C7EA3007E1CF6 /* PathLookup.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,6 +419,7 @@
 				506939C70D88728E00E050F1 /* Win32Rules.cpp in Sources */,
 				50C967880DA42FF3004E7B67 /* SysUnixBase.cpp in Sources */,
 				501A0C940DB595F300C7E54C /* Exception.cpp in Sources */,
+				50D354700E0C7E59007E1CF6 /* PathLookup.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

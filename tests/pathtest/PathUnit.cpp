@@ -45,6 +45,7 @@ class PathUnit : public CppUnit::TestCase
     CPPUNIT_TEST(testSplit);
     CPPUNIT_TEST(testmk);
     CPPUNIT_TEST_EXCEPTION(testInfo, path::PathException);
+    CPPUNIT_TEST(testStrings2Paths);
     
 	CPPUNIT_TEST_SUITE_END();
 
@@ -77,7 +78,8 @@ protected:
     void testmk();
     /// Check that info() on non-file throws exception
     void testInfo();
-    
+    /// Check that Path::strings2Paths works
+    void testStrings2Paths();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(PathUnit);
@@ -322,4 +324,13 @@ void PathUnit::testInfo()
 {
     Path p("jfakls");
     p.info();
+}
+
+void PathUnit::testStrings2Paths()
+{
+    Strings src;
+    Paths paths;
+    split("/bin:/usr/bin:/usr/local/bin", ':', src);
+    paths = path::strings2Paths(src);
+    CPPUNIT_ASSERT_EQUAL(src.size(), paths.size());
 }
