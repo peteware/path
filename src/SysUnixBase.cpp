@@ -54,9 +54,9 @@ namespace path {
             throw PathException(dir, errno);
     }
     
-    void SysUnixBase::touch(const std::string &file) const
+    void SysUnixBase::touch(const std::string &file, int mode) const
     {
-        int fd = ::open(file.c_str(), O_WRONLY|O_CREAT, 0777);
+        int fd = ::open(file.c_str(), O_WRONLY|O_CREAT, mode);
         if (fd < 0)
             throw PathException(file, errno);
         (void) ::close(fd);

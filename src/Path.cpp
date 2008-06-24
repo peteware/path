@@ -267,7 +267,7 @@ namespace path {
     
     
     /**
-     * Return the extension or suffix on a path.  For example:
+     * Return the extension (eg. suffix) of a Path.  For example:
      * 
      * @code
      * String path("/a/file.h")
@@ -447,7 +447,7 @@ namespace path {
      * shares the same PathRules.
      *
      * Using Unix style paths as a shorthand, the following path "/a/b/c"
-     * would return three vectors: ["/a", "/a/b", "/a/b/c"]
+     * would return the vector of Path's: ["/a", "/a/b", "/a/b/c"]
      */
     std::vector<Path> Path::split() const
     {
@@ -489,11 +489,10 @@ namespace path {
     }
     
     /**
-     * Returns a default set of rules.  If the rules
-     * are not set, it uses the default rules.  If
-     * the default rules have not been initialized,
-     * it uses UnixRules::rules (as returned by
-     * defaultPathRules()).
+     * If the rules
+     * are not set, this uses defaultPathRules().  defaultPathRules()
+     * in turn either use the value from setDefaultPathRules() or
+     * if those are not set uses System.rules().
      *
      * Do not delete the returned rules!
      */
@@ -580,6 +579,7 @@ namespace path {
      * that this Path already represents.
      *
      * Not yet implemented
+     * ;;; TODO: Implement glob()
      *
      * @param pattern A shell pattern ("*.C", "*", *.[Cho]")
      */
@@ -600,7 +600,9 @@ namespace path {
     
     
     /**
-     * Gets the System.stat() on this path.
+     * Gets the System.stat() on this path.  Caches
+     * the result so multiple calls avoid
+     * doing more work.  
      * @throws PathException
      * @return NodeInfo about this path
      */
@@ -627,9 +629,8 @@ namespace path {
     }
     
     /**
-     * Returns if path represents a directory.  Throws
-     * 
-     * Caller assumes responsibility for memory deallocation.
+     * Returns if path represents a directory.
+     * Throws PathException if not able to access path.
      */
     bool Path::isDir() const 
     {
@@ -646,31 +647,46 @@ namespace path {
     
     /**
      * Create all the directories along the path.
+     * Throws a PathException if unable to create
+     * one of the directories because you don't
+     * have permission or a component exists
+     * and is a file,  not a directory (plus
+     * lots of other reasons).
      *
      * @param path The path to create
+     * @return Number of directories creaeted (may be 0).
      */
-    void Path::mkdirs(const Path &path)
+    int Path::mkdirs(const Path &path, int mode)
     {
+        int count = 0;      // How many directories created
         std::vector<Path> hier = path.expand().split();
         for (std::vector<Path>::iterator iter = hier.begin();
              iter != hier.end(); ++iter)
         {
-            if (System.exists(iter->path()))
+            if (System.exists(iter->path()) && iter->isDir())
                 continue;
-            System.mkdir(iter->path(), 0777);
+            System.mkdir(iter->path(), mode);
+            ++count;
         }
+        return count;
     }
 
     /**
-     * Create any directories along the path and make
-     * create the file.
+     * Create any directories along the path and
+     * create the file.  If you don't want to
+     * create the directories, just use 
+     * @code
+     * System.touch(path.path())
+     * @endcode
      *
      * @param path The file to make sure it exists.
+     * @param dirmode The mode for creating the direcotry (passed to System.mkdir()) (default is 0777)
+     * @param filemode THe mdoe for the actual file (passed to System.touch()) (default is (0666)
      */
-    void Path::mkfile(const Path &path)
+    void Path::mkfile(const Path &path, int dirmode, int filemode)
     {
-        mkdirs(path.dirname());
-        System.touch(path.path());
+        mkdirs(path.dirname(), dirmode);
+        System.touch(path.path(), filemode);
     }
     
     /**
@@ -738,6 +754,7 @@ namespace path {
     }
     
 }
+
 /**
  * Compares the PathRules and Canonical componenets
  * to see if they are the same.  So while two paths
@@ -793,6 +810,7 @@ path::Path operator+(const path::Path &path, const std::string &dir)
     return path.add(dir);
     
 }
+
 /**
  * Add another component to path and return a new Path
  *

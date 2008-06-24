@@ -39,7 +39,7 @@ namespace path {
         throw Unimplemented("SysCalls::rmdir");
     }
     
-    void SysCalls::touch(const std::string &file) const
+    void SysCalls::touch(const std::string &file, int mode) const
     {
         throw Unimplemented("SysCalls::touch");
     }

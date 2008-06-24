@@ -42,7 +42,7 @@ namespace path {
         /// Remove a directory
         virtual void rmdir(const std::string & dir) const;
         /// Create empty file or if it exists update modified time
-        virtual void touch(const std::string & file) const;
+        virtual void touch(const std::string & file, int mode = 0777) const;
         /// Remove a file
         virtual void remove(const std::string &file) const;
         /// Return a vector with directory contents

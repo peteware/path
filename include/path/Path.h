@@ -26,16 +26,16 @@ namespace path {
     /**
      * @class Path path/Path.h
      *
-     * A Path is an arbitrary string used to represent a path to a file
+     * A Path is a string representing a filename
      * or directory.  The primary purpose of using a Path instead of a string is
      * to encourage operating system independence.  A secondary purpose
-     * is to make typical filename operators easier.  The operations on a Path 
+     * is to make typical filename operators easier.  The operations on a Path
      * make no attempt to validate if the file or directory actually exists. 
      * 
      * You can operate on a Path with some common operations such as add(),
      * extension(), split(), dirname(), basename(), stem(), + and &.  All
      * such operations leave the original Path object unchanged and
-     * return a copy.
+     * return a copy.  In technical terms, a Path is an immutable object.
      *
      * To interact with the rest of the system, you can use path(), str(), and 
      * normpath() to return a std::string or path_c(), str_c(), normpath_c() 
@@ -70,12 +70,19 @@ namespace path {
      *
      * Result in two identical paths.
      *
-     * To support the Node class (represnting actual files and directories),
-     * the Path class is defined with value semantics.  This means to change
-     * something a copy is created.  This what the
-     * Node class can derive from Path and maintain it's
-     * own semantics.  For example, it doesn't make sense
-     * to change a Node's suffix().
+     * To list the contents of a directory, you can use the
+     * iterator returned by begin(), glob(), and end() so you
+     * can use Standard Template Library algorithms.  This
+     * returns a Forward Iterator in STL terminology.  An
+     * iterator can also be told to traverse a directory
+     * hierachy by using setRecursive():
+     *
+     * @code
+     * Path  path(UnixPath("/tmp"));
+     *
+     * for (Path::iterator iter = path.begin().setRecursive(); iter != path.end(); ++iter)
+     * {...}
+     * @endcode
      *
      * @sa 
      * Canonical, PathRules, UnixRules, Wn32Rules, UriRules, Win32Path, 
@@ -190,9 +197,9 @@ namespace path {
         /// Return the current working directory
         static Path getcwd();
         /// Create all directories in Path
-        static void mkdirs(const Path &path);
+        static int mkdirs(const Path &path, int mode = 0777);
         /// Create all directories and the file in Path
-        static void mkfile(const Path &path);
+        static void mkfile(const Path &path, int dirmode = 0777, int filemode = 0666);
         
     private:
         /// Use these rules if none are set.
