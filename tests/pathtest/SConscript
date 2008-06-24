@@ -11,6 +11,7 @@ env.Program(target = 'pathtest',
              'NodeUnit.cpp',
              'PathRulesUnit.cpp',
              'PathUnit.cpp',
+             'RefcountUnit.cpp',
              'SysCallsUnit.cpp',
              'UnixRulesUnit.cpp',
              'Win32RulesUnit.cpp'
