@@ -4,8 +4,33 @@
 
 #include <path/PathLookup.h>
 
+#include <algorithm>
+#include <iterator>
+
 namespace path
 {
-    
+    PathLookup::PathLookup()
+		: m_pathList()
+	{
+	}
+
+	void PathLookup::push_back (const Paths &paths)
+	{
+		std::copy (paths.begin(), paths.end(), std::back_insert_iterator<Paths>(m_pathList));
+	}
+
+	void PathLookup::push_front (const Paths &paths)
+	{
+		Paths pathList;
+		std::copy (paths.begin(), paths.end(), std::back_insert_iterator<Paths>(pathList));
+		std::copy (m_pathList.begin(), m_pathList.end(), std::back_insert_iterator<Paths>(pathList));
+
+		m_pathList = pathList;
+	}
+
+	Path PathLookup::find (const std::string &path)
+	{
+		return Path();
+	}
 }
 
