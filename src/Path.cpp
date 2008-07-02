@@ -10,6 +10,7 @@
 #include <path/PathIter.h>
 #include <path/PathExtra.h>
 
+#include <algorithm>
 #include <iostream>
 
 namespace path {

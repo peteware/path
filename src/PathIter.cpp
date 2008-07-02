@@ -6,6 +6,7 @@
 #include <path/SysCalls.h>
 
 #include <iterator>
+#include <algorithm>
 
 namespace path {
     /**

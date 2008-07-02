@@ -23,6 +23,14 @@ namespace path {
     {
         m_message = m_filename + ":" + strerror(m_errno);
     }
+
+	PathException::PathException(const std::string &filename)
+		: Exception(),
+		m_filename(filename),
+		m_errno(errno)
+	{
+		m_message = m_filename + ":" + strerror(m_errno);
+	}
     
     PathException::~PathException() throw()
     {

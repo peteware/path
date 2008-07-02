@@ -26,7 +26,7 @@ namespace path {
     public:
         PathException();
         PathException(const std::string &filename, int errno);
-        
+        PathException(const std::string &filename);        
         virtual ~PathException() throw();
         int 		err() const;
         std::string filename() const;

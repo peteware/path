@@ -9,7 +9,7 @@
 #include <path/PathException.h>
 #include <path/Unimplemented.h>
 
-#include <sys/errno.h>  // System dependency?
+//#include <sys/errno.h>  // System dependency?
 
 namespace path {
     
@@ -33,7 +33,7 @@ namespace path {
     m_cache(0)
     {
         if (!exists())
-            throw PathException(path(), errno);
+            throw PathException(path());
     }
     
     /**
@@ -46,7 +46,7 @@ namespace path {
     m_cache(0)
     {
         if (!exists())
-            throw PathException(path(), errno);
+            throw PathException(path());
     }
     
     
@@ -62,7 +62,7 @@ namespace path {
     m_cache(0)
     {
         if (!exists())
-            throw PathException(path(), errno);
+            throw PathException(path());
     }
     
     /**
@@ -79,7 +79,7 @@ namespace path {
     m_cache(0)
     {
         if (!exists())
-            throw PathException(path(), errno);
+            throw PathException(path());
     }
     
     /**
