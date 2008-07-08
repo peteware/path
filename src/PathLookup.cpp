@@ -9,6 +9,15 @@
 
 namespace path
 {
+    namespace internal 
+    {
+        class DirCache 
+        {
+        public:
+        private:
+            
+        };
+    }
     PathLookup::PathLookup()
 		: m_pathList()
 	{
@@ -21,8 +30,9 @@ namespace path
 
 	void PathLookup::push_front (const Paths &paths)
 	{
-		Paths pathList;
-		std::copy (paths.begin(), paths.end(), std::back_insert_iterator<Paths>(pathList));
+        // Put paths at the start
+		Paths pathList(paths.begin(), paths.end());
+        // And previous one after
 		std::copy (m_pathList.begin(), m_pathList.end(), std::back_insert_iterator<Paths>(pathList));
 
 		m_pathList = pathList;
