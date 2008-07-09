@@ -7,6 +7,8 @@
 #include <path/PathException.h>
 #include <stdio.h>
 
+#include <errno.h>
+
 namespace path {
     
     PathException::PathException()
@@ -16,10 +18,10 @@ namespace path {
     {
     }
     
-    PathException::PathException(const std::string &filename, int errno)
+    PathException::PathException(const std::string &filename, int err)
 	: Exception(),
     m_filename(filename),
-    m_errno(errno)
+    m_errno(err)
     {
         m_message = m_filename + ":" + strerror(m_errno);
     }
