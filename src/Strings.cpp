@@ -40,6 +40,9 @@ namespace path
                     continue;
                 }
             }
+			if (iter == str.end())
+				break;
+
             // Search for a '$'
             if (*iter != intro) 
             {
@@ -49,6 +52,9 @@ namespace path
             
             // We have a '$'
             std::string var;
+			std::string fullname;				// used to avoid recursion
+
+			fullname += *iter;
             ++iter;
             // Treat $$ as an escape for a single '$'
             if (iter != str.end() && *iter == intro) 
@@ -71,17 +77,17 @@ namespace path
                         case '(':
                             match = ')';
                             domatch = true;
-                            ++iter;
+							fullname += *iter++;
                             continue;
                         case '{':
                             match = '}';
                             domatch = true;
-                            ++iter;
+							fullname += *iter++;
                             continue;
                         case '[':
                             match = ']';
                             domatch = true;
-                            ++iter;
+							fullname += *iter++;
                             continue;
                         default:
                             break;
@@ -91,17 +97,19 @@ namespace path
                 {
                     if (*iter == match)
                     {
-                        ++iter;
+						fullname += *iter++;
                         domatch = false;
                         break;
                     }
                     else
                     {
+						fullname += *iter;
                         var += *iter++;
                     }
                 }
                 else if (isalnum(*iter) || *iter == '_')
                 {
+					fullname += *iter;
                     var += *iter++;
                 }
                 else
@@ -115,7 +123,11 @@ namespace path
                 StringMap::const_iterator variter = vars.find(var);
                 // If we added an else, we could have non-matches expand
                 if (variter != vars.end())
-                    newstr += expand(variter->second, vars, false);
+				{
+					// Avoid expanding $VAR=$VAR
+					if (variter->second != fullname)
+						newstr += expand(variter->second, vars, false);
+				}
             }
         }
         return newstr;

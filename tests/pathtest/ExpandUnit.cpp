@@ -20,6 +20,7 @@ class ExpandUnit : public CppUnit::TestCase
     CPPUNIT_TEST(nested);
     CPPUNIT_TEST(braces);
     CPPUNIT_TEST(split);
+    CPPUNIT_TEST(recurse);
     
     CPPUNIT_TEST_SUITE_END();
 protected:
@@ -31,6 +32,8 @@ protected:
     void braces();
     /// Test that path::split() works
     void split();
+	/// Test that expand var to itself $VAR=$VAR
+	void recurse();
 };
 
 CPPUNIT_TEST_SUITE_REGISTRATION(ExpandUnit);
@@ -114,5 +117,15 @@ void ExpandUnit::split()
     CPPUNIT_ASSERT_EQUAL(std::string("e"), strings[4]);
     CPPUNIT_ASSERT_EQUAL(std::string(""), strings[5]);
     CPPUNIT_ASSERT_EQUAL(std::string(""), strings[6]);
-
 }
+
+void ExpandUnit::recurse()
+{
+    path::StringMap env;
+
+    env["X"] = "$X";
+    env["X2"] = "$(X2)";
+    CPPUNIT_ASSERT_EQUAL(std::string(""), path::expand("$X", env, true));
+    CPPUNIT_ASSERT_EQUAL(std::string(""), path::expand("$(X2)", env, true));
+}
+
