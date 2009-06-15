@@ -75,7 +75,7 @@ void NodeUnit::initFiles()
 
 void NodeUnit::buildFiles()
 {
-    // Create a directories first
+    // Create directories first
     for (std::vector<DirHiearchy>::iterator iter = m_files.begin();
          iter != m_files.end(); ++iter)
     {

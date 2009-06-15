@@ -59,8 +59,13 @@ namespace path {
         PathIter &operator++();
         /// Postfix increment
         PathIter PathIter::operator++(int);
+		/// Add another element to the iter
+		void addPath(const Path &path);
         /// Make this a recursive iterator
         PathIter & setRecursive();
+		/// Check if matches against pattern
+		bool match(const Path &path) const;
+
     private:
         /// Returns the node this iterator is referencing
         Path *      findNode(int index) const;

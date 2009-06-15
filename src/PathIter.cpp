@@ -135,20 +135,28 @@ namespace path {
     PathIter &PathIter::operator++()
     {
         if (m_current < 0 || m_current + 1 >= size())
-            m_current = - 1;
-        else
-        {
-            ++m_current;
+		{
+            m_current = -1;
+			return *this;
+		}
+		while (++m_current < size())
+		{
+			Path *p = findNode(m_current);
             if (m_recursive) 
             {
-                Path *n = findNode(m_current);
-                if (n && n->isDir())
-                    addNodes(n);
+                if (p && p->isDir())
+                    addNodes(p);
             }
-        }
-        return *this;
+			if (p && match(*p))
+				break;
+		}
+		if (m_current == size())
+		{
+			m_current = -1;
+		}
+		return *this;
     }
-    
+
     /**
      * Postfix increment.
      *
@@ -171,6 +179,8 @@ namespace path {
      */
     bool PathIter::operator==(const PathIter & op2) const
     {
+		(void) findNode(m_current);
+		
         // Most comparisons are non-end against end() so make sure that is fast.
         if (m_current != op2.m_current)
             return false;
@@ -194,6 +204,21 @@ namespace path {
     {
         return !(*this == op2);
     }
+
+	/**
+	 * Add a Path to the list that we are traversing.  Creates
+	 * a new Path.  If the PathIter already reached
+	 * the end, then this gets added and the PathIter
+	 * can be incremented again.
+	 *
+	 * @param path The path added to end of list
+	 */
+	void PathIter::addPath(const Path &path)
+	{
+		m_nodeList.push_back(new Path(path));
+		if (m_current == -1)
+			m_current = size() - 1;
+	}
     
     /**
      * Traverse into each subdirectory.  Usually,
@@ -228,6 +253,19 @@ namespace path {
     {
         return static_cast<int>(m_nodeList.size());
     }
+
+
+	/**
+	 * Check if this path matches the glob() pattern.  Uses the
+	 * Path::basename() to compare against
+	 *
+	 * @param path The path to match
+	 * @return true if it matches the pattern
+	 */
+	bool PathIter::match(const Path &path) const
+	{
+		return true;
+	}
 
     /**
      * @param index First is 0.  

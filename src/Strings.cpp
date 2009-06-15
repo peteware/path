@@ -142,7 +142,4 @@ namespace path
             start = end + 1;
         }
     }
-    
-    
-    
 }
