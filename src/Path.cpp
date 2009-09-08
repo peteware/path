@@ -696,8 +696,14 @@ namespace path {
      *
      * @code
      * Path     header(UnixPath("/a/b/file.h"));
+     * // src is "/a/b/file.C"
      * Path     src = header.dirname() + header.stem() + ".C";
+     * // backup is "/a/b/file.h.bak"
      * Path     backup = header & ".bak";
+     * // backup2 is "/a/b/file.bak.h" (using string addition)
+     * Path     backup2 = header.dirname() + (header.stem() + ".bak" + header.suffix());
+     * // backup3 is "/a/b/file.bak.h" (using Path append)
+     * Path     backup3 = header.dirname() + header.stem() & ".bak" & header.suffix());
      * @endcode
      *
      * @param append String to be added
