@@ -163,16 +163,16 @@ namespace path {
         /// Return the rules (may be NULL)
         const PathRules *pathRules() const;
         /// Return PathRules, never null
-        const PathRules *	rules() const;
+        const PathRules *       rules() const;
         /// Set the default rules to be used by most paths
         static PathRules * setDefaultPathRules(PathRules * rules);
         /// Return the rules
         static const PathRules * defaultPathRules();
         
         /// How to iterate through directory
-        typedef PathIter	iterator;
+        typedef PathIter        iterator;
         /// And the const version of iterator
-        typedef const PathIter	const_iterator;
+        typedef const PathIter  const_iterator;
         /// Return iterator for examining files in this directory
         iterator begin();
         /// Return iterator for examining files in this directory, const version
@@ -203,7 +203,7 @@ namespace path {
         
     private:
         /// Use these rules if none are set.
-        static PathRules *	s_defaultPathRules;
+        static PathRules *      s_defaultPathRules;
         mutable Refcount<PathExtra> m_meta;
         
     };
@@ -217,7 +217,7 @@ namespace path {
     /// Convert a URL style path ("http://www.peteware.com/a") to Canonical
     path::Canonical URLPath(const std::string &path);
 }
-/// Check if Cannonical names are the same	
+/// Check if Cannonical names are the same      
 bool operator==(const path::Path &op1, const path::Path &op2);
 /// Check if Cannonical names are different.
 bool operator!=(const path::Path &op1, const path::Path &op2);

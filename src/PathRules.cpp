@@ -15,7 +15,7 @@ namespace path {
      * @param sep Sepearator charcter within path, for example '/'.
      */
     PathRules::PathRules(char sep)
-	: m_sep(sep)
+        : m_sep(sep)
     {
     }
     
@@ -68,9 +68,9 @@ namespace path {
      */
     Canonical PathRules::canonical(const std::string &path) const
     {
-        Canonical	canon;
+        Canonical       canon;
         Strings     components;
-        bool		first = true;
+        bool            first = true;
         
         split(path, m_sep, components);
         Strings::iterator iter = components.begin();

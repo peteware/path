@@ -28,11 +28,11 @@ namespace path {
         PathException(const std::string &filename, int the_errno);
         PathException(const std::string &filename);        
         virtual ~PathException() throw();
-        int 		err() const;
+        int             err() const;
         std::string filename() const;
     private:
-        std::string		m_filename;
-        int				m_errno;
+        std::string             m_filename;
+        int                             m_errno;
     };
 }
 #endif // !defined(_PATH_PATHEXCEPTION_H_)

@@ -7,11 +7,11 @@
 
 namespace path {
     PathExtra::PathExtra()
-    : m_path(0),
-    m_rules(0),
-    m_canon(0),
-    m_pathStr(0),
-    m_cache(0)
+        : m_path(0),
+          m_rules(0),
+          m_canon(0),
+          m_pathStr(0),
+          m_cache(0)
     {
     }
     

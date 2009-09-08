@@ -13,7 +13,7 @@ namespace path {
     }
     
     Exception::Exception(const std::string &message)
-    : m_message(message)
+        : m_message(message)
     {
     }
     

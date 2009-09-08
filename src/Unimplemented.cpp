@@ -8,7 +8,7 @@
 namespace path {
     
     Unimplemented::Unimplemented(const std::string &operation)
-    : Exception(operation)
+        : Exception(operation)
     {
     }
     

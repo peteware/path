@@ -21,7 +21,7 @@ namespace path {
         virtual std::string quote(const std::string & path) const;
         virtual std::string unquote(const std::string &subdir) const;
         
-        static UnixRules	rules;
+        static UnixRules        rules;
         
     };
 }

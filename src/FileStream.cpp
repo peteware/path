@@ -7,8 +7,8 @@
 namespace path 
 {
     FileStream::FileStream(const Path &p, std::ios_base::openmode mode)
-	: Node("abc"),
-    std::fstream(/*path_c(), mode*/)
+        : Node("abc"),
+          std::fstream(/*path_c(), mode*/)
     {
     }
     

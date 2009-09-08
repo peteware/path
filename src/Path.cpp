@@ -26,7 +26,7 @@ namespace path {
      * @param rules Rules to initialize.  May be NULL.
      */
     Path::Path(const PathRules *rules)
-	: m_meta(new PathExtra)
+        : m_meta(new PathExtra)
     {
         m_meta->m_rules = rules;
     }
@@ -37,7 +37,7 @@ namespace path {
      * @param path The directory
      */
     Path::Path(const char *path)
-    : m_meta(new PathExtra)
+        : m_meta(new PathExtra)
     {
         m_meta->m_canon = new Canonical(path);
     }
@@ -48,7 +48,7 @@ namespace path {
      * @param path The directory
      */
     Path::Path(const std::string &path)
-    : m_meta(new PathExtra)
+        : m_meta(new PathExtra)
     {
         m_meta->m_canon = new Canonical(path);
     }
@@ -63,7 +63,7 @@ namespace path {
      * @param param_rules Rules to use
      */
     Path::Path(const Canonical &canon, const PathRules *param_rules)
-    : m_meta(new PathExtra)
+        : m_meta(new PathExtra)
     {
         m_meta->m_rules = param_rules;
         m_meta->m_canon = new Canonical(canon);
@@ -76,7 +76,7 @@ namespace path {
      * @param copy Path to be copied
      */
     Path::Path(const Path &copy)
-	: m_meta(copy.m_meta)
+        : m_meta(copy.m_meta)
     {
     }
     
@@ -163,7 +163,7 @@ namespace path {
      *
      * @return A path with all $VAR expanded
      */
-     Path Path::expand() const
+    Path Path::expand() const
     {
         return expand(System.env());
     }
@@ -284,7 +284,7 @@ namespace path {
     std::string Path::extension() const
     {
         Path    last = basename();
-        std::string::size_type	index = last.str().find_last_of (".");
+        std::string::size_type  index = last.str().find_last_of (".");
         if (index == std::string::npos)
             return "";
         else
@@ -294,7 +294,7 @@ namespace path {
     /**
      * Return basename() of path with the extension() removed
      * @code
-     * Path	p("/a/b/name.ext");
+     * Path     p("/a/b/name.ext");
      * p.basename() == "name"; 
      * @endcode
      * @code
@@ -305,8 +305,8 @@ namespace path {
      */
     std::string Path::stem() const
     {
-        Path	base = basename();
-        std::string::size_type	index = base.str().find_last_of (".");
+        Path    base = basename();
+        std::string::size_type  index = base.str().find_last_of (".");
         if (index == std::string::npos)
             return base.str();
         else if (index == 0)
@@ -372,7 +372,7 @@ namespace path {
     /**
      * Return a Path by appending another path.  For example:
      * @code
-     * Path	path1("/tmp");
+     * Path     path1("/tmp");
      * Path path2("a/b/c");
      * Path path3 = path1.add(path2);
      * std::cout << path3 << std::endl;
@@ -724,7 +724,7 @@ namespace path {
     {
         const PathRules *m_rules;
         ConvertToPath(const PathRules *rules)
-        : m_rules(rules)
+            : m_rules(rules)
         {
         }
         
@@ -789,7 +789,7 @@ bool operator==(const path::Path &op1, const path::Path & op2)
  */
 bool operator!=(const path::Path &op1, const path::Path &op2)
 {
-	return !(op1 == op2);
+    return !(op1 == op2);
 }
 
 /**
@@ -802,7 +802,7 @@ bool operator!=(const path::Path &op1, const path::Path &op2)
  */
 std::ostream &operator<<(std::ostream &out, const path::Path&path)
 {
-	return out << path.str();
+    return out << path.str();
 }
 
 /**

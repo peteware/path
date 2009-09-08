@@ -19,7 +19,7 @@ namespace path {
      * I'm not happy about this but it became necessary to support PathIter from Node::end().
      */
     Node::Node()
-	: m_cache(0)
+        : m_cache(0)
     {
     }
     
@@ -29,8 +29,8 @@ namespace path {
      * @param str A string representing a directory
      */
     Node::Node(const char *str)
-    : Path(str),
-    m_cache(0)
+        : Path(str),
+          m_cache(0)
     {
         if (!exists())
             throw PathException(path());
@@ -42,8 +42,8 @@ namespace path {
      * @param str A string representing a directory
      */
     Node::Node(const std::string &str)
-	: Path(Canonical(str)),
-    m_cache(0)
+        : Path(Canonical(str)),
+          m_cache(0)
     {
         if (!exists())
             throw PathException(path());
@@ -58,8 +58,8 @@ namespace path {
      * @param p Path to be copied from
      */
     Node::Node(const Path &p)
-    : Path(p),
-    m_cache(0)
+        : Path(p),
+          m_cache(0)
     {
         if (!exists())
             throw PathException(path());
@@ -75,8 +75,8 @@ namespace path {
      * @param rules PathRules to use to translate into a path name
      */
     Node::Node(const Canonical &can, const PathRules *rules)
-    : Path(can, rules),
-    m_cache(0)
+        : Path(can, rules),
+          m_cache(0)
     {
         if (!exists())
             throw PathException(path());
@@ -89,8 +89,8 @@ namespace path {
      * @param orig The Node being copied
      */
     Node::Node(const Node &orig)
-    : Path(orig),
-    m_cache(0)
+        : Path(orig),
+          m_cache(0)
     {
     }
 

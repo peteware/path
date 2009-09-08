@@ -38,7 +38,7 @@ namespace path {
         /// Unquote (dequote?) an element of path
         virtual std::string unquote(const std::string &path) const = 0;
     protected:
-        char		m_sep;							///< Seperator
+        char            m_sep;                                                  ///< Seperator
     };
 }
 #endif // !defined(_PATH_PATHRULES_H_)

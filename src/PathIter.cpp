@@ -14,10 +14,10 @@ namespace path {
      * end() iterator.
      */
     PathIter::PathIter()
-	: m_parent(0),
-    m_nodeList(),
-    m_current(-1),
-    m_recursive(false)
+        : m_parent(0),
+          m_nodeList(),
+          m_current(-1),
+          m_recursive(false)
     {
     }
     
@@ -25,10 +25,10 @@ namespace path {
      * @param copy The PathIter to copy
      */
     PathIter::PathIter(const PathIter &copy)
-    : m_parent(copy.m_parent),
-    m_nodeList(),
-    m_current(copy.m_current),
-    m_recursive(copy.m_recursive)
+        : m_parent(copy.m_parent),
+          m_nodeList(),
+          m_current(copy.m_current),
+          m_recursive(copy.m_recursive)
     {
         for (std::vector<Path *>::const_iterator iter = copy.m_nodeList.begin();
              iter != copy.m_nodeList.end(); ++iter)
@@ -43,10 +43,10 @@ namespace path {
      * @param node The Node this is going to iterate through
      */
     PathIter::PathIter(const Path &node)
-	: m_parent(&node),
-    m_nodeList(),
-    m_current(0),
-    m_recursive(false)
+        : m_parent(&node),
+          m_nodeList(),
+          m_current(0),
+          m_recursive(false)
     {
         addNodes(m_parent);
         if (size() == 0)
@@ -63,10 +63,10 @@ namespace path {
      * @param regexp This is a regular expression, not a shell pattern
      */
     PathIter::PathIter(const Path &node, const std::string & pattern, bool regexp)
-	: m_parent(&node),
-    m_nodeList(),
-    m_current(0),
-    m_recursive(false)
+        : m_parent(&node),
+          m_nodeList(),
+          m_current(0),
+          m_recursive(false)
     {
         addNodes(m_parent);
         if (size() == 0)
@@ -112,7 +112,7 @@ namespace path {
      */
     Path * PathIter::operator->()
     {
-        Path *	n = findNode(m_current);
+        Path *  n = findNode(m_current);
         return n;
     }
     
@@ -123,7 +123,7 @@ namespace path {
      */
     Path &PathIter::operator*()
     {
-        Path *	n = findNode(m_current);
+        Path *  n = findNode(m_current);
         return *n;
     }
     
@@ -135,26 +135,26 @@ namespace path {
     PathIter &PathIter::operator++()
     {
         if (m_current < 0 || m_current + 1 >= size())
-		{
+        {
             m_current = -1;
-			return *this;
-		}
-		while (++m_current < size())
-		{
-			Path *p = findNode(m_current);
+            return *this;
+        }
+        while (++m_current < size())
+        {
+            Path *p = findNode(m_current);
             if (m_recursive) 
             {
                 if (p && p->isDir())
                     addNodes(p);
             }
-			if (p && match(*p))
-				break;
-		}
-		if (m_current == size())
-		{
-			m_current = -1;
-		}
-		return *this;
+            if (p && match(*p))
+                break;
+        }
+        if (m_current == size())
+        {
+            m_current = -1;
+        }
+        return *this;
     }
 
     /**
@@ -179,8 +179,8 @@ namespace path {
      */
     bool PathIter::operator==(const PathIter & op2) const
     {
-		(void) findNode(m_current);
-		
+        (void) findNode(m_current);
+                
         // Most comparisons are non-end against end() so make sure that is fast.
         if (m_current != op2.m_current)
             return false;
@@ -205,20 +205,20 @@ namespace path {
         return !(*this == op2);
     }
 
-	/**
-	 * Add a Path to the list that we are traversing.  Creates
-	 * a new Path.  If the PathIter already reached
-	 * the end, then this gets added and the PathIter
-	 * can be incremented again.
-	 *
-	 * @param path The path added to end of list
-	 */
-	void PathIter::addPath(const Path &path)
-	{
-		m_nodeList.push_back(new Path(path));
-		if (m_current == -1)
-			m_current = size() - 1;
-	}
+    /**
+     * Add a Path to the list that we are traversing.  Creates
+     * a new Path.  If the PathIter already reached
+     * the end, then this gets added and the PathIter
+     * can be incremented again.
+     *
+     * @param path The path added to end of list
+     */
+    void PathIter::addPath(const Path &path)
+    {
+        m_nodeList.push_back(new Path(path));
+        if (m_current == -1)
+            m_current = size() - 1;
+    }
     
     /**
      * Traverse into each subdirectory.  Usually,
@@ -255,17 +255,17 @@ namespace path {
     }
 
 
-	/**
-	 * Check if this path matches the glob() pattern.  Uses the
-	 * Path::basename() to compare against
-	 *
-	 * @param path The path to match
-	 * @return true if it matches the pattern
-	 */
-	bool PathIter::match(const Path &path) const
-	{
-		return true;
-	}
+    /**
+     * Check if this path matches the glob() pattern.  Uses the
+     * Path::basename() to compare against
+     *
+     * @param path The path to match
+     * @return true if it matches the pattern
+     */
+    bool PathIter::match(const Path &path) const
+    {
+        return true;
+    }
 
     /**
      * @param index First is 0.  
@@ -287,7 +287,7 @@ namespace path {
         if (!node)
             return;
 
-        Strings	files = System.listdir(node->path());
+        Strings files = System.listdir(node->path());
         std::sort(files.begin(), files.end());
         for (Strings::iterator iter = files.begin(); iter != files.end(); ++iter)
         {

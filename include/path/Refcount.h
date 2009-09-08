@@ -45,24 +45,24 @@ namespace path {
      */
     template<typename Type>
     Refcount<Type>::Refcount()
-    : m_count(new int),
-    m_data(0)
+        : m_count(new int),
+          m_data(0)
     {
         *m_count = 0;
     }
     
     template<typename Type>
     Refcount<Type>::Refcount(Type *ptr)
-    : m_count (new int),
-    m_data(ptr)
+        : m_count (new int),
+          m_data(ptr)
     {
         *m_count = 1;
     }
     
     template<typename Type>
     Refcount<Type>::Refcount(const Refcount &ref)
-    : m_count(ref.m_count),
-    m_data(ref.m_data)
+        : m_count(ref.m_count),
+          m_data(ref.m_data)
     {
         IncReference();
     }

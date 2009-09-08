@@ -6,8 +6,8 @@
 namespace path 
 {
     NodeInfo::NodeInfo()
-    : m_size(0),
-    m_type(OTHER)
+        : m_size(0),
+          m_type(OTHER)
     {
     }
     

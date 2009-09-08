@@ -68,23 +68,23 @@ namespace path
                     start = false;
                     switch (*iter)
                     {
-                        case '(':
-                            match = ')';
-                            domatch = true;
-                            ++iter;
-                            continue;
-                        case '{':
-                            match = '}';
-                            domatch = true;
-                            ++iter;
-                            continue;
-                        case '[':
-                            match = ']';
-                            domatch = true;
-                            ++iter;
-                            continue;
-                        default:
-                            break;
+                    case '(':
+                        match = ')';
+                        domatch = true;
+                        ++iter;
+                        continue;
+                    case '{':
+                        match = '}';
+                        domatch = true;
+                        ++iter;
+                        continue;
+                    case '[':
+                        match = ']';
+                        domatch = true;
+                        ++iter;
+                        continue;
+                    default:
+                        break;
                     }
                 }
                 if (domatch)
@@ -130,8 +130,8 @@ namespace path
      */
     void split(const std::string &word, char sep, Strings &strings)
     {
-        std::string::size_type	start = 0;
-        std::string::size_type	end = 0;
+        std::string::size_type  start = 0;
+        std::string::size_type  end = 0;
         
         while (start < word.size() && end != std::string::npos)
         {

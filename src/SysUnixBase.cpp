@@ -24,7 +24,7 @@ namespace path {
     SysCalls &System = defSysUniBase;
     
     SysUnixBase::SysUnixBase()
-    : SysCalls()
+        : SysCalls()
     {
     }
     
@@ -71,23 +71,23 @@ namespace path {
     
     Strings SysUnixBase::listdir(const std::string &path) const
     {
-        Strings	dirs;
+        Strings dirs;
         
         DIR *dir = opendir(path.c_str());
         if (!dir)
             return dirs;
         
-        struct dirent	*entry_ptr;
-        struct dirent	entry;
+        struct dirent   *entry_ptr;
+        struct dirent   entry;
         while (readdir_r(dir, &entry, &entry_ptr) == 0) 
         {
             if (!entry_ptr)
                 break;
-#ifdef notdef
+            #ifdef notdef
             if ((entry.d_namlen == 1 || entry.d_namlen == 2) &&
                 (strcmp(entry.d_name, ".") == 0 || strcmp(entry.d_name, "..") == 0))
                 continue;
-#endif
+            #endif
             if (strcmp(entry.d_name, ".") == 0 || strcmp(entry.d_name, "..") == 0)
                 continue;
             dirs.push_back(entry.d_name);
@@ -116,22 +116,22 @@ namespace path {
         
         node->setSize(statbuf.st_size);
         switch (statbuf.st_mode & S_IFMT) {
-            case S_IFDIR:
-                type = NodeInfo::DIRECTORY;
-                break;
-            case S_IFREG:
-                type = NodeInfo::FILE;
-                break;
-            case S_IFLNK:
-                type = NodeInfo::SYMLINK;
-                break;
-            case S_IFCHR:
-            case S_IFBLK:
-                type = NodeInfo::DEVICE;
-                break;
-            default:
-                type = NodeInfo::OTHER;
-                break;
+        case S_IFDIR:
+            type = NodeInfo::DIRECTORY;
+            break;
+        case S_IFREG:
+            type = NodeInfo::FILE;
+            break;
+        case S_IFLNK:
+            type = NodeInfo::SYMLINK;
+            break;
+        case S_IFCHR:
+        case S_IFBLK:
+            type = NodeInfo::DEVICE;
+            break;
+        default:
+            type = NodeInfo::OTHER;
+            break;
         }
         node->setType(type);
         return node;

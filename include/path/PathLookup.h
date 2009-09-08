@@ -33,15 +33,15 @@ namespace path
         PathLookup();
         /// Add lookup paths to end
         void push_back(const Paths &paths);
-		/// Add lookup paths to the front
-		void push_front (const Paths &paths);
+        /// Add lookup paths to the front
+        void push_front (const Paths &paths);
         /// Return a copy of lookup paths
         Paths paths() const;
-		/// Clear the list of paths
-		void clear();
-		Path find (const std::string & path);
-		
-		
+        /// Clear the list of paths
+        void clear();
+        Path find (const std::string & path);
+                
+                
         /// AddIter()
         /// AddPath()
         /// AddPath+recursive flag?

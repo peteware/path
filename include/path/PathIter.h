@@ -59,12 +59,12 @@ namespace path {
         PathIter &operator++();
         /// Postfix increment
         PathIter PathIter::operator++(int);
-		/// Add another element to the iter
-		void addPath(const Path &path);
+        /// Add another element to the iter
+        void addPath(const Path &path);
         /// Make this a recursive iterator
         PathIter & setRecursive();
-		/// Check if matches against pattern
-		bool match(const Path &path) const;
+        /// Check if matches against pattern
+        bool match(const Path &path) const;
 
     private:
         /// Returns the node this iterator is referencing
@@ -78,7 +78,7 @@ namespace path {
         /// List of subdirs
         std::vector<Path *> m_nodeList;
         /// Current index
-        int			m_current;
+        int                     m_current;
         /// Traverse subdirectories, too
         bool        m_recursive;
     };

@@ -39,7 +39,7 @@ namespace path {
         /// Assignment operator
         Node &operator=(const Node &op2);       
 
-#ifdef notdef
+        #ifdef notdef
         /// Return basic info about the Node (size, type, etc).
         const NodeInfo &info() const;
         /// Return the size in bytes of this file
@@ -48,7 +48,7 @@ namespace path {
         bool exists() const;
         /// Return if this is a directory
         bool isDir() const;
-#endif
+        #endif
         /// Resolve symbolic links, etc
         Node realpath() const;
         

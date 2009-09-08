@@ -12,12 +12,12 @@ namespace path
      * Sets everything to be empty and this to be a relative path.
      */
     Canonical::Canonical()
-	: m_protocol(),
-    m_host(),	  
-    m_extra(),
-    m_drive(),
-    m_abs(false),
-    m_components()
+        : m_protocol(),
+          m_host(),     
+          m_extra(),
+          m_drive(),
+          m_abs(false),
+          m_components()
     
     {
     }
@@ -26,12 +26,12 @@ namespace path
      * @param copy Provides the protocol, host, and component info
      */
     Canonical::Canonical(const Canonical &copy)
-	: m_protocol(copy.m_protocol),
-    m_host(copy.m_host),
-    m_extra(copy.m_extra),
-    m_drive(copy.m_drive),
-    m_abs(copy.m_abs),
-    m_components(copy.m_components)
+        : m_protocol(copy.m_protocol),
+          m_host(copy.m_host),
+          m_extra(copy.m_extra),
+          m_drive(copy.m_drive),
+          m_abs(copy.m_abs),
+          m_components(copy.m_components)
     {
     }
     
@@ -42,12 +42,12 @@ namespace path
      * @param components Replaces that path from copy
      */
     Canonical::Canonical(const Canonical &copy, const Strings &components)
-	: m_protocol(copy.m_protocol),
-    m_host(copy.m_host),
-    m_extra(copy.m_extra),
-    m_drive(copy.m_drive),
-    m_abs(copy.m_abs),
-    m_components(components)
+        : m_protocol(copy.m_protocol),
+          m_host(copy.m_host),
+          m_extra(copy.m_extra),
+          m_drive(copy.m_drive),
+          m_abs(copy.m_abs),
+          m_components(components)
     {
     }
     
@@ -57,12 +57,12 @@ namespace path
      * @param dir1 First directory
      */
     Canonical::Canonical(const std::string &dir1)
-	: m_protocol(),
-    m_host(),	  
-    m_extra(),
-    m_drive(),
-    m_abs(false),
-    m_components()
+        : m_protocol(),
+          m_host(),     
+          m_extra(),
+          m_drive(),
+          m_abs(false),
+          m_components()
     
     {
         add(dir1);
@@ -75,12 +75,12 @@ namespace path
      * @param dir2 First directory
      */
     Canonical::Canonical(const std::string &dir1, const std::string &dir2)
-	: m_protocol(),
-    m_host(),	  
-    m_extra(),
-    m_drive(),
-    m_abs(false),
-    m_components()
+        : m_protocol(),
+          m_host(),     
+          m_extra(),
+          m_drive(),
+          m_abs(false),
+          m_components()
     
     {
         add(dir1).add(dir2);
@@ -94,12 +94,12 @@ namespace path
      * @param dir3 Third directory
      */
     Canonical::Canonical(const std::string &dir1, const std::string &dir2, const std::string &dir3)
-	: m_protocol(),
-    m_host(),	  
-    m_extra(),
-    m_drive(),
-    m_abs(false),
-    m_components()
+        : m_protocol(),
+          m_host(),     
+          m_extra(),
+          m_drive(),
+          m_abs(false),
+          m_components()
     
     {
         add(dir1).add(dir2).add(dir3);
@@ -113,12 +113,12 @@ namespace path
      * @param dir4 Third directory
      */
     Canonical::Canonical(const std::string &dir1, const std::string &dir2, const std::string &dir3, const std::string &dir4)
-	: m_protocol(),
-    m_host(),	  
-    m_extra(),
-    m_drive(),
-    m_abs(false),
-    m_components()
+        : m_protocol(),
+          m_host(),     
+          m_extra(),
+          m_drive(),
+          m_abs(false),
+          m_components()
     
     {
         add(dir1).add(dir2).add(dir3).add(dir4);
@@ -293,7 +293,7 @@ namespace path
      * Technically, even filesystem pathnames are 
      * relative to the current working directory.
      *
-     * @param abs	If this path starts at root
+     * @param abs       If this path starts at root
      * @return A reference to this object
      */
     Canonical & Canonical::setAbs(bool abs)
@@ -319,7 +319,7 @@ namespace path
  * This prints out the path to look like
  * a URI:
  * @code
- *	http://www.pete.ware/a/b/c
+ *      http://www.pete.ware/a/b/c
  * @endcode
  * or more generally:
  * @code
@@ -339,16 +339,16 @@ std::ostream &
 operator<<(std::ostream &out, const path::Canonical &canon)
 {
     bool    seperator = true;
-	if (!canon.protocol().empty())
-		out << canon.protocol() << ':';
-	if (!canon.host().empty())
+    if (!canon.protocol().empty())
+        out << canon.protocol() << ':';
+    if (!canon.host().empty())
     {
-		out << "//" << canon.host();
+        out << "//" << canon.host();
         seperator = false;
     }
-	if (!canon.extra().empty())
+    if (!canon.extra().empty())
     {
-		out << ":" << canon.extra();
+        out << ":" << canon.extra();
         seperator = false;
     }
     if (!seperator)
@@ -360,10 +360,10 @@ operator<<(std::ostream &out, const path::Canonical &canon)
     }
     if (canon.abs())
         out << '/';
-	std::copy(canon.components().begin(),
+    std::copy(canon.components().begin(),
               canon.components().end(),
               std::ostream_iterator<std::string>(out, "/"));
-	return out;
+    return out;
 }
 
 /**

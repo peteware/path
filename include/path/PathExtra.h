@@ -37,7 +37,7 @@ namespace path {
          */
         std::string *           m_path;
         /// These are the rules we use for this path; may be NULL
-        const PathRules *		m_rules;
+        const PathRules *               m_rules;
         /// The path in canonical form; may be NULL
         Canonical *m_canon;
         /// Cached value path converted by path();

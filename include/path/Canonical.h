@@ -53,17 +53,17 @@ namespace path
         /// Set the protocol (e.g. "http")
         Canonical &  setProtocol(const std::string &proto);
         /// Return the protocol string (may be empty)
-        const std::string &	protocol() const;
+        const std::string &     protocol() const;
         
         /// Set the hostname (e.g. "www.peteware.com")
         Canonical & setHost(const std::string &host);
         /// Return the host string (may be empty)
-        const std::string &	host() const;
+        const std::string &     host() const;
         
         /// Set the extra part (e.g. "8080")
         Canonical &  setExtra(const std::string &extra);
         /// Return the extra string (may be empty)
-        const std::string &	extra() const;
+        const std::string &     extra() const;
         
         /// Set the drive letter (e.g. "C")
         Canonical &  setDrive(const std::string &drive);
@@ -81,7 +81,7 @@ namespace path
         /// Set if this is an absolute path
         Canonical & setAbs(bool abs);
         /// Return if this is an absolute path
-        bool	abs() const;
+        bool    abs() const;
         
     protected:
         /**
@@ -89,9 +89,9 @@ namespace path
          */
         std::string m_protocol;
         std::string m_host;     ///< Host (e.g. peteware.com); May be empty
-        std::string m_extra;	///< Extra (e.g. 8080); may be empty
+        std::string m_extra;    ///< Extra (e.g. 8080); may be empty
         std::string m_drive;    ///< Drive letter (e.g. C); may be empty
-        bool		m_abs;      ///< Is path absolute?
+        bool            m_abs;      ///< Is path absolute?
         /**
          * Each individual path component.
          * 
