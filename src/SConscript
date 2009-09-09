@@ -1,6 +1,6 @@
 # -*- python -*-
 
-env = Environment (CCFLAGS = ['-g', '-Wall', '-O3'],
+env = Environment (CCFLAGS = ['-g', '-Wall', '-O3', '-DLINUX'],
                    CPPPATH = ['#include'])
 #env = Environment (CPPFLAGS = '/EHsc')
 env.Library('path',

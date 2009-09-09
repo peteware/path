@@ -5,14 +5,18 @@
 #include <path/PathException.h>
 #include <path/NodeInfo.h>
 #include <path/UnixRules.h>
+#include <path/Unimplemented.h>
 
-#include <dirent.h>
 #include <errno.h>
+
+#ifdef LINUX
+#include <dirent.h>
 #include <fcntl.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/param.h>
+#endif
 
 extern "C" {
     extern char **environ;
@@ -42,35 +46,52 @@ namespace path {
     
     void SysUnixBase::mkdir(const std::string & dir, int mode) const
     {
+#ifdef LINUX
         int status = ::mkdir(dir.c_str(), mode);
         if (status < 0)
             throw PathException(dir, errno);
+#else
+		throw Unimplemented ("SysUnixBase::mkdir");
+#endif		
     }
     
     void SysUnixBase::rmdir(const std::string & dir) const
     {
+#ifdef LINUX
         int status = ::rmdir(dir.c_str());
         if (status < 0)
             throw PathException(dir, errno);
+#else
+		throw Unimplemented ("SysUnixBase::rmdir");
+#endif		
     }
     
     void SysUnixBase::touch(const std::string &file, int mode) const
     {
+#ifdef LINUX
         int fd = ::open(file.c_str(), O_WRONLY|O_CREAT, mode);
         if (fd < 0)
             throw PathException(file, errno);
         (void) ::close(fd);
+#else
+		throw Unimplemented ("SysUnixBase::touch");
+#endif		
     }
     
     void SysUnixBase::remove(const std::string &file) const
     {
+#ifdef LINUX
         int status = ::unlink(file.c_str());
         if (status < 0)
             throw PathException(file, errno);
+#else
+		throw Unimplemented ("SysUnixBase::remove");
+#endif		
     }
     
     Strings SysUnixBase::listdir(const std::string &path) const
     {
+#ifdef LINUX
         Strings dirs;
         
         DIR *dir = opendir(path.c_str());
@@ -94,6 +115,9 @@ namespace path {
         }
         closedir(dir);
         return dirs;
+#else
+		throw Unimplemented ("SysUnixBase::listdir");
+#endif		
     }
     
     /**
@@ -106,6 +130,7 @@ namespace path {
      */
     NodeInfo * SysUnixBase::stat(const std::string & path) const 
     {
+#ifdef LINUX
         struct stat     statbuf;
         NodeInfo *node = 0;
         NodeInfo::Type type = NodeInfo::OTHER;
@@ -135,23 +160,35 @@ namespace path {
         }
         node->setType(type);
         return node;
+#else
+		throw Unimplemented ("SysUnixBase::stat");
+#endif		
     }
     
     bool SysUnixBase::exists(const std::string &path) const
     {
+#ifdef LINUX
         return (::access(path.c_str(), F_OK) >= 0);
+#else
+		throw Unimplemented ("SysUnixBase::exists");
+#endif		
     }
     
     std::string SysUnixBase::getcwd() const
     {
+#ifdef LINUX
         char        buf[MAXPATHLEN];
         
         ::getcwd(buf, sizeof(buf));
         return std::string(buf);
+#else
+		throw Unimplemented ("SysUnixBase::getcwd");
+#endif		
     }
     
     StringMap &SysUnixBase::env() const
     {
+#ifdef LINUX
         if (!m_env)
         {
             m_env = new StringMap();
@@ -168,5 +205,8 @@ namespace path {
             }
         }
         return *m_env;
+#else
+		throw Unimplemented ("SysUnixBase::env");
+#endif		
     }
 }
