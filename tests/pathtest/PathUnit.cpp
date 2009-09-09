@@ -255,9 +255,10 @@ void PathUnit::testadd()
     CPPUNIT_ASSERT_EQUAL(Path("x"), p1);
 
     Path     header(UnixPath("/a/b/file.h"));
-    Path     src = header.dirname() + header.stem() + ".C";
+    Path     src = header.dirname() + header.stem() & ".C";
     Path     backup = header & ".bak";
-    Path     backup3 = header.dirname() + header.stem() & ".bak" & header.suffix());
+    Path     backup3 = header.dirname() + header.stem() & ".bak"
+                        & header.extension();
     CPPUNIT_ASSERT_EQUAL (Path (UnixPath ("/a/b/file.C")), src);
     CPPUNIT_ASSERT_EQUAL (Path (UnixPath ("/a/b/file.h.bak")), backup);
     CPPUNIT_ASSERT_EQUAL (Path (UnixPath ("/a/b/file.bak.h")), backup3);

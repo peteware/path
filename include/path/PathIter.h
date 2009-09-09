@@ -58,7 +58,7 @@ namespace path {
         /// Prefix increment
         PathIter &operator++();
         /// Postfix increment
-        PathIter PathIter::operator++(int);
+        PathIter operator++(int);
         /// Add another element to the iter
         void addPath(const Path &path);
         /// Make this a recursive iterator

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 44;
+	objectVersion = 46;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -46,7 +46,6 @@
 		506939C50D88728E00E050F1 /* UnixRules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140D0CE2B3E300ADA70C /* UnixRules.cpp */; };
 		506939C60D88728E00E050F1 /* UriRules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140E0CE2B3E300ADA70C /* UriRules.cpp */; };
 		506939C70D88728E00E050F1 /* Win32Rules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5009140F0CE2B3E300ADA70C /* Win32Rules.cpp */; };
-		50693A220D8873C500E050F1 /* libcppunit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5009152A0CE5238000ADA70C /* libcppunit.a */; };
 		50693A270D8873F100E050F1 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914860CE333AE00ADA70C /* main.cpp */; };
 		50693A280D8873F100E050F1 /* CanonicalUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914850CE333AE00ADA70C /* CanonicalUnit.cpp */; };
 		50693A290D8873F100E050F1 /* NodeUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 500914870CE333AE00ADA70C /* NodeUnit.cpp */; };
@@ -61,6 +60,7 @@
 		50B9744A0D8DA9F800E8B628 /* Strings.h in Headers */ = {isa = PBXBuildFile; fileRef = 50B974490D8DA9F800E8B628 /* Strings.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		50C967880DA42FF3004E7B67 /* SysUnixBase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50C967870DA42FF3004E7B67 /* SysUnixBase.cpp */; };
 		50C9678A0DA4300B004E7B67 /* SysUnixBase.h in Headers */ = {isa = PBXBuildFile; fileRef = 50C967890DA4300B004E7B67 /* SysUnixBase.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		50CADCBF10573F39009BE2B9 /* libcppunit.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 50CADCBE10573F39009BE2B9 /* libcppunit.dylib */; };
 		50D354700E0C7E59007E1CF6 /* PathLookup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 50D3546F0E0C7E59007E1CF6 /* PathLookup.cpp */; };
 		50D354720E0C7EA3007E1CF6 /* PathLookup.h in Headers */ = {isa = PBXBuildFile; fileRef = 50D354710E0C7EA3007E1CF6 /* PathLookup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -122,7 +122,6 @@
 		500914890CE333AE00ADA70C /* PathUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = PathUnit.cpp; path = tests/pathtest/PathUnit.cpp; sourceTree = "<group>"; };
 		5009148B0CE333AE00ADA70C /* SysCallsUnit.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = SysCallsUnit.cpp; path = tests/pathtest/SysCallsUnit.cpp; sourceTree = "<group>"; };
 		500914CE0CE3F37900ADA70C /* pathtest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "pathtest-Info.plist"; sourceTree = "<group>"; };
-		5009152A0CE5238000ADA70C /* libcppunit.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcppunit.a; path = /usr/local/lib/libcppunit.a; sourceTree = "<absolute>"; };
 		500948620D665356000B393F /* UnixRulesUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = UnixRulesUnit.cpp; path = tests/pathtest/UnixRulesUnit.cpp; sourceTree = "<group>"; };
 		5009487C0D6656AC000B393F /* PathRulesUnit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathRulesUnit.h; path = tests/pathtest/PathRulesUnit.h; sourceTree = "<group>"; };
 		500948B30D6EF039000B393F /* Win32RulesUnit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Win32RulesUnit.cpp; path = tests/pathtest/Win32RulesUnit.cpp; sourceTree = "<group>"; };
@@ -140,6 +139,7 @@
 		50B974490D8DA9F800E8B628 /* Strings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Strings.h; path = include/path/Strings.h; sourceTree = "<group>"; };
 		50C967870DA42FF3004E7B67 /* SysUnixBase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SysUnixBase.cpp; path = src/SysUnixBase.cpp; sourceTree = "<group>"; };
 		50C967890DA4300B004E7B67 /* SysUnixBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SysUnixBase.h; path = include/path/SysUnixBase.h; sourceTree = "<group>"; };
+		50CADCBE10573F39009BE2B9 /* libcppunit.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcppunit.dylib; path = /usr/local/lib/libcppunit.dylib; sourceTree = "<absolute>"; };
 		50D3546F0E0C7E59007E1CF6 /* PathLookup.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PathLookup.cpp; path = src/PathLookup.cpp; sourceTree = "<group>"; };
 		50D354710E0C7EA3007E1CF6 /* PathLookup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PathLookup.h; path = include/path/PathLookup.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -156,8 +156,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50693A220D8873C500E050F1 /* libcppunit.a in Frameworks */,
 				50B973F90D8D897800E8B628 /* libpath.a in Frameworks */,
+				50CADCBF10573F39009BE2B9 /* libcppunit.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,11 +175,11 @@
 		08FB7794FE84155DC02AAC07 /* path */ = {
 			isa = PBXGroup;
 			children = (
-				5009152A0CE5238000ADA70C /* libcppunit.a */,
 				08FB7795FE84155DC02AAC07 /* Source */,
 				C6859E8C029090F304C91782 /* Documentation */,
 				1AB674ADFE9D54B511CA2CBB /* Products */,
 				500914CE0CE3F37900ADA70C /* pathtest-Info.plist */,
+				50CADCBE10573F39009BE2B9 /* libcppunit.dylib */,
 			);
 			name = path;
 			sourceTree = "<group>";
@@ -385,7 +385,7 @@
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "path" */;
-			compatibilityVersion = "Xcode 3.0";
+			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 1;
 			mainGroup = 08FB7794FE84155DC02AAC07 /* path */;
 			projectDirPath = "";
@@ -471,25 +471,21 @@
 		1DEB923608733DC60010E9CD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.4;
-				PREBINDING = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
 		1DEB923708733DC60010E9CD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					ppc,
-					i386,
-				);
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				PREBINDING = NO;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.5.sdk";
+				HEADER_SEARCH_PATHS = /usr/local/include;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Release;
 		};
@@ -497,12 +493,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(NATIVE_ARCH)";
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = include;
 				INSTALL_PATH = /usr/local/lib;
 				ONLY_ACTIVE_ARCH = YES;
@@ -518,16 +512,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/lib;
 				PREBINDING = NO;
 				PRODUCT_NAME = path;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -535,22 +524,13 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
-				ARCHS = "$(NATIVE_ARCH)";
 				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
 				HEADER_SEARCH_PATHS = (
 					.,
 					/usr/local/include,
 				);
 				INSTALL_PATH = /usr/local/bin;
-				ONLY_ACTIVE_ARCH = YES;
-				PREBINDING = NO;
 				PRODUCT_NAME = pathtest;
-				SCAN_ALL_SOURCE_FILES_FOR_INCLUDES = YES;
-				SDKROOT = "$(DEVELOPER_SDK_DIR)/MacOSX10.4u.sdk";
 			};
 			name = Debug;
 		};
@@ -558,16 +538,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_MODEL_TUNING = G5;
 				INSTALL_PATH = /usr/local/bin;
-				PREBINDING = NO;
 				PRODUCT_NAME = pathtest;
-				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -575,14 +549,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ONLY_ACTIVE_ARCH_PRE_XCODE_3_1)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INSTALL_PATH = /usr/local/bin;
-				ONLY_ACTIVE_ARCH_PRE_XCODE_3_1 = "$(NATIVE_ARCH)";
+				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
 				PRODUCT_NAME = search;
 			};
@@ -592,8 +566,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1)";
-				ARCHS_STANDARD_32_BIT_PRE_XCODE_3_1 = "ppc i386";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
@@ -615,7 +588,7 @@
 				1DEB923708733DC60010E9CD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		506939A40D88721600E050F1 /* Build configuration list for PBXNativeTarget "path" */ = {
 			isa = XCConfigurationList;
@@ -624,7 +597,7 @@
 				506939A30D8871F300E050F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		50693A260D8873E800E050F1 /* Build configuration list for PBXNativeTarget "pathtest" */ = {
 			isa = XCConfigurationList;
@@ -633,7 +606,7 @@
 				50693A210D8873B400E050F1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		507833F80D96CA460011FC60 /* Build configuration list for PBXNativeTarget "search" */ = {
 			isa = XCConfigurationList;
@@ -642,7 +615,7 @@
 				507833F70D96CA190011FC60 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
