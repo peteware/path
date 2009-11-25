@@ -6,6 +6,23 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		50523D4710BD639100AAFDC0 /* All */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 50523D5010BD63CE00AAFDC0 /* Build configuration list for PBXAggregateTarget "All" */;
+			buildPhases = (
+				50523D6710BD66E300AAFDC0 /* run pathtest */,
+			);
+			dependencies = (
+				50523D4B10BD63A500AAFDC0 /* PBXTargetDependency */,
+				50523D4D10BD63AB00AAFDC0 /* PBXTargetDependency */,
+				50523D4F10BD63B000AAFDC0 /* PBXTargetDependency */,
+			);
+			name = All;
+			productName = All;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
 		500C69B00D9C858200E865F0 /* libpath.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 506939A10D8871F300E050F1 /* libpath.a */; };
 		501690870DBE0B0B0086F5CA /* ExpandUnit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 501690860DBE0B0B0086F5CA /* ExpandUnit.cpp */; };
@@ -72,6 +89,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 506939A00D8871F300E050F1;
 			remoteInfo = path;
+		};
+		50523D4A10BD63A500AAFDC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 506939A00D8871F300E050F1 /* path */;
+			remoteInfo = path;
+		};
+		50523D4C10BD63AB00AAFDC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50693A1D0D8873B300E050F1 /* pathtest */;
+			remoteInfo = pathtest;
+		};
+		50523D4E10BD63B000AAFDC0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 08FB7793FE84155DC02AAC07 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 507833F30D96CA180011FC60 /* search */;
+			remoteInfo = search;
 		};
 		50693A230D8873CA00E050F1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -384,6 +422,10 @@
 /* Begin PBXProject section */
 		08FB7793FE84155DC02AAC07 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				ORGANIZATIONNAME = "Pete Ware, Inc";
+			};
 			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "path" */;
 			compatibilityVersion = "Xcode 3.2";
 			hasScannedForEncodings = 1;
@@ -394,9 +436,28 @@
 				506939A00D8871F300E050F1 /* path */,
 				50693A1D0D8873B300E050F1 /* pathtest */,
 				507833F30D96CA180011FC60 /* search */,
+				50523D4710BD639100AAFDC0 /* All */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		50523D6710BD66E300AAFDC0 /* run pathtest */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			comments = "Runs unit tests";
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "run pathtest";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$TARGET_BUILD_DIR/pathtest\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5069399E0D8871F300E050F1 /* Sources */ = {
@@ -460,6 +521,21 @@
 			target = 506939A00D8871F300E050F1 /* path */;
 			targetProxy = 500C69AB0D9C853A00E865F0 /* PBXContainerItemProxy */;
 		};
+		50523D4B10BD63A500AAFDC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 506939A00D8871F300E050F1 /* path */;
+			targetProxy = 50523D4A10BD63A500AAFDC0 /* PBXContainerItemProxy */;
+		};
+		50523D4D10BD63AB00AAFDC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50693A1D0D8873B300E050F1 /* pathtest */;
+			targetProxy = 50523D4C10BD63AB00AAFDC0 /* PBXContainerItemProxy */;
+		};
+		50523D4F10BD63B000AAFDC0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 507833F30D96CA180011FC60 /* search */;
+			targetProxy = 50523D4E10BD63B000AAFDC0 /* PBXContainerItemProxy */;
+		};
 		50693A240D8873CA00E050F1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 506939A00D8871F300E050F1 /* path */;
@@ -486,6 +562,27 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = /usr/local/include;
 				ONLY_ACTIVE_ARCH = YES;
+			};
+			name = Release;
+		};
+		50523D4810BD639200AAFDC0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = All;
+			};
+			name = Debug;
+		};
+		50523D4910BD639200AAFDC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = All;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -525,6 +622,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = YES;
 				COPY_PHASE_STRIP = NO;
+				GCC_OPTIMIZATION_LEVEL = 1;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				HEADER_SEARCH_PATHS = (
 					.,
 					/usr/local/include,
@@ -555,6 +654,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				INSTALL_PATH = /usr/local/bin;
 				ONLY_ACTIVE_ARCH = YES;
 				PREBINDING = NO;
@@ -586,6 +686,15 @@
 			buildConfigurations = (
 				1DEB923608733DC60010E9CD /* Debug */,
 				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		50523D5010BD63CE00AAFDC0 /* Build configuration list for PBXAggregateTarget "All" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				50523D4810BD639200AAFDC0 /* Debug */,
+				50523D4910BD639200AAFDC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

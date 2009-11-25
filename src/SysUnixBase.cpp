@@ -8,7 +8,7 @@
 #include <path/Unimplemented.h>
 
 #include <errno.h>
-
+#define LINUX
 #ifdef LINUX
 #include <dirent.h>
 #include <fcntl.h>

@@ -54,7 +54,7 @@ namespace path
             std::string var;
 			std::string fullname;				// used to avoid recursion
 
-			fullname += *iter;
+			fullname += *iter; // Includes the '$'
             ++iter;
             // Treat $$ as an escape for a single '$'
             if (iter != str.end() && *iter == intro) 
@@ -77,17 +77,17 @@ namespace path
                     case '(':
                         match = ')';
                         domatch = true;
-                        ++iter;
+                        fullname += *iter++;
                         continue;
                     case '{':
                         match = '}';
                         domatch = true;
-                        ++iter;
+                        fullname += *iter++;
                         continue;
                     case '[':
                         match = ']';
                         domatch = true;
-                        ++iter;
+                        fullname += *iter++;
                         continue;
                     default:
                         break;
@@ -95,17 +95,15 @@ namespace path
                 }
                 if (domatch)
                 {
+                    // We've found the terminating parenthesis
                     if (*iter == match)
                     {
 						fullname += *iter++;
                         domatch = false;
                         break;
                     }
-                    else
-                    {
-						fullname += *iter;
-                        var += *iter++;
-                    }
+					fullname += *iter;
+                    var += *iter++;
                 }
                 else if (isalnum(*iter) || *iter == '_')
                 {

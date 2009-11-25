@@ -1,3 +1,5 @@
 build
 doc/doc
 .sconsign*
+path.xcodeproj/ware.*
+.DS_Store
