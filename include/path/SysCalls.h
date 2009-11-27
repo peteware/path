@@ -16,10 +16,11 @@ namespace path {
     
     /**
      * This is the object you should reference for making all System calls.  On a given
-     * build (machine) this gets initialized by exactly one of the classes
+     * This gets initialized by exactly one of the classes
      * derived from SysCalls.  It's done at compile time.
      *
-     * Examples of other SysCalls are: SysWin32, SysLinux, SysMacOS, etc.  
+     * Examples of other classes derived from SysCalls are: 
+     * SysWin32, SysUnixBase, SysMacOS, etc.
      */
     extern SysCalls &System;
     
@@ -27,6 +28,22 @@ namespace path {
      * @class SysCalls path/SysCalls.h
      * Implements the basic set of system calls to create, remove and traverse
      * directories.
+     *
+     * These all take std::string as an argument and not a Path -- the
+     * intention is these are pretty low level calls and should
+     * use not be dependent on Path.
+     *
+     * Here are some ways to use these in a system independent way:
+     *
+     * @code
+     * Path   p;
+     * // ...
+     * if (!System.exists (p.path())
+     * {
+     *   std::cerr << "Creating file " << p.str() << std::endl;
+     *   System.touch (p.path());
+     * }
+     * @endcode
      */
     class SysCalls
     {
