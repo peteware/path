@@ -34,9 +34,9 @@ namespace path {
         /// Convert a raw path (aka a string) into Canonical
         virtual Canonical canonical(const std::string &path) const = 0;
         /// Quote an element of path
-        virtual std::string quote(const std::string & subdir) const = 0;
+        virtual bool quote(const std::string & subdir, std::string *dest) const = 0;
         /// Unquote (dequote?) an element of path
-        virtual std::string unquote(const std::string &path) const = 0;
+        virtual bool unquote(const std::string &path, std::string *dest) const = 0;
     protected:
         char            m_sep;                                                  ///< Seperator
     };

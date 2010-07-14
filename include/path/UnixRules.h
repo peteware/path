@@ -18,8 +18,8 @@ namespace path {
         virtual ~UnixRules();
         
         virtual Canonical   canonical(const std::string &path) const;
-        virtual std::string quote(const std::string & path) const;
-        virtual std::string unquote(const std::string &subdir) const;
+        virtual bool quote(const std::string & path, std::string *dest) const;
+        virtual bool unquote(const std::string &subdir, std::string *dest) const;
         
         static UnixRules        rules;
         
