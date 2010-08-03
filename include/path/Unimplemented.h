@@ -1,4 +1,4 @@
-/**  
+/**
  * @file Unimplemented.h
  */
 #if !defined(_PATH_UNIMPLEMENTED_H_)
@@ -8,17 +8,17 @@
 #include <string>
 
 namespace path {
-    /**
-     * @class Unimplemented path/Unimplemented.h
-     * The operation is not implemented.
-     * 
-     */
-    class Unimplemented : public Exception
-    {
-    public:
-        Unimplemented(const std::string &operation);
-        virtual ~Unimplemented() throw();
-    private:
-    };
+/**
+ * @class Unimplemented path/Unimplemented.h
+ * The operation is not implemented.
+ *
+ */
+class Unimplemented : public Exception
+{
+public:
+    Unimplemented(const std::string &operation);
+    virtual ~Unimplemented() throw();
+private:
+};
 }
 #endif // !defined(_PATH_UNIMPLEMENTED_H_)

@@ -34,19 +34,20 @@ PathRules::~PathRules()
  */
 std::string PathRules::str(const Canonical &canon) const
 {
-    std::string     p;
+    std::string     pathStr
+    ;
     if (!canon.protocol().empty())
     {
-        p += canon.protocol() + ":";
+        pathStr += canon.protocol() + ":";
         if (!canon.host().empty())
-            p += "//" + canon.host() + "/";
+            pathStr += "//" + canon.host() + "/";
     }
     if (!canon.drive().empty())
     {
-        p += canon.drive() + ":";
+        pathStr += canon.drive() + ":";
     }
     if (canon.abs())
-        p += m_sep;
+        pathStr += m_sep;
     bool first = true;
     for (Strings::const_iterator iter = canon.components().begin();
          iter != canon.components().end(); ++iter)
@@ -54,10 +55,17 @@ std::string PathRules::str(const Canonical &canon) const
         if (first)
             first = false;
         else
-            p += m_sep;
-        p += quote(*iter);
+            pathStr += m_sep;
+        if (!quote(*iter, 0))
+            pathStr += *iter;
+        else 
+        {
+            std::string quoteStr;
+            //quote(*iter, &quoteStr);
+            pathStr += quoteStr;
+        }
     }
-    return p;
+    return pathStr;
 }
 
 /**

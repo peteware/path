@@ -26,7 +26,7 @@ struct Glob::Pattern
         char        m_last;
         char *      m_List;
     };
-}
+};
 
 /**
  * @param pattern The csh-style file pattern
@@ -41,7 +41,7 @@ Glob::Glob (const std::string &pattern)
  * @param copy The Glob object to copy
  */
 Glob::Glob (const Glob &copy)
-    : m_pattern (copy.m_pattern)
+    : m_pattern (copy.m_pattern),
       m_compiled (0)
 {
 }

@@ -3,7 +3,7 @@
  */
 #include <path/UriRules.h>
 #include <path/Canonical.h>
-//#include <path/Path.h>
+#include <path/Unimplemented.h>
 
 namespace path {
 UriRules::UriRules()

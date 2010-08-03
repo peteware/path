@@ -132,8 +132,9 @@ std::string expand(const std::string &str, const StringMap &vars, bool tilde)
 }
 
 /**
- * Calling this with "//abc/d/e//" would return a vector of
+ * Calling this with "//abc/d/e//" returns a vector of
  * "", "", "abc", "d", "e", "", ""
+ *
  * @param word The string to split
  * @param sep The character to use to split the path
  * @param strings vector of strings that each component is push_back()'d on

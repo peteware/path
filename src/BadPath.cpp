@@ -5,18 +5,18 @@
  */
 #include <path/BadPath.h>
 
-namespace path 
+namespace path
 {
-    
-    BadPath::BadPath()
+
+BadPath::BadPath()
     : PathException()
-    {
-        
-    }
-    
-    BadPath::~BadPath() throw()
-    {
-        
-    }
-    
+{
+
+}
+
+BadPath::~BadPath() throw()
+{
+
+}
+
 }

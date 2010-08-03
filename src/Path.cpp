@@ -529,7 +529,7 @@ PathRules * Path::setDefaultPathRules(PathRules * rules)
  * returns.
  *
  * Uses System.rules() if s_defaultPathRules is NULL.  System
- * is usually initialized at compile time to refer to the
+ * is initialized at compile time to refer to the
  * SysCalls used by this particular machine.
  */
 const PathRules * Path::defaultPathRules()

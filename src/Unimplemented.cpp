@@ -6,13 +6,13 @@
 #include <path/Unimplemented.h>
 
 namespace path {
-    
-    Unimplemented::Unimplemented(const std::string &operation)
-        : Exception(operation)
-    {
-    }
-    
-    Unimplemented::~Unimplemented() throw()
-    {
-    }
+
+Unimplemented::Unimplemented(const std::string &operation)
+    : Exception(operation)
+{
+}
+
+Unimplemented::~Unimplemented() throw()
+{
+}
 }

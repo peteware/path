@@ -6,14 +6,14 @@
 #include <path/Permission.h>
 
 namespace path {
-    
-    Permission::Permission()
-    {
-        
-    }
-    
-    Permission::~Permission() throw()
-    {
-        
-    }
+
+Permission::Permission()
+{
+
+}
+
+Permission::~Permission() throw()
+{
+
+}
 }

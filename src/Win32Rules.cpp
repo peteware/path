@@ -63,7 +63,7 @@ bool Win32Rules::quote(const std::string & path, std::string *dest) const
 bool Win32Rules::unquote(const std::string & subdir, std::string *dest) const
 {
     if (dest)
-        *dest = path;
+        *dest = subdir;
     return false;
 }
 

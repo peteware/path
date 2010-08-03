@@ -59,7 +59,7 @@ bool UnixRules::quote(const std::string & subdir, std::string *dest) const
 {
     if (subdir.find ("/") == std::string::npos)
     {
-        if (&subdir != dest && dest)
+        if (dest && dest != &subdir)
             *dest = subdir;
         return false;
     }
@@ -83,17 +83,17 @@ bool UnixRules::quote(const std::string & subdir, std::string *dest) const
         }
     }
     *dest = q;
-    return quoted;
+    return true;
 }
 
-bool UnixRules::unquote(const std::string &subdir, std::string *dest) const
+bool UnixRules::unquote(const std::string &p, std::string *dest) const
 {
     int state = 0;
 
-    if (subdir.find ("_!_") == std::string::npos)
+    if (p.find ("_!_") == std::string::npos)
     {
-        if (&subdir != dest && dest)
-            *dest = subdir;
+        if (dest && dest != &p)
+            *dest = p;
         return false;
     }
 
@@ -101,8 +101,8 @@ bool UnixRules::unquote(const std::string &subdir, std::string *dest) const
         return true;
 
     std::string unquoted;
-    for (std::string::const_iterator iter = subdir.begin();
-         iter != subdir.end(); ++iter)
+    for (std::string::const_iterator iter = p.begin();
+         iter != p.end(); ++iter)
     {
         if (*iter == '_')
         {
