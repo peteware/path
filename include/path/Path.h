@@ -47,9 +47,9 @@ typedef std::vector<Path> Paths;
  *
  * To interact with the rest of the system 
  * - path() returns a fully expanded string (path_c()) for NUL terminated)
- * - str() returns a string with ~ and $VAR still present(str_c())
+ * - str() returns a string with ~ and $VAR still present(c_str())
  * - normpath() 
- * normpath() to return a std::string or path_c(), str_c(), normpath_c()
+ * normpath() to return a std::string or path_c(), c_str(), normpath_c()
  * to return C-style, NUL terminated strings.  path() and normpath()
  * also expand environment variables (e.g. $HOME) and "~".
  *
@@ -139,7 +139,7 @@ public:
     /// Return original path
     const std::string & str() const;
     /// Return orignal path as C-style, NUL terminated string
-    const char * str_c() const;
+    const char * c_str() const;
     /// Return path with ~ and environment variables expanded
     const std::string & path() const;
     /// Same as path() but a C-style, NUL terminated string

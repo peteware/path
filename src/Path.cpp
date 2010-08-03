@@ -126,7 +126,7 @@ const std::string &Path::str() const
 /**
  * Same as str() but a NUL terminated string
  */
-const char * Path::str_c() const
+const char * Path::c_str() const
 {
     return str().c_str();
 }
