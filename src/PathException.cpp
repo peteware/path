@@ -6,8 +6,8 @@
 
 #include <path/PathException.h>
 #include <stdio.h>
-
-#include <sys/errno.h>
+#include <string.h>
+#include <errno.h>
 
 namespace path {
 

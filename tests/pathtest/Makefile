@@ -4,6 +4,7 @@ LIB_PATH	= -L../../src -l$(LIBRARY)
 LIBNAME		= ../../src/lib$(FASTLINK_LIBRARY).a
 
 TEST_SRCS	= \
+		GlobUnit.cpp \
 		CanonicalUnit.cpp \
 		ExpandUnit.cpp \
 		NodeUnit.cpp \
@@ -16,6 +17,7 @@ TEST_SRCS	= \
 		Win32RulesUnit.cpp \
 		main.cpp
 TEST_OBJS	=  \
+		GlobUnit.o \
 		CanonicalUnit.o \
 		ExpandUnit.o \
 		NodeUnit.o \

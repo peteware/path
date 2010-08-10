@@ -8,7 +8,10 @@
 #include <path/Unimplemented.h>
 
 #include <errno.h>
+#ifdef __APPLE__
 #define LINUX
+#endif
+
 #ifdef LINUX
 #include <dirent.h>
 #include <fcntl.h>
@@ -23,10 +26,11 @@ extern char **environ;
 }
 
 namespace path {
-SysUnixBase::SysUnixBase    defSysUniBase;
+#ifdef LINUX
+SysUnixBase::SysUnixBase    defSysUnixBase;
 
-SysCalls &System = defSysUniBase;
-
+SysCalls &System = defSysUnixBase;
+#endif
 SysUnixBase::SysUnixBase()
     : SysCalls()
 {

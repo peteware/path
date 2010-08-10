@@ -5,7 +5,15 @@
 
 namespace path {
 /**
- * Implements csh style pattern matching.
+ * Implements csh style pattern matching using
+ * the characters '*','?', '[]', '{}' and '^'.  It treats
+ * '~' at the start as a regular character.  Examples:
+ * - *.C
+ * - *.[ch]
+ * - test.{c,cpp,h}
+ * - test.?
+ * - *[0-9].cpp
+ * - *[^0-9].cpp
  */
 class Glob
 {
@@ -16,6 +24,10 @@ public:
     Glob (const Glob &copy);
     /// Destructor
     ~Glob();
+    /// Compile pattern (done automatically)
+    bool compile();
+    /// Compare against pattern
+    bool match (const std::string &word);
 private:
     /// Implements state for pattern matching
     struct Pattern;
