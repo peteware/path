@@ -1,3 +1,7 @@
+CXX		= $(CROSS)g++
+AR		= $(CROSS)ar
+RANLIB		= $(CROSS)ranlib
+
 LIBRARY		= path
 LIBNAME		= lib$(LIBRARY).a
 
@@ -56,6 +60,7 @@ all:		$(LIBNAME)
 
 $(LIBNAME):	$(LIB_OBJS)
 		$(AR) $(ARFLAGS) $(LIBNAME) $(LIB_OBJS)
+		$(RANLIB) $(LIBNAME)
 
 clean:
 		$(RM) -f *.o $(LIBNAME) $(FASTLINK_PROG)

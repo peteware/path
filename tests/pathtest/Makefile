@@ -1,3 +1,7 @@
+CXX		= $(CROSS)g++
+AR		= $(CROSS)ar
+RANLIB		= $(CROSS)ranlib
+
 LIBRARY		= path
 TEST_PROG	= test_path
 LIB_PATH	= -L../../src -l$(LIBRARY)

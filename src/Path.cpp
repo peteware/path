@@ -696,20 +696,20 @@ void Path::mkfile(const Path &path, int dirmode, int filemode)
  *
  * @code
  * Path     header(UnixPath("/a/b/file.h"));
- * // src is "/a/b/file.C"
- * Path     src = header.dirname() + header.stem() & ".C";
- * // backup is "/a/b/file.h.bak"
- * Path     backup = header & ".bak";
- * // backup2 is "/a/b/file.bak.h" (using string addition)
- * Path     backup2 = header.dirname() + (header.stem() + ".bak" + header.extension());
- * // backup3 is "/a/b/file.bak.h" (using Path append)
- * Path     backup3 = header.dirname() + header.stem() & ".bak" & header.extension());
+ * // src becomes "/a/b/file.C"
+ * Path     src = header.dirname() / header.stem() + ".C";
+ * // backup becomes "/a/b/file.h.bak"
+ * Path     backup = header + ".bak";
+ * // backup2 becomes "/a/b/file.bak.h" (using string addition)
+ * Path     backup2 = header.dirname() / (header.stem() + ".bak" + header.extension());
+ * // backup3 becomes "/a/b/file.bak.h" (using Path append)
+ * Path     backup3 = header.dirname() / header.stem() + ".bak" + header.extension());
  * @endcode
  *
  * @param append String to be added
  * @return A new Path with the same rules.
  */
-Path Path::operator&(const std::string &append) const
+Path Path::operator+(const std::string &append) const
 {
     Canonical c(canon());
 
@@ -812,9 +812,9 @@ std::ostream &operator<<(std::ostream &out, const path::Path&path)
  * @param dir The directory to add to path
  * @return A new Path
  */
-path::Path operator+(const path::Path &path, const std::string &dir)
+path::Path operator/(const path::Path &path, const char *dir)
 {
-    return path.add(dir);
+    return path.add(std::string(dir));
 
 }
 
@@ -825,9 +825,9 @@ path::Path operator+(const path::Path &path, const std::string &dir)
  * @param dir The directory to add to path
  * @return A new Path
  */
-path::Path operator+(const path::Path &path, const char *dir)
+path::Path operator/(const path::Path &path, const std::string &dir)
 {
-    return path.add(std::string(dir));
+    return path.add(dir);
 
 }
 
@@ -838,7 +838,7 @@ path::Path operator+(const path::Path &path, const char *dir)
  * @param op2 The directory to add to path
  * @return A new path
  */
-path::Path operator+(const path::Path &path, const path::Path &op2)
+path::Path operator/(const path::Path &path, const path::Path &op2)
 {
     return path.add(op2);
 }

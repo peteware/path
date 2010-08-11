@@ -179,7 +179,7 @@ void NodeUnit::iter_file()
     buildFiles();
     System.touch(testfile.str());
     Node    n (testfile);
-    CPPUNIT_ASSERT_EQUAL(0L, std::distance(n.begin(), n.end()));
+    CPPUNIT_ASSERT_EQUAL(0, (int)std::distance(n.begin(), n.end()));
     System.remove(testfile.str());
 }
 

@@ -236,29 +236,29 @@ void PathUnit::testadd()
     p1 = Path(UnixPath("/a")).add("b");
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a/b")), p1);
     
-    p1 = p1 + "c";
+    p1 = p1 / "c";
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a/b/c")), p1);
     
     p1 = Path();
-    p1 = p1 + "a" + "b" + "c";
+    p1 = p1 / "a" / "b" / "c";
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("a/b/c")), p1);
-    p1 = p1 + p1;
+    p1 = p1 / p1;
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("a/b/c/a/b/c")), p1);
     
     p1 = Path(UnixPath("/a"));
-    p1 = p1 & ".txt";
+    p1 = p1 + ".txt";
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a.txt")), p1);
     CPPUNIT_ASSERT_EQUAL(std::string("a.txt"), p1.basename());
     
     p1 = Path();
-    p1 = p1 & "x";
+    p1 = p1 / "x";
     CPPUNIT_ASSERT_EQUAL(Path("x"), p1);
 
     Path     header(UnixPath("/a/b/file.h"));
-    Path     src = header.dirname() + header.stem() & ".C";
-    Path     backup = header & ".bak";
-    Path     backup3 = header.dirname() + header.stem() & ".bak"
-                        & header.extension();
+    Path     src = header.dirname() / header.stem() + ".C";
+    Path     backup = header + ".bak";
+    Path     backup3 = header.dirname() / header.stem() + ".bak"
+                        + header.extension();
     CPPUNIT_ASSERT_EQUAL (Path (UnixPath ("/a/b/file.C")), src);
     CPPUNIT_ASSERT_EQUAL (Path (UnixPath ("/a/b/file.h.bak")), backup);
     CPPUNIT_ASSERT_EQUAL (Path (UnixPath ("/a/b/file.bak.h")), backup3);
@@ -283,7 +283,7 @@ void PathUnit::testSplit()
     CPPUNIT_ASSERT_EQUAL(false, paths[0].abs());
     
     Path     header(UnixPath("/a/b/file.h"));
-    Path     src = header.dirname() + header.stem() & ".C" ;
+    Path     src = header.dirname() / header.stem() + ".C" ;
     CPPUNIT_ASSERT_EQUAL(std::string("file.C"), src.basename());
     
 }

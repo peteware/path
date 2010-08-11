@@ -42,8 +42,8 @@ typedef std::vector<Path> Paths;
  * - dirname() returns the directory or all but last component
  * - basename() returns the last component
  * - stem() returns the filename without any suffix
- * - + as a shorthand for add()
- * - & adds to the last component
+ * - / as a shorthand for add()
+ * - + adds to the last component
  *
  * To interact with the rest of the system 
  * - path() returns a fully expanded string (path_c()) for NUL terminated)
@@ -188,7 +188,7 @@ public:
     const Canonical &canon() const;
 
     /// Append a string to last element.
-    Path operator&(const std::string &append) const;
+    Path operator+(const std::string &append) const;
 
     /// Return the rules (may be NULL)
     const PathRules *pathRules() const;
@@ -254,9 +254,9 @@ bool operator!=(const path::Path &op1, const path::Path &op2);
 /// Print out the path
 std::ostream &operator<<(std::ostream &out, const path::Path&path);
 /// Add a new directory
-path::Path operator+(const path::Path &path, const char *dir);
+path::Path operator/(const path::Path &path, const char *dir);
 /// Add a new directory
-path::Path operator+(const path::Path &path, const std::string &dir);
+path::Path operator/(const path::Path &path, const std::string &dir);
 /// Concatenate two paths
-path::Path operator+(const path::Path &path, const path::Path &op2);
+path::Path operator/(const path::Path &path, const path::Path &op2);
 #endif // !defined(_PATH_PATH_H_)
