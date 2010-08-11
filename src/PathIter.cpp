@@ -291,7 +291,7 @@ void PathIter::addNodes(const Path *node)
     std::sort(files.begin(), files.end());
     for (Strings::iterator iter = files.begin(); iter != files.end(); ++iter)
     {
-        m_nodeList.push_back(new Path(*node + *iter));
+        m_nodeList.push_back(new Path(*node / *iter));
     }
 }
 }
