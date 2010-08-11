@@ -241,7 +241,9 @@ void SysUnixBase::throwException (const std::string &path, int err) const
     case EEXIST:
     case ENOTDIR:
     case EISDIR:
+#ifdef ELOOP
     case ELOOP:
+#endif
     case ENAMETOOLONG:
         throw BadPath (path, err);
     default:

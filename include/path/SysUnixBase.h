@@ -42,7 +42,7 @@ public:
     virtual StringMap &env() const;
 protected:
     /// Use errno to throw appropriate exception
-    void throwException (const std::string &path, int errno) const;
+    void throwException (const std::string &path, int err) const;
 };
 }
 #endif /* _PATH_SYSUNIXBASE_H_ */

@@ -40,7 +40,7 @@ const PathRules *SysWin32::rules() const
 void SysWin32::mkdir(const std::string & dir, int mode) const
 {
 #ifdef __WINNT__
-    if (::mkdir (dir.c_str() < 0))
+    if (::mkdir (dir.c_str()) < 0)
     {
         throw PathException (dir, errno);
     }
