@@ -40,6 +40,9 @@ public:
     /// Return the current working directory
     virtual std::string getcwd() const;
     virtual StringMap &env() const;
+protected:
+    /// Use errno to throw appropriate exception
+    void throwException (const std::string &path, int errno) const;
 };
 }
 #endif /* _PATH_SYSUNIXBASE_H_ */

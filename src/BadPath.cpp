@@ -5,18 +5,20 @@
  */
 #include <path/BadPath.h>
 
-namespace path
-{
+namespace path {
 
 BadPath::BadPath()
     : PathException()
 {
+}
 
+BadPath::BadPath(const std::string &path, int err)
+    : PathException (path, err)
+{
 }
 
 BadPath::~BadPath() throw()
 {
-
 }
 
 }

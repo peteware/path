@@ -2,9 +2,11 @@
  * @file SysUnixBase.cpp
  */
 #include <path/SysUnixBase.h>
-#include <path/PathException.h>
-#include <path/NodeInfo.h>
 #include <path/UnixRules.h>
+#include <path/PathException.h>
+#include <path/Permission.h>
+#include <path/BadPath.h>
+#include <path/NodeInfo.h>
 #include <path/Unimplemented.h>
 
 #include <errno.h>
@@ -53,7 +55,7 @@ void SysUnixBase::mkdir(const std::string & dir, int mode) const
 #ifdef LINUX
     int status = ::mkdir(dir.c_str(), mode);
     if (status < 0)
-        throw PathException(dir, errno);
+        throwException(dir, errno);
 #else
     throw Unimplemented ("SysUnixBase::mkdir");
 #endif
@@ -64,7 +66,7 @@ void SysUnixBase::rmdir(const std::string & dir) const
 #ifdef LINUX
     int status = ::rmdir(dir.c_str());
     if (status < 0)
-        throw PathException(dir, errno);
+        throwException(dir, errno);
 #else
     throw Unimplemented ("SysUnixBase::rmdir");
 #endif
@@ -75,7 +77,7 @@ void SysUnixBase::touch(const std::string &file, int mode) const
 #ifdef LINUX
     int fd = ::open(file.c_str(), O_WRONLY|O_CREAT, mode);
     if (fd < 0)
-        throw PathException(file, errno);
+        throwException (file, errno);
     (void) ::close(fd);
 #else
     throw Unimplemented ("SysUnixBase::touch");
@@ -87,7 +89,7 @@ void SysUnixBase::remove(const std::string &file) const
 #ifdef LINUX
     int status = ::unlink(file.c_str());
     if (status < 0)
-        throw PathException(file, errno);
+        throwException (file, errno);
 #else
     throw Unimplemented ("SysUnixBase::remove");
 #endif
@@ -140,7 +142,7 @@ NodeInfo * SysUnixBase::stat(const std::string & path) const
     NodeInfo::Type type = NodeInfo::OTHER;
 
     if (::stat(path.c_str(), &statbuf) < 0)
-        throw PathException(path, errno);
+        throwException(path, errno);
     node = new NodeInfo();
 
     node->setSize(statbuf.st_size);
@@ -213,4 +215,38 @@ StringMap &SysUnixBase::env() const
     throw Unimplemented ("SysUnixBase::env");
 #endif
 }
+
+/**
+ * Examines err to see which exception type is appropriate to
+ * throw.  They all derive from PathException but
+ * Permission is used for err related to permission (EPERM, EACCES,
+ * EINVAL) and BadPath for problems relating to the
+ * filename (EBADF, ENOENT, EFAULT, EEXIST, ENODIR, EISDIR,
+ * ELOOP, ENAMETOOLONG).
+ *
+ * @param path The path being operated on
+ * @param err The value of errno
+ */
+void SysUnixBase::throwException (const std::string &path, int err) const
+{
+    switch (errno)
+    {
+    case EPERM:
+    case EACCES:
+    case EINVAL:
+        throw Permission (path, err);
+    case EBADF:
+    case ENOENT:
+    case EFAULT:
+    case EEXIST:
+    case ENOTDIR:
+    case EISDIR:
+    case ELOOP:
+    case ENAMETOOLONG:
+        throw BadPath (path, err);
+    default:
+        throw PathException (path, err);
+    }
+}
+
 }

@@ -16,6 +16,7 @@ class BadPath : public PathException
 {
 public:
     BadPath();
+    BadPath(const std::string &path, int err);
     virtual ~BadPath() throw();
 
 };

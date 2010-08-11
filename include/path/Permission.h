@@ -14,7 +14,11 @@ class Permission : public PathException
 {
 
 public:
+    /// Default constructor
     Permission();
+    /// Include path and errno
+    Permission (const std::string &path, int err);
+    /// Destructor
     virtual ~Permission() throw();
 
 };

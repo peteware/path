@@ -9,6 +9,10 @@
 
 #include <errno.h>
 
+#ifdef __WINNT__
+#include <io.h>
+#endif
+
 namespace path {
 #ifdef __WINNT__
 SysWin32    defSysWin32;
@@ -35,12 +39,26 @@ const PathRules *SysWin32::rules() const
 
 void SysWin32::mkdir(const std::string & dir, int mode) const
 {
+#ifdef __WINNT__
+    if (::mkdir (dir.c_str() < 0))
+    {
+        throw PathException (dir, errno);
+    }
+#else
     throw Unimplemented ("SysWin32::mkdir");
+#endif
 }
 
 void SysWin32::rmdir(const std::string & dir) const
 {
+#ifdef __WINNT__
+    if (::rmdir (dir.c_str()) < 0)
+    {
+        throw PathException (dir, errno);
+    }
+#else
     throw Unimplemented ("SysWin32::rmdir");
+#endif
 }
 
 void SysWin32::touch(const std::string &file, int mode) const
