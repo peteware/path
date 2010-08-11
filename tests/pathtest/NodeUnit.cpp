@@ -15,27 +15,27 @@ using namespace path;
 
 class NodeUnit: public CppUnit::TestCase
 {
-	CPPUNIT_TEST_SUITE(NodeUnit);
+    CPPUNIT_TEST_SUITE(NodeUnit);
 
-	CPPUNIT_TEST(init);
-	CPPUNIT_TEST(iter);
+    CPPUNIT_TEST(init);
+    CPPUNIT_TEST(iter);
     CPPUNIT_TEST(iter_file);
     CPPUNIT_TEST(opers);
-	CPPUNIT_TEST_SUITE_END();
+    CPPUNIT_TEST_SUITE_END();
 public:
     virtual void setUp();
     virtual void tearDown();
 protected:
-	/// Test basic initialization
-	void init();
-	/// Test node iteration
-	void iter();
+    /// Test basic initialization
+    void init();
+    /// Test node iteration
+    void iter();
     /// Make sure we handle regular files
     void iter_file();
     /// Test PathIter operators
     void opers();
-    
-    struct DirHiearchy 
+
+    struct DirHiearchy
     {
         Path    m_path;
         bool    m_isDir;
@@ -43,7 +43,7 @@ protected:
     };
     std::vector<DirHiearchy>    m_files;
     Path            m_base; // Directory for temporary m_files
-    
+
     void initFiles();
     void buildFiles();
     void cleanFiles();
@@ -79,7 +79,7 @@ void NodeUnit::buildFiles()
     for (std::vector<DirHiearchy>::iterator iter = m_files.begin();
          iter != m_files.end(); ++iter)
     {
-        if (iter->m_isDir) 
+        if (iter->m_isDir)
         {
             System.mkdir(iter->m_path.path());
         }
@@ -87,7 +87,7 @@ void NodeUnit::buildFiles()
     for (std::vector<DirHiearchy>::iterator iter = m_files.begin();
          iter != m_files.end(); ++iter)
     {
-        if (!iter->m_isDir) 
+        if (!iter->m_isDir)
         {
             System.touch(iter->m_path.path());
         }
@@ -99,7 +99,7 @@ void NodeUnit::cleanFiles()
     for (std::vector<DirHiearchy>::iterator iter = m_files.begin();
          iter != m_files.end(); ++iter)
     {
-        if (!iter->m_isDir) 
+        if (!iter->m_isDir)
         {
             try
             {
@@ -115,11 +115,11 @@ void NodeUnit::cleanFiles()
     for (std::vector<DirHiearchy>::reverse_iterator iter = m_files.rbegin();
          iter != m_files.rend(); ++iter)
     {
-        if (iter->m_isDir) 
+        if (iter->m_isDir)
         {
             try
             {
-                System.rmdir(iter->m_path.path());                
+                System.rmdir(iter->m_path.path());
             }
             catch (PathException e)
             {
@@ -131,10 +131,10 @@ void NodeUnit::cleanFiles()
 
 void NodeUnit::init()
 {
-	Node	node (".");
+    Node	node (".");
     Node    node2 ("..");
-    Node    node3 ("."); 
-    
+    Node    node3 (".");
+
     node = node2;
     Node    node4 = node;
     node4 = Path ("..");
@@ -143,7 +143,7 @@ void NodeUnit::init()
 void NodeUnit::iter()
 {
     buildFiles();
-	Node	node(m_base);
+    Node	node(m_base);
 
     /*
      * Test NodeIte assignment and copy constructors and destructor
@@ -154,7 +154,7 @@ void NodeUnit::iter()
         iter1 = iter2;
         PathIter    iter3(iter1);
     }
-    
+
     /*
      * Tet PathIter constructror from Node and destructor
      */
@@ -164,13 +164,13 @@ void NodeUnit::iter()
 
     std::vector<Node>   nodes;
     std::copy(node.begin(), node.end(), std::back_insert_iterator<std::vector<Node> > (nodes));
-	int count = 0;
-	for (Node::iterator iter = node.begin(); iter != node.end(); ++iter)
-	{
-		++count;
-	}
+    int count = 0;
+    for (Node::iterator iter = node.begin(); iter != node.end(); ++iter)
+    {
+        ++count;
+    }
     // We don't include m_base and don't go into subdirs
-	CPPUNIT_ASSERT_EQUAL(static_cast<int>(m_files.size() - 1), count);
+    CPPUNIT_ASSERT_EQUAL(static_cast<int>(m_files.size() - 1), count);
 }
 
 void NodeUnit::iter_file()
@@ -188,12 +188,12 @@ void NodeUnit::opers()
     buildFiles();
     Node        node(".");
     Node::iterator  iter = node.begin();
-    
+
     CPPUNIT_ASSERT(node.exists());
     CPPUNIT_ASSERT(node.size() != 0);
-    
+
     // Honestly, I couldn't figure out how to figure out
-    // what the first node being returned is!  So no 
+    // what the first node being returned is!  So no
     // comparison on results; just make sure they compile
     iter->size();
     node = *iter;
