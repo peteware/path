@@ -5,7 +5,7 @@ RANLIB		= $(CROSS)ranlib
 LIBRARY		= path
 TEST_PROG	= test_path
 LIB_PATH	= -L../../src -l$(LIBRARY)
-LIBNAME		= ../../src/lib$(FASTLINK_LIBRARY).a
+LIBNAME		= ../../src/lib$(LIBRARY).a
 
 TEST_SRCS	= \
 		GlobUnit.cpp \
@@ -36,7 +36,7 @@ TEST_OBJS	=  \
 
 O		= -g -Wall
 CPPFLAGS	= $O -I. -I../../include -I$(HOME)/usr/include 
-LIBCPPUNIT      = -R$(HOME)/usr/lib -L$(HOME)/usr/lib -lcppunit
+LIBCPPUNIT      = -lcppunit
 
 all:		$(TEST_PROG) runtest
 

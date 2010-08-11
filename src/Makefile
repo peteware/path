@@ -25,6 +25,7 @@ LIB_SRCS	= \
 		Strings.cpp \
 		SysCalls.cpp \
 		SysUnixBase.cpp \
+		SysWin32.cpp \
 		Unimplemented.cpp \
 		UnixRules.cpp \
 		UriRules.cpp \
@@ -47,6 +48,7 @@ LIB_OBJS	= \
 		Strings.o \
 		SysCalls.o \
 		SysUnixBase.o \
+		SysWin32.o \
 		Unimplemented.o \
 		UnixRules.o \
 		UriRules.o \

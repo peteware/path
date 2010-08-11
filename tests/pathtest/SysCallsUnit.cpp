@@ -5,6 +5,8 @@
 #include <path/SysCalls.h>
 #include <path/PathException.h>
 
+#include <stdlib.h>
+
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
 
