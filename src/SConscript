@@ -1,13 +1,15 @@
 # -*- python -*-
 
-env = Environment (CCFLAGS = ['-g', '-Wall', '-O3', '-DLINUX'],
-                   CPPPATH = ['#include'])
+#env = Environment (CCFLAGS = ['-g', '-Wall', '-O3'],
+#                   CPPPATH = ['#include'])
 #env = Environment (CPPFLAGS = '/EHsc')
+Import("env")
 env.Library('path',
             ['BadPath.cpp',
              'Canonical.cpp',
 	     'Exception.cpp',
              'FileStream.cpp',
+             'Glob.cpp',
              'Node.cpp',
              'NodeInfo.cpp',
              'Path.cpp',
@@ -20,6 +22,7 @@ env.Library('path',
 	     'Strings.cpp',
              'SysCalls.cpp',
              'SysUnixBase.cpp',
+             'SysWin32.cpp',
              'Unimplemented.cpp',
              'UnixRules.cpp',
              'UriRules.cpp',

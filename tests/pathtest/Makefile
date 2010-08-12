@@ -8,9 +8,9 @@ LIB_PATH	= -L../../src -l$(LIBRARY)
 LIBNAME		= ../../src/lib$(LIBRARY).a
 
 TEST_SRCS	= \
-		GlobUnit.cpp \
 		CanonicalUnit.cpp \
 		ExpandUnit.cpp \
+		GlobUnit.cpp \
 		NodeUnit.cpp \
 		PathLookupUnit.cpp \
 		PathRulesUnit.cpp \
