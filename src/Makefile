@@ -8,7 +8,7 @@ LIBNAME		= lib$(LIBRARY).a
 LIB_PATH	= -L. -l$(LIBRARY)
 
 LIB_SRCS	= \
-		BadPathException.cpp \
+		PathBadException.cpp \
 		Canonical.cpp \
 		Exception.cpp \
 		FileStream.cpp \
@@ -31,7 +31,7 @@ LIB_SRCS	= \
 		RulesUri.cpp \
 		RulesWin32.cpp
 LIB_OBJS	= \
-		BadPathException.o \
+		PathBadException.o \
 		Canonical.o \
 		Exception.o \
 		FileStream.o \

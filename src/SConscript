@@ -5,7 +5,7 @@
 #env = Environment (CPPFLAGS = '/EHsc')
 Import("env")
 env.Library('path',
-            ['BadPathException.cpp',
+            ['PathBadException.cpp',
              'Canonical.cpp',
 	     'Exception.cpp',
              'FileStream.cpp',

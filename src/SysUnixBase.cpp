@@ -5,7 +5,7 @@
 #include <path/RulesUnix.h>
 #include <path/PathException.h>
 #include <path/PathPermissionException.h>
-#include <path/BadPathException.h>
+#include <path/PathBadException.h>
 #include <path/NodeInfo.h>
 #include <path/Unimplemented.h>
 
@@ -221,7 +221,7 @@ StringMap &SysUnixBase::env() const
  * Examines err to see which exception type is appropriate to
  * throw.  They all derive from PathException but
  * PathPermissionException is used for err related to pathpermissionexception (EPERM, EACCES,
- * EINVAL) and BadPathException for problems relating to the
+ * EINVAL) and PathBadException for problems relating to the
  * filename (EBADF, ENOENT, EFAULT, EEXIST, ENODIR, EISDIR,
  * ELOOP, ENAMETOOLONG).
  *
@@ -246,7 +246,7 @@ void SysUnixBase::throwException (const std::string &path, int err) const
     case ELOOP:
 #endif
     case ENAMETOOLONG:
-        throw BadPathException (path, err);
+        throw PathBadException (path, err);
     default:
         throw PathException (path, err);
     }
