@@ -31,7 +31,7 @@ public:
     /// Construct from a string
     Node(const Path &path);
     /// Construct from Canonical
-    Node(const Canonical &can, const PathRules *rules = 0);
+    Node(const Canonical &can, const RulesBase *rules = 0);
     /// Copy constructor
     Node(const Node &orig);
     ///  Destructor

@@ -1,34 +1,34 @@
 /**
- * @file PathRulesUnit.cpp
+ * @file RulesBaseUnit.cpp
  * @ingroup PathTest
  */
-#include <path/PathRules.h>
-#include <path/UnixRules.h>
+#include <path/RulesBase.h>
+#include <path/RulesUnix.h>
 #include <path/Canonical.h>
 #include <path/Path.h>
 
-#include "PathRulesUnit.h"
+#include "RulesBaseUnit.h"
 using namespace path;
 
-CPPUNIT_TEST_SUITE_REGISTRATION(PathRulesUnit);
-void PathRulesUnit::setUp()
+CPPUNIT_TEST_SUITE_REGISTRATION(RulesBaseUnit);
+void RulesBaseUnit::setUp()
 {
-	m_rules = new UnixRules;
+	m_rules = new RulesUnix;
 }
-void PathRulesUnit::tearDown()
+void RulesBaseUnit::tearDown()
 {
     delete m_rules;
 }
 
 /// Set the rules and returns the previous one
-PathRules * PathRulesUnit::setRules (PathRules *rules)
+RulesBase * RulesBaseUnit::setRules (RulesBase *rules)
 {
     std::swap(m_rules, rules);
     return rules;
 }
 
 /// Return the rules
-PathRules *PathRulesUnit::rules() const
+RulesBase *RulesBaseUnit::rules() const
 {
     return m_rules;
 }
@@ -36,14 +36,14 @@ PathRules *PathRulesUnit::rules() const
 /**
  * Check basic initialization.
  */
-void PathRulesUnit::init()
+void RulesBaseUnit::init()
 {
-	UnixRules	unix_rules;
+	RulesUnix	unix_rules;
 }
 
-void PathRulesUnit::canonical()
+void RulesBaseUnit::canonical()
 {
-	UnixRules	unix_rules;
+	RulesUnix	unix_rules;
 	Canonical	canon = unix_rules.canonical("/a/b/c");
 
 	CPPUNIT_ASSERT(canon.protocol().empty());
@@ -75,10 +75,10 @@ void PathRulesUnit::canonical()
 	CPPUNIT_ASSERT_EQUAL(false, canon.abs());
 }
 
-void PathRulesUnit::convert()
+void RulesBaseUnit::convert()
 {
 	Canonical	canon;
-	UnixRules	rules;
+	RulesUnix	rules;
 	Path		path (canon, &rules);
 
 	CPPUNIT_ASSERT_EQUAL(std::string(""), path.str());

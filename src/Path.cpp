@@ -3,7 +3,7 @@
  */
 #include <path/Path.h>
 #include <path/Canonical.h>
-#include <path/SysCalls.h>
+#include <path/SysBase.h>
 #include <path/Strings.h>
 #include <path/Unimplemented.h>
 #include <path/NodeInfo.h>
@@ -18,14 +18,14 @@ namespace path {
  * Default set of rules if none are specified.  Also
  * see System::rules();
  */
-PathRules * Path::s_defaultPathRules;
+RulesBase * Path::s_defaultRulesBase;
 
 /**
  * Initialize an empty Path
  *
  * @param rules Rules to initialize.  May be NULL.
  */
-Path::Path(const PathRules *rules)
+Path::Path(const RulesBase *rules)
     : m_meta(new PathExtra)
 {
     m_meta->m_rules = rules;
@@ -54,15 +54,15 @@ Path::Path(const std::string &path)
 }
 
 /**
- * Create a path from a Canonical and a PathRules.
+ * Create a path from a Canonical and a RulesBase.
  *
  * Initialized m_path by converting from Canonical to a string
- * via the PathRules
+ * via the RulesBase
  *
  * @param canon Canonical version of path
  * @param param_rules Rules to use
  */
-Path::Path(const Canonical &canon, const PathRules *param_rules)
+Path::Path(const Canonical &canon, const RulesBase *param_rules)
     : m_meta(new PathExtra)
 {
     m_meta->m_rules = param_rules;
@@ -247,7 +247,7 @@ std::string Path::basename() const
  * dirname('/a/b/c') returns '/a/b'.
  *
  * @code
- * Path p1(UnixRules("/a/b/c"));
+ * Path p1(RulesUnix("/a/b/c"));
  * Path p2;
  *
  * p2 = p1.add(p1.basename()));
@@ -445,7 +445,7 @@ Path Path::add(const char *p) const
  * Returns a vector of components to reach this path.
  *
  * If the path is abs(), then each component is also abs().  Each component
- * shares the same PathRules.
+ * shares the same RulesBase.
  *
  * Using Unix style paths as a shorthand, the following path "/a/b/c"
  * would return the vector of Path's: ["/a", "/a/b", "/a/b/c"]
@@ -481,28 +481,28 @@ const Canonical & Path::canon() const
 }
 
 /**
- * Return the PathRules used by the Path.  May
+ * Return the RulesBase used by the Path.  May
  * be NULL.  Do not delete the returned rules.
  */
-const PathRules *Path::pathRules() const
+const RulesBase *Path::pathRules() const
 {
     return m_meta->m_rules;
 }
 
 /**
  * If the rules
- * are not set, this uses defaultPathRules().  defaultPathRules()
- * in turn either use the value from setDefaultPathRules() or
+ * are not set, this uses defaultRulesBase().  defaultRulesBase()
+ * in turn either use the value from setDefaultRulesBase() or
  * if those are not set uses System.rules().
  *
  * Do not delete the returned rules!
  */
-const PathRules *Path::rules() const
+const RulesBase *Path::rules() const
 {
     if (m_meta->m_rules)
         return m_meta->m_rules;
     else
-        return defaultPathRules();
+        return defaultRulesBase();
 }
 
 
@@ -514,9 +514,9 @@ const PathRules *Path::rules() const
  * @param rules Set the rules to be used by default
  * @return Previous value of ruls
  */
-PathRules * Path::setDefaultPathRules(PathRules * rules)
+RulesBase * Path::setDefaultRulesBase(RulesBase * rules)
 {
-    std::swap(rules, s_defaultPathRules);
+    std::swap(rules, s_defaultRulesBase);
     return rules;
 }
 
@@ -524,18 +524,18 @@ PathRules * Path::setDefaultPathRules(PathRules * rules)
  * Returns the default rules; never NULL.
  *
  * Typical
- * behaviour is to create a Path with the PathRules set to NULL.
- * All such paths will use whatever the defaultPathRules()
+ * behaviour is to create a Path with the RulesBase set to NULL.
+ * All such paths will use whatever the defaultRulesBase()
  * returns.
  *
- * Uses System.rules() if s_defaultPathRules is NULL.  System
+ * Uses System.rules() if s_defaultRulesBase is NULL.  System
  * is initialized at compile time to refer to the
- * SysCalls used by this particular machine.
+ * SysBase used by this particular machine.
  */
-const PathRules * Path::defaultPathRules()
+const RulesBase * Path::defaultRulesBase()
 {
-    if (s_defaultPathRules)
-        return s_defaultPathRules;
+    if (s_defaultRulesBase)
+        return s_defaultRulesBase;
     else
         return System.rules();
 }
@@ -650,7 +650,7 @@ Path Path::getcwd()
  * Create all the directories along the path.
  * Throws a PathException if unable to create
  * one of the directories because you don't
- * have permission or a component exists
+ * have pathpermissionexception or a component exists
  * and is a file,  not a directory (plus
  * lots of other reasons).
  *
@@ -722,36 +722,36 @@ Path Path::operator+(const std::string &append) const
 
 struct ConvertToPath : public std::unary_function<std::string, Path>
 {
-    const PathRules *m_rules;
-    ConvertToPath(const PathRules *rules)
+    const RulesBase *m_rules;
+    ConvertToPath(const RulesBase *rules)
         : m_rules(rules)
     {
     }
 
     Path operator()(const std::string &arg)
     {
-        const PathRules *r;
+        const RulesBase *r;
         if (m_rules != NULL)
             r = m_rules;
         else
-            r = Path::defaultPathRules();
+            r = Path::defaultRulesBase();
         return Path(r->canonical(arg), m_rules);
     }
 };
 
 /**
  * Takes the vector of strings and converts them to a vector
- * of Path's.  If rules is NULL, then the Path::defaultPathRules()
+ * of Path's.  If rules is NULL, then the Path::defaultRulesBase()
  * are used.
  *
  * @sa PathLookup for a complete interface to maintaining a
  * list of Path's to search for a file.
  *
  * @param strings The vector of strings
- * @param rules The PathRules to use to convert each element of strings
+ * @param rules The RulesBase to use to convert each element of strings
  * @return A vector (possibly empty) of strings.
  */
-Paths strings2Paths(const Strings &strings, const PathRules *rules)
+Paths strings2Paths(const Strings &strings, const RulesBase *rules)
 {
     Paths paths;
     std::transform(strings.begin(), strings.end(),
@@ -763,7 +763,7 @@ Paths strings2Paths(const Strings &strings, const PathRules *rules)
 }
 
 /**
- * Compares the PathRules and Canonical componenets
+ * Compares the RulesBase and Canonical componenets
  * to see if they are the same.  So while two paths
  * might be logically the same, "a" and "/a/b/.." are logically
  * the same, they will not compare equally.  See

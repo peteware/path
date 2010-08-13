@@ -1,43 +1,43 @@
 /**
- * @file UriRules.cpp
+ * @file RulesUri.cpp
  */
-#include <path/UriRules.h>
+#include <path/RulesUri.h>
 #include <path/Canonical.h>
 #include <path/Unimplemented.h>
 
 namespace path {
-UriRules::UriRules()
-    : PathRules('/')
+RulesUri::RulesUri()
+    : RulesBase('/')
 {
 }
 
-UriRules::~UriRules()
+RulesUri::~RulesUri()
 {
 }
 
 /**
  * Converts Path into a 'canonical' form.  This allows a Path to be converted from
- * one PathRules to another PathRules.
+ * one RulesBase to another RulesBase.
  *
  * @param path A string to parse into a path.
  */
-Canonical UriRules::canonical(const std::string &path) const
+Canonical RulesUri::canonical(const std::string &path) const
 {
     return Canonical();
 }
 
 /**
  * Return a string properly quoted with any system special components replaces.
- * For example, UriRules would replace spaces with %040.  Only single path
- * components should be passed.  For example, passing 'a/b' to UnixRules would
+ * For example, RulesUri would replace spaces with %040.  Only single path
+ * components should be passed.  For example, passing 'a/b' to RulesUnix would
  * return 'a_b'.
  *
  * @param subdir The string to remove any '/' characters
  * @return the quoted string
  */
-bool UriRules::quote(const std::string & subdir, std::string *dest) const
+bool RulesUri::quote(const std::string & subdir, std::string *dest) const
 {
-    throw Unimplemented ("UriRules::quote");
+    throw Unimplemented ("RulesUri::quote");
     return false;
 }
 }

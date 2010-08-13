@@ -2,10 +2,10 @@
  * @file SysUnixBase.cpp
  */
 #include <path/SysUnixBase.h>
-#include <path/UnixRules.h>
+#include <path/RulesUnix.h>
 #include <path/PathException.h>
-#include <path/Permission.h>
-#include <path/BadPath.h>
+#include <path/PathPermissionException.h>
+#include <path/BadPathException.h>
 #include <path/NodeInfo.h>
 #include <path/Unimplemented.h>
 
@@ -32,10 +32,10 @@ namespace path {
 #ifdef PW_SYS_LINUX
 SysUnixBase::SysUnixBase    defSysUnixBase;
 
-SysCalls &System = defSysUnixBase;
+SysBase &System = defSysUnixBase;
 #endif
 SysUnixBase::SysUnixBase()
-    : SysCalls()
+    : SysBase()
 {
 }
 
@@ -44,11 +44,11 @@ SysUnixBase::~SysUnixBase()
 }
 
 /**
- * @return A pointer to the UnixRules::rules
+ * @return A pointer to the RulesUnix::rules
  */
-const PathRules *SysUnixBase::rules() const
+const RulesBase *SysUnixBase::rules() const
 {
-    return &UnixRules::rules;
+    return &RulesUnix::rules;
 }
 
 void SysUnixBase::mkdir(const std::string & dir, int mode) const
@@ -220,8 +220,8 @@ StringMap &SysUnixBase::env() const
 /**
  * Examines err to see which exception type is appropriate to
  * throw.  They all derive from PathException but
- * Permission is used for err related to permission (EPERM, EACCES,
- * EINVAL) and BadPath for problems relating to the
+ * PathPermissionException is used for err related to pathpermissionexception (EPERM, EACCES,
+ * EINVAL) and BadPathException for problems relating to the
  * filename (EBADF, ENOENT, EFAULT, EEXIST, ENODIR, EISDIR,
  * ELOOP, ENAMETOOLONG).
  *
@@ -235,7 +235,7 @@ void SysUnixBase::throwException (const std::string &path, int err) const
     case EPERM:
     case EACCES:
     case EINVAL:
-        throw Permission (path, err);
+        throw PathPermissionException (path, err);
     case EBADF:
     case ENOENT:
     case EFAULT:
@@ -246,7 +246,7 @@ void SysUnixBase::throwException (const std::string &path, int err) const
     case ELOOP:
 #endif
     case ENAMETOOLONG:
-        throw BadPath (path, err);
+        throw BadPathException (path, err);
     default:
         throw PathException (path, err);
     }

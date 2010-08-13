@@ -7,7 +7,7 @@
 #include <path/Canonical.h>
 #include <path/PathException.h>
 #include <path/FileStream.h>
-#include <path/SysCalls.h>
+#include <path/SysBase.h>
 
 #include <getopt.h>
 #include <iostream>
@@ -57,7 +57,7 @@ int main(int argc, char **argv)
 			break;
 		}
 	}
-	const path::PathRules *rules = path::System.rules();
+	const path::RulesBase *rules = path::System.rules();
 	for (int i = optind; i < argc; ++i)
 	{
         try

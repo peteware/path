@@ -1,28 +1,28 @@
 /**
- * @file UnixRules.h
+ * @file RulesUnix.h
  */
-#if !defined(_PATH_UNIXRULES_H_)
-#define _PATH_UNIXRULES_H_
+#if !defined(_PATH_RULESUNIX_H_)
+#define _PATH_RULESUNIX_H_
 
-#include <path/PathRules.h>
+#include <path/RulesBase.h>
 
 namespace path {
 /**
- * @class UnixRules path/UnixRules.h
- * Implement PathRules for Unix like pathnames.
+ * @class RulesUnix path/RulesUnix.h
+ * Implement RulesBase for Unix like pathnames.
  */
-class UnixRules : public PathRules
+class RulesUnix : public RulesBase
 {
 public:
-    UnixRules();
-    virtual ~UnixRules();
+    RulesUnix();
+    virtual ~RulesUnix();
 
     virtual Canonical   canonical(const std::string &path) const;
     virtual bool quote(const std::string &subdir, std::string *dest) const;
     virtual bool unquote(const std::string &subdir, std::string *dest) const;
 
-    static UnixRules        rules;
+    static RulesUnix        rules;
 
 };
 }
-#endif // !defined(_PATH_UNIXRULES_H_)
+#endif // !defined(_PATH_RULESUNIX_H_)

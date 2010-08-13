@@ -1,23 +1,23 @@
 /**
- * @file BadPath.cpp
+ * @file BadPathException.cpp
  *
- * Implementation of the Class BadPath
+ * Implementation of the Class BadPathException
  */
-#include <path/BadPath.h>
+#include <path/BadPathException.h>
 
 namespace path {
 
-BadPath::BadPath()
+BadPathException::BadPathException()
     : PathException()
 {
 }
 
-BadPath::BadPath(const std::string &path, int err)
+BadPathException::BadPathException(const std::string &path, int err)
     : PathException (path, err)
 {
 }
 
-BadPath::~BadPath() throw()
+BadPathException::~BadPathException() throw()
 {
 }
 

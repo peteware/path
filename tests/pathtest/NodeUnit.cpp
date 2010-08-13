@@ -4,7 +4,7 @@
  */
 #include <path/Node.h>
 #include <path/PathIter.h>
-#include <path/SysCalls.h>
+#include <path/SysBase.h>
 #include <path/PathException.h>
 #include <path/Canonical.h>
 

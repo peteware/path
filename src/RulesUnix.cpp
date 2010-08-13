@@ -1,39 +1,39 @@
 /**
- * @file UnixRules.cpp
+ * @file RulesUnix.cpp
  *
- * Implementation of the Class UnixRules
+ * Implementation of the Class RulesUnix
  */
-#include <path/UnixRules.h>
+#include <path/RulesUnix.h>
 #include <path/Canonical.h>
 #include <path/Path.h>
 
 namespace path {
-UnixRules   UnixRules::rules;
+RulesUnix   RulesUnix::rules;
 
-UnixRules::UnixRules()
-    : PathRules('/')
+RulesUnix::RulesUnix()
+    : RulesBase('/')
 {
 }
 
-UnixRules::~UnixRules()
+RulesUnix::~RulesUnix()
 {
 }
 
 /**
  * Converts Path into a 'canonical' form.  This allows a Path to be converted from
- * one PathRules to another PathRules.
+ * one RulesBase to another RulesBase.
  *
  * @param path A string to parse into a path.
  */
-Canonical UnixRules::canonical(const std::string &path) const
+Canonical RulesUnix::canonical(const std::string &path) const
 {
-    return PathRules::canonical(path);
+    return RulesBase::canonical(path);
 }
 
 /**
  * Return a string properly quoted with any system special components replaces.
- * For example, UriRules would replace spaces with %040.  Only single path
- * components should be passed.  For example, passing 'a/b' to UnixRules would
+ * For example, RulesUri would replace spaces with %040.  Only single path
+ * components should be passed.  For example, passing 'a/b' to RulesUnix would
  * return 'a_!_b'.
  *
  * Optimized for the case of no quoting needed.  If you pass in
@@ -41,7 +41,7 @@ Canonical UnixRules::canonical(const std::string &path) const
  * no copying is done.
  *
  * @code
- * UnixRules    rules;
+ * RulesUnix    rules;
  * std::string  path = "a b c";
  * std::string  path2 = "/a/b/c";
  * std::string  quotedPath;
@@ -55,7 +55,7 @@ Canonical UnixRules::canonical(const std::string &path) const
  * @param dest Where to put the quoted string
  * @return true if needed to quote, false otherwise
  */
-bool UnixRules::quote(const std::string & subdir, std::string *dest) const
+bool RulesUnix::quote(const std::string & subdir, std::string *dest) const
 {
     if (subdir.find ("/") == std::string::npos)
     {
@@ -86,7 +86,7 @@ bool UnixRules::quote(const std::string & subdir, std::string *dest) const
     return true;
 }
 
-bool UnixRules::unquote(const std::string &p, std::string *dest) const
+bool RulesUnix::unquote(const std::string &p, std::string *dest) const
 {
     int state = 0;
 
@@ -160,7 +160,7 @@ bool UnixRules::unquote(const std::string &p, std::string *dest) const
  * names but you can specify it as a string.
  *
  * Note that this declared in <path/Path.h> even though
- * it is implemented in UnixRules.cpp.  I did this so
+ * it is implemented in RulesUnix.cpp.  I did this so
  * people could use the Path() constructor easily.
  *
  * @sa Win32Path(),  URLPath()
@@ -170,6 +170,6 @@ bool UnixRules::unquote(const std::string &p, std::string *dest) const
  */
 path::Canonical UnixPath(const std::string &path)
 {
-    return path::UnixRules::rules.canonical(path);
+    return path::RulesUnix::rules.canonical(path);
 }
 }

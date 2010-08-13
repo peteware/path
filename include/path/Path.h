@@ -6,7 +6,7 @@
 #if !defined(_PATH_PATH_H_)
 #define _PATH_PATH_H_
 
-#include <path/PathRules.h>
+#include <path/RulesBase.h>
 #include <path/Strings.h>
 #include <path/Refcount.h>
 
@@ -115,18 +115,18 @@ typedef std::vector<Path> Paths;
  *
  * 
  * @sa
- * Canonical, PathRules, UnixRules, Wn32Rules, UriRules, Win32Path,
+ * Canonical, RulesBase, RulesUnix, Wn32Rules, RulesUri, Win32Path,
  * UnixPath.
  */
 class Path
 {
 public:
     /// Default constructor
-    Path(const PathRules *rules = 0);
+    Path(const RulesBase *rules = 0);
     /// Constructor from std::string
     Path(const std::string &path);
-    /// Use a Canonical path and PathRules
-    Path(const Canonical &canon, const PathRules *rules = 0);
+    /// Use a Canonical path and RulesBase
+    Path(const Canonical &canon, const RulesBase *rules = 0);
     /// Construct from a NUL terminated string
     Path(const char *path);
     /// Copy constructor
@@ -191,13 +191,13 @@ public:
     Path operator+(const std::string &append) const;
 
     /// Return the rules (may be NULL)
-    const PathRules *pathRules() const;
-    /// Return PathRules, never null
-    const PathRules *       rules() const;
+    const RulesBase *pathRules() const;
+    /// Return RulesBase, never null
+    const RulesBase *       rules() const;
     /// Set the default rules to be used by most paths
-    static PathRules * setDefaultPathRules(PathRules * rules);
+    static RulesBase * setDefaultRulesBase(RulesBase * rules);
     /// Return the rules
-    static const PathRules * defaultPathRules();
+    static const RulesBase * defaultRulesBase();
 
     /// How to iterate through directory
     typedef PathIter        iterator;
@@ -233,12 +233,12 @@ public:
 
 private:
     /// Use these rules if none are set.
-    static PathRules *      s_defaultPathRules;
+    static RulesBase *      s_defaultRulesBase;
     mutable Refcount<PathExtra> m_meta;
 
 };
 /// Convert an array of strings into an array of Paths
-Paths strings2Paths(const Strings &strings, const PathRules *rules = 0);
+Paths strings2Paths(const Strings &strings, const RulesBase *rules = 0);
 // Shortcuts for handling different paths as strings
 /// Convert a unix style path ("/a/b/c") to Canonical
 path::Canonical UnixPath(const std::string &path);

@@ -4,7 +4,7 @@
 #include <path/Node.h>
 #include <path/NodeInfo.h>
 #include <path/PathIter.h>
-#include <path/SysCalls.h>
+#include <path/SysBase.h>
 #include <path/Canonical.h>
 #include <path/PathException.h>
 #include <path/Unimplemented.h>
@@ -72,9 +72,9 @@ Node::Node(const Path &p)
  * If there is no corresponding filesystem object, then an exception is raised.
  *
  * @param can The Canonical path
- * @param rules PathRules to use to translate into a path name
+ * @param rules RulesBase to use to translate into a path name
  */
-Node::Node(const Canonical &can, const PathRules *rules)
+Node::Node(const Canonical &can, const RulesBase *rules)
     : Path(can, rules),
       m_cache(0)
 {

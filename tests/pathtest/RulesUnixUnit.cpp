@@ -1,21 +1,21 @@
 /**
- * @file UnixRulesUnit.cpp
+ * @file RulesUnixUnit.cpp
  * @ingroup PathTest
  */
 
-#include <path/UnixRules.h>
+#include <path/RulesUnix.h>
 #include <path/Canonical.h>
 #include <path/Path.h>
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
 
-#include "PathRulesUnit.h"
+#include "RulesBaseUnit.h"
 using namespace path;
 
-class UnixRulesUnit: public PathRulesUnit
+class RulesUnixUnit: public RulesBaseUnit
 {
-    CPPUNIT_TEST_SUB_SUITE(UnixRulesUnit, PathRulesUnit);
+    CPPUNIT_TEST_SUB_SUITE(RulesUnixUnit, RulesBaseUnit);
 
     CPPUNIT_TEST(init);
     CPPUNIT_TEST(testQuote);
@@ -31,27 +31,27 @@ protected:
 
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(UnixRulesUnit);
+CPPUNIT_TEST_SUITE_REGISTRATION(RulesUnixUnit);
 
-void UnixRulesUnit::setUp()
+void RulesUnixUnit::setUp()
 {
-    setRules(new UnixRules());
+    setRules(new RulesUnix());
 }
 
-void UnixRulesUnit::tearDown()
+void RulesUnixUnit::tearDown()
 {
-    PathRulesUnit::tearDown();
+    RulesBaseUnit::tearDown();
 }
 
-void UnixRulesUnit::init()
+void RulesUnixUnit::init()
 {
-    UnixRules	unix_rules;
+    RulesUnix	unix_rules;
 }
 
 #define QC(have,want,tmp) rules()->quote(std::string(have), &tmp); CPPUNIT_ASSERT_EQUAL(std::string(want), tmp)
 #define UC(have,want,tmp) rules()->unquote(std::string(have), &tmp); CPPUNIT_ASSERT_EQUAL(std::string(want), tmp)
 
-void UnixRulesUnit::testQuote()
+void RulesUnixUnit::testQuote()
 {
     std::string     str;
 

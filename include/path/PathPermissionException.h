@@ -1,26 +1,26 @@
 /**
- * @file Permission.h
+ * @file PathPermissionException.h
  */
-#if !defined(_PATH_PERMISSION_H_)
-#define _PATH_PERMISSION_H_
+#if !defined(_PATH_PATHPERMISSIONEXCEPTION_H_)
+#define _PATH_PATHPERMISSIONEXCEPTION_H_
 
 #include <path/PathException.h>
 namespace path {
 /**
- * @class Permission path/Permission.h
- * An operation failed because of permissions.
+ * @class PathPermissionException path/PathPermissionException.h
+ * An operation failed because of pathpermissionexceptions.
  */
-class Permission : public PathException
+class PathPermissionException : public PathException
 {
 
 public:
     /// Default constructor
-    Permission();
+    PathPermissionException();
     /// Include path and errno
-    Permission (const std::string &path, int err);
+    PathPermissionException (const std::string &path, int err);
     /// Destructor
-    virtual ~Permission() throw();
+    virtual ~PathPermissionException() throw();
 
 };
 }
-#endif // !defined(_PATH_PERMISSION_H_)
+#endif // !defined(_PATH_PATHPERMISSIONEXCEPTION_H_)

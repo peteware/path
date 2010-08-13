@@ -1,8 +1,8 @@
 /**
- * @file PathRules.h
+ * @file RulesBase.h
  */
-#if !defined(_PATH_PATHRULES_H_)
-#define _PATH_PATHRULES_H_
+#if !defined(_PATH_RULESBASE_H_)
+#define _PATH_RULESBASE_H_
 
 #include <path/Strings.h>
 #include <string>
@@ -12,7 +12,7 @@ namespace path {
 class Canonical;
 
 /**
- * @class PathRules path/PathRules.h
+ * @class RulesBase path/RulesBase.h
  * Defines an interface for manipulating Path components.
  *
  * For example, the difference between using a forward slash between
@@ -23,11 +23,11 @@ class Canonical;
  * Mostly, this is about converting between a std::string
  * and Canonical objects.
  */
-class PathRules
+class RulesBase
 {
 public:
-    PathRules(char sep);
-    virtual ~PathRules();
+    RulesBase(char sep);
+    virtual ~RulesBase();
 
     /// Convert Canonical into a string
     virtual std::string str(const Canonical &canononical) const;
@@ -41,4 +41,4 @@ protected:
     char            m_sep;                                                  ///< Seperator
 };
 }
-#endif // !defined(_PATH_PATHRULES_H_)
+#endif // !defined(_PATH_RULESBASE_H_)

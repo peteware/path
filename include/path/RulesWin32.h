@@ -1,29 +1,29 @@
 /**
- * @file Win32Rules.h
+ * @file RulesWin32.h
  */
-#if !defined(_PATH_WIN32RULES_H_)
-#define _PATH_WIN32RULES_H_
+#if !defined(_PATH_RULESWIN32_H_)
+#define _PATH_RULESWIN32_H_
 
-#include <path/PathRules.h>
+#include <path/RulesBase.h>
 
 namespace path {
 /**
- * @class Win32Rules path/Win32Rules.h
+ * @class RulesWin32 path/RulesWin32.h
  * Implements the Windows path rules
  * (Not yet implemented)
  */
-class Win32Rules : public PathRules
+class RulesWin32 : public RulesBase
 {
 
 public:
-    Win32Rules();
-    virtual ~Win32Rules();
+    RulesWin32();
+    virtual ~RulesWin32();
 
-    static Win32Rules    rules;
+    static RulesWin32    rules;
 
     virtual Canonical canonical(const std::string &path) const;
     virtual bool quote(const std::string & path, std::string *dest) const;
     virtual bool unquote(const std::string &subdir, std::string *dest) const;
 };
 }
-#endif // !defined(_PATH_WIN32RULES_H_)
+#endif // !defined(_PATH_RULESWIN32_H_)

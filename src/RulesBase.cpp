@@ -1,7 +1,7 @@
 /**
- * @file PathRules.cpp
+ * @file RulesBase.cpp
  */
-#include <path/PathRules.h>
+#include <path/RulesBase.h>
 #include <path/Canonical.h>
 #include <path/Path.h>
 #include <path/Unimplemented.h>
@@ -14,12 +14,12 @@ namespace path {
 /**
  * @param sep Sepearator charcter within path, for example '/'.
  */
-PathRules::PathRules(char sep)
+RulesBase::RulesBase(char sep)
     : m_sep(sep)
 {
 }
 
-PathRules::~PathRules()
+RulesBase::~RulesBase()
 {
 }
 
@@ -30,9 +30,9 @@ PathRules::~PathRules()
  * '/' are escaped.
  *
  * @param canon The protocol, drive, components to stringify
- * @return The PathRules specific string
+ * @return The RulesBase specific string
  */
-std::string PathRules::str(const Canonical &canon) const
+std::string RulesBase::str(const Canonical &canon) const
 {
     std::string     pathStr
     ;
@@ -74,7 +74,7 @@ std::string PathRules::str(const Canonical &canon) const
  *
  * @param path The path to convert to Canonical
  */
-Canonical PathRules::canonical(const std::string &path) const
+Canonical RulesBase::canonical(const std::string &path) const
 {
     Canonical       canon;
     Strings     components;
@@ -105,8 +105,8 @@ Canonical PathRules::canonical(const std::string &path) const
 
 /**
  * Return a string properly quoted with any system special components replaces.
- * For example, UriRules would replace spaces with %040.  Only single path
- * components should be passed.  For example, passing 'a/b' to UnixRules would
+ * For example, RulesUri would replace spaces with %040.  Only single path
+ * components should be passed.  For example, passing 'a/b' to RulesUnix would
  * return 'a_!_b'.
  *
  * See unquote() which does the inverse.
@@ -118,9 +118,9 @@ Canonical PathRules::canonical(const std::string &path) const
  * @param dest Result is placed here
  * @return Element with special characters translated
  */
-bool PathRules::quote(const std::string & subdir, std::string *) const
+bool RulesBase::quote(const std::string & subdir, std::string *) const
 {
-    throw Unimplemented("PathRules::quote()");
+    throw Unimplemented("RulesBase::quote()");
 }
 
 /**
@@ -131,9 +131,9 @@ bool PathRules::quote(const std::string & subdir, std::string *) const
  * @param dest Results are placed here
  * @return true if anything changed, false otherwise
  */
-bool PathRules::unquote(const std::string &subdir, std::string *dest) const
+bool RulesBase::unquote(const std::string &subdir, std::string *dest) const
 {
-    throw Unimplemented("PathRules::unquote()");
+    throw Unimplemented("RulesBase::unquote()");
 }
 
 }

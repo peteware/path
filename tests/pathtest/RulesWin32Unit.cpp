@@ -1,9 +1,9 @@
 /**
- * @file Win32RulesUnit.cpp
+ * @file RulesWin32Unit.cpp
  * @ingroup PathTest
  */
 
-#include <path/Win32Rules.h>
+#include <path/RulesWin32.h>
 #include <path/Canonical.h>
 #include <path/Path.h>
 
@@ -12,9 +12,9 @@
 
 using namespace path;
 
-class Win32RulesUnit : public CppUnit::TestCase
+class RulesWin32Unit : public CppUnit::TestCase
 {
-    CPPUNIT_TEST_SUITE(Win32RulesUnit);
+    CPPUNIT_TEST_SUITE(RulesWin32Unit);
     
     CPPUNIT_TEST(init);
     CPPUNIT_TEST(canon);
@@ -27,19 +27,19 @@ protected:
     void convert();
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(Win32RulesUnit);
+CPPUNIT_TEST_SUITE_REGISTRATION(RulesWin32Unit);
 
-void Win32RulesUnit::init()
+void RulesWin32Unit::init()
 {
-    Win32Rules  rules;
-    Win32Rules  rules2;
+    RulesWin32  rules;
+    RulesWin32  rules2;
     
     rules = rules2;
 }
 
-void Win32RulesUnit::canon()
+void RulesWin32Unit::canon()
 {
-    Win32Rules  rules;
+    RulesWin32  rules;
     Canonical  canon;
     
     canon = rules.canonical("a\\b\\c");
@@ -57,9 +57,9 @@ void Win32RulesUnit::canon()
     
 }
 
-void Win32RulesUnit::convert()
+void RulesWin32Unit::convert()
 {
-    Win32Rules  rules;
+    RulesWin32  rules;
     Canonical  canon;
     Path        path;
     

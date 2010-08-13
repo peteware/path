@@ -13,12 +13,12 @@ TEST_SRCS	= \
 		GlobUnit.cpp \
 		NodeUnit.cpp \
 		PathLookupUnit.cpp \
-		PathRulesUnit.cpp \
+		RulesBaseUnit.cpp \
 		PathUnit.cpp \
 		RefcountUnit.cpp \
-		SysCallsUnit.cpp \
-		UnixRulesUnit.cpp \
-		Win32RulesUnit.cpp \
+		SysBaseUnit.cpp \
+		RulesUnixUnit.cpp \
+		RulesWin32Unit.cpp \
 		main.cpp
 TEST_OBJS	=  \
 		GlobUnit.o \
@@ -26,12 +26,12 @@ TEST_OBJS	=  \
 		ExpandUnit.o \
 		NodeUnit.o \
 		PathLookupUnit.o \
-		PathRulesUnit.o \
+		RulesBaseUnit.o \
 		PathUnit.o \
 		RefcountUnit.o \
-		SysCallsUnit.o \
-		UnixRulesUnit.o \
-		Win32RulesUnit.o \
+		SysBaseUnit.o \
+		RulesUnixUnit.o \
+		RulesWin32Unit.o \
 		main.o
 
 O		= -g -Wall

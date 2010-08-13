@@ -4,24 +4,24 @@
 #ifndef _PATH_SYSWIN32_H_
 #define _PATH_SYSWIN32_H_
 
-#include <path/SysCalls.h>
+#include <path/SysBase.h>
 
 namespace path {
 // Forward declarations
-class PathRules;
+class RulesBase;
 
 /**
  * @class SysWin32 path/SysWin32.h
  * Implements base functionality for Windows systems
  */
-class SysWin32: public SysCalls
+class SysWin32: public SysBase
 {
 public:
     SysWin32();
     virtual ~SysWin32();
 
-    /// Return PathRules suitable for Windows
-    virtual const PathRules *rules() const;
+    /// Return RulesBase suitable for Windows
+    virtual const RulesBase *rules() const;
     /// Create a Directory
     virtual void mkdir(const std::string & dir, int mode = 0777) const;
     /// Remove a directory

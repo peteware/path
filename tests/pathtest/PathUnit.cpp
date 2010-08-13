@@ -3,8 +3,8 @@
  * @ingroup PathTest
  */
 #include <path/Path.h>
-#include <path/PathRules.h>
-#include <path/UnixRules.h>
+#include <path/RulesBase.h>
+#include <path/RulesUnix.h>
 #include <path/Canonical.h>
 #include <path/PathException.h>
 
@@ -21,9 +21,9 @@ using namespace path;
  * as a result.
  *
  * The biggest weakness is it doesn't currently
- * adopt to different PathRules.  Ideally, it
+ * adopt to different RulesBase.  Ideally, it
  * should be a base class with derived classes
- * substituting in different PathRules and
+ * substituting in different RulesBase and
  * providing a way to construct appropriate paths.
  *
  */
@@ -290,27 +290,27 @@ void PathUnit::testSplit()
 
 void PathUnit::testRules()
 {
-    PathRules *	rules = &UnixRules::rules;
-    PathRules *	old;
+    RulesBase *	rules = &RulesUnix::rules;
+    RulesBase *	old;
     /*
-     * We don't know what pathrules is currently
+     * We don't know what rulesbase is currently
      * set to, so save the old ones which gets
      * restored later.  Set the current rules to NULL
      */
-    old = Path::setDefaultPathRules(0);
+    old = Path::setDefaultRulesBase(0);
 
     /*
      *
      */
     Path		p1;
-    CPPUNIT_ASSERT(Path::defaultPathRules() != 0);
-    CPPUNIT_ASSERT(p1.rules() == Path::defaultPathRules());
+    CPPUNIT_ASSERT(Path::defaultRulesBase() != 0);
+    CPPUNIT_ASSERT(p1.rules() == Path::defaultRulesBase());
     p1 = Path(rules);
     CPPUNIT_ASSERT(p1.rules() == rules);
     p1 = Path();
-    CPPUNIT_ASSERT(p1.rules() == Path::defaultPathRules());
+    CPPUNIT_ASSERT(p1.rules() == Path::defaultRulesBase());
 
-    old = Path::setDefaultPathRules(old);
+    old = Path::setDefaultRulesBase(old);
 }
 
 void PathUnit::testGetcwd()

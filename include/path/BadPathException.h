@@ -1,24 +1,24 @@
 /**
- * @file BadPath.h
+ * @file BadPathException.h
  */
-#if !defined(_PATH_BADPATH_H_)
-#define _PATH_BADPATH_H_
+#if !defined(_PATH_BADPATHEXCEPTION_H_)
+#define _PATH_BADPATHEXCEPTION_H_
 
 #include <path/PathException.h>
 
 namespace path
 {
 /**
- * @class BadPath path/BadPath.h
- * Handle faults related to BadPath's.
+ * @class BadPathException path/BadPathException.h
+ * Handle faults related to BadPathException's.
  */
-class BadPath : public PathException
+class BadPathException : public PathException
 {
 public:
-    BadPath();
-    BadPath(const std::string &path, int err);
-    virtual ~BadPath() throw();
+    BadPathException();
+    BadPathException(const std::string &path, int err);
+    virtual ~BadPathException() throw();
 
 };
 }
-#endif // !defined(_PATH_BADPATH_H_)
+#endif // !defined(_PATH_BADPATHEXCEPTION_H_)

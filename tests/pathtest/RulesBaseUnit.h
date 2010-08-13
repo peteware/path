@@ -1,15 +1,15 @@
 /**
- * @file PathRulesUnit.h
+ * @file RulesBaseUnit.h
  * @ingroup PathTest
  */
 
 #include <cppunit/TestCase.h>
 #include <cppunit/extensions/HelperMacros.h>
-#include <path/PathRules.h>
+#include <path/RulesBase.h>
 
-class PathRulesUnit: public CppUnit::TestCase
+class RulesBaseUnit: public CppUnit::TestCase
 {
-	CPPUNIT_TEST_SUITE(PathRulesUnit);
+	CPPUNIT_TEST_SUITE(RulesBaseUnit);
     
 	CPPUNIT_TEST(init);
 	CPPUNIT_TEST(canonical);
@@ -20,12 +20,12 @@ public:
     virtual void setUp();
     virtual void tearDown();
     /// Set the rules and returns the previous one
-    path::PathRules * setRules (path::PathRules *rules);
+    path::RulesBase * setRules (path::RulesBase *rules);
     /// Return the rules
-    path::PathRules *rules() const;
+    path::RulesBase *rules() const;
 protected:
     /// Rules to use for the test.
-    path::PathRules * m_rules;
+    path::RulesBase * m_rules;
 	/// Make sure constructors/destructor works
 	void init();
 	/// Test conversion to canonical form

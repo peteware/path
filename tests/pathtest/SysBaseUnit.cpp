@@ -1,8 +1,8 @@
 /**
- * @file SysCallsUnit.cpp
+ * @file SysBaseUnit.cpp
  * @ingroup PathTest
  */
-#include <path/SysCalls.h>
+#include <path/SysBase.h>
 #include <path/PathException.h>
 
 #include <stdlib.h>
@@ -12,9 +12,9 @@
 
 using namespace path;
 
-class SysCallsUnit: public CppUnit::TestCase
+class SysBaseUnit: public CppUnit::TestCase
 {
-	CPPUNIT_TEST_SUITE(SysCallsUnit);
+	CPPUNIT_TEST_SUITE(SysBaseUnit);
 
 	CPPUNIT_TEST(init);
 	CPPUNIT_TEST(listdir);
@@ -39,14 +39,14 @@ protected:
     void env();
 };
 
-CPPUNIT_TEST_SUITE_REGISTRATION(SysCallsUnit);
+CPPUNIT_TEST_SUITE_REGISTRATION(SysBaseUnit);
 
-void SysCallsUnit::init()
+void SysBaseUnit::init()
 {
-	SysCalls	sys;
+	SysBase	sys;
 }
 
-void SysCallsUnit::listdir()
+void SysBaseUnit::listdir()
 {
 	Strings	dirs = System.listdir(".");
 	CPPUNIT_ASSERT(dirs.size() > 0);
@@ -56,23 +56,23 @@ void SysCallsUnit::listdir()
 	
 }
 
-void SysCallsUnit::mkdir()
+void SysBaseUnit::mkdir()
 {
     System.mkdir("xxx");
     System.rmdir("xxx");
 }
 
-void SysCallsUnit::mkdir_fail()
+void SysBaseUnit::mkdir_fail()
 {
    System.mkdir("/a/b/c/1");
 }
 
-void SysCallsUnit::rmdir_fail()
+void SysBaseUnit::rmdir_fail()
 {
    System.rmdir("/a/b/c/1");
 }
 
-void SysCallsUnit::env()
+void SysBaseUnit::env()
 {
     StringMap   m = System.env();
     

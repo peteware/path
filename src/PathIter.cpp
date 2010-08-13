@@ -3,7 +3,7 @@
  */
 #include <path/PathIter.h>
 #include <path/Node.h>
-#include <path/SysCalls.h>
+#include <path/SysBase.h>
 
 #include <iterator>
 #include <algorithm>

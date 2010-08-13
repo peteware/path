@@ -4,25 +4,25 @@
 #ifndef _PATH_SYSUNIXBASE_H_
 #define _PATH_SYSUNIXBASE_H_
 
-#include <path/SysCalls.h>
+#include <path/SysBase.h>
 
 namespace path {
 // Forward declarations
-class PathRules;
+class RulesBase;
 
 /**
  * @class SysUnixBase path/SysUnixBase.h
  * Implements base functionality for Unix like systems
  * (Linux, MacOS, Solaris, etc)
  */
-class SysUnixBase: public SysCalls
+class SysUnixBase: public SysBase
 {
 public:
     SysUnixBase();
     virtual ~SysUnixBase();
 
-    /// Return PathRules suitable for Unix-like systems
-    virtual const PathRules *rules() const;
+    /// Return RulesBase suitable for Unix-like systems
+    virtual const RulesBase *rules() const;
     /// Create a Directory
     virtual void mkdir(const std::string & dir, int mode = 0777) const;
     /// Remove a directory

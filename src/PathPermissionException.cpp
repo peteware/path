@@ -1,23 +1,23 @@
 /**
- * @file Permission.cpp
+ * @file PathPermissionException.cpp
  *
- * Implementation of the Class Permission
+ * Implementation of the Class PathPermissionException
  */
-#include <path/Permission.h>
+#include <path/PathPermissionException.h>
 
 namespace path {
 
-Permission::Permission()
+PathPermissionException::PathPermissionException()
     : PathException()
 {
 }
 
-Permission::Permission(const std::string &path, int err)
+PathPermissionException::PathPermissionException(const std::string &path, int err)
     : PathException (path,err)
 {
 }
 
-Permission::~Permission() throw()
+PathPermissionException::~PathPermissionException() throw()
 {
 
 }

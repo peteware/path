@@ -1,8 +1,8 @@
 /**
- * @file SysCalls.h
+ * @file SysBase.h
  */
-#if !defined(_PATH_SYSCALLS_H_)
-#define _PATH_SYSCALLS_H_
+#if !defined(_PATH_SYSBASE_H_)
+#define _PATH_SYSBASE_H_
 
 #include <path/Strings.h>
 #include <string>
@@ -11,21 +11,21 @@
 namespace path {
 // Forward declarations
 class NodeInfo;
-class SysCalls;
-class PathRules;
+class SysBase;
+class RulesBase;
 
 /**
  * This is the object you should reference for making all System
  * calls.  On a given OS this gets initialized at compile time by
- * exactly one of the classes derived from SysCalls.
+ * exactly one of the classes derived from SysBase.
  *
- * Examples of other classes derived from SysCalls are:
+ * Examples of other classes derived from SysBase are:
  * SysWin32, SysUnixBase, SysMacOS, etc.
  */
-extern SysCalls &System;
+extern SysBase &System;
 
 /**
- * @class SysCalls path/SysCalls.h
+ * @class SysBase path/SysBase.h
  * Implements the basic set of system calls to create, remove and traverse
  * directories.
  *
@@ -45,15 +45,15 @@ extern SysCalls &System;
  * }
  * @endcode
  */
-class SysCalls
+class SysBase
 {
 
 public:
-    SysCalls();
-    virtual ~SysCalls();
+    SysBase();
+    virtual ~SysBase();
 
     /// Return the default path rules used by this system
-    virtual const PathRules *rules() const;
+    virtual const RulesBase *rules() const;
     /// Create a Directory
     virtual void mkdir(const std::string & dir, int mode = 0777) const;
     /// Remove a directory
@@ -76,4 +76,4 @@ protected:
     mutable StringMap *m_env;   ///< Map from environment variable
 };
 }
-#endif // !defined(_PATH_SYSCALLS_H_)
+#endif // !defined(_PATH_SYSBASE_H_)

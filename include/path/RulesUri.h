@@ -1,27 +1,27 @@
 /**
- * @file UriRules.h
+ * @file RulesUri.h
  */
-#if !defined(_PATH_URIRULES_H_)
-#define _PATH_URIRULES_H_
+#if !defined(_PATH_RULESURI_H_)
+#define _PATH_RULESURI_H_
 
-#include <path/PathRules.h>
+#include <path/RulesBase.h>
 
 namespace path {
 
 /**
- * @class UriRules path/UriRules.h
+ * @class RulesUri path/RulesUri.h
  * Handle URI's rules.
  */
-class UriRules : public PathRules
+class RulesUri : public RulesBase
 {
 
 public:
-    UriRules();
-    virtual ~UriRules();
+    RulesUri();
+    virtual ~RulesUri();
 
     virtual Canonical canonical(const std::string &path) const;
     virtual bool quote(const std::string & subdirs, std::string *dest) const;
 
 };
 }
-#endif // !defined(_PATH_URIRULES_H_)
+#endif // !defined(_PATH_RULESURI_H_)

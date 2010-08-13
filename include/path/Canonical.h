@@ -15,11 +15,11 @@ namespace path
  * Represents a Path in a standard form.
  *
  * Each component added represents a new element
- * in the path.  When convereted via a PathRules
+ * in the path.  When convereted via a RulesBase
  * a directory seperator is placed between
  * each component.
  *
- * This is used to convert from one PathRules type to another.
+ * This is used to convert from one RulesBase type to another.
  */
 class Canonical
 {

@@ -172,7 +172,7 @@ Canonical & Canonical::setInfo(const Canonical &from)
 /**
  * The protocol is something like "http", "ftp", "file" and
  * is meaningful only for a specific type of PathRule.  For example,
- * UnixRules ignore protocol.
+ * RulesUnix ignore protocol.
  *
  * @param proto The new protocol
  * @return A reference to this object
@@ -190,7 +190,7 @@ const std::string & Canonical::protocol() const
 
 /**
  * The host is something like "www.peteware.com" and is meaningful
- * only for a specific type of PathRule (such as UriRules).
+ * only for a specific type of PathRule (such as RulesUri).
  *
  * @param host The new hostname to use
  * @return A reference to this object
@@ -285,7 +285,7 @@ const Strings &Canonical::components() const
 }
 
 /**
- * Some PathRules really only understand absolute
+ * Some RulesBase really only understand absolute
  * paths.  For example, URLs are really always absolute
  * with relative ones being expressed only relative
  * to an existing path.
@@ -314,7 +314,7 @@ bool Canonical::abs() const
 
 /**
  * Don't use this to print out as a regular path.
- * Use an appropriate PathRules to do so.
+ * Use an appropriate RulesBase to do so.
  *
  * This prints out the path to look like
  * a URI:

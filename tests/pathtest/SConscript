@@ -12,12 +12,12 @@ env.Program(target = 'pathtest',
              'GlobUnit.cpp',
              'NodeUnit.cpp',
 	     'PathLookupUnit.cpp',
-             'PathRulesUnit.cpp',
+             'RulesBaseUnit.cpp',
              'PathUnit.cpp',
              'RefcountUnit.cpp',
-             'SysCallsUnit.cpp',
-             'UnixRulesUnit.cpp',
-             'Win32RulesUnit.cpp'
+             'SysBaseUnit.cpp',
+             'RulesUnixUnit.cpp',
+             'RulesWin32Unit.cpp'
              ],
             LIBS = ['path', 'cppunit', 'dl'],
             LIBPATH = ['../../src'])

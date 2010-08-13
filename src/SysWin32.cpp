@@ -4,7 +4,7 @@
 #include <path/SysWin32.h>
 #include <path/PathException.h>
 #include <path/NodeInfo.h>
-#include <path/Win32Rules.h>
+#include <path/RulesWin32.h>
 #include <path/Unimplemented.h>
 
 #include <errno.h>
@@ -17,11 +17,11 @@ namespace path {
 #ifdef __WINNT__
 SysWin32    defSysWin32;
 
-SysCalls &System = defSysWin32;
+SysBase &System = defSysWin32;
 #endif
 
 SysWin32::SysWin32()
-    : SysCalls()
+    : SysBase()
 {
 }
 
@@ -30,11 +30,11 @@ SysWin32::~SysWin32()
 }
 
 /**
- * @return A pointer to the UnixRules::rules
+ * @return A pointer to the RulesUnix::rules
  */
-const PathRules *SysWin32::rules() const
+const RulesBase *SysWin32::rules() const
 {
-    return &Win32Rules::rules;
+    return &RulesWin32::rules;
 }
 
 void SysWin32::mkdir(const std::string & dir, int mode) const

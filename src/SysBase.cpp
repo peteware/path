@@ -1,50 +1,50 @@
 /**
- * @file SysCalls.cpp
+ * @file SysBase.cpp
  */
-#include <path/SysCalls.h>
+#include <path/SysBase.h>
 #include <path/Unimplemented.h>
 #include <path/NodeInfo.h>
 
 
 namespace path {
 
-SysCalls::SysCalls()
+SysBase::SysBase()
     : m_env(0)
 {
 }
 
-SysCalls::~SysCalls()
+SysBase::~SysBase()
 {
     delete m_env;
 }
 
-const PathRules *SysCalls::rules() const
+const RulesBase *SysBase::rules() const
 {
-    throw Unimplemented("SysCalls::rules");
+    throw Unimplemented("SysBase::rules");
 }
-void SysCalls::mkdir(const std::string & dir, int mode) const
+void SysBase::mkdir(const std::string & dir, int mode) const
 {
-    throw Unimplemented("SysCalls::mkdir");
-}
-
-void SysCalls::rmdir(const std::string & dir) const
-{
-    throw Unimplemented("SysCalls::rmdir");
+    throw Unimplemented("SysBase::mkdir");
 }
 
-void SysCalls::touch(const std::string &file, int mode) const
+void SysBase::rmdir(const std::string & dir) const
 {
-    throw Unimplemented("SysCalls::touch");
+    throw Unimplemented("SysBase::rmdir");
 }
 
-void SysCalls::remove(const std::string &file) const
+void SysBase::touch(const std::string &file, int mode) const
 {
-    throw Unimplemented("SysCalls::remove");
+    throw Unimplemented("SysBase::touch");
 }
 
-Strings SysCalls::listdir(const std::string &path) const
+void SysBase::remove(const std::string &file) const
 {
-    throw Unimplemented("SysCalls::listdir");
+    throw Unimplemented("SysBase::remove");
+}
+
+Strings SysBase::listdir(const std::string &path) const
+{
+    throw Unimplemented("SysBase::listdir");
 }
 
 /**
@@ -54,22 +54,22 @@ Strings SysCalls::listdir(const std::string &path) const
  * @param path The path to look for
  * @return Newly created NodeInfo object.
  */
-NodeInfo * SysCalls::stat(const std::string & path) const
+NodeInfo * SysBase::stat(const std::string & path) const
 {
-    throw Unimplemented("SysCalls::stat");
+    throw Unimplemented("SysBase::stat");
 }
 
-bool SysCalls::exists(const std::string &path) const
+bool SysBase::exists(const std::string &path) const
 {
-    throw Unimplemented("SysCalls::exists");
+    throw Unimplemented("SysBase::exists");
 }
 
-std::string SysCalls::getcwd() const
+std::string SysBase::getcwd() const
 {
-    throw Unimplemented("SysCalls::getcwd");
+    throw Unimplemented("SysBase::getcwd");
 }
 
-StringMap& SysCalls::env() const
+StringMap& SysBase::env() const
 {
     throw Unimplemented("Syscalls::env");
 }

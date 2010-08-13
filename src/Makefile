@@ -8,7 +8,7 @@ LIBNAME		= lib$(LIBRARY).a
 LIB_PATH	= -L. -l$(LIBRARY)
 
 LIB_SRCS	= \
-		BadPath.cpp \
+		BadPathException.cpp \
 		Canonical.cpp \
 		Exception.cpp \
 		FileStream.cpp \
@@ -20,18 +20,18 @@ LIB_SRCS	= \
 		PathExtra.cpp \
 		PathIter.cpp \
 		PathLookup.cpp \
-		PathRules.cpp \
-		Permission.cpp \
+		RulesBase.cpp \
+		PathPermissionException.cpp \
 		Strings.cpp \
-		SysCalls.cpp \
+		SysBase.cpp \
 		SysUnixBase.cpp \
 		SysWin32.cpp \
 		Unimplemented.cpp \
-		UnixRules.cpp \
-		UriRules.cpp \
-		Win32Rules.cpp
+		RulesUnix.cpp \
+		RulesUri.cpp \
+		RulesWin32.cpp
 LIB_OBJS	= \
-		BadPath.o \
+		BadPathException.o \
 		Canonical.o \
 		Exception.o \
 		FileStream.o \
@@ -43,16 +43,16 @@ LIB_OBJS	= \
 		PathExtra.o \
 		PathIter.o \
 		PathLookup.o \
-		PathRules.o \
-		Permission.o \
+		RulesBase.o \
+		PathPermissionException.o \
 		Strings.o \
-		SysCalls.o \
+		SysBase.o \
 		SysUnixBase.o \
 		SysWin32.o \
 		Unimplemented.o \
-		UnixRules.o \
-		UriRules.o \
-		Win32Rules.o
+		RulesUnix.o \
+		RulesUri.o \
+		RulesWin32.o
 
 O		= -g -Wall
 CPPFLAGS	= $O -I. -I../include -I/opt/local/include

@@ -5,7 +5,7 @@
 #env = Environment (CPPFLAGS = '/EHsc')
 Import("env")
 env.Library('path',
-            ['BadPath.cpp',
+            ['BadPathException.cpp',
              'Canonical.cpp',
 	     'Exception.cpp',
              'FileStream.cpp',
@@ -17,14 +17,14 @@ env.Library('path',
              'PathExtra.cpp',
              'PathIter.cpp',
              'PathLookup.cpp',
-             'PathRules.cpp',
-             'Permission.cpp',
+             'RulesBase.cpp',
+             'PathPermissionException.cpp',
 	     'Strings.cpp',
-             'SysCalls.cpp',
+             'SysBase.cpp',
              'SysUnixBase.cpp',
              'SysWin32.cpp',
              'Unimplemented.cpp',
-             'UnixRules.cpp',
-             'UriRules.cpp',
-             'Win32Rules.cpp'
+             'RulesUnix.cpp',
+             'RulesUri.cpp',
+             'RulesWin32.cpp'
              ])
