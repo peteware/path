@@ -509,7 +509,9 @@ const RulesBase *Path::rules() const
 /**
  * Sets the default path rules to be used by any newly created Path objects.
  *
- * This should be done at compile time to match the operations on the system.
+ * The normal behaviour is that defaultRulesBase() expects this
+ * to be NULL and uses the System.rules() which is determined
+ * at compile time.
  *
  * @param rules Set the rules to be used by default
  * @return Previous value of ruls
@@ -573,11 +575,9 @@ Path::const_iterator Path::end() const
 }
 
 /**
- * Use shell pattern expansion to list
- * contents of a directory.  Returns an
- * iterator to the list.  Note that this
- * only works within the specied directory
- * that this Path already represents.
+ * Use shell pattern expansion to list contents of a directory.
+ * Returns an iterator to the list.  Note that this only works within
+ * the specied directory that this Path already represents.
  *
  * Not yet implemented
  * ;;; TODO: Implement glob()
@@ -599,11 +599,10 @@ Path::const_iterator Path::glob(const std::string & pattern) const
     return  PathIter();
 }
 
-
 /**
- * Gets the System.stat() on this path.  Caches
- * the result so multiple calls avoid
- * doing more work.
+ * Gets the System.stat() on this path.  Caches the result so multiple
+ * calls avoid doing more work.
+ *
  * @throws PathException
  * @return NodeInfo about this path
  */

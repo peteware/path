@@ -150,13 +150,12 @@ Canonical & Canonical::operator=(const Canonical &op2)
 }
 
 /**
- * This makes it easier to start with a given Canonical
- * but provide new components and drive.
+ * This makes it easier to start with a given Canonical but provide
+ * new components and drive.
  *
  * @code
- * Canonical c;
+ * Canonical c ("a", "b", "c");
  * c.setInfo(somepath.canon());
- * c.add("a");
  * @endcode
  *
  * @param from The Canonical object to copy protocol, host, extra
@@ -170,8 +169,8 @@ Canonical & Canonical::setInfo(const Canonical &from)
     return *this;
 }
 /**
- * The protocol is something like "http", "ftp", "file" and
- * is meaningful only for a specific type of PathRule.  For example,
+ * The protocol is something like "http", "ftp", "file" and is
+ * meaningful only for a specific type of PathRule.  For example,
  * RulesUnix ignore protocol.
  *
  * @param proto The new protocol
@@ -225,17 +224,15 @@ const std::string & Canonical::extra() const
 }
 
 /**
- * This helps with win32/DOS compatibility by allowing
- * a drive to be specified.  For example:
- * @code
- * C:\temp
- * @endcode
- * The "C" is the drive.  Do not include the ":" as
- * other protocols use something different.  For example,
- * UNC uses a "$" to specify a drive:
+ * This helps with win32/DOS compatibility by allowing a drive to be
+ * specified.  For example @c C:\temp The @c "C" is the drive.  Do not
+ * include the ":" as other protocols use something different.  For
+ * example, UNC uses a "$" to specify a drive:
+ *
  * @code
  * \\somehostname\C$\temp
  * @endcode
+ *
  * @param drive The drive letter
  * @return A reference to this object
  */
@@ -265,9 +262,8 @@ Canonical & Canonical::add(const std::string &dir)
 }
 
 /**
- * Rather then anticipate every possible operation
- * on the list of components, this just
- * exposes the list as a reference.
+ * Rather then anticipate every possible operation on the list of
+ * components, this just exposes the list as a reference.
  *
  * @return Componenets in a path
  */
@@ -285,13 +281,12 @@ const Strings &Canonical::components() const
 }
 
 /**
- * Some RulesBase really only understand absolute
- * paths.  For example, URLs are really always absolute
- * with relative ones being expressed only relative
- * to an existing path.
+ * Some RulesBase really only understand absolute paths.  For example,
+ * URLs are really always absolute with relative ones being expressed
+ * only relative to an existing path.
  *
- * Technically, even filesystem pathnames are
- * relative to the current working directory.
+ * Technically, even filesystem pathnames are relative to the current
+ * working directory.
  *
  * @param abs       If this path starts at root
  * @return A reference to this object
@@ -313,11 +308,10 @@ bool Canonical::abs() const
 }
 
 /**
- * Don't use this to print out as a regular path.
- * Use an appropriate RulesBase to do so.
+ * Don't use this to print out as a regular path.  Use an appropriate
+ * RulesBase to do so.
  *
- * This prints out the path to look like
- * a URI:
+ * This prints out the path to look like a URI:
  * @code
  *      http://www.pete.ware/a/b/c
  * @endcode
@@ -326,13 +320,11 @@ bool Canonical::abs() const
  * protocol://host:extra/components
  * @endcode
  *
- * If protocol, host, and extra are empty it'll
- * look like a regular path with "/" seperating
- * components.
+ * If protocol, host, and extra are empty it'll look like a regular
+ * path with "/" seperating components.
  *
- * @param out The stream to print to (e.g. std::cout)
- * @param canon The Canonical object to print
- * @return out
+ * @param out The stream to print to (e.g. std::cout) @param canon The
+ * Canonical object to print @return out
  */
 
 std::ostream &
