@@ -21,6 +21,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <sys/param.h>
+#include <string.h>
 #endif
 
 extern "C" {
