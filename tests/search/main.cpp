@@ -11,6 +11,7 @@
 
 #include <getopt.h>
 #include <iostream>
+#include <stdlib.h>
 
 extern char *optarg;
 extern int optind;
