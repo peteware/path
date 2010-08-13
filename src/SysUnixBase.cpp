@@ -10,11 +10,11 @@
 #include <path/Unimplemented.h>
 
 #include <errno.h>
-#ifdef __APPLE__
-#define LINUX
+#if defined (__APPLE__) || defined (__linux__)
+#define PW_SYS_LINUX
 #endif
 
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
 #include <dirent.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -28,7 +28,7 @@ extern char **environ;
 }
 
 namespace path {
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
 SysUnixBase::SysUnixBase    defSysUnixBase;
 
 SysCalls &System = defSysUnixBase;
@@ -52,7 +52,7 @@ const PathRules *SysUnixBase::rules() const
 
 void SysUnixBase::mkdir(const std::string & dir, int mode) const
 {
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
     int status = ::mkdir(dir.c_str(), mode);
     if (status < 0)
         throwException(dir, errno);
@@ -63,7 +63,7 @@ void SysUnixBase::mkdir(const std::string & dir, int mode) const
 
 void SysUnixBase::rmdir(const std::string & dir) const
 {
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
     int status = ::rmdir(dir.c_str());
     if (status < 0)
         throwException(dir, errno);
@@ -74,7 +74,7 @@ void SysUnixBase::rmdir(const std::string & dir) const
 
 void SysUnixBase::touch(const std::string &file, int mode) const
 {
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
     int fd = ::open(file.c_str(), O_WRONLY|O_CREAT, mode);
     if (fd < 0)
         throwException (file, errno);
@@ -86,7 +86,7 @@ void SysUnixBase::touch(const std::string &file, int mode) const
 
 void SysUnixBase::remove(const std::string &file) const
 {
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
     int status = ::unlink(file.c_str());
     if (status < 0)
         throwException (file, errno);
@@ -97,7 +97,7 @@ void SysUnixBase::remove(const std::string &file) const
 
 Strings SysUnixBase::listdir(const std::string &path) const
 {
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
     Strings dirs;
 
     DIR *dir = opendir(path.c_str());
@@ -136,7 +136,7 @@ Strings SysUnixBase::listdir(const std::string &path) const
  */
 NodeInfo * SysUnixBase::stat(const std::string & path) const
 {
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
     struct stat     statbuf;
     NodeInfo *node = 0;
     NodeInfo::Type type = NodeInfo::OTHER;
@@ -173,7 +173,7 @@ NodeInfo * SysUnixBase::stat(const std::string & path) const
 
 bool SysUnixBase::exists(const std::string &path) const
 {
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
     return (::access(path.c_str(), F_OK) >= 0);
 #else
     throw Unimplemented ("SysUnixBase::exists");
@@ -182,7 +182,7 @@ bool SysUnixBase::exists(const std::string &path) const
 
 std::string SysUnixBase::getcwd() const
 {
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
     char        buf[MAXPATHLEN];
 
     ::getcwd(buf, sizeof(buf));
@@ -194,7 +194,7 @@ std::string SysUnixBase::getcwd() const
 
 StringMap &SysUnixBase::env() const
 {
-#ifdef LINUX
+#ifdef PW_SYS_LINUX
     if (!m_env)
     {
         m_env = new StringMap();
