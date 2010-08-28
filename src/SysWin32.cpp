@@ -11,6 +11,8 @@
 
 #ifdef __WINNT__
 #include <io.h>
+#include <dirent.h>
+#include <string.h>
 #endif
 
 namespace path {
@@ -68,12 +70,38 @@ void SysWin32::touch(const std::string &file, int mode) const
 
 void SysWin32::remove(const std::string &file) const
 {
+#ifdef __WINNT__
+    if (::unlink (file.c_str()) <0)
+    {
+        throw PathException (file, errno);
+    }
+#else
     throw Unimplemented ("SysWin32::remove");
+#endif
 }
 
 Strings SysWin32::listdir(const std::string &path) const
 {
+#ifdef __WINNT__
+    Strings     dirs;
+    DIR *dir = opendir (path.c_str());
+    if (!dir)
+        return dirs;
+    struct dirent   *entry_ptr;
+    struct dirent   entry;
+    while ((entry_ptr = readdir(dir)) != 0)
+    {
+        if (entry.d_namlen == 1 && strcmp(entry.d_name, ".") == 0)
+            continue;
+        if (entry.d_namlen == 2 && strcmp(entry.d_name, "..") == 0)
+            continue;
+        dirs.push_back(entry.d_name);
+    }
+    closedir(dir);
+    return dirs;
+#else
     throw Unimplemented ("SysWin32::listdir");
+#endif
 }
 
 /**

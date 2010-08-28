@@ -95,6 +95,17 @@ bool Glob::compile()
 {
     if (m_compiled)
         return true;
+    m_compiled = new Pattern;
+    for (std::string::const_iterator iter = m_pattern.begin(); iter != m_pattern.end();
+         ++iter)
+    {
+        if (*iter == '*')
+        {
+            Pattern::State       s;
+            
+            m_compiled->m_states.push_back (s);
+        }
+    }
     return true;
 }
 
