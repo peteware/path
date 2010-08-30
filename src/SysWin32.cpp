@@ -13,6 +13,7 @@
 #include <io.h>
 #include <dirent.h>
 #include <string.h>
+#include <sys/stat.h>
 #endif
 
 namespace path {
@@ -84,12 +85,12 @@ Strings SysWin32::listdir(const std::string &path) const
 {
 #ifdef __WINNT__
     Strings     dirs;
-    DIR *dir = opendir (path.c_str());
+    DIR *dir = ::opendir (path.c_str());
     if (!dir)
         return dirs;
     struct dirent   *entry_ptr;
     struct dirent   entry;
-    while ((entry_ptr = readdir(dir)) != 0)
+    while ((entry_ptr = ::readdir(dir)) != 0)
     {
         if (entry.d_namlen == 1 && strcmp(entry.d_name, ".") == 0)
             continue;
@@ -97,7 +98,7 @@ Strings SysWin32::listdir(const std::string &path) const
             continue;
         dirs.push_back(entry.d_name);
     }
-    closedir(dir);
+    ::closedir(dir);
     return dirs;
 #else
     throw Unimplemented ("SysWin32::listdir");
@@ -114,7 +115,39 @@ Strings SysWin32::listdir(const std::string &path) const
  */
 NodeInfo * SysWin32::stat(const std::string & path) const
 {
+#ifdef __WINNT__
+    struct stat     statbuf;
+    NodeInfo *node = 0;
+    NodeInfo::Type type = NodeInfo::OTHER;
+
+    if (::stat(path.c_str(), &statbuf) < 0)
+        throw PathException(path, errno);
+    node = new NodeInfo();
+
+    node->setSize(statbuf.st_size);
+    switch (statbuf.st_mode & S_IFMT) {
+    case S_IFDIR:
+        type = NodeInfo::DIRECTORY;
+        break;
+    case S_IFREG:
+        type = NodeInfo::FILE;
+        break;
+    case S_IFLNK:
+        type = NodeInfo::SYMLINK;
+        break;
+    case S_IFCHR:
+    case S_IFBLK:
+        type = NodeInfo::DEVICE;
+        break;
+    default:
+        type = NodeInfo::OTHER;
+        break;
+    }
+    node->setType(type);
+    return node;
+#else
     throw Unimplemented ("SysWin32::stat");
+#endif
 }
 
 bool SysWin32::exists(const std::string &path) const
