@@ -30,7 +30,7 @@ extern char **environ;
 
 namespace path {
 #ifdef PW_SYS_LINUX
-SysUnixBase::SysUnixBase    defSysUnixBase;
+SysUnixBase    defSysUnixBase;
 
 SysBase &System = defSysUnixBase;
 #endif

@@ -35,8 +35,8 @@ TEST_OBJS	=  \
 		main.o
 
 O		= -g -Wall
-CPPFLAGS	= $O -I. -I../../include -I$(HOME)/usr/include 
-LIBCPPUNIT      = -lcppunit
+CPPFLAGS	= $O -I. -I../../include
+LIBCPPUNIT      = -lcppunit -ldl
 
 all:		$(TEST_PROG) runtest
 
