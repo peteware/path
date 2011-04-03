@@ -86,6 +86,17 @@ bool RulesUnix::quote(const std::string & subdir, std::string *dest) const
     return true;
 }
 
+/**
+ * Looks for "_!_" and replaces with "/".  If you pass in
+ * a NULL destination, it just returns if there would be any
+ * changes.  As an optimization, if p and dest are the
+ * same and there is nothing to quote, then no changes
+ * are made to dest.
+ *
+ * @param p The component to unquote any characters
+ * @param dest The unquoted test is copied to here, may be NULL
+ * @return true if any quoted text, false otherwise
+ */
 bool RulesUnix::unquote(const std::string &p, std::string *dest) const
 {
     int state = 0;

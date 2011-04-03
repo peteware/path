@@ -807,6 +807,12 @@ std::ostream &operator<<(std::ostream &out, const path::Path&path)
 /**
  * Add another component to path and return a new Path
  *
+ * @code
+ * Path p ("/a/b");
+ * Path p2 = p1 / "c" / "d";
+ * @endcode
+ * Creates the path "/a/b/c/d";
+ *
  * @param path The path to add to
  * @param dir The directory to add to path
  * @return A new Path

@@ -245,6 +245,10 @@ void PathUnit::testadd()
     p1 = p1 / p1;
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("a/b/c/a/b/c")), p1);
 
+    p1 = Path();
+    p1 = p1 / "a" / "b" + ".c";
+    CPPUNIT_ASSERT_EQUAL(Path(UnixPath("a/b.c")), p1);
+
     p1 = Path(UnixPath("/a"));
     p1 = p1 + ".txt";
     CPPUNIT_ASSERT_EQUAL(Path(UnixPath("/a.txt")), p1);
@@ -253,7 +257,7 @@ void PathUnit::testadd()
     p1 = Path();
     p1 = p1 / "x";
     CPPUNIT_ASSERT_EQUAL(Path("x"), p1);
-
+    
     Path     header(UnixPath("/a/b/file.h"));
     Path     src = header.dirname() / header.stem() + ".C";
     Path     backup = header + ".bak";

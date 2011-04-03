@@ -14,11 +14,17 @@ PathLookup::PathLookup()
 {
 }
 
+/**
+ * Add new paths to the end of a search list.
+ */
 void PathLookup::push_back (const Paths &paths)
 {
     std::copy (paths.begin(), paths.end(), std::back_insert_iterator<Paths>(m_pathList));
 }
 
+/**
+ * Add new paths to the front of the search list.
+ */
 void PathLookup::push_front (const Paths &paths)
 {
     // Put paths at the start

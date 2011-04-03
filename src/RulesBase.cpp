@@ -73,6 +73,7 @@ std::string RulesBase::str(const Canonical &canon) const
  * knowing system implementation details.
  *
  * @param path The path to convert to Canonical
+ * @return Canonical representation of path
  */
 Canonical RulesBase::canonical(const std::string &path) const
 {
