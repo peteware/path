@@ -31,5 +31,7 @@ CPPUNIT_TEST_SUITE_REGISTRATION(PathLookupUnit);
 void PathLookupUnit::init()
 {
     PathLookup look;
-    CPPUNIT_ASSERT_EQUAL(Path(), look.find("abc"));
+    CPPUNIT_ASSERT(look.find("abc").empty());
+    look.push_back(".");
+    look.find("abc");
 }

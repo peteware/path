@@ -3,9 +3,11 @@
  */
 
 #include <path/PathLookup.h>
+#include <path/PathIter.h>
 
 #include <algorithm>
 #include <iterator>
+#include <iostream>
 
 namespace path {
 
@@ -13,6 +15,14 @@ PathLookup::PathLookup()
     : m_pathList()
 {
 }
+
+PathLookup &
+PathLookup::push_back(const Path &path)
+{
+    m_pathList.push_back(path);
+    return *this;
+}
+    
 
 /**
  * Add new paths to the end of a search list.
@@ -35,8 +45,32 @@ void PathLookup::push_front (const Paths &paths)
     m_pathList = pathList;
 }
 
-Path PathLookup::find (const std::string &path)
+const Paths &
+PathLookup::paths() const
 {
-    return Path();
+    return m_pathList;
+}
+    
+Paths PathLookup::find (const std::string &path)
+{
+    Paths   results;
+    for (Paths::const_iterator dirIter = m_pathList.begin();
+         dirIter != m_pathList.end(); ++dirIter)
+    {
+        const Path &dirPath = *dirIter;
+        Path::iterator pathIter = dirPath.begin();
+        pathIter.setRecursive();
+        while (pathIter != dirPath.end()) 
+        {
+            const Path &p = *pathIter;
+            //std::cout << p << std::endl;
+            if (path == p.basename()) 
+            {
+                results.push_back(p);
+            }
+            ++pathIter;
+        }
+    }
+    return results;
 }
 }
